@@ -1,159 +1,153 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Star, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
+import { useRef, useEffect, useState } from 'react'
+import { Star } from 'lucide-react'
 
 const reviews = [
-  {
-    name: 'Paul Harrison',
-    company: 'UPS Solar',
-    text: 'ETOTO transformed our lead generation. We went from struggling with poor quality leads to having a consistent pipeline of qualified homeowners ready to buy. The £450 CPA speaks for itself.',
-    rating: 5,
-  },
-  {
-    name: 'Michael O\'Brien',
-    company: 'Premier Energy Ireland',
-    text: 'The team understands the Irish solar market better than anyone we have worked with. Their ad creatives actually convert, and the qualification process means we only speak to serious buyers.',
-    rating: 5,
-  },
-  {
-    name: 'Sarah McCarthy',
-    company: 'GreenLight Solar',
-    text: 'We were skeptical at first, but the results are undeniable. More leads, better quality, lower costs. ETOTO delivered exactly what they promised and then some.',
-    rating: 5,
-  },
-  {
-    name: 'David Walsh',
-    company: 'SunPower Solutions',
-    text: 'Finally, a marketing agency that gets renewables. No more generic campaigns that waste budget. Every pound we spend with ETOTO comes back tenfold.',
-    rating: 5,
-  },
+  { name: "Donovan Fawcett", badge: "Local Guide", time: "3 weeks ago", text: "An Incredible company to work with. A great group of very intelligent hard working and capable individuals, worked alongside them in a variety of marketing campaigns from local to national commercial. Very driven and a pleasure to work alongside. Highly recommend." },
+  { name: "John Bloomfield", time: "a month ago", text: "Great team especially Keilan who is also a menace on the dance floor. They have exceeded our expectations and we are very happy with the service so far. We are about 5 months in and the increase in enquiries is very noticeable." },
+  { name: "James Burrell", time: "11 months ago", text: "We've only been working with ETOTO Media for a few weeks, but we're already seeing great results and good quality leads. The team has been proactive, responsive, and clearly know their stuff. Excited to see what we can achieve together going forward!" },
+  { name: "Callum Conroy", time: "a year ago", text: "We've been working with ETOTO Media for 4 months now and they are doing a great job. We've seen our leads triple since the team came on board. Speaking to the team regularly they are great guys." },
+  { name: "Emilie Stella Hulbert", time: "a year ago", text: "ETOTO Media has been absolutely amazing in helping grow my business! Their expertise in building our followers and generating high-quality leads has made a huge difference." },
+  { name: "Kirsty Biggs", time: "a year ago", text: "We are currently only a few weeks into working with ETOTO, however our social media engagement has increased massively and we already have our first lead converted before we start the lead campaign fully!" },
+  { name: "Karim Shabankareh", time: "a year ago", text: "ETOTO media are a young, expert and enthusiastic team of marketeers and sales support strategists. Jordan, Keilan and Joel have absolutely nailed their processes and have helped me scale my business." },
+  { name: "David Ewen", time: "a year ago", text: "Our company started using ETOTO Media in May of this year and the amount of high quality leads we have received since has been amazing (over 120). We had many chats and zoom calls with the team before getting started." },
+  { name: "Jon Carter", time: "a year ago", text: "Exceptional Onboarding and Lead Generation with ETOTO Marketing! I've been consistently impressed with ETOTO Marketing's services." },
+  { name: "Nick Turner", time: "a year ago", text: "ETOTO were recommended to us by a company we work closely with, and could personally see the increase in sales they were making since they started their marketing campaign." },
+  { name: "Georgia Memon", badge: "Local Guide", time: "a year ago", text: "The most fantastic, ambitious, committed team. I have had the pleasure of working with Keilan and Alex over the 5 months. It's been an incredible experience." },
+  { name: "Daniel Millar", time: "a year ago", text: "The Etoto team are a pleasure to work with and absolutely deliver, after working with a few agencies Etoto are who we have stuck with. The quality of leads and supporting software they provide is unmatched." },
+  { name: "Sarah Haysmore", time: "a year ago", text: "The guys at Etoto are like an extension of your work force. Always on hand if you need them, especially Keilan who was working on a project with me until 9pm one evening." },
+  { name: "Finn J.W.", time: "a year ago", text: "ETOTO talk a BIG game on the sales call but you'll find out why. I have just finished my first month with ETOTO. Before they took over my marketing, results were mediocre. Now they're exceptional." },
+  { name: "Lead Pro Solutions", time: "a year ago", text: "Amazing company we started our business at the start of July needed someone to help us improve our lead quality, halfway through the month and we've hit 100k in sales." },
+  { name: "EVLM Renewables", time: "a year ago", text: "A great bunch, totally committed and always on the end of the phone. After a meeting with them we felt they had what it takes to help us scale up our Renewables business." },
+  { name: "Robert Atkinson", time: "a year ago", text: "These guys are hard working and ambitious. We get a sense they really want the best for our company and not just want our cash like many marketing companies. Highly recommended." },
+  { name: "Richard Murray", time: "2 years ago", text: "A breath of fresh air; creative ideas, excellent communication and top-class marketing & industry knowledge. After multiple failed trials with other companies, it seems we've now found the one." },
+  { name: "Aid", badge: "Local Guide", time: "5 days ago", text: "Known the guys for a few years now, they were patient waiting for me to finally commit, but I can honestly say onboarding was easy and I feel like I have 24hour access to the team when needed." },
+  { name: "Rory Pack", time: "3 days ago", text: "Great company to work alongside." },
 ]
 
-export default function Reviews() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const sectionRef = useRef<HTMLElement>(null)
+function ReviewCard({ review }: { review: typeof reviews[0] }) {
+  return (
+    <div className="flex-shrink-0 w-[320px] md:w-[380px] bg-white rounded-2xl p-6 shadow-lg border border-slate-100 mx-2 md:mx-3 hover:shadow-xl transition-shadow duration-300">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#E8192C] to-[#FF6B7A] flex items-center justify-center text-white font-bold text-base flex-shrink-0">
+          {review.name.charAt(0)}
+        </div>
+        <div className="min-w-0">
+          <p className="font-semibold text-slate-900 truncate">{review.name}</p>
+          <div className="flex items-center gap-2">
+            {review.badge && (
+              <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{review.badge}</span>
+            )}
+            <span className="text-xs text-slate-400">{review.time}</span>
+          </div>
+        </div>
+      </div>
+      <div className="flex gap-0.5 mb-3">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+        ))}
+      </div>
+      <p className="text-slate-600 text-sm leading-relaxed line-clamp-4">{review.text}</p>
+    </div>
+  )
+}
 
+export default function Reviews() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true)
-          observer.disconnect()
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     )
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current)
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
-
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % reviews.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  const nextReview = () => setCurrentIndex(prev => (prev + 1) % reviews.length)
-  const prevReview = () => setCurrentIndex(prev => (prev - 1 + reviews.length) % reviews.length)
+    const container = scrollRef.current
+    if (!container) return
+    
+    let animationId: number
+    let scrollPos = 0
+    
+    const animate = () => {
+      const speed = isHovered ? 0.3 : 1
+      scrollPos += speed
+      if (scrollPos >= container.scrollWidth / 2) {
+        scrollPos = 0
+      }
+      container.scrollLeft = scrollPos
+      animationId = requestAnimationFrame(animate)
+    }
+    
+    animationId = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(animationId)
+  }, [isHovered])
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 px-6 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <img 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-              alt="ETOTO Media" 
-              className="h-8 object-contain"
-            />
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-[#F5921E] text-[#F5921E]" />
-              ))}
-            </div>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-[#1A1A2E] mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-lg text-[#64748B] max-w-2xl mx-auto">
-            Solar installers across the UK and Ireland trust ETOTO to deliver results.
-          </p>
+    <section ref={sectionRef} className="py-16 md:py-28 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+      <div className={`max-w-7xl mx-auto px-4 md:px-8 mb-10 md:mb-14 text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <p className="text-[#E8192C] font-semibold tracking-wide uppercase text-sm mb-3">
+          Trusted by Solar Installers Nationwide
+        </p>
+        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5">
+          What Our Clients Say
+        </h2>
+        <div className="flex justify-center gap-1 mb-3">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-5 h-5 md:w-6 md:h-6 fill-amber-400 text-amber-400" />
+          ))}
         </div>
+        <p className="text-slate-500">5.0 rating from 30+ verified Google reviews</p>
+      </div>
 
-        {/* Review carousel */}
-        <div className={`relative transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl p-8 md:p-12 relative overflow-hidden">
-            {/* Quote mark */}
-            <div className="absolute top-4 left-4 text-[#E8192C]/10 text-9xl font-serif leading-none">"</div>
-            
-            <div className="relative z-10">
-              <div className="flex gap-1 mb-6">
-                {[...Array(reviews[currentIndex].rating)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-[#F5921E] text-[#F5921E]" />
-                ))}
-              </div>
-              
-              <p className="text-xl md:text-2xl text-[#1A1A2E] font-medium leading-relaxed mb-8">
-                "{reviews[currentIndex].text}"
-              </p>
-              
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-bold text-[#1A1A2E]">{reviews[currentIndex].name}</p>
-                  <p className="text-[#64748B]">{reviews[currentIndex].company}</p>
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={prevReview}
-                    className="w-10 h-10 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center hover:bg-[#F8FAFC] transition-all"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-[#64748B]" />
-                  </button>
-                  <button 
-                    onClick={nextReview}
-                    className="w-10 h-10 rounded-full bg-white border border-[#E2E8F0] flex items-center justify-center hover:bg-[#F8FAFC] transition-all"
-                  >
-                    <ChevronRight className="w-5 h-5 text-[#64748B]" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Dots indicator */}
-          <div className="flex justify-center gap-2 mt-6">
-            {reviews.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  currentIndex === i ? 'bg-[#E8192C] w-6' : 'bg-[#E2E8F0]'
-                }`}
-              />
-            ))}
-          </div>
+      <div 
+        ref={scrollRef}
+        className="flex overflow-hidden cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onTouchStart={() => setIsHovered(true)}
+        onTouchEnd={() => setIsHovered(false)}
+      >
+        <div className="flex">
+          {reviews.map((review, i) => (
+            <ReviewCard key={i} review={review} />
+          ))}
+          {reviews.map((review, i) => (
+            <ReviewCard key={`dup-${i}`} review={review} />
+          ))}
         </div>
+      </div>
 
-        {/* CTA to leave review */}
-        <div className={`mt-12 text-center transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-[#64748B] mb-4">Found this audit helpful?</p>
-          <a 
-            href="https://g.page/r/ETOTOMEDIA/review" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-white border-2 border-[#E8192C] text-[#E8192C] px-6 py-3 rounded-full font-semibold hover:bg-[#E8192C] hover:text-white transition-all"
-          >
-            Leave Us a Review
-            <ExternalLink className="w-4 h-4" />
-          </a>
+      <div className={`max-w-7xl mx-auto px-4 md:px-8 mt-12 md:mt-16 text-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <p className="text-slate-600 mb-5">Found this audit helpful?</p>
+        <a
+          href="https://g.page/r/CQfK3n8YKhAJEBM/review"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-white border-2 border-slate-200 hover:border-[#E8192C] text-slate-900 px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold transition-all duration-300 hover:shadow-lg group"
+        >
+          <svg className="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Leave Us a Review
+        </a>
+        <div className="flex justify-center gap-1 mt-4">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+          ))}
         </div>
       </div>
     </section>

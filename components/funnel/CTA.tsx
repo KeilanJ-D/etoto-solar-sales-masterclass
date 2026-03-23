@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, Mail, Calendar } from 'lucide-react'
 
 export default function CTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -26,51 +25,37 @@ export default function CTA() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 px-6 bg-gradient-to-b from-white to-[#F8F9FA]">
-      <div className="max-w-4xl mx-auto">
-        <div className={`text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block bg-[#E8192C]/10 text-[#E8192C] text-sm font-semibold px-4 py-2 rounded-full mb-6">
-            Next Steps
-          </span>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#1A1A2E] mb-6 leading-tight">
+    <section ref={sectionRef} className="py-24 md:py-40 px-4 md:px-6 bg-white relative overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-red-50/30 pointer-events-none" />
+      
+      <div className="max-w-3xl mx-auto relative z-10">
+        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 mb-6 leading-[1.1]">
             Ready to Stop
             <br />
             <span className="text-[#E8192C]">Leaking Revenue?</span>
           </h2>
-          <p className="text-lg md:text-xl text-[#64748B] max-w-2xl mx-auto mb-10">
-            Book a 30-minute strategy call. We shall walk through this audit together and map out a growth plan tailored specifically to Solar Path.
+        </div>
+
+        <div className={`text-center mt-16 md:mt-24 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-12">
+            Good. See you on the call.
           </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          
+          <div className="space-y-3">
+            <p className="text-lg md:text-xl font-semibold text-slate-900">
+              Keilan James-Devereux
+            </p>
+            <p className="text-slate-500">
+              Co-Founder, ETOTO Media
+            </p>
             <a 
-              href="mailto:hello@etotomedia.com?subject=Solar%20Path%20Growth%20Strategy%20Call"
-              className="group inline-flex items-center gap-3 bg-[#E8192C] hover:bg-[#D01622] text-white px-8 py-4 text-lg font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#E8192C]/25"
+              href="mailto:keilan.jd@etotomedia.com"
+              className="inline-block text-[#E8192C] hover:text-[#D01622] font-medium text-lg transition-colors duration-300 hover:underline"
             >
-              <Calendar className="w-5 h-5" />
-              Book Strategy Call
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              keilan.jd@etotomedia.com
             </a>
-            <a 
-              href="mailto:hello@etotomedia.com"
-              className="inline-flex items-center gap-2 text-[#64748B] hover:text-[#1A1A2E] px-6 py-4 text-lg transition-all"
-            >
-              <Mail className="w-5 h-5" />
-              hello@etotomedia.com
-            </a>
-          </div>
-
-          <div className={`flex items-center justify-center gap-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <img 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-              alt="ETOTO Media" 
-              className="h-8 object-contain"
-            />
-            <span className="text-[#CBD5E1]">×</span>
-            <img 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/solar%20path%20logo-gb9aYzjnVnp3LFRgT565BJqotuLeRG.png" 
-              alt="Solar Path" 
-              className="h-8 object-contain"
-            />
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ import Competitors from '@/components/funnel/Competitors'
 import CaseStudy from '@/components/funnel/CaseStudy'
 import AdStrategy from '@/components/funnel/AdStrategy'
 import Services from '@/components/funnel/Services'
-import Proof from '@/components/funnel/Proof'
+
 import Reviews from '@/components/funnel/Reviews'
 import AISpeed from '@/components/funnel/AISpeed'
 import CTA from '@/components/funnel/CTA'
@@ -29,7 +29,6 @@ export default function AuditFunnel() {
       <CaseStudy />
       <AdStrategy />
       <Services />
-      <Proof />
       <Reviews />
       <AISpeed />
       <CTA />
