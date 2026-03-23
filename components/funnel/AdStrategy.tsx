@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Target, CheckCircle, ArrowRight, Zap } from 'lucide-react'
+import { Target, CheckCircle, ArrowRight, Zap, TrendingUp } from 'lucide-react'
 
 const adExamples = [
   {

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { TrendingUp, TrendingDown, Zap, Target, PoundSterling } from 'lucide-react'
+import { TrendingUp, TrendingDown, Zap, Target, Banknote } from 'lucide-react'
 
 export default function CaseStudy() {
   const [isVisible, setIsVisible] = useState(false)
