@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { TrendingDown, Check } from 'lucide-react'
+import { TrendingDown, Check, Info } from 'lucide-react'
 import { useCountUp } from '@/hooks/use-animate-on-scroll'
 
 export default function CaseStudy() {
@@ -63,14 +63,17 @@ export default function CaseStudy() {
 
             <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
               {[
-                "Did not understand the renewables market",
-                "Poor ad creatives that failed to convert",
-                "Terrible pricing strategy",
-                "Fox-only offers with zero margin"
+                { text: "Did not understand the renewables market", context: "Generic ads that failed to address homeowner pain points specific to solar" },
+                { text: "Poor ad creatives that failed to convert", context: "Stock imagery, weak copy, no clear value proposition or pricing" },
+                { text: "Terrible pricing strategy", context: "No grant-led messaging, features buried, benefits unclear" },
+                { text: "Fox-only offers with zero margin", context: "Race-to-the-bottom pricing that attracted tyre-kickers, not buyers" }
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 group">
-                  <div className="w-2 h-2 rounded-full bg-[#DC2626] mt-1.5 md:mt-2 group-hover:scale-150 transition-transform" />
-                  <p className="text-white/70 text-sm md:text-base">{item}</p>
+                  <div className="w-2 h-2 rounded-full bg-[#DC2626] mt-1.5 md:mt-2 group-hover:scale-150 transition-transform flex-shrink-0" />
+                  <div>
+                    <p className="text-white/70 text-sm md:text-base">{item.text}</p>
+                    <p className="text-white/40 text-xs mt-0.5">{item.context}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -96,14 +99,17 @@ export default function CaseStudy() {
 
             <div className="space-y-3 md:space-y-4 mb-5 md:mb-6">
               {[
-                "Premium Sigenergy & Aiko offer positioning",
-                "Direct, on-the-nose ad creatives that convert",
-                "8-step qualification gate after click",
-                "More leads with less budget"
+                { text: "Premium Sigenergy & Aiko offer positioning", context: "High-value products attract high-value customers with real buying intent" },
+                { text: "Direct, on-the-nose ad creatives that convert", context: "Clear pricing, SEAI grants front and centre, real installation photos" },
+                { text: "8-step qualification gate after click", context: "Pre-qualifies prospects so sales team only speaks to ready buyers" },
+                { text: "More leads with less budget", context: "Efficient targeting + compelling offer = lower cost per qualified lead" }
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3 group">
                   <Check className="w-4 h-4 md:w-5 md:h-5 text-[#16A34A] mt-0.5 flex-shrink-0 group-hover:scale-125 transition-transform" />
-                  <p className="text-white/70 text-sm md:text-base">{item}</p>
+                  <div>
+                    <p className="text-white/70 text-sm md:text-base">{item.text}</p>
+                    <p className="text-white/40 text-xs mt-0.5">{item.context}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -148,7 +154,7 @@ export default function CaseStudy() {
 
         {/* Meta Ads comparison screenshot */}
         <div className={`mt-8 md:mt-12 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-center text-white/50 text-xs md:text-sm mb-3 md:mb-4">Live Meta Ads Manager comparison</p>
+          <p className="text-center text-white/50 text-xs md:text-sm mb-3 md:mb-4">Live Meta Ads Manager comparison — same time period, same market</p>
           <div className="rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-2xl hover:shadow-[#E8192C]/20 transition-shadow duration-500">
             <img 
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/us%20vs%20them%20-%20UPS-8wrbM7jp1whgKjN2cZXvTCA0pQ0D02.jpg" 
@@ -156,9 +162,17 @@ export default function CaseStudy() {
               className="w-full"
             />
           </div>
-          <p className="text-center text-white/40 text-xs mt-3 md:mt-4">
-            ETOTO campaign: 1,315 leads at £16.53 CPL vs Competitor: 734 leads at £29.64 CPL
-          </p>
+          <div className="mt-4 md:mt-6 bg-white/5 rounded-xl p-4 md:p-5">
+            <div className="flex items-start gap-3">
+              <Info className="w-4 h-4 md:w-5 md:h-5 text-white/50 flex-shrink-0 mt-0.5" />
+              <div className="text-white/60 text-xs md:text-sm leading-relaxed">
+                <p className="mb-2"><strong className="text-white">What you are seeing:</strong> Two campaigns running simultaneously for UPS Solar.</p>
+                <p><strong className="text-[#16A34A]">ETOTO (Domestic Lead Generation Campaign):</strong> 1,315 leads at £16.53 cost per lead. £21,730 spent. 145,674 reach.</p>
+                <p><strong className="text-[#DC2626]">Previous Agency:</strong> 734 leads at £29.64 cost per lead. £21,753 spent. Similar reach but 79% higher cost per lead.</p>
+                <p className="mt-2 text-white/40">Same budget, same timeframe. Nearly double the leads at almost half the cost per lead.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

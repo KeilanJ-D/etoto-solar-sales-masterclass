@@ -28,34 +28,33 @@ const reviews = [
 
 function ReviewCard({ review }: { review: typeof reviews[0] }) {
   return (
-    <div className="flex-shrink-0 w-[320px] md:w-[380px] bg-white rounded-2xl p-6 shadow-lg border border-slate-100 mx-2 md:mx-3 hover:shadow-xl transition-shadow duration-300">
+    <div className="flex-shrink-0 w-[300px] md:w-[360px] bg-white rounded-2xl p-5 md:p-6 shadow-lg border border-slate-100 mx-2 md:mx-3">
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#E8192C] to-[#FF6B7A] flex items-center justify-center text-white font-bold text-base flex-shrink-0">
+        <div className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-[#E8192C] to-[#FF6B7A] flex items-center justify-center text-white font-bold text-sm md:text-base flex-shrink-0">
           {review.name.charAt(0)}
         </div>
         <div className="min-w-0">
-          <p className="font-semibold text-slate-900 truncate">{review.name}</p>
+          <p className="font-semibold text-slate-900 text-sm md:text-base truncate">{review.name}</p>
           <div className="flex items-center gap-2">
             {review.badge && (
-              <span className="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{review.badge}</span>
+              <span className="text-[10px] md:text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded-full">{review.badge}</span>
             )}
-            <span className="text-xs text-slate-400">{review.time}</span>
+            <span className="text-[10px] md:text-xs text-slate-400">{review.time}</span>
           </div>
         </div>
       </div>
       <div className="flex gap-0.5 mb-3">
         {[...Array(5)].map((_, i) => (
-          <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+          <Star key={i} className="w-3.5 h-3.5 md:w-4 md:h-4 fill-amber-400 text-amber-400" />
         ))}
       </div>
-      <p className="text-slate-600 text-sm leading-relaxed line-clamp-4">{review.text}</p>
+      <p className="text-slate-600 text-xs md:text-sm leading-relaxed line-clamp-4">{review.text}</p>
     </div>
   )
 }
 
 export default function Reviews() {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   
@@ -72,6 +71,7 @@ export default function Reviews() {
     return () => observer.disconnect()
   }, [])
   
+  // Continuous scroll - no pause on hover
   useEffect(() => {
     const container = scrollRef.current
     if (!container) return
@@ -80,8 +80,7 @@ export default function Reviews() {
     let scrollPos = 0
     
     const animate = () => {
-      const speed = isHovered ? 0.3 : 1
-      scrollPos += speed
+      scrollPos += 0.8 // Constant speed, no slowing
       if (scrollPos >= container.scrollWidth / 2) {
         scrollPos = 0
       }
@@ -91,15 +90,15 @@ export default function Reviews() {
     
     animationId = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(animationId)
-  }, [isHovered])
+  }, [])
 
   return (
     <section ref={sectionRef} className="py-16 md:py-28 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
       <div className={`max-w-7xl mx-auto px-4 md:px-8 mb-10 md:mb-14 text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <p className="text-[#E8192C] font-semibold tracking-wide uppercase text-sm mb-3">
+        <p className="text-[#E8192C] font-semibold tracking-wide uppercase text-xs md:text-sm mb-3">
           Trusted by Solar Installers Nationwide
         </p>
-        <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5">
+        <h2 className="text-2xl md:text-5xl font-bold text-slate-900 mb-5">
           What Our Clients Say
         </h2>
         <div className="flex justify-center gap-1 mb-3">
@@ -107,16 +106,12 @@ export default function Reviews() {
             <Star key={i} className="w-5 h-5 md:w-6 md:h-6 fill-amber-400 text-amber-400" />
           ))}
         </div>
-        <p className="text-slate-500">5.0 rating from 30+ verified Google reviews</p>
+        <p className="text-slate-500 text-sm md:text-base">5.0 rating from 30+ verified Google reviews</p>
       </div>
 
       <div 
         ref={scrollRef}
-        className="flex overflow-hidden cursor-grab active:cursor-grabbing"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onTouchStart={() => setIsHovered(true)}
-        onTouchEnd={() => setIsHovered(false)}
+        className="flex overflow-hidden"
       >
         <div className="flex">
           {reviews.map((review, i) => (
@@ -129,7 +124,7 @@ export default function Reviews() {
       </div>
 
       <div className={`max-w-7xl mx-auto px-4 md:px-8 mt-12 md:mt-16 text-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <p className="text-slate-600 mb-5">Found this audit helpful?</p>
+        <p className="text-slate-600 mb-5 text-sm md:text-base">Found this audit helpful?</p>
         <a
           href="https://g.page/r/CQfK3n8YKhAJEBM/review"
           target="_blank"

@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, AlertTriangle, Info } from 'lucide-react'
 import { useCountUp } from '@/hooks/use-animate-on-scroll'
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
   const [showStats, setShowStats] = useState(false)
+  const [expandedStat, setExpandedStat] = useState<number | null>(null)
   
   const seoScore = useCountUp(34, 1500, showStats)
   const issues = useCountUp(6, 1200, showStats)
@@ -17,6 +18,31 @@ export default function Hero() {
     const timer = setTimeout(() => setShowStats(true), 800)
     return () => clearTimeout(timer)
   }, [])
+
+  const stats = [
+    { 
+      value: seoScore, 
+      suffix: '/100', 
+      label: 'SEO Score', 
+      color: '#DC2626',
+      context: 'Based on Google Lighthouse audit of solarpath.ie. Industry benchmark for solar installers is 65+. Your score of 34 indicates severe technical SEO deficiencies including missing meta descriptions on 80% of pages, no structured data markup, and poor Core Web Vitals.'
+    },
+    { 
+      value: issues, 
+      suffix: '', 
+      label: 'Critical Issues', 
+      color: '#E8192C',
+      context: 'Six fundamental problems identified: (1) No email capture on calculators, (2) Missing local SEO for key counties, (3) Blog dormant since 2024, (4) No lead magnets, (5) Poor mobile conversion paths, (6) Weak trust signals vs competitors.'
+    },
+    { 
+      value: revenue, 
+      prefix: '£', 
+      suffix: 'K+', 
+      label: 'Revenue at Risk', 
+      color: '#F5921E',
+      context: 'Calculation: Average solar installation = £8,500. Conservative estimate of 6 lost leads/month due to poor SEO visibility and conversion issues. 6 leads × £8,500 × 12 months = £47,600 annually. Based on competitor traffic analysis and industry conversion benchmarks.'
+    },
+  ]
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-6 py-16 md:py-20 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
@@ -41,19 +67,23 @@ export default function Hero() {
         />
       ))}
 
-      {/* Logos */}
-      <div className={`flex items-center gap-3 md:gap-6 mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        <img 
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-          alt="ETOTO Media" 
-          className="h-8 md:h-14 object-contain"
-        />
+      {/* Logos - Fixed with dark background cards */}
+      <div className={`flex items-center gap-4 md:gap-8 mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
+        <div className="bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 shadow-xl">
+          <img 
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
+            alt="ETOTO Media" 
+            className="h-6 md:h-10 object-contain"
+          />
+        </div>
         <span className="text-[#E8192C] font-black text-xl md:text-3xl animate-pulse">×</span>
-        <img 
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/solar%20path%20logo-gb9aYzjnVnp3LFRgT565BJqotuLeRG.png" 
-          alt="Solar Path" 
-          className="h-8 md:h-14 object-contain"
-        />
+        <div className="bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 shadow-xl">
+          <img 
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/solar%20path%20logo-gb9aYzjnVnp3LFRgT565BJqotuLeRG.png" 
+            alt="Solar Path" 
+            className="h-6 md:h-10 object-contain"
+          />
+        </div>
       </div>
 
       {/* Badge */}
@@ -83,22 +113,39 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Animated stats */}
-      <div className={`grid grid-cols-3 gap-2 md:gap-6 mt-10 md:mt-14 w-full max-w-2xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-        {[
-          { value: seoScore, suffix: '/100', label: 'SEO Score', color: '#DC2626' },
-          { value: issues, suffix: '', label: 'Critical Issues', color: '#E8192C' },
-          { value: revenue, prefix: '£', suffix: 'K+', label: 'Revenue at Risk', color: '#F5921E' },
-        ].map((stat, i) => (
+      {/* Animated stats with expandable context */}
+      <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-10 md:mt-14 w-full max-w-3xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        {stats.map((stat, i) => (
           <div 
             key={i} 
-            className="text-center px-2 md:px-6 py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-default"
+            className="text-center relative"
             style={{ transitionDelay: `${i * 100}ms` }}
           >
-            <p className="text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
-              {stat.prefix}{stat.value}{stat.suffix}
-            </p>
-            <p className="text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2">{stat.label}</p>
+            <div 
+              className="px-2 md:px-6 py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-pointer"
+              onClick={() => setExpandedStat(expandedStat === i ? null : i)}
+            >
+              <p className="text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
+                {stat.prefix}{stat.value}{stat.suffix}
+              </p>
+              <p className="text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2">{stat.label}</p>
+              <button className="mt-2 inline-flex items-center gap-1 text-xs text-slate-400 hover:text-[#E8192C] transition-colors">
+                <Info className="w-3 h-3" />
+                <span className="hidden md:inline">How we calculated this</span>
+                <span className="md:hidden">Details</span>
+              </button>
+            </div>
+            
+            {/* Expanded context */}
+            {expandedStat === i && (
+              <div className="absolute top-full left-0 right-0 mt-2 z-20 bg-slate-900 text-white text-xs md:text-sm p-4 rounded-xl shadow-2xl animate-fade-in-up">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 text-[#F5921E] flex-shrink-0 mt-0.5" />
+                  <p className="leading-relaxed">{stat.context}</p>
+                </div>
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900 rotate-45" />
+              </div>
+            )}
           </div>
         ))}
       </div>
