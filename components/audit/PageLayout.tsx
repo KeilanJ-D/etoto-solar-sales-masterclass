@@ -1,3 +1,5 @@
+'use client'
+
 interface PageLayoutProps {
   children: React.ReactNode
   sectionNumber?: string

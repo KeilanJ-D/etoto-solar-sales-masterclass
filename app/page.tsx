@@ -13,8 +13,18 @@ import CallToAction from '@/components/audit/CallToAction'
 import ReviewRequest from '@/components/audit/ReviewRequest'
 
 export default function AuditDocument() {
+  const handleDownloadPDF = () => {
+    window.print()
+  }
+
   return (
     <main className="bg-[#E8E8E8] min-h-screen">
+      <button
+        onClick={handleDownloadPDF}
+        className="fixed top-6 right-6 z-50 bg-[#E8192C] hover:bg-[#D01622] text-white px-6 py-3 font-semibold rounded-lg shadow-lg transition-all print:hidden"
+      >
+        Download PDF
+      </button>
       <style jsx global>{`
         @media print {
           body { background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
