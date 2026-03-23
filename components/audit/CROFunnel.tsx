@@ -1,3 +1,5 @@
+'use client'
+
 import { PageLayout } from './PageLayout'
 
 const pipelineCards = [
@@ -5,22 +7,22 @@ const pipelineCards = [
     title: 'Lead Capture',
     badge: 'PARTIAL',
     badgeColor: '#F5921E',
-    desc: 'Three calculators exist. Contact form exists. But calculators have no email gate — a homeowner gets a number and leaves without entering their details. The contact form has no urgency, no pre-qualification, and no confirmation of next steps.',
-    insight: 'Tools that generate interest but don't capture identity are awareness assets, not lead gen assets.',
+    desc: "Three calculators exist. Contact form exists. But calculators have no email gate — a homeowner gets a number and leaves without entering their details. The contact form has no urgency, no pre-qualification, and no confirmation of next steps.",
+    insight: "Tools that generate interest but don't capture identity are awareness assets, not lead gen assets.",
   },
   {
     title: 'Lead Response',
     badge: 'UNKNOWN',
     badgeColor: '#E8192C',
-    desc: 'No live chat. No WhatsApp. No automated acknowledgement. A lead arriving at 9pm Tuesday gets a response Wednesday morning — by which point two competitors have already called.',
-    insight: 'Sub-60 minute response increases conversion by up to 391% vs same-day response.',
+    desc: "No live chat. No WhatsApp. No automated acknowledgement. A lead arriving at 9pm Tuesday gets a response Wednesday morning — by which point two competitors have already called.",
+    insight: "Sub-60 minute response increases conversion by up to 391% vs same-day response.",
   },
   {
     title: 'Lead Retention',
     badge: 'NOT IN PLACE',
     badgeColor: '#E8192C',
-    desc: 'No Meta retargeting pixel. No email nurture for unconverted leads. No exit-intent capture. Every visitor who doesn't convert today is permanently gone.',
-    insight: 'The avg solar buyer takes 3–6 weeks from first research to booking. You're invisible for all of that window.',
+    desc: "No Meta retargeting pixel. No email nurture for unconverted leads. No exit-intent capture. Every visitor who doesn't convert today is permanently gone.",
+    insight: "The avg solar buyer takes 3–6 weeks from first research to booking. You're invisible for all of that window.",
   },
 ]
 
@@ -56,7 +58,7 @@ export default function CROFunnel() {
                   </span>
                 </div>
                 <p className="text-[#4B5563] text-[9px] leading-relaxed mb-3">{card.desc}</p>
-                <p className="text-[#6B7280] text-[8px] italic border-t border-[#E5E7EB] pt-2">"{card.insight}"</p>
+                <p className="text-[#6B7280] text-[8px] italic border-t border-[#E5E7EB] pt-2">{`"${card.insight}"`}</p>
               </div>
             </div>
           ))}

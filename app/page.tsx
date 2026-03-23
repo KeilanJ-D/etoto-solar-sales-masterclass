@@ -1,3 +1,5 @@
+'use client'
+
 import Cover from '@/components/audit/Cover'
 import ExecutiveSnapshot from '@/components/audit/ExecutiveSnapshot'
 import PipelineMoney from '@/components/audit/PipelineMoney'
@@ -13,20 +15,6 @@ import ReviewRequest from '@/components/audit/ReviewRequest'
 export default function AuditDocument() {
   return (
     <main className="bg-[#E8E8E8] min-h-screen">
-      <div className="flex flex-col items-center py-12 gap-10 print:py-0 print:gap-0 print:bg-white">
-        <Cover />
-        <ExecutiveSnapshot />
-        <PipelineMoney />
-        <SEOAudit />
-        <CROFunnel />
-        <BrandAudit />
-        <Competitors />
-        <Services />
-        <SocialProof />
-        <CallToAction />
-        <ReviewRequest />
-      </div>
-
       <style jsx global>{`
         @media print {
           body { background: white !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -42,6 +30,19 @@ export default function AuditDocument() {
           }
         }
       `}</style>
+      <div className="flex flex-col items-center py-12 gap-10 print:py-0 print:gap-0 print:bg-white">
+        <Cover />
+        <ExecutiveSnapshot />
+        <PipelineMoney />
+        <SEOAudit />
+        <CROFunnel />
+        <BrandAudit />
+        <Competitors />
+        <Services />
+        <SocialProof />
+        <CallToAction />
+        <ReviewRequest />
+      </div>
     </main>
   )
 }
