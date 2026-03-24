@@ -34,6 +34,7 @@ export default function AddOns() {
       description: '3 static posts per week — Mythbusters, educational, carousel content. Plus video shoot content (B-roll, stills, short-form) weaved in to create a 5–7 post/week organic strategy.',
       extra: 'Graphic design, caption writing, scheduling — all managed by us. Completely hands-off for you.',
       color: '#F5921E',
+      examplesLink: 'https://drive.google.com/drive/folders/1mUgCRCDk5toznWsK8e0OlBKVPcHv6QkK?usp=sharing',
     },
     {
       icon: Globe,
@@ -98,6 +99,20 @@ export default function AddOns() {
                 <p className="text-xs text-slate-500 italic border-t border-slate-100 pt-3">
                   {addon.extra}
                 </p>
+              )}
+
+              {addon.examplesLink && (
+                <div className="border-t border-slate-100 pt-3 mt-3">
+                  <a
+                    href={addon.examplesLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5921E]/10 text-[#F5921E] rounded-lg text-sm font-semibold hover:bg-[#F5921E]/20 transition-colors"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    View Content Examples
+                  </a>
+                </div>
               )}
 
               {addon.portfolioLinks && (
