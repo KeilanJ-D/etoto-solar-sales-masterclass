@@ -9,10 +9,10 @@ const roadmap = [
     title: 'Capture & Launch',
     subtitle: 'Build the foundation, start generating',
     color: '#E8192C',
-    installs: '+5',
-    baseline: '20 → 25',
-    leads: '~120',
-    additionalGP: '€12,000',
+    installs: '+3',
+    baseline: '20 → 23',
+    leads: '~96',
+    additionalGP: '€7,200',
     items: [
       { text: 'Video content shoot: 2 days on-site capturing installs, testimonials, team footage', icon: Camera },
       { text: 'Publish 10 SEO articles targeting 9,500+ monthly searches', icon: FileText },
@@ -26,10 +26,10 @@ const roadmap = [
     title: 'Optimise & Scale',
     subtitle: 'Refine what works, cut what doesn\'t',
     color: '#F5921E',
-    installs: '+15',
-    baseline: '25 → 35',
-    leads: '~240',
-    additionalGP: '€36,000',
+    installs: '+8',
+    baseline: '23 → 31',
+    leads: '~96',
+    additionalGP: '€19,200',
     items: [
       { text: 'Analyse Month 1 ad performance, double down on winning creatives', icon: BarChart3 },
       { text: 'A/B test landing pages and ad variations', icon: Target },
@@ -43,15 +43,15 @@ const roadmap = [
     title: 'Compound & Grow',
     subtitle: 'Full pipeline converting, SEO compounding',
     color: '#22C55E',
-    installs: '+30',
-    baseline: '35 → 50',
-    leads: '~240+',
-    additionalGP: '€72,000',
+    installs: '+16',
+    baseline: '31 → 47',
+    leads: '~96+',
+    additionalGP: '€38,400',
     items: [
       { text: 'SEO content starts ranking (organic leads increase)', icon: TrendingUp },
       { text: 'Scale winning ad sets with retargeting audiences built', icon: Zap },
       { text: 'Review collection system active (build social proof)', icon: Users },
-      { text: 'Prepare for capacity scaling (50+ installs ready)', icon: BarChart3 },
+      { text: 'Prepare for capacity scaling (47+ installs ready)', icon: BarChart3 },
     ],
     keyDeliverable: 'Full pipeline converting. Combined organic + paid at scale.',
   },
@@ -95,10 +95,10 @@ export default function NinetyDayRoadmap() {
             90-Day Growth Plan
           </span>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
-            From <span className="text-[#E8192C]">20</span> to <span className="text-[#22C55E]">50</span> Installs Per Month
+            From <span className="text-[#E8192C]">20</span> to <span className="text-[#22C55E]">47</span> Installs Per Month
           </h2>
           <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto">
-            €2,400/month ad budget. 240 leads. 40 additional sales at full run rate. Here's how we get there.
+            €2,400/month ad budget. ~96 leads/month at €25 CPL. 16 additional sales at full run rate. Here's how we get there.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function NinetyDayRoadmap() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             <div className="bg-slate-800 rounded-xl p-4">
-              <p className="text-2xl md:text-3xl font-black text-white">€10</p>
+              <p className="text-2xl md:text-3xl font-black text-white">€25</p>
               <p className="text-xs text-slate-400 mt-1">Cost per lead (conservative)</p>
             </div>
             <div className="bg-slate-800 rounded-xl p-4">
@@ -127,7 +127,7 @@ export default function NinetyDayRoadmap() {
             </div>
           </div>
           <p className="text-xs text-slate-500 mt-4">
-            Note: Our Irish campaigns delivered €14-16 CPL. With video creative and retargeting maturity, CPL typically drops 20-30% by Month 3. These projections use the conservative €10 figure.
+            Note: Our Irish campaigns delivered €14-16 CPL. We're using €25 here to be ultra-conservative. As video creative and retargeting mature, CPL typically drops 20-30% — meaning real returns could be significantly higher.
           </p>
         </div>
 
@@ -290,7 +290,7 @@ export default function NinetyDayRoadmap() {
           {/* Big ROI number */}
           <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 md:p-12 text-center">
             <p className="text-slate-400 mb-2">Total Additional Gross Profit Over 90 Days</p>
-            <p className="text-4xl md:text-6xl font-black text-white mb-4">€120,000</p>
+            <p className="text-4xl md:text-6xl font-black text-white mb-4">€64,800</p>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-8 pt-8 border-t border-slate-700">
               <div>
@@ -300,17 +300,17 @@ export default function NinetyDayRoadmap() {
               <div className="hidden md:block text-slate-600">→</div>
               <div>
                 <p className="text-sm text-slate-400">Net Profit (after all costs)</p>
-                <p className="text-xl font-bold text-[#22C55E]">€99,810</p>
+                <p className="text-xl font-bold text-[#22C55E]">€44,610</p>
               </div>
               <div className="hidden md:block text-slate-600">→</div>
               <div>
                 <p className="text-sm text-slate-400">Return on Investment</p>
-                <p className="text-xl font-bold text-[#E8192C]">5.9×</p>
+                <p className="text-xl font-bold text-[#E8192C]">3.2×</p>
               </div>
             </div>
 
             <p className="text-2xl md:text-3xl font-black text-white mt-8">
-              Every €1 you invest returns <span className="text-[#22C55E]">€5.94</span> in gross profit.
+              Every €1 you invest returns <span className="text-[#22C55E]">€3.21</span> in gross profit.
             </p>
           </div>
         </div>
@@ -318,10 +318,10 @@ export default function NinetyDayRoadmap() {
         {/* Bottom callout */}
         <div className={`mt-8 bg-[#E8192C] rounded-2xl p-6 md:p-8 text-center transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-xl md:text-2xl font-black text-white mb-2">
-            €20,190 in. €99,810 net profit. 90 days.
+            €20,190 in. €44,610 net profit. 90 days.
           </p>
           <p className="text-sm md:text-base text-red-100 max-w-2xl mx-auto">
-            These are gross profit numbers — not revenue. After you've paid for materials, labour, and every euro of marketing spend, you're still nearly €100,000 better off than if you'd done nothing. And Month 4 onwards, the retargeting audience is built, the video content is running, and the pipeline never stops filling.
+            These are gross profit numbers — not revenue. After you've paid for materials, labour, and every euro of marketing spend, you're still €44k better off than if you'd done nothing. And Month 4 onwards, the retargeting audience is built, the video content is running, and the pipeline never stops filling. At steady state that's 16 extra installs/month = €38k additional GP every single month.
           </p>
         </div>
       </div>
