@@ -289,7 +289,7 @@ export default function NinetyDayRoadmap() {
 
         {/* ROI Section */}
         <div className={`mt-12 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h3 className="text-xl md:text-2xl font-black text-slate-900 text-center mb-8">What €20,190 Buys You</h3>
+          <h3 className="text-xl md:text-2xl font-black text-slate-900 text-center mb-8">What €18,750 Buys You</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             {roadmap.map((month, i) => (

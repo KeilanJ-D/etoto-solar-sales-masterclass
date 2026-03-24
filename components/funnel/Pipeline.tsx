@@ -14,7 +14,7 @@ const counties = [
   { name: 'Carlow', status: 'none', leads: '0' },
   { name: 'Kilkenny', status: 'none', leads: '0' },
   { name: 'Waterford', status: 'none', leads: '0' },
-  { name: 'Cork', status: 'none', leads: '0' },
+  { name: 'Cork', status: 'none', leads: 'No page (HQ!)' },
   { name: 'Limerick', status: 'none', leads: '0' },
   { name: 'Galway', status: 'none', leads: '0' },
 ]
