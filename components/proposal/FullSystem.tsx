@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState, useRef } from 'react'
 import { Target, Settings, Zap, Globe, Camera, Search } from 'lucide-react'
 
 const services = [
@@ -11,13 +12,13 @@ const services = [
   {
     icon: Settings,
     title: 'CRM & Pipeline Infrastructure',
-    description: 'Go High Level overhaul. Automated welcome sequences, call-back scheduling, quote reminders, and long-term nurture flows. Pipeline stages that match your actual sales process. Review collection automation. Everything talks to everything.',
+    description: 'Go High Level overhaul. Automated welcome sequences, call-back scheduling, quote reminders, and long-term nurture flows. Pipeline stages that match your actual sales process. Review collection automation.',
   },
   {
     icon: Zap,
     title: 'SolaFlow Quiz Funnel',
     tag: 'FREE',
-    description: 'Our proprietary lead qualification tool, branded to Solar Path. Configured for the Irish market — SEAI grants, Eircode, € pricing. Recommends system sizes based on roof space and energy usage. Delivers pre-qualified leads with full context to your sales team.',
+    description: 'Our proprietary lead qualification tool, branded to Solar Path. Configured for the Irish market — SEAI grants, Eircode, € pricing. Recommends system sizes and delivers pre-qualified leads with full context.',
   },
   {
     icon: Globe,
@@ -27,55 +28,98 @@ const services = [
   {
     icon: Camera,
     title: 'Ad Creative Production',
-    description: 'Carousels, educational content, package offers. Mythbuster posts. Everything designed to stop the scroll and speak to Irish homeowners considering solar. Video content from quarterly shoots woven into ongoing campaigns.',
+    description: 'Carousels, educational content, package offers. Mythbuster posts. Everything designed to stop the scroll and speak to Irish homeowners considering solar. Video content from quarterly shoots woven into campaigns.',
   },
   {
     icon: Search,
     title: 'SEO & Google Ads Audit',
     tag: 'FREE',
-    description: 'Once we have access to your Google Ads and GA4, we will conduct a full audit. Honest assessment of what is working, what is not, and what it would cost to fix. No commitment required for the audit — we want to see it.',
+    description: 'Once we have access to your Google Ads and GA4, we will conduct a full audit. Honest assessment of what is working, what is not, and what it would cost to fix. No commitment required.',
   },
 ]
 
 export default function FullSystem() {
+  const [sectionVisible, setSectionVisible] = useState(false)
+  const [visibleCards, setVisibleCards] = useState<number[]>([])
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSectionVisible(true)
+            services.forEach((_, idx) => {
+              setTimeout(() => {
+                setVisibleCards(prev => [...prev, idx])
+              }, idx * 100)
+            })
+            observer.disconnect()
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className="bg-[#F2F4F7] py-20 md:py-28">
-      <div className="max-w-6xl mx-auto px-6">
+    <section ref={sectionRef} className="py-16 md:py-28 px-4 md:px-6 bg-slate-50 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Section header */}
-        <p className="text-[#E8192C] text-xs font-semibold tracking-[0.2em] uppercase mb-4 animate-on-scroll">
-          The Full System
-        </p>
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-[#0A0A0A] mb-6 animate-on-scroll stagger-1">
-          Everything Under One Roof
-        </h2>
-        <p className="text-[#6B7280] text-lg max-w-2xl mb-12 animate-on-scroll stagger-2">
-          No more juggling multiple agencies who do not talk to each other. The funnel feeds the CRM. 
-          The CRM feeds the ads. The content feeds everything.
-        </p>
+        <div className={`text-center mb-12 transition-all duration-700 ${sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-flex items-center gap-2 bg-[#E8192C]/10 text-[#E8192C] text-xs md:text-sm font-semibold px-4 py-2 rounded-full mb-4">
+            <span className="w-2 h-2 bg-[#E8192C] rounded-full animate-pulse" />
+            The Full System
+          </span>
+          <h2 className="text-2xl md:text-5xl font-black text-slate-900 mb-4">
+            Everything Under One Roof
+          </h2>
+          <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto">
+            No more juggling multiple agencies who do not talk to each other. The funnel feeds the CRM. 
+            The CRM feeds the ads. The content feeds everything.
+          </p>
+        </div>
         
         {/* Service cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, idx) => (
-            <div 
-              key={service.title}
-              className={`bg-white border-t-[3px] border-[#E8192C] p-6 animate-on-scroll stagger-${(idx % 6) + 1}`}
-            >
-              <div className="flex items-start justify-between mb-4">
-                <service.icon className="w-8 h-8 text-[#E8192C]" />
-                {service.tag && (
-                  <span className="bg-[#22C55E] text-white text-xs font-bold px-2 py-1">
-                    {service.tag}
-                  </span>
-                )}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {services.map((service, idx) => {
+            const Icon = service.icon
+            const isVisible = visibleCards.includes(idx)
+            
+            return (
+              <div 
+                key={service.title}
+                className={`group relative bg-white border border-slate-100 rounded-2xl p-6 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: `${idx * 50}ms` }}
+              >
+                {/* Top accent */}
+                <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl bg-[#E8192C]" />
+                
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-[#E8192C]/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-6 h-6 text-[#E8192C]" />
+                  </div>
+                  {service.tag && (
+                    <span className="bg-[#22C55E] text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {service.tag}
+                    </span>
+                  )}
+                </div>
+                
+                <h3 className="text-lg font-bold text-slate-900 mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+                
+                {/* Hover gradient line */}
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#E8192C] to-[#F5921E] rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <h3 className="font-heading text-lg font-bold text-[#0A0A0A] mb-3">
-                {service.title}
-              </h3>
-              <p className="text-[#6B7280] text-sm leading-relaxed">
-                {service.description}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

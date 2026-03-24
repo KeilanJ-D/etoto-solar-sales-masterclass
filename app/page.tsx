@@ -37,13 +37,12 @@ export default function ProposalPage() {
     <main className="bg-white min-h-screen overflow-x-hidden">
       <StickyNav />
       <ProposalHero />
-      <div className="gradient-strip" />
       <WhereYouAre />
+      <div className="gradient-strip" />
       <IrishMarketProof />
-      <div className="gradient-strip" />
       <NinetyDayScaler />
-      <FullSystem />
       <div className="gradient-strip" />
+      <FullSystem />
       <Investment />
       <OptionalAddOns />
       <NextSteps />
