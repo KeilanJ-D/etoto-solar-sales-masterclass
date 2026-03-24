@@ -5,7 +5,7 @@ import JSZip from 'jszip'
 
 const blogs = [
   {
-    filename: '01-seai-grant-2026.md',
+    filename: '01-seai-grant-2026.txt',
     title: 'SEAI Solar Panel Grant 2026: Complete Irish Homeowner Guide',
     content: `# SEAI Solar Panel Grant 2026: Complete Irish Homeowner Guide
 
@@ -55,7 +55,7 @@ Current processing times are approximately 4-6 weeks from application to approva
 `
   },
   {
-    filename: '02-solar-panels-cost-ireland-2026.md',
+    filename: '02-solar-panels-cost-ireland-2026.txt',
     title: 'How Much Do Solar Panels Cost in Ireland in 2026?',
     content: `# How Much Do Solar Panels Cost in Ireland in 2026?
 
@@ -104,7 +104,7 @@ A typical 4kWp system costing €7,500 (after grant) can save €800-1,200 annua
 `
   },
   {
-    filename: '03-solar-panels-cork.md',
+    filename: '03-solar-panels-cork.txt',
     title: 'Solar Panels Cork: Your Complete Local Installation Guide',
     content: `# Solar Panels Cork: Your Complete Local Installation Guide
 
@@ -153,7 +153,7 @@ ESB Networks handles all grid connections in Cork. The process typically takes 2
 `
   },
   {
-    filename: '04-sigenergy-review-ireland.md',
+    filename: '04-sigenergy-review-ireland.txt',
     title: 'Sigenergy Review Ireland: Is It Worth the Premium?',
     content: `# Sigenergy Review Ireland: Is It Worth the Premium?
 
@@ -216,7 +216,7 @@ Sigenergy is an excellent choice for homeowners who want a premium, integrated s
 `
   },
   {
-    filename: '05-aiko-solar-panels-ireland.md',
+    filename: '05-aiko-solar-panels-ireland.txt',
     title: 'Aiko Solar Panels Ireland: Premium Efficiency Worth It?',
     content: `# Aiko Solar Panels Ireland: Premium Efficiency Worth It?
 
@@ -270,7 +270,7 @@ For most Irish homes with adequate roof space, standard Tier 1 panels offer bett
 `
   },
   {
-    filename: '06-solar-battery-worth-it-ireland.md',
+    filename: '06-solar-battery-worth-it-ireland.txt',
     title: 'Is a Solar Battery Worth It in Ireland? 2026 Analysis',
     content: `# Is a Solar Battery Worth It in Ireland? 2026 Analysis
 
@@ -341,7 +341,7 @@ In 2026, batteries make financial sense for the right households. If you generat
 `
   },
   {
-    filename: '07-sigenergy-vs-huawei-ireland.md',
+    filename: '07-sigenergy-vs-huawei-ireland.txt',
     title: 'Sigenergy vs Huawei: Which Solar Battery for Ireland?',
     content: `# Sigenergy vs Huawei: Which Solar Battery for Ireland?
 
@@ -405,7 +405,7 @@ Choosing between Sigenergy and Huawei is one of the most common dilemmas for Iri
 `
   },
   {
-    filename: '08-sell-electricity-grid-ireland.md',
+    filename: '08-sell-electricity-grid-ireland.txt',
     title: 'How to Sell Electricity Back to the Grid in Ireland',
     content: `# How to Sell Electricity Back to the Grid in Ireland
 
@@ -472,7 +472,7 @@ The Microgeneration Support Scheme continues to evolve. Future developments may 
 `
   },
   {
-    filename: '09-solar-panel-myths-ireland.md',
+    filename: '09-solar-panel-myths-ireland.txt',
     title: '10 Solar Panel Myths Irish Homeowners Still Believe',
     content: `# 10 Solar Panel Myths Irish Homeowners Still Believe
 
@@ -532,7 +532,7 @@ Despite solar panels becoming increasingly common in Ireland, many homeowners st
 `
   },
   {
-    filename: '10-farm-solar-tams3-ireland.md',
+    filename: '10-farm-solar-tams3-ireland.txt',
     title: 'Solar Panels for Irish Farms: TAMS 3 Grants Explained',
     content: `# Solar Panels for Irish Farms: TAMS 3 Grants Explained
 
@@ -622,7 +622,7 @@ export async function GET() {
     })
     
     // Add a README
-    zip.file('README.md', `# Solar Path Blog Content Pack
+    zip.file('README.txt', `# Solar Path Blog Content Pack
 
 ## Contents
 This ZIP contains 10 SEO-optimised blog articles ready to publish on your website.

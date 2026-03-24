@@ -1,108 +1,108 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { FileText, Download, Clock, TrendingUp, Sparkles, ExternalLink, ChevronRight } from 'lucide-react'
+import { FileText, Download, Clock, TrendingUp, Sparkles } from 'lucide-react'
 
 const blogs = [
   {
     id: 1,
     title: 'SEAI Solar Panel Grant 2026: Complete Irish Homeowner Guide',
     slug: 'seai-grant-2026',
-    keywords: ['seai grant', 'solar panel grant ireland', 'seai solar grant 2026'],
+    keywords: ['seai grant', 'solar panel grant ireland'],
     wordCount: 1847,
     readTime: '8 min',
     searchVolume: '2,400/mo',
-    excerpt: 'Everything Irish homeowners need to know about the SEAI solar panel grant in 2026, including eligibility, amounts, and how to apply.',
+    excerpt: 'Everything Irish homeowners need to know about the SEAI solar panel grant in 2026.',
   },
   {
     id: 2,
     title: 'How Much Do Solar Panels Cost in Ireland in 2026?',
     slug: 'solar-panels-cost-ireland-2026',
-    keywords: ['solar panels cost ireland', 'solar panel prices ireland 2026'],
+    keywords: ['solar panels cost ireland', 'solar panel prices ireland'],
     wordCount: 1624,
     readTime: '7 min',
     searchVolume: '1,900/mo',
-    excerpt: 'A comprehensive breakdown of solar panel costs in Ireland for 2026, including installation, grants, and ROI calculations.',
+    excerpt: 'A comprehensive breakdown of solar panel costs in Ireland for 2026.',
   },
   {
     id: 3,
     title: 'Solar Panels Cork: Your Complete Local Installation Guide',
     slug: 'solar-panels-cork',
-    keywords: ['solar panels cork', 'solar installers cork', 'solar pv cork'],
+    keywords: ['solar panels cork', 'solar installers cork'],
     wordCount: 1156,
     readTime: '5 min',
     searchVolume: '720/mo',
-    excerpt: 'Local guide for Cork homeowners considering solar panels, including regional installers, grants, and weather considerations.',
+    excerpt: 'Local guide for Cork homeowners considering solar panels.',
   },
   {
     id: 4,
     title: 'Sigenergy Review Ireland: Is It Worth the Premium?',
     slug: 'sigenergy-review-ireland',
-    keywords: ['sigenergy review', 'sigenergy ireland', 'sigenergy battery'],
+    keywords: ['sigenergy review', 'sigenergy ireland'],
     wordCount: 1432,
     readTime: '6 min',
     searchVolume: '590/mo',
-    excerpt: 'An honest review of Sigenergy solar battery systems for Irish homeowners, covering performance, pricing, and alternatives.',
+    excerpt: 'An honest review of Sigenergy solar battery systems for Irish homeowners.',
   },
   {
     id: 5,
     title: 'Aiko Solar Panels Ireland: Premium Efficiency Worth It?',
     slug: 'aiko-solar-panels-ireland',
-    keywords: ['aiko solar panels', 'aiko panels ireland', 'aiko solar review'],
+    keywords: ['aiko solar panels', 'aiko panels ireland'],
     wordCount: 1289,
     readTime: '6 min',
     searchVolume: '480/mo',
-    excerpt: 'Deep dive into Aiko solar panels for the Irish market, examining their efficiency claims and value proposition.',
+    excerpt: 'Deep dive into Aiko solar panels for the Irish market.',
   },
   {
     id: 6,
     title: 'Is a Solar Battery Worth It in Ireland? 2026 Analysis',
     slug: 'solar-battery-worth-it-ireland',
-    keywords: ['solar battery ireland', 'is solar battery worth it', 'home battery storage ireland'],
+    keywords: ['solar battery ireland', 'home battery storage ireland'],
     wordCount: 1567,
     readTime: '7 min',
     searchVolume: '1,300/mo',
-    excerpt: 'Data-driven analysis of whether solar battery storage makes financial sense for Irish homeowners in 2026.',
+    excerpt: 'Data-driven analysis of whether solar battery storage makes financial sense.',
   },
   {
     id: 7,
     title: 'Sigenergy vs Huawei: Which Solar Battery for Ireland?',
     slug: 'sigenergy-vs-huawei-ireland',
-    keywords: ['sigenergy vs huawei', 'best solar battery ireland', 'huawei battery ireland'],
+    keywords: ['sigenergy vs huawei', 'best solar battery ireland'],
     wordCount: 1378,
     readTime: '6 min',
     searchVolume: '390/mo',
-    excerpt: 'Head-to-head comparison of Sigenergy and Huawei solar battery systems for the Irish market.',
+    excerpt: 'Head-to-head comparison of Sigenergy and Huawei solar battery systems.',
   },
   {
     id: 8,
     title: 'How to Sell Electricity Back to the Grid in Ireland',
     slug: 'sell-electricity-grid-ireland',
-    keywords: ['sell electricity grid ireland', 'microgeneration ireland', 'ceg ireland'],
+    keywords: ['sell electricity grid ireland', 'microgeneration ireland'],
     wordCount: 1234,
     readTime: '5 min',
     searchVolume: '880/mo',
-    excerpt: 'Complete guide to the Clean Export Guarantee and how Irish solar owners can earn from excess electricity.',
+    excerpt: 'Complete guide to the Clean Export Guarantee for Irish solar owners.',
   },
   {
     id: 9,
     title: '10 Solar Panel Myths Irish Homeowners Still Believe',
     slug: 'solar-panel-myths-ireland',
-    keywords: ['solar panel myths', 'solar panels ireland facts', 'solar myths debunked'],
+    keywords: ['solar panel myths', 'solar panels ireland facts'],
     wordCount: 1456,
     readTime: '6 min',
     searchVolume: '320/mo',
-    excerpt: 'Debunking the most common misconceptions about solar panels that prevent Irish homeowners from going solar.',
+    excerpt: 'Debunking the most common misconceptions about solar panels.',
   },
   {
     id: 10,
     title: 'Solar Panels for Irish Farms: TAMS 3 Grants Explained',
     slug: 'farm-solar-tams3-ireland',
-    keywords: ['tams 3 solar', 'farm solar panels ireland', 'agricultural solar grants'],
+    keywords: ['tams 3 solar', 'farm solar panels ireland'],
     wordCount: 1607,
     readTime: '7 min',
     searchVolume: '540/mo',
-    excerpt: 'How Irish farmers can leverage TAMS 3 grants for solar panel installations, with ROI calculations and eligibility.',
+    excerpt: 'How Irish farmers can leverage TAMS 3 grants for solar panel installations.',
   },
 ]
 
@@ -110,7 +110,6 @@ const totalWords = blogs.reduce((acc, blog) => acc + blog.wordCount, 0)
 
 export default function BlogShowcase() {
   const [isVisible, setIsVisible] = useState(false)
-  const [hoveredBlog, setHoveredBlog] = useState<number | null>(null)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -170,49 +169,38 @@ export default function BlogShowcase() {
           ))}
         </div>
 
-        {/* Blog grid */}
+        {/* Blog grid - Cards as previews only, no buttons */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {blogs.map((blog, index) => (
             <div
               key={blog.id}
-              className={`group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 md:p-6 transition-all duration-500 hover:bg-white/10 hover:border-[#E8192C]/50 hover:-translate-y-1 cursor-pointer ${
+              className={`group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-5 md:p-6 transition-all duration-500 hover:bg-white/10 hover:border-[#E8192C]/30 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${300 + index * 50}ms` }}
-              onMouseEnter={() => setHoveredBlog(blog.id)}
-              onMouseLeave={() => setHoveredBlog(null)}
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="w-6 h-6 rounded-full bg-[#E8192C] text-white text-xs font-bold flex items-center justify-center">
-                      {blog.id}
-                    </span>
-                    <span className="text-xs text-slate-400">{blog.readTime} read</span>
-                    <span className="text-xs text-[#F5921E] font-medium">{blog.searchVolume}</span>
+              <div className="flex items-start gap-4">
+                <span className="w-8 h-8 rounded-full bg-[#E8192C] text-white text-sm font-bold flex items-center justify-center flex-shrink-0">
+                  {blog.id}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-2 text-xs text-slate-400">
+                    <span>{blog.readTime} read</span>
+                    <span className="text-[#F5921E] font-medium">{blog.searchVolume}</span>
+                    <span className="text-slate-500">{blog.wordCount.toLocaleString()} words</span>
                   </div>
-                  <h3 className="text-base md:text-lg font-bold text-white mb-2 group-hover:text-[#E8192C] transition-colors">
+                  <h3 className="text-base md:text-lg font-bold text-white mb-2 line-clamp-2">
                     {blog.title}
                   </h3>
                   <p className="text-sm text-slate-400 mb-3 line-clamp-2">{blog.excerpt}</p>
                   <div className="flex flex-wrap gap-2">
-                    {blog.keywords.slice(0, 2).map((kw, i) => (
+                    {blog.keywords.map((kw, i) => (
                       <span key={i} className="text-xs bg-white/10 text-slate-300 px-2 py-1 rounded">
                         {kw}
                       </span>
                     ))}
                   </div>
                 </div>
-                <div className="flex-shrink-0">
-                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#E8192C] transition-colors">
-                    <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
-                  </div>
-                </div>
-              </div>
-              
-              {/* Word count badge */}
-              <div className="absolute top-4 right-4 text-xs text-slate-500">
-                {blog.wordCount.toLocaleString()} words
               </div>
             </div>
           ))}
@@ -223,10 +211,10 @@ export default function BlogShowcase() {
           <div className="inline-flex flex-col items-center gap-6 bg-gradient-to-br from-[#E8192C] to-[#D01622] rounded-2xl p-8 md:p-10 shadow-2xl shadow-[#E8192C]/20">
             <div className="text-center">
               <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                Download All 10 Articles Now
+                Download All 10 Articles
               </h3>
               <p className="text-white/80 text-sm md:text-base max-w-md">
-                Fully formatted, ready to publish. Just add your branding and go live.
+                Plain text files ready to copy and paste directly into your blog.
               </p>
             </div>
             <a 
@@ -238,7 +226,7 @@ export default function BlogShowcase() {
               Download ZIP ({(totalWords / 1000).toFixed(1)}k words)
             </a>
             <p className="text-white/60 text-xs">
-              Includes all 10 markdown files + meta descriptions + featured image suggestions
+              10 plain .txt files ready for instant publishing
             </p>
           </div>
         </div>

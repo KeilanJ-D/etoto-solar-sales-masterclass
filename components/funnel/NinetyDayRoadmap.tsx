@@ -1,80 +1,55 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Calendar, CheckCircle, Zap, TrendingUp, Target, FileText, BarChart3, Users, ArrowRight, Calculator } from 'lucide-react'
+import { Calendar, CheckCircle, Zap, TrendingUp, Target, FileText, BarChart3, Users, Camera, Settings } from 'lucide-react'
 
 const roadmap = [
   {
     month: 'Month 1',
-    title: 'Foundation',
-    subtitle: 'Build the lead engine',
+    title: 'Capture & Launch',
+    subtitle: 'Build the foundation, start generating',
     color: '#E8192C',
     installs: '20 → 25',
-    leads: '40-50',
+    leadsGenerated: '€2,000 worth',
     items: [
+      { text: 'Capture content on-site (install footage, team photos, testimonials)', icon: Camera },
       { text: 'Publish 10 SEO articles targeting 9,500+ monthly searches', icon: FileText },
-      { text: 'Fix 83 technical SEO issues (meta, schema, Core Web Vitals)', icon: Zap },
-      { text: 'Launch lead-gated solar calculator (capture every visitor)', icon: Target },
-      { text: 'Deploy CRM + automated follow-up (no lead left behind)', icon: BarChart3 },
+      { text: 'Fix technical SEO issues (meta, schema, Core Web Vitals)', icon: Zap },
+      { text: 'Launch Meta Ads with proven Irish solar creatives', icon: TrendingUp },
     ],
-    metrics: [
-      { label: 'Organic Keywords', value: '40+', note: 'rankings started' },
-      { label: 'Lead Capture Rate', value: '8-12%', note: 'vs current ~2%' },
-      { label: 'Response Time', value: '<5 min', note: 'automated' },
-    ],
+    keyDeliverable: 'Live ads + all SEO content published. Lead flow starts.',
   },
   {
     month: 'Month 2',
-    title: 'Scale',
-    subtitle: 'Turn on paid acquisition',
+    title: 'Optimise & Scale',
+    subtitle: 'Refine what works, cut what doesn\'t',
     color: '#F5921E',
     installs: '25 → 35',
-    leads: '60-80',
+    leadsGenerated: '€2,000 worth',
     items: [
-      { text: 'Launch Meta Ads (proven Irish creatives, €16 CPL target)', icon: TrendingUp },
-      { text: 'Publish 4 localised pages (Cork, Dublin, Galway, Limerick)', icon: FileText },
-      { text: 'Implement review collection (5-star social proof engine)', icon: CheckCircle },
-      { text: 'A/B test landing pages (conversion rate optimisation)', icon: Target },
+      { text: 'Analyse Month 1 ad performance, double down on winners', icon: BarChart3 },
+      { text: 'A/B test landing pages and ad creatives', icon: Target },
+      { text: 'Add localised pages (Cork, Dublin, regional targeting)', icon: FileText },
+      { text: 'Implement automated follow-up sequences in CRM', icon: Settings },
     ],
-    metrics: [
-      { label: 'Cost Per Lead', value: '€16-25', note: 'paid channels' },
-      { label: 'Organic Leads', value: '15-20', note: 'SEO kicking in' },
-      { label: 'Total Pipeline', value: '€400k+', note: 'quoted value' },
-    ],
+    keyDeliverable: 'Optimised campaigns running. CRM automation live.',
   },
   {
     month: 'Month 3',
-    title: 'Compound',
-    subtitle: 'Hit 50 install capacity',
+    title: 'Compound & Grow',
+    subtitle: 'SEO kicks in, organic compounds paid',
     color: '#22C55E',
     installs: '35 → 50',
-    leads: '100-120',
+    leadsGenerated: '€2,000 worth',
     items: [
-      { text: 'Scale winning ad creatives (double budget on performers)', icon: TrendingUp },
-      { text: 'SEO content hits page 1 (organic leads compound)', icon: BarChart3 },
-      { text: 'Lead nurture sequences fully operational (warm → hot)', icon: Zap },
-      { text: 'Installer capacity planning (prepare for growth)', icon: Users },
+      { text: 'SEO content starts ranking (organic leads increase)', icon: TrendingUp },
+      { text: 'Scale winning ad sets with increased budget', icon: Zap },
+      { text: 'Review collection system active (build social proof)', icon: Users },
+      { text: 'Prepare for capacity scaling (50+ installs ready)', icon: BarChart3 },
     ],
-    metrics: [
-      { label: 'Monthly Leads', value: '100+', note: 'combined channels' },
-      { label: 'Close Rate', value: '25%+', note: 'qualified leads' },
-      { label: 'Revenue Pipeline', value: '€1M+', note: 'annual run rate' },
-    ],
+    keyDeliverable: 'Combined organic + paid generating 50+ install capacity.',
   },
 ]
-
-const investmentBreakdown = {
-  retainer: 2000,
-  adSpend: 2000,
-  total: 4000,
-  roi: {
-    leads: 100,
-    closeRate: 0.25,
-    avgInstall: 8500,
-    revenue: 212500,
-    multiple: 53,
-  }
-}
 
 export default function NinetyDayRoadmap() {
   const [isVisible, setIsVisible] = useState(false)
@@ -111,7 +86,7 @@ export default function NinetyDayRoadmap() {
             From <span className="text-[#E8192C]">20</span> to <span className="text-[#22C55E]">50</span> Installs Per Month
           </h2>
           <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto">
-            A data-driven roadmap to 2.5x your installation capacity. Based on real metrics from Irish solar campaigns.
+            We generate €2,000 worth of leads each month. You close them. Simple.
           </p>
         </div>
 
@@ -172,54 +147,47 @@ export default function NinetyDayRoadmap() {
                     </div>
                     <p className="text-slate-500">{month.subtitle}</p>
                   </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-lg text-white font-bold" style={{ backgroundColor: month.color }}>
-                    <Users className="w-4 h-4" />
-                    <span>{month.installs} installs</span>
+                  <div className="flex items-center gap-4">
+                    <div className="px-4 py-2 rounded-lg bg-slate-100 text-slate-700 font-bold text-sm">
+                      {month.leadsGenerated} leads
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-lg text-white font-bold" style={{ backgroundColor: month.color }}>
+                      <Users className="w-4 h-4" />
+                      <span>{month.installs}</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Content grid */}
+              {/* Content */}
               <div className="p-6 md:p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Actions */}
-                  <div className="lg:col-span-2">
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Key Actions</h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {month.items.map((item, i) => {
-                        const Icon = item.icon
-                        return (
-                          <div 
-                            key={i}
-                            className="flex items-start gap-3 bg-slate-50 rounded-xl p-4 hover:bg-slate-100 transition-colors"
-                          >
-                            <div 
-                              className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                              style={{ backgroundColor: `${month.color}15` }}
-                            >
-                              <Icon className="w-5 h-5" style={{ color: month.color }} />
-                            </div>
-                            <span className="text-sm font-medium text-slate-700 leading-tight">{item.text}</span>
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Metrics */}
-                  <div>
-                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Target Metrics</h4>
-                    <div className="space-y-3">
-                      {month.metrics.map((metric, i) => (
-                        <div key={i} className="bg-slate-900 rounded-xl p-4">
-                          <div className="flex items-baseline justify-between mb-1">
-                            <span className="text-xs text-slate-400">{metric.label}</span>
-                            <span className="text-lg font-black text-white">{metric.value}</span>
-                          </div>
-                          <span className="text-xs text-slate-500">{metric.note}</span>
+                <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">What We Deliver</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                  {month.items.map((item, i) => {
+                    const Icon = item.icon
+                    return (
+                      <div 
+                        key={i}
+                        className="flex items-start gap-3 bg-slate-50 rounded-xl p-4 hover:bg-slate-100 transition-colors"
+                      >
+                        <div 
+                          className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                          style={{ backgroundColor: `${month.color}15` }}
+                        >
+                          <Icon className="w-5 h-5" style={{ color: month.color }} />
                         </div>
-                      ))}
-                    </div>
+                        <span className="text-sm font-medium text-slate-700 leading-tight">{item.text}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+
+                {/* Key deliverable */}
+                <div className="bg-slate-900 rounded-xl p-4 flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-[#22C55E] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">End of Month Deliverable</p>
+                    <p className="text-sm text-white font-medium">{month.keyDeliverable}</p>
                   </div>
                 </div>
               </div>
@@ -227,66 +195,29 @@ export default function NinetyDayRoadmap() {
           ))}
         </div>
 
-        {/* ROI Calculator */}
-        <div className={`mt-12 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex items-center gap-3 mb-6">
-            <Calculator className="w-6 h-6 text-[#F5921E]" />
-            <h3 className="text-lg md:text-xl font-bold text-white">
-              Month 3 ROI: The Conservative Maths
+        {/* Simple investment summary */}
+        <div className={`mt-12 bg-slate-50 rounded-2xl p-6 md:p-8 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="text-center max-w-2xl mx-auto">
+            <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-4">
+              The Simple Maths
             </h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Investment */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-              <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Monthly Investment</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-300">ETOTO Retainer</span>
-                  <span className="text-white font-bold">£{investmentBreakdown.retainer.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-300">Recommended Ad Spend</span>
-                  <span className="text-white font-bold">€{investmentBreakdown.adSpend.toLocaleString()}</span>
-                </div>
-                <div className="border-t border-white/10 pt-3 flex justify-between items-center">
-                  <span className="text-slate-400">Total Monthly</span>
-                  <span className="text-xl font-black text-white">~£{investmentBreakdown.total.toLocaleString()}</span>
-                </div>
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <p className="text-2xl md:text-3xl font-black text-[#E8192C]">€2k</p>
+                <p className="text-xs text-slate-500">Leads/month</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <p className="text-2xl md:text-3xl font-black text-[#F5921E]">£2k</p>
+                <p className="text-xs text-slate-500">Retainer/month</p>
+              </div>
+              <div className="bg-white rounded-xl p-4 shadow-sm">
+                <p className="text-2xl md:text-3xl font-black text-[#22C55E]">30</p>
+                <p className="text-xs text-slate-500">Extra installs</p>
               </div>
             </div>
-
-            {/* Returns */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5">
-              <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Month 3 Returns</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2 text-slate-300">
-                  <span className="text-white font-bold">{investmentBreakdown.roi.leads}</span> leads
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
-                  <span className="text-white font-bold">{(investmentBreakdown.roi.closeRate * 100)}%</span> close
-                  <ArrowRight className="w-3 h-3 text-slate-500" />
-                  <span className="text-white font-bold">{investmentBreakdown.roi.leads * investmentBreakdown.roi.closeRate}</span> installs
-                </div>
-                <div className="text-slate-400 text-xs">
-                  At €{investmentBreakdown.roi.avgInstall.toLocaleString()} average install value
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/10">
-                <div className="flex items-baseline justify-between">
-                  <span className="text-slate-400">Monthly Revenue</span>
-                  <span className="text-2xl font-black text-[#22C55E]">€{investmentBreakdown.roi.revenue.toLocaleString()}</span>
-                </div>
-                <div className="text-right text-sm text-[#22C55E] font-bold mt-1">
-                  {investmentBreakdown.roi.multiple}× ROI
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom note */}
-          <div className="mt-6 text-center text-sm text-slate-400">
-            <span className="text-[#F5921E] font-semibold">Note:</span> These are conservative estimates. 
-            Premier Energy achieved €16.18 CPL and 482 leads in 3 months.
+            <p className="text-sm text-slate-500">
+              At €8,500 average install value, 30 extra installs = <span className="font-bold text-slate-900">€255,000 additional revenue.</span>
+            </p>
           </div>
         </div>
       </div>

@@ -9,9 +9,7 @@ import BlogProblem from '@/components/funnel/BlogProblem'
 import Competitors from '@/components/funnel/Competitors'
 import CompetitorContentGap from '@/components/funnel/CompetitorContentGap'
 import BlogShowcase from '@/components/funnel/BlogShowcase'
-import IrishMarketProof from '@/components/funnel/IrishMarketProof'
-import CaseStudy from '@/components/funnel/CaseStudy'
-import AdStrategy from '@/components/funnel/AdStrategy'
+import PremierEnergyCaseStudy from '@/components/funnel/PremierEnergyCaseStudy'
 import NinetyDayRoadmap from '@/components/funnel/NinetyDayRoadmap'
 import Services from '@/components/funnel/Services'
 import Investment from '@/components/funnel/Investment'
@@ -36,10 +34,8 @@ export default function AuditFunnel() {
       <Competitors />
       <CompetitorContentGap />
       
-      {/* Part 3: The Proof - We Can Fix This */}
-      <IrishMarketProof />
-      <CaseStudy />
-      <AdStrategy />
+      {/* Part 3: The Proof - We Already Do This */}
+      <PremierEnergyCaseStudy />
       
       {/* Part 4: The Solution - Here's What We Built */}
       <BlogShowcase />
