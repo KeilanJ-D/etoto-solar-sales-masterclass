@@ -18,28 +18,21 @@ const faqs = [
   },
   {
     question: 'What happens if it doesn\'t work?',
-    answer: '3-month minimum. If after 90 days the numbers don\'t stack up, you walk away with 30 days notice. But we\'ll know long before day 90 whether it\'s working — the fortnightly calls exist to catch problems early, not report on them after the fact.',
+    answer: 'We\'re confident it will — solar is our niche, and we\'ve generated over £200m in conversions for clients since May 2023. But if after 90 days the numbers don\'t stack up, you walk away with 30 days notice. No hard feelings. The fortnightly calls exist to catch problems early, optimise fast, and ensure we never get to that point.',
   },
   {
     question: 'Can you handle commercial and agricultural as well?',
     answer: 'Yes — Jackie asked about this on the call. We\'ve generated over 450MW of commercial opportunity across the UK. We have calculator software, appointment setting infrastructure, and dedicated commercial campaign frameworks. This sits as an add-on once the residential engine is running.',
   },
   {
-    question: 'What about the Rocky / Foch situation?',
-    answer: 'We\'ve built this proposal to work entirely without Rocky funding. If your conversation goes well and the Foch exclusivity ends in April, the installer loyalty programme could reduce or eliminate your ad spend entirely. That\'s upside — not the plan. We\'re happy to be on a call with Rocky if it helps.',
+    question: 'What about the Rocky / Failte situation?',
+    answer: 'We\'ve built this proposal to work entirely without Rocky funding. If your conversation goes well and the Failte exclusivity ends in April, the installer loyalty programme could reduce or eliminate your ad spend entirely. That\'s upside — not the plan. We\'re happy to be on a call with Rocky if it helps.',
   },
   {
     question: 'Why the discount?',
     answer: 'Solar Path is our first Irish client under the full ETOTO system. You\'re opening a market for us. The £1,000/month discount reflects that — and it stays in place for as long as we work together. Standard UK retainer is £3,000. You pay £2,000.',
   },
-  {
-    question: 'Do we need planning permission for solar panels?',
-    answer: 'Almost certainly not. Since October 2022, solar panels on residential rooftops in Ireland are exempt from planning permission, provided they don\'t extend more than 50cm above the roof surface. There are limited exceptions for protected structures and architectural conservation areas — we\'ll flag these during the site survey if applicable. For farm buildings, rooftop solar is exempt up to 300 kWp.',
-  },
-  {
-    question: 'Do solar panels actually work in Irish weather?',
-    answer: 'Yes — this is the most common myth in Irish solar and it\'s completely wrong. Ireland receives 1,100-1,600 sunshine hours per year. The Netherlands, which has 20% worse solar irradiance, leads Europe in rooftop solar adoption per capita. Modern panels work on daylight, not direct sunshine. A well-sized system in Cork generates 3,500-4,000 kWh per year — enough to cover 70-100% of a typical household\'s consumption. Real Irish homeowners consistently report 5-7 year payback periods on forums like Boards.ie.',
-  },
+  
 ]
 
 export default function FAQ() {

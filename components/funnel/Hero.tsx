@@ -97,19 +97,19 @@ export default function Hero() {
       {/* Main headline */}
       <div className={`text-center max-w-5xl transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
         <h1 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-6 text-balance">
-          Your Website Is
+          Your Website Is Leaking Leads.
           <span className="block text-[#E8192C] relative">
-            Leaking Leads.
+            Your Pipeline Should Be Full.
             <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#E8192C]/20" viewBox="0 0 200 8" preserveAspectRatio="none">
               <path d="M0,5 Q50,0 100,5 T200,5" fill="none" stroke="currentColor" strokeWidth="3" className="animate-draw" />
             </svg>
           </span>
         </h1>
-        <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed mb-3">
-          We have conducted a forensic audit of <span className="font-semibold text-slate-900">solarpath.ie</span> and discovered critical gaps costing you thousands in lost revenue every month.
+        <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+          A forensic website audit, real Irish campaign data, a 90-day growth plan, and 10 ready-to-publish blog articles — built specifically for <span className="font-semibold text-slate-900">Ken and Jackie at Solar Path</span>.
         </p>
-        <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto">
-          This complimentary audit reveals exactly where your digital presence is underperforming — and how to fix it.
+        <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto mt-3">
+          Scroll down. This is everything you need to hit 50 installs a month.
         </p>
       </div>
 
