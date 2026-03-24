@@ -195,11 +195,11 @@ export default function Problems() {
             <div className="flex items-center gap-3">
               <div className="w-3 h-3 bg-[#E8192C] rounded-full animate-ping" />
               <p className="text-slate-700 text-sm md:text-lg">
-                Combined, these issues are costing Solar Path an estimated <span className="font-bold text-[#E8192C]">£47,000+ annually</span>
+                Combined, these issues are costing Solar Path an estimated <span className="font-bold text-[#E8192C]">€48,000+ annually</span>
               </p>
             </div>
             <p className="text-xs md:text-sm text-slate-500 max-w-xl">
-              Based on: 6 lost leads/month × £8,500 average installation × 12 months = £47,600. Calculated from competitor traffic analysis and industry conversion benchmarks of 3.2% for optimised solar websites.
+              Based on: 4 lost leads/month × €12,000 average installation × 12 months = €48,000. Calculated from competitor traffic analysis and industry conversion benchmarks of 3.2% for optimised solar websites.
             </p>
           </div>
         </div>
