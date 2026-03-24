@@ -229,10 +229,14 @@ export default function BlogShowcase() {
                 Fully formatted, ready to publish. Just add your branding and go live.
               </p>
             </div>
-            <button className="inline-flex items-center gap-3 bg-white text-[#E8192C] px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 transition-all duration-300 hover:scale-105 shadow-xl">
+            <a 
+              href="/api/download-blogs" 
+              download="solar-path-blog-content.zip"
+              className="inline-flex items-center gap-3 bg-white text-[#E8192C] px-8 py-4 rounded-full font-bold text-lg hover:bg-slate-100 transition-all duration-300 hover:scale-105 shadow-xl"
+            >
               <Download className="w-5 h-5" />
               Download ZIP ({(totalWords / 1000).toFixed(1)}k words)
-            </button>
+            </a>
             <p className="text-white/60 text-xs">
               Includes all 10 markdown files + meta descriptions + featured image suggestions
             </p>
