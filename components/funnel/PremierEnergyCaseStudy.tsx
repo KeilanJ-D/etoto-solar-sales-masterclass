@@ -124,7 +124,8 @@ export default function PremierEnergyCaseStudy() {
             The leads entered their Go High Level CRM. Here is where every single one of them sits today — right now, as you read this.
           </p>
           <p className="text-sm text-slate-500 max-w-2xl mx-auto mt-4 italic">
-            Note: Some leads in the ad account don't appear in the CRM — likely never imported, or lost in handoff. The numbers below are what we can verify in the system.
+            Note: The CRM shows 155 leads in defined stages. The remaining 90 leads were moved to "Abandoned" during a CRM cleanup — 
+            comprising 42 quoted but never followed up, 31 booked for appointments that didn't happen, 12 never contacted, and 5 outside service area.
           </p>
         </div>
 
@@ -296,26 +297,32 @@ export default function PremierEnergyCaseStudy() {
             <div className="bg-[#22C55E]/10 border border-[#22C55E]/30 rounded-xl p-5">
               <p className="text-sm text-slate-300 mb-4">
                 If Solar Path had received these same 245 leads with their current sales process — SDRs making contact within hours, 
-                site surveys booked within days, quotes turned around same-week — even a conservative 1-in-6 close rate produces:
+                site surveys booked within days, quotes turned around same-week:
               </p>
               
-              <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                 <div className="text-center">
-                  <p className="text-2xl font-black text-[#22C55E]">40</p>
+                  <p className="text-2xl font-black text-white">122</p>
+                  <p className="text-xs text-slate-400">Appointments</p>
+                  <p className="text-[10px] text-slate-500">1 in 2 leads</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-black text-[#22C55E]">30</p>
                   <p className="text-xs text-slate-400">Sales</p>
+                  <p className="text-[10px] text-slate-500">1 in 4 appts</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-black text-[#22C55E]">€12k</p>
                   <p className="text-xs text-slate-400">AOV</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-black text-[#22C55E]">€480k</p>
+                  <p className="text-2xl font-black text-[#22C55E]">€360k</p>
                   <p className="text-xs text-slate-400">Revenue</p>
                 </div>
               </div>
               
               <p className="text-xs text-slate-400 italic">
-                From the same leads. Same ad spend. Different process.
+                From the same leads. Same ad spend. Different process. That's €72,000 in gross profit (20%).
               </p>
             </div>
 

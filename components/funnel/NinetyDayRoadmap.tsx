@@ -9,13 +9,14 @@ const roadmap = [
     title: 'Capture & Launch',
     subtitle: 'Build the foundation, start generating',
     color: '#E8192C',
-    installs: '+3',
-    baseline: '20 → 23',
+    installs: '+6',
+    baseline: '20 → 26',
     leads: '~48',
+    appts: '~24',
     adBudget: '€1,200',
     adBudgetNote: 'Meta €40/day limit on new accounts',
-    additionalRevenue: '€36,000',
-    additionalGP: '€7,200',
+    additionalRevenue: '€72,000',
+    additionalGP: '€14,400',
     items: [
       { text: 'Video content shoot: 2 days on-site capturing installs, testimonials, team footage', icon: Camera },
       { text: 'Launch Meta Ads with proven Irish solar creatives', icon: TrendingUp },
@@ -29,13 +30,14 @@ const roadmap = [
     title: 'Optimise & Scale',
     subtitle: 'Refine what works, cut what doesn\'t',
     color: '#F5921E',
-    installs: '+8',
-    baseline: '23 → 31',
+    installs: '+12',
+    baseline: '26 → 38',
     leads: '~96',
+    appts: '~48',
     adBudget: '€2,400',
     adBudgetNote: 'Full budget unlocked',
-    additionalRevenue: '€96,000',
-    additionalGP: '€19,200',
+    additionalRevenue: '€144,000',
+    additionalGP: '€28,800',
     items: [
       { text: 'Analyse Month 1 ad performance, double down on winning creatives', icon: BarChart3 },
       { text: 'A/B test landing pages and ad variations', icon: Target },
@@ -49,13 +51,14 @@ const roadmap = [
     title: 'Compound & Grow',
     subtitle: 'Full pipeline converting, SEO compounding',
     color: '#22C55E',
-    installs: '+16',
-    baseline: '31 → 47',
+    installs: '+12',
+    baseline: '38 → 50',
     leads: '~96+',
+    appts: '~48',
     adBudget: '€2,400',
     adBudgetNote: 'Full budget + retargeting',
-    additionalRevenue: '€192,000',
-    additionalGP: '€38,400',
+    additionalRevenue: '€144,000',
+    additionalGP: '€28,800',
     items: [
       { text: 'Scale winning ad sets with mature retargeting audiences', icon: Zap },
       { text: 'Review collection system active (build social proof)', icon: Users },
@@ -104,10 +107,10 @@ export default function NinetyDayRoadmap() {
             90-Day Growth Plan
           </span>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
-            From <span className="text-[#E8192C]">20</span> to <span className="text-[#22C55E]">47</span> Installs Per Month
+            From <span className="text-[#E8192C]">20</span> to <span className="text-[#22C55E]">50</span> Installs Per Month
           </h2>
           <p className="text-base md:text-lg text-slate-500 max-w-2xl mx-auto">
-            €1,200 ad budget Month 1 (Meta limit), then €2,400/month. ~96 leads/month at €25 CPL. 27 additional sales over 90 days.
+            €1,200 ad budget Month 1 (Meta limit), then €2,400/month. 240 leads → 120 appointments → 30 sales over 90 days.
           </p>
         </div>
 
@@ -117,22 +120,26 @@ export default function NinetyDayRoadmap() {
             <Calculator className="w-5 h-5 text-[#E8192C]" />
             <h3 className="text-lg font-bold text-white">The Numbers Behind The Plan</h3>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-4">
             <div className="bg-slate-800 rounded-xl p-4">
               <p className="text-2xl md:text-3xl font-black text-white">€25</p>
-              <p className="text-xs text-slate-400 mt-1">Cost per lead (conservative)</p>
+              <p className="text-xs text-slate-400 mt-1">Cost per lead</p>
             </div>
             <div className="bg-slate-800 rounded-xl p-4">
-              <p className="text-2xl md:text-3xl font-black text-white">1 in 6</p>
-              <p className="text-xs text-slate-400 mt-1">Close rate</p>
+              <p className="text-2xl md:text-3xl font-black text-white">1 in 2</p>
+              <p className="text-xs text-slate-400 mt-1">Lead → Appt</p>
+            </div>
+            <div className="bg-slate-800 rounded-xl p-4">
+              <p className="text-2xl md:text-3xl font-black text-white">1 in 4</p>
+              <p className="text-xs text-slate-400 mt-1">Appt → Sale</p>
             </div>
             <div className="bg-slate-800 rounded-xl p-4">
               <p className="text-2xl md:text-3xl font-black text-white">€12,000</p>
-              <p className="text-xs text-slate-400 mt-1">Average order value</p>
+              <p className="text-xs text-slate-400 mt-1">Avg order value</p>
             </div>
             <div className="bg-slate-800 rounded-xl p-4">
               <p className="text-2xl md:text-3xl font-black text-[#22C55E]">€2,400</p>
-              <p className="text-xs text-slate-400 mt-1">Gross profit per install (20%)</p>
+              <p className="text-xs text-slate-400 mt-1">GP per install (20%)</p>
             </div>
           </div>
           <p className="text-xs text-slate-500 mt-4">
@@ -308,14 +315,14 @@ export default function NinetyDayRoadmap() {
                   <p className="text-[10px] text-slate-400 mt-1">Conservative est.</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <p className="text-2xl font-black text-slate-900">~40</p>
+                  <p className="text-2xl font-black text-slate-900">120</p>
                   <p className="text-xs text-slate-500">Appointments</p>
-                  <p className="text-[10px] text-slate-400 mt-1">~1 in 6 qualify</p>
+                  <p className="text-[10px] text-slate-400 mt-1">1 in 2 leads</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <p className="text-2xl font-black text-[#22C55E]">27</p>
+                  <p className="text-2xl font-black text-[#22C55E]">30</p>
                   <p className="text-xs text-slate-500">Sales</p>
-                  <p className="text-[10px] text-slate-400 mt-1">1-in-6 close rate</p>
+                  <p className="text-[10px] text-slate-400 mt-1">1 in 4 appts</p>
                 </div>
               </div>
 
@@ -327,8 +334,8 @@ export default function NinetyDayRoadmap() {
                     <div className="flex gap-4 text-right">
                       <span className="text-slate-500">€1,200 ads</span>
                       <span className="text-slate-700">48 leads</span>
-                      <span className="text-slate-700">8 appts</span>
-                      <span className="font-semibold">+3 sales</span>
+                      <span className="text-slate-700">24 appts</span>
+                      <span className="font-semibold">+6 sales</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-sm border-b border-slate-100 pb-2">
@@ -336,8 +343,8 @@ export default function NinetyDayRoadmap() {
                     <div className="flex gap-4 text-right">
                       <span className="text-slate-500">€2,400 ads</span>
                       <span className="text-slate-700">96 leads</span>
-                      <span className="text-slate-700">16 appts</span>
-                      <span className="font-semibold">+8 sales</span>
+                      <span className="text-slate-700">48 appts</span>
+                      <span className="font-semibold">+12 sales</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between text-sm">
@@ -345,8 +352,8 @@ export default function NinetyDayRoadmap() {
                     <div className="flex gap-4 text-right">
                       <span className="text-slate-500">€2,400 ads</span>
                       <span className="text-slate-700">96 leads</span>
-                      <span className="text-slate-700">16 appts</span>
-                      <span className="font-semibold">+16 sales</span>
+                      <span className="text-slate-700">48 appts</span>
+                      <span className="font-semibold">+12 sales</span>
                     </div>
                   </div>
                 </div>
@@ -357,17 +364,17 @@ export default function NinetyDayRoadmap() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <p className="text-3xl font-black text-slate-900">€324,000</p>
+                  <p className="text-3xl font-black text-slate-900">€360,000</p>
                   <p className="text-xs text-slate-500">Total Revenue</p>
-                  <p className="text-[10px] text-slate-400">27 sales × €12k AOV</p>
+                  <p className="text-[10px] text-slate-400">30 sales × €12k AOV</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <p className="text-3xl font-black text-[#22C55E]">€64,800</p>
+                  <p className="text-3xl font-black text-[#22C55E]">€72,000</p>
                   <p className="text-xs text-slate-500">Gross Profit (20%)</p>
                   <p className="text-[10px] text-slate-400">After materials + labour</p>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <p className="text-3xl font-black text-[#E8192C]">€46,050</p>
+                  <p className="text-3xl font-black text-[#E8192C]">€53,250</p>
                   <p className="text-xs text-slate-500">Net Profit</p>
                   <p className="text-[10px] text-slate-400">GP minus €18,750 investment</p>
                 </div>
@@ -405,34 +412,34 @@ export default function NinetyDayRoadmap() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-12 mb-6">
               <div>
                 <p className="text-slate-400 mb-1">Total Additional Revenue</p>
-                <p className="text-3xl md:text-5xl font-black text-white">€324,000</p>
+                <p className="text-3xl md:text-5xl font-black text-white">€360,000</p>
               </div>
               <div className="hidden md:block text-slate-600 text-2xl">→</div>
               <div>
                 <p className="text-slate-400 mb-1">Total Additional GP (20%)</p>
-                <p className="text-3xl md:text-5xl font-black text-[#22C55E]">€64,800</p>
+                <p className="text-3xl md:text-5xl font-black text-[#22C55E]">€72,000</p>
               </div>
             </div>
             
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mt-8 pt-8 border-t border-slate-700">
               <div>
                 <p className="text-sm text-slate-400">Total Investment</p>
-                <p className="text-xl font-bold text-white">€18,750</p>
+                <p className="text-xl font-bold text-white">€18,750 / £16,170</p>
               </div>
               <div className="hidden md:block text-slate-600">→</div>
               <div>
                 <p className="text-sm text-slate-400">Net Profit (after all costs)</p>
-                <p className="text-xl font-bold text-[#22C55E]">€46,050</p>
+                <p className="text-xl font-bold text-[#22C55E]">€53,250 / £45,950</p>
               </div>
               <div className="hidden md:block text-slate-600">→</div>
               <div>
                 <p className="text-sm text-slate-400">Return on Investment</p>
-                <p className="text-xl font-bold text-[#E8192C]">3.5×</p>
+                <p className="text-xl font-bold text-[#E8192C]">3.8×</p>
               </div>
             </div>
 
             <p className="text-2xl md:text-3xl font-black text-white mt-8">
-              Every €1 you invest returns <span className="text-[#22C55E]">€3.46</span> in gross profit.
+              Every €1 you invest returns <span className="text-[#22C55E]">€3.84</span> in gross profit.
             </p>
           </div>
         </div>
@@ -440,10 +447,10 @@ export default function NinetyDayRoadmap() {
         {/* Bottom callout */}
         <div className={`mt-8 bg-[#E8192C] rounded-2xl p-6 md:p-8 text-center transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-xl md:text-2xl font-black text-white mb-2">
-            €18,750 in. €324,000 revenue. €46,050 net profit. 90 days.
+            €18,750 in. €360,000 revenue. €53,250 net profit. 90 days.
           </p>
           <p className="text-sm md:text-base text-red-100 max-w-2xl mx-auto">
-            These are gross profit numbers — not revenue. After you've paid for materials, labour, and every euro of marketing spend, you're still €46k better off than if you'd done nothing. And Month 4 onwards, the retargeting audience is built, the video content is running, and the pipeline never stops filling. At steady state that's 16 extra installs/month = €192k revenue / €38k GP every single month.
+            These are gross profit numbers — not revenue. After you've paid for materials, labour, and every euro of marketing spend, you're €53k better off than if you'd done nothing. And Month 4 onwards, the retargeting audience is built, the video content is running, and the pipeline never stops filling. At steady state that's 12 extra installs/month = €144k revenue / €28.8k GP every single month.
           </p>
         </div>
       </div>

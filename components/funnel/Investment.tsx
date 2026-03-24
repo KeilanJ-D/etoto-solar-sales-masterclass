@@ -14,12 +14,12 @@ const includedItems = [
 ]
 
 const separateItems = [
-  { item: 'Ad budget (recommended)', value: '£2,000/month', note: 'Paid direct to Meta — gives you 100% control' },
-  { item: 'Video production', value: '£5,000/shoot', note: '2 days on-site, quarterly. First shoot included in Month 1.' },
+  { item: 'Ad budget (recommended)', value: '€2,400/month (£2,070)', note: 'Paid direct to Meta — gives you 100% control' },
+  { item: 'Video production', value: '€5,790/shoot (£5,000)', note: '2 days on-site, quarterly. First shoot included in Month 1.' },
 ]
 
 const bonusItems = [
-  { item: 'SolaFlow lead-gated calculator', value: '£200/m', note: 'Normally charged monthly — yours free for life' },
+  { item: 'SolaFlow lead-gated calculator', value: '€230/m (£200/m)', note: 'Normally charged monthly — yours free for life' },
   { item: '10 SEO articles (14,590 words)', value: 'Priceless', note: 'Ready-to-publish blog content showcasing our capabilities' },
   { item: 'Technical SEO audit + insights', value: 'Free', note: 'Actionable recommendations if you choose to pursue SEO' },
 ]
@@ -166,9 +166,9 @@ export default function Investment() {
         {/* ROI tie-in */}
         <div className={`mt-8 bg-[#E8192C]/5 border border-[#E8192C]/20 rounded-xl p-6 text-center transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-slate-700">
-            Based on the 90-day projections above: <span className="font-bold text-[#E8192C]">€46,050 net profit</span> on a €18,750 investment.
+            Based on the 90-day projections above: <span className="font-bold text-[#E8192C]">€53,250 net profit</span> (£45,950) on a €18,750 (£16,170) investment.
             <br className="hidden md:block" />
-            <span className="font-semibold text-slate-900">That's a 3.5× return in 90 days — using conservative €25 CPL assumptions.</span>
+            <span className="font-semibold text-slate-900">That's a 3.8× return in 90 days — using conservative €25 CPL assumptions.</span>
           </p>
         </div>
 
