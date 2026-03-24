@@ -43,7 +43,7 @@ const scoreCards = [
     status: 'WEAK', 
     statusColour: '#F59E0B', 
     detail: 'Limited reviews displayed, no accreditation badges, missing case studies.',
-    context: 'Competitors like ActSolar and EnergyPro prominently display MCS certification, SEAI accreditation, and Trustpilot widgets. Your site shows no third-party review integration. No video testimonials. No named case studies with measurable results. Trust is the #1 conversion factor in solar—homeowners are spending £8,000+; they need reassurance.'
+    context: 'Top-ranking Irish solar installers prominently display MCS certification, SEAI accreditation, and Trustpilot widgets. Your site shows no third-party review integration. No video testimonials. No named case studies with measurable results. Trust is the #1 conversion factor in solar—homeowners are spending €12,000+; they need reassurance.'
   },
   { 
     icon: Palette, 
