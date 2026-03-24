@@ -123,6 +123,9 @@ export default function PremierEnergyCaseStudy() {
             We generated 245 leads for an Irish solar installer through Meta campaigns. €16.18 average cost per lead. 
             The leads entered their Go High Level CRM. Here is where every single one of them sits today — right now, as you read this.
           </p>
+          <p className="text-sm text-slate-500 max-w-2xl mx-auto mt-4 italic">
+            Note: Some leads in the ad account don't appear in the CRM — likely never imported, or lost in handoff. The numbers below are what we can verify in the system.
+          </p>
         </div>
 
         {/* Top Stats */}
@@ -332,6 +335,25 @@ export default function PremierEnergyCaseStudy() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* The Question */}
+        <div className={`bg-slate-800 rounded-2xl p-6 md:p-8 mb-8 transition-all duration-700 delay-650 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h3 className="text-lg md:text-xl font-bold text-white mb-4">
+            "How can you have clients doing £3.2 million in sales... and clients who sell nothing?"
+          </h3>
+          <p className="text-sm text-slate-300 mb-4">
+            Fair question. Halo Solar (UK) has generated £3.2m+ in closed revenue using the exact same ETOTO strategy. 
+            Same creative frameworks. Same ad account management. Same targeting methodology. Same everything.
+          </p>
+          <p className="text-sm text-slate-300 mb-4">
+            <span className="font-semibold text-white">The difference?</span> Halo has a sales team that calls leads within 10 minutes. 
+            They have a CRM process that chases quotes. They have owners who live in the pipeline.
+          </p>
+          <p className="text-sm text-slate-400 italic">
+            We learned the hard way that marketing can only fill the top of the funnel — we can't close deals for you. 
+            Which is exactly why we've evolved our service to include appointment setting and sales training for clients who need it.
+          </p>
         </div>
 
         {/* Final Callout */}

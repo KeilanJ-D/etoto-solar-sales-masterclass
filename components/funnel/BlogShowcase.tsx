@@ -145,7 +145,7 @@ export default function BlogShowcase() {
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4">
             10 SEO-Optimised Articles.
             <br />
-            <span className="text-[#E8192C]">Written in 24 Hours.</span>
+            <span className="text-[#E8192C]">Written in hours.</span>
           </h2>
           <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
             This is not a promise. These articles already exist. {totalWords.toLocaleString()} words of high-quality, 
@@ -159,7 +159,7 @@ export default function BlogShowcase() {
             { label: 'Articles', value: '10', icon: FileText },
             { label: 'Total Words', value: totalWords.toLocaleString(), icon: FileText },
             { label: 'Combined Search Volume', value: '9,519/mo', icon: TrendingUp },
-            { label: 'Time to Create', value: '24hrs', icon: Clock },
+            { label: 'Time to Create', value: '<2hrs', icon: Clock },
           ].map((stat, i) => (
             <div key={i} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center">
               <stat.icon className="w-5 h-5 text-[#E8192C] mx-auto mb-2" />
@@ -236,7 +236,7 @@ export default function BlogShowcase() {
           <div className="inline-flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-6 py-4">
             <Sparkles className="w-5 h-5 text-[#F5921E]" />
             <p className="text-sm text-slate-300">
-              <span className="font-semibold text-white">This is the power of AI + expertise.</span> We created this entire content library in under 24 hours. 
+              <span className="font-semibold text-white">This is the power of AI + expertise.</span> We created this entire content library in under 2 hours. 
               Imagine what we could do for Solar Path in 90 days.
             </p>
           </div>

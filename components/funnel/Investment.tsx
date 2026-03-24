@@ -5,12 +5,12 @@ import { Check, Sparkles, ArrowRight, Gift, AlertCircle } from 'lucide-react'
 
 const includedItems = [
   'Full Meta Ads management (creative, targeting, optimisation)',
-  'SEO content strategy + blog articles',
   'CRM setup in Go High Level + lead nurturing automation',
   'Fortnightly performance calls',
   'Dedicated account manager',
   'Landing page optimisation',
   'Competitor monitoring',
+  'Blog content strategy guidance (SEO delivery is separate — ask us for pricing)',
 ]
 
 const separateItems = [
@@ -19,9 +19,9 @@ const separateItems = [
 ]
 
 const bonusItems = [
-  { item: 'SolaFlow lead-gated calculator', value: '£1,500+' },
-  { item: '10 SEO articles (10,590 words)', value: '£3,000+' },
-  { item: 'Technical SEO audit + fixes', value: '£750+' },
+  { item: 'SolaFlow lead-gated calculator', value: '£200/m', note: 'Normally charged monthly — yours free for life' },
+  { item: '10 SEO articles (14,590 words)', value: 'Priceless', note: 'Ready-to-publish blog content showcasing our capabilities' },
+  { item: 'Technical SEO audit + insights', value: 'Free', note: 'Actionable recommendations if you choose to pursue SEO' },
 ]
 
 export default function Investment() {
@@ -125,17 +125,20 @@ export default function Investment() {
                 <Gift className="w-5 h-5 text-[#F5921E]" />
                 <h3 className="font-bold text-slate-900">Bonus: Included Free</h3>
               </div>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {bonusItems.map((bonus, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span className="text-sm text-slate-700">{bonus.item}</span>
-                    <span className="text-sm font-semibold text-[#F5921E] line-through">{bonus.value}</span>
+                  <div key={index} className="flex flex-col md:flex-row md:items-center justify-between gap-1">
+                    <div>
+                      <span className="text-sm font-medium text-slate-700">{bonus.item}</span>
+                      <p className="text-xs text-slate-500">{bonus.note}</p>
+                    </div>
+                    <span className="text-sm font-semibold text-[#F5921E]">{bonus.value}</span>
                   </div>
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-[#F5921E]/30 flex items-center justify-between">
                 <span className="font-bold text-slate-900">Total Bonus Value</span>
-                <span className="font-black text-[#F5921E]">£5,250+ FREE</span>
+                <span className="font-black text-[#F5921E]">£10,000s in insight (if/when implemented)</span>
               </div>
             </div>
 
@@ -163,9 +166,9 @@ export default function Investment() {
         {/* ROI tie-in */}
         <div className={`mt-8 bg-[#E8192C]/5 border border-[#E8192C]/20 rounded-xl p-6 text-center transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-slate-700">
-            Based on the 90-day projections above: <span className="font-bold text-[#E8192C]">€44,610 net profit</span> on a €20,190 investment.
+            Based on the 90-day projections above: <span className="font-bold text-[#E8192C]">€46,050 net profit</span> on a €18,750 investment.
             <br className="hidden md:block" />
-            <span className="font-semibold text-slate-900">That's a 3.2× return in 90 days — using conservative €25 CPL assumptions.</span>
+            <span className="font-semibold text-slate-900">That's a 3.5× return in 90 days — using conservative €25 CPL assumptions.</span>
           </p>
         </div>
 

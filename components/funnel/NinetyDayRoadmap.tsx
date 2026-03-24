@@ -18,11 +18,11 @@ const roadmap = [
     additionalGP: '€7,200',
     items: [
       { text: 'Video content shoot: 2 days on-site capturing installs, testimonials, team footage', icon: Camera },
-      { text: 'Publish 10 SEO articles targeting 9,500+ monthly searches', icon: FileText },
-      { text: 'Fix technical SEO issues (meta, schema, Core Web Vitals)', icon: Zap },
       { text: 'Launch Meta Ads with proven Irish solar creatives', icon: TrendingUp },
+      { text: 'CRM automations: lead assignment, follow-up sequences, task reminders', icon: Settings },
+      { text: 'Landing page optimisation for higher conversion rates', icon: Target },
     ],
-    keyDeliverable: 'Live ads running + all SEO content published. Pipeline building.',
+    keyDeliverable: 'Live ads running. CRM automations active. Pipeline building.',
   },
   {
     month: 'Month 2',
@@ -39,8 +39,8 @@ const roadmap = [
     items: [
       { text: 'Analyse Month 1 ad performance, double down on winning creatives', icon: BarChart3 },
       { text: 'A/B test landing pages and ad variations', icon: Target },
-      { text: 'Add localised pages (Cork, Dublin, regional targeting)', icon: FileText },
-      { text: 'Implement automated follow-up sequences in CRM', icon: Settings },
+      { text: 'Refine CRM workflows based on real lead behaviour', icon: Settings },
+      { text: 'Begin retargeting campaigns with video content', icon: TrendingUp },
     ],
     keyDeliverable: 'First ETOTO-sourced sales closing. Optimised campaigns running.',
   },
@@ -57,12 +57,12 @@ const roadmap = [
     additionalRevenue: '€192,000',
     additionalGP: '€38,400',
     items: [
-      { text: 'SEO content starts ranking (organic leads increase)', icon: TrendingUp },
-      { text: 'Scale winning ad sets with retargeting audiences built', icon: Zap },
+      { text: 'Scale winning ad sets with mature retargeting audiences', icon: Zap },
       { text: 'Review collection system active (build social proof)', icon: Users },
+      { text: 'Continuous creative testing with video shoot content', icon: Camera },
       { text: 'Prepare for capacity scaling (47+ installs ready)', icon: BarChart3 },
     ],
-    keyDeliverable: 'Full pipeline converting. Combined organic + paid at scale.',
+    keyDeliverable: 'Full pipeline converting. Paid ads at scale. Retargeting compounding.',
   },
 ]
 
@@ -258,11 +258,15 @@ export default function NinetyDayRoadmap() {
           ))}
         </div>
 
-        {/* 90-Day Investment Breakdown */}
+        {/* 90-Day Investment Breakdown - Crystal Clear */}
         <div className={`mt-16 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h3 className="text-xl md:text-2xl font-black text-slate-900 text-center mb-8">Your Total 90-Day Investment</h3>
+          <h3 className="text-xl md:text-2xl font-black text-slate-900 text-center mb-8">Your Total 90-Day Investment — In Full Detail</h3>
           
-          <div className="bg-slate-50 rounded-2xl overflow-hidden">
+          {/* Costs breakdown */}
+          <div className="bg-slate-50 rounded-2xl overflow-hidden mb-8">
+            <div className="bg-slate-200 p-4">
+              <h4 className="font-bold text-slate-900">What You Pay</h4>
+            </div>
             <div className="divide-y divide-slate-200">
               {investmentItems.map((item, i) => (
                 <div key={i} className="p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-2">
@@ -282,6 +286,91 @@ export default function NinetyDayRoadmap() {
               <div className="text-right">
                 <p className="text-2xl md:text-3xl font-black text-white">£16,170</p>
                 <p className="text-slate-400">€18,750</p>
+              </div>
+            </div>
+          </div>
+
+          {/* What you get - detailed metrics */}
+          <div className="bg-[#22C55E]/10 border border-[#22C55E]/30 rounded-2xl overflow-hidden mb-8">
+            <div className="bg-[#22C55E]/20 p-4">
+              <h4 className="font-bold text-slate-900">What You Get Back (Conservative Projections)</h4>
+            </div>
+            <div className="p-4 md:p-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-2xl font-black text-slate-900">240</p>
+                  <p className="text-xs text-slate-500">Total Leads</p>
+                  <p className="text-[10px] text-slate-400 mt-1">48 + 96 + 96</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-2xl font-black text-slate-900">€25</p>
+                  <p className="text-xs text-slate-500">Avg CPL</p>
+                  <p className="text-[10px] text-slate-400 mt-1">Conservative est.</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-2xl font-black text-slate-900">~40</p>
+                  <p className="text-xs text-slate-500">Appointments</p>
+                  <p className="text-[10px] text-slate-400 mt-1">~1 in 6 qualify</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-2xl font-black text-[#22C55E]">27</p>
+                  <p className="text-xs text-slate-500">Sales</p>
+                  <p className="text-[10px] text-slate-400 mt-1">1-in-6 close rate</p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-xl p-4 mb-4">
+                <h5 className="font-semibold text-slate-900 mb-3 text-sm">Month-by-Month Projection</h5>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm border-b border-slate-100 pb-2">
+                    <span className="text-slate-600">Month 1</span>
+                    <div className="flex gap-4 text-right">
+                      <span className="text-slate-500">€1,200 ads</span>
+                      <span className="text-slate-700">48 leads</span>
+                      <span className="text-slate-700">8 appts</span>
+                      <span className="font-semibold">+3 sales</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-sm border-b border-slate-100 pb-2">
+                    <span className="text-slate-600">Month 2</span>
+                    <div className="flex gap-4 text-right">
+                      <span className="text-slate-500">€2,400 ads</span>
+                      <span className="text-slate-700">96 leads</span>
+                      <span className="text-slate-700">16 appts</span>
+                      <span className="font-semibold">+8 sales</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-slate-600">Month 3</span>
+                    <div className="flex gap-4 text-right">
+                      <span className="text-slate-500">€2,400 ads</span>
+                      <span className="text-slate-700">96 leads</span>
+                      <span className="text-slate-700">16 appts</span>
+                      <span className="font-semibold">+16 sales</span>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-xs text-slate-500 mt-3 italic">
+                  Sales ramp up as retargeting matures, creative optimises, and your team gets into rhythm with the lead flow.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-3xl font-black text-slate-900">€324,000</p>
+                  <p className="text-xs text-slate-500">Total Revenue</p>
+                  <p className="text-[10px] text-slate-400">27 sales × €12k AOV</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-3xl font-black text-[#22C55E]">€64,800</p>
+                  <p className="text-xs text-slate-500">Gross Profit (20%)</p>
+                  <p className="text-[10px] text-slate-400">After materials + labour</p>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <p className="text-3xl font-black text-[#E8192C]">€46,050</p>
+                  <p className="text-xs text-slate-500">Net Profit</p>
+                  <p className="text-[10px] text-slate-400">GP minus €18,750 investment</p>
+                </div>
               </div>
             </div>
           </div>
