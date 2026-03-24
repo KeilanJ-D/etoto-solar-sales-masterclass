@@ -1,26 +1,35 @@
 import type { Metadata } from 'next'
-import { Outfit, DM_Sans } from 'next/font/google'
+import { Raleway } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const outfit = Outfit({
+const raleway = Raleway({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-raleway',
   weight: ['300', '400', '500', '600', '700', '800', '900'],
 })
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
-  weight: ['400', '500', '700'],
-  style: ['normal', 'italic'],
-})
-
 export const metadata: Metadata = {
-  title: 'Solar Path × ETOTO Media — Commercial Proposal',
-  description: '90-Day Solar Scaler — Prepared exclusively for Ken Hegarty & Jackie Murphy',
-  robots: 'noindex, nofollow',
+  title: 'ETOTO Media × Solar Path — Website Audit',
+  description: 'A forensic audit of solarpath.ie prepared exclusively by ETOTO Media for Solar Path.',
   generator: 'v0.app',
+  icons: {
+    icon: [
+      {
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -29,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
-      <body className="font-body antialiased">
+    <html lang="en" className={raleway.variable}>
+      <body className="font-sans antialiased bg-white">
         {children}
         <Analytics />
       </body>
