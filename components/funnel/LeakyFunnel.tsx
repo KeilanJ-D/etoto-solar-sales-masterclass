@@ -92,7 +92,9 @@ export default function LeakyFunnel() {
                   }`}
                   style={{ 
                     width: `${width}%`,
-                    borderColor: isActive ? stage.colour : '#E2E8F0',
+                    borderTopColor: isActive ? stage.colour : '#E2E8F0',
+                    borderRightColor: isActive ? stage.colour : '#E2E8F0',
+                    borderBottomColor: isActive ? stage.colour : '#E2E8F0',
                     borderLeftWidth: '4px',
                     borderLeftColor: stage.colour
                   }}

@@ -6,23 +6,31 @@ import Pipeline from '@/components/funnel/Pipeline'
 import SEOProblems from '@/components/funnel/SEOProblems'
 import LeakyFunnel from '@/components/funnel/LeakyFunnel'
 import BlogProblem from '@/components/funnel/BlogProblem'
-import Competitors from '@/components/funnel/Competitors'
+
+import Transition from '@/components/funnel/Transition'
+
 import CompetitorContentGap from '@/components/funnel/CompetitorContentGap'
 import BlogShowcase from '@/components/funnel/BlogShowcase'
+
 import PremierEnergyCaseStudy from '@/components/funnel/PremierEnergyCaseStudy'
+
 import NinetyDayRoadmap from '@/components/funnel/NinetyDayRoadmap'
-import Services from '@/components/funnel/Services'
+
 import Investment from '@/components/funnel/Investment'
+import AddOns from '@/components/funnel/AddOns'
+import FAQ from '@/components/funnel/FAQ'
 import NextSteps from '@/components/funnel/NextSteps'
+
 import Reviews from '@/components/funnel/Reviews'
-import AISpeed from '@/components/funnel/AISpeed'
 import CTA from '@/components/funnel/CTA'
 import Footer from '@/components/funnel/Footer'
 
 export default function AuditFunnel() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
-      {/* Part 1: The Audit - What's Broken */}
+      {/* ================================
+          PART 1: THE AUDIT (pre-meeting)
+          ================================ */}
       <Hero />
       <Problems />
       <Pipeline />
@@ -30,27 +38,35 @@ export default function AuditFunnel() {
       <LeakyFunnel />
       <BlogProblem />
       
-      {/* Part 2: The Competition - Why You're Losing */}
-      <Competitors />
-      <CompetitorContentGap />
+      {/* ================================
+          TRANSITION
+          ================================ */}
+      <Transition />
       
-      {/* Part 3: The Proof - We Already Do This */}
+      {/* ================================
+          PART 2: THE EVIDENCE (post-meeting)
+          ================================ */}
+      <CompetitorContentGap />
+      <BlogShowcase />
       <PremierEnergyCaseStudy />
       
-      {/* Part 4: The Solution - Here's What We Built */}
-      <BlogShowcase />
-      
-      {/* Part 5: The Plan - How We'll Do It */}
+      {/* ================================
+          PART 3: THE PLAN
+          ================================ */}
       <NinetyDayRoadmap />
-      <Services />
       
-      {/* Part 6: The Investment */}
+      {/* ================================
+          PART 4: THE OFFER
+          ================================ */}
       <Investment />
+      <AddOns />
+      <FAQ />
       <NextSteps />
       
-      {/* Part 7: Social Proof & Close */}
+      {/* ================================
+          PART 5: TRUST & CLOSE
+          ================================ */}
       <Reviews />
-      <AISpeed />
       <CTA />
       <Footer />
     </main>

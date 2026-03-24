@@ -109,6 +109,45 @@ export default function Reviews() {
         <p className="text-slate-500 text-sm md:text-base">5.0 rating from 30+ verified Google reviews</p>
       </div>
 
+      {/* Featured reviews */}
+      <div className={`max-w-5xl mx-auto px-4 md:px-8 mb-12 grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className="bg-white border-2 border-[#E8192C]/20 rounded-2xl p-6 md:p-8 shadow-lg">
+          <div className="flex gap-0.5 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <p className="text-slate-700 text-base md:text-lg leading-relaxed mb-4 italic">
+            "ETOTO talk a BIG game on the sales call but you'll find out why. I have just finished my first month with ETOTO. Before they took over my marketing, results were mediocre. <span className="font-bold text-slate-900">Now they're exceptional.</span>"
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E8192C] to-[#FF6B7A] flex items-center justify-center text-white font-bold">F</div>
+            <div>
+              <p className="font-semibold text-slate-900">Finn J.W.</p>
+              <p className="text-xs text-slate-500">Verified Google Review</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="bg-white border-2 border-[#E8192C]/20 rounded-2xl p-6 md:p-8 shadow-lg">
+          <div className="flex gap-0.5 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <p className="text-slate-700 text-base md:text-lg leading-relaxed mb-4 italic">
+            "Our company started using ETOTO Media in May of this year and <span className="font-bold text-slate-900">the amount of high quality leads we have received since has been amazing (over 120)</span>. We had many chats and zoom calls with the team before getting started."
+          </p>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E8192C] to-[#FF6B7A] flex items-center justify-center text-white font-bold">D</div>
+            <div>
+              <p className="font-semibold text-slate-900">David Ewen</p>
+              <p className="text-xs text-slate-500">Verified Google Review</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div 
         ref={scrollRef}
         className="flex overflow-hidden"

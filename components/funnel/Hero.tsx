@@ -11,7 +11,7 @@ export default function Hero() {
   
   const seoScore = useCountUp(34, 1500, showStats)
   const issues = useCountUp(6, 1200, showStats)
-  const revenue = useCountUp(47, 1800, showStats)
+  const revenue = useCountUp(48, 1800, showStats)
 
   useEffect(() => {
     setIsVisible(true)
@@ -36,11 +36,11 @@ export default function Hero() {
     },
     { 
       value: revenue, 
-      prefix: '£', 
+      prefix: '€', 
       suffix: 'K+', 
       label: 'Revenue at Risk', 
       color: '#F5921E',
-      context: 'Calculation: Average solar installation = £8,500. Conservative estimate of 6 lost leads/month due to poor SEO visibility and conversion issues. 6 leads × £8,500 × 12 months = £47,600 annually. Based on competitor traffic analysis and industry conversion benchmarks.'
+      context: 'Calculation: Average solar installation = €12,000 AOV. Conservative estimate of 4 lost leads/month due to poor SEO visibility and conversion issues. 4 leads × €12,000 × 12 months = €48,000 annually. Based on competitor traffic analysis and industry conversion benchmarks.'
     },
   ]
 

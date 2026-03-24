@@ -1,33 +1,28 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Calendar, FileSignature, CreditCard, Rocket, ArrowRight, CheckCircle } from 'lucide-react'
+import { CheckCircle, Settings, Search, Phone, ArrowRight } from 'lucide-react'
 
 const steps = [
   {
-    icon: Calendar,
-    title: 'Book Strategy Call',
-    description: 'Pick a 30-minute slot this week. We will walk through this proposal together and answer any questions.',
-    cta: 'Book Now',
-    ctaLink: 'https://calendly.com/etotomedia',
+    icon: CheckCircle,
+    title: 'The Green Light',
+    description: 'Review this with Jackie. Let us know you\'re in. We\'ll send contracts same day.',
   },
   {
-    icon: FileSignature,
-    title: 'Sign Agreement',
-    description: 'Simple, plain-English contract. 3-month initial term. No hidden clauses.',
-    cta: null,
+    icon: Settings,
+    title: 'GHL Access',
+    description: 'Add Keilan as a staff member in Go High Level. We start scoping the CRM build immediately.',
   },
   {
-    icon: CreditCard,
-    title: 'First Invoice',
-    description: '£2,000 for Month 1. Payable upon signing. Then monthly on the same date.',
-    cta: null,
+    icon: Search,
+    title: 'Google Ads + GA4',
+    description: 'Grant access to your Google Ads account and GA4. Free audit — no commitment, just an honest look.',
   },
   {
-    icon: Rocket,
-    title: 'We Launch',
-    description: 'Week 1 kick-off. Blog content live. CRM set up. Ads in review. You start seeing progress immediately.',
-    cta: null,
+    icon: Phone,
+    title: 'Rocky Update',
+    description: 'Let us know how the conversation lands. If the funding model works, it\'s a bonus — not the plan.',
   },
 ]
 
@@ -59,7 +54,7 @@ export default function NextSteps() {
             What Happens Next
           </h2>
           <p className="text-base md:text-lg text-slate-500">
-            Four simple steps to start generating more leads for Solar Path.
+            Four things. That's it. Then we move.
           </p>
         </div>
 
@@ -92,25 +87,11 @@ export default function NextSteps() {
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-1">{step.title}</h3>
                     <p className="text-sm md:text-base text-slate-500">{step.description}</p>
-                    
-                    {step.cta && (
-                      <a 
-                        href={step.ctaLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 mt-3 text-[#E8192C] font-semibold text-sm hover:underline"
-                      >
-                        {step.cta}
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                    )}
                   </div>
 
-                  {/* Completion indicator */}
-                  <div className="flex-shrink-0 hidden md:block">
-                    <div className="w-8 h-8 rounded-full border-2 border-slate-200 flex items-center justify-center group-hover:border-[#22C55E] group-hover:bg-[#22C55E] transition-all duration-300">
-                      <CheckCircle className="w-5 h-5 text-slate-200 group-hover:text-white transition-colors duration-300" />
-                    </div>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 hidden md:flex items-center justify-center">
+                    <ArrowRight className="w-5 h-5 text-slate-300 group-hover:text-[#E8192C] transition-colors duration-300" />
                   </div>
                 </div>
 
@@ -125,11 +106,12 @@ export default function NextSteps() {
 
         {/* Urgency note */}
         <div className={`mt-10 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="bg-[#E8192C]/5 border border-[#E8192C]/20 rounded-xl p-6 text-center">
-            <p className="text-slate-700">
-              <span className="font-bold text-[#E8192C]">Launch partner pricing expires 31st March.</span>
-              <br className="hidden md:block" />
-              After that, the retainer returns to £3,000/month.
+          <div className="bg-[#E8192C] rounded-xl p-6 text-center">
+            <p className="text-xl md:text-2xl font-bold text-white mb-2">
+              Your current agency ends this week.
+            </p>
+            <p className="text-red-100 text-sm md:text-base">
+              We can have campaigns live within 7 days of signing. There doesn't need to be a gap — but the decision needs to happen now.
             </p>
           </div>
         </div>

@@ -31,16 +31,20 @@ export default function CTA() {
       
       <div className="max-w-3xl mx-auto relative z-10">
         <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-slate-900 mb-6 leading-[1.1]">
-            Ready to Stop
-            <br />
-            <span className="text-[#E8192C]">Leaking Revenue?</span>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-2 leading-[1.1]">
+            You've seen the audit.
+          </h2>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-2 leading-[1.1]">
+            You've seen the data.
+          </h2>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-[#E8192C] mb-8 leading-[1.1]">
+            You've seen the plan.
           </h2>
         </div>
 
-        <div className={`text-center mt-16 md:mt-24 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <p className="text-2xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-12">
-            Good. See you on the call.
+        <div className={`text-center mt-12 md:mt-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <p className="text-lg md:text-xl text-slate-600 mb-12 max-w-xl mx-auto">
+            Review this with Jackie. We'll have contracts ready the moment you say go.
           </p>
           
           <div className="space-y-3">
@@ -48,7 +52,7 @@ export default function CTA() {
               Keilan James-Devereux
             </p>
             <p className="text-slate-500">
-              Co-Founder, ETOTO Media
+              Co-Founder & CRO, ETOTO Media
             </p>
             <a 
               href="mailto:keilan.jd@etotomedia.com"

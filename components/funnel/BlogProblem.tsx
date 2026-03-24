@@ -112,8 +112,8 @@ export default function BlogProblem() {
         {/* Bottom message */}
         <div className={`bg-gradient-to-r from-[#1A1A2E] to-[#2D2D44] rounded-2xl p-8 text-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-white/90 text-lg md:text-xl font-medium">
-            Your competitors are publishing <span className="text-[#E8192C] font-bold">4-8 articles per week</span>. 
-            Every week you wait, they pull further ahead.
+            Your competitors are publishing <span className="text-[#E8192C] font-bold">consistently — weekly or fortnightly</span>. 
+            Your blog has been inactive since late 2025. Every week you wait, they pull further ahead.
           </p>
         </div>
       </div>
