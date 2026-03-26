@@ -100,9 +100,10 @@ function InputField({
         {prefix && <span className="text-slate-500 font-medium">{prefix}</span>}
         <input
           type="text"
+          inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium"
+          className="w-full px-3 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base"
         />
         {suffix && <span className="text-slate-500 font-medium">{suffix}</span>}
       </div>
@@ -139,7 +140,7 @@ function EnergyAuditTab({
   return (
     <div className="space-y-8">
       {/* Inputs */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <InputField
           label="Monthly electricity bill"
           value={monthlyBill}
@@ -165,7 +166,7 @@ function EnergyAuditTab({
       </div>
 
       {/* Results */}
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
         <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
           <p className="text-sm text-slate-500 mb-1">Annual usage</p>
           <p className="text-2xl font-bold text-slate-900">{annualKwh.toLocaleString()} kWh</p>
@@ -176,7 +177,7 @@ function EnergyAuditTab({
         </div>
         <div className="bg-gradient-to-br from-[#E8192C] to-[#c01424] rounded-xl p-5 text-white shadow-lg">
           <p className="text-sm text-white/80 mb-1">Daily running cost</p>
-          <p className="text-3xl font-bold">£{dailyCost.toFixed(2)}</p>
+          <p className="text-2xl md:text-3xl font-bold">£{dailyCost.toFixed(2)}</p>
         </div>
       </div>
 
@@ -305,11 +306,12 @@ function BatterySavingsTab({
                 <div className="flex items-center gap-2">
                   <span className="text-slate-700 font-medium">£</span>
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="decimal"
                     value={batteryPrices[p.id]}
                     onChange={(e) => setBatteryPrice(p.id, parseFloat(e.target.value) || 0)}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-24 px-2 py-1 border border-slate-300 rounded text-slate-900 font-medium focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none"
+                    className="w-24 px-2 py-2 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none"
                   />
                 </div>
               </div>
@@ -439,7 +441,7 @@ function BatterySavingsTab({
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 text-white">
         <h4 className="text-lg font-bold mb-4">With {quantity}× {product.name.split(' ')[0]}</h4>
         
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <div>
             <p className="text-sm text-slate-400">Daily cost</p>
             <p className="text-xl">
@@ -458,7 +460,7 @@ function BatterySavingsTab({
           <div className="flex justify-between items-end">
             <div>
               <p className="text-sm text-slate-400">Annual saving</p>
-              <p className="text-3xl font-bold text-emerald-400">£{Math.round(annualSaving).toLocaleString()}</p>
+              <p className="text-2xl md:text-3xl font-bold text-emerald-400">£{Math.round(annualSaving).toLocaleString()}</p>
             </div>
             <div className="text-right">
               <p className="text-sm text-slate-400">Battery cost</p>
@@ -527,7 +529,7 @@ function SolarIncomeTab({
   return (
     <div className="space-y-8">
       {/* Inputs */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <InputField
           label="Number of panels"
           value={panels}
@@ -543,7 +545,7 @@ function SolarIncomeTab({
         />
       </div>
       
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         <InputField
           label="Export rate"
           value={exportRate}
@@ -731,7 +733,7 @@ function PaybackTab({
       {/* Payback result */}
       <div className="bg-gradient-to-br from-[#E8192C] to-[#c01424] rounded-xl p-8 text-white text-center">
         <p className="text-white/80 text-sm uppercase tracking-wide mb-2">Payback period</p>
-        <p className="text-5xl font-bold">{paybackYears.toFixed(1)} years</p>
+        <p className="text-3xl md:text-5xl font-bold">{paybackYears.toFixed(1)} years</p>
         <p className="text-white/80 mt-4">
           After payback: <span className="font-bold text-white">£{Math.round(totalAnnualBenefit).toLocaleString()}/year</span> in pure savings
         </p>
@@ -890,7 +892,7 @@ Payback: ${paybackYears.toFixed(1)} years
         </button>
       </div>
       
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
         {/* Costs */}
         <div className="space-y-2">
           <div className="flex justify-between text-sm">

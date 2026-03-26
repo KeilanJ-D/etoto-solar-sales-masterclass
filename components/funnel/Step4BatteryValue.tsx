@@ -47,7 +47,7 @@ And that is literally just through battery storage. We haven't even talked about
       </div>
 
       <h3 className="text-lg font-bold text-white mb-4">Why Battery Comes First</h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
         <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10">
           <div className="w-10 h-10 rounded-lg bg-[#E8192C]/20 flex items-center justify-center mb-3">
             <Zap className="w-5 h-5 text-[#E8192C]" />
@@ -72,20 +72,20 @@ And that is literally just through battery storage. We haven't even talked about
       </div>
 
       {/* Before/After Visual */}
-      <div className="bg-white/10 rounded-xl p-6 mb-6">
+      <div className="bg-white/10 rounded-xl p-4 md:p-6 mb-6">
         <h4 className="text-white font-bold text-center mb-4">The Transformation</h4>
-        <div className="grid grid-cols-3 gap-4 text-center">
-          <div>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-center">
+          <div className="flex-1">
             <p className="text-slate-400 text-xs uppercase tracking-wide mb-1">Before</p>
             <p className="text-2xl md:text-3xl font-black text-white">£3.28<span className="text-sm font-normal">/day</span></p>
             <p className="text-slate-400 text-sm mt-1">£1,197/year</p>
           </div>
           <div className="flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-[#E8192C] flex items-center justify-center">
-              <TrendingDown className="w-4 h-4 text-white" />
+            <div className="w-10 h-10 rounded-full bg-[#E8192C] flex items-center justify-center">
+              <TrendingDown className="w-5 h-5 text-white rotate-0 sm:rotate-0" />
             </div>
           </div>
-          <div>
+          <div className="flex-1">
             <p className="text-slate-400 text-xs uppercase tracking-wide mb-1">After (Battery)</p>
             <p className="text-2xl md:text-3xl font-black text-[#E8192C]">£1.12<span className="text-sm font-normal">/day</span></p>
             <p className="text-[#E8192C] text-sm mt-1">Save £788/year</p>

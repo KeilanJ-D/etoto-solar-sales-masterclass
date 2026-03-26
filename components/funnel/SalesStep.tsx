@@ -98,18 +98,19 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg transition-all opacity-0 group-hover:opacity-100"
+          className="flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-2 rounded-lg transition-all min-h-[44px]"
           aria-label="Copy script to clipboard"
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-green-400" />
+              <Check className="w-4 h-4 text-green-400" />
               <span className="text-green-400">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
-              <span>Copy</span>
+              <Copy className="w-4 h-4" />
+              <span className="hidden sm:inline">Copy</span>
+              <span className="sm:hidden">Tap to copy</span>
             </>
           )}
         </button>

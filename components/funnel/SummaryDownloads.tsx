@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Download, FileText, ArrowRight } from 'lucide-react'
+import { Download, FileText, ArrowRight, ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 
 const steps = [
   'Rapport',
@@ -50,11 +51,11 @@ const formulas = [
   },
 ]
 
-const downloads = [
-  { name: 'Full Sales Script', description: 'Word-for-word version', href: '/downloads/full-sales-script.pdf', available: false },
-  { name: 'Sales Framework', description: 'Flexible skeleton', href: '/downloads/sales-framework.pdf', available: false },
-  { name: 'Appointment Setter Quiz', description: 'Training new hires', href: '/downloads/appointment-setter-quiz.pdf', available: false },
-  { name: 'Formula Cheat Sheet', description: 'All formulas on one page', href: '/downloads/formula-cheat-sheet.md', available: true },
+const products = [
+  { name: 'Full Sales Script', description: 'Word-for-word, with audio clips', href: '/sales-script', price: '£3.99' },
+  { name: 'Sales Framework', description: 'Flexible 9-step skeleton', href: '/sales-framework', price: '£3.99' },
+  { name: 'Appointment Setter Quiz', description: '18 questions, scoring, retry mode', href: '/appointment-quiz', price: '£3.99' },
+  { name: 'Formula Cheat Sheet', description: 'Calculator with saved configs', href: '/formula-cheat-sheet', price: '£3.99' },
 ]
 
 export default function SummaryDownloads() {
@@ -125,47 +126,38 @@ export default function SummaryDownloads() {
           </div>
         </div>
 
-        {/* Downloads */}
+        {/* Product Microsites */}
         <div className={`mb-12 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h3 className="text-lg font-bold text-slate-900 mb-6 text-center">Downloadable Resources</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {downloads.map((item, index) => (
-              item.available ? (
-                <a
-                  key={index}
-                  href={item.href}
-                  download
-                  className="flex items-center gap-4 p-5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-colors text-left group"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
-                    <Download className="w-6 h-6 text-[#E8192C]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-bold text-slate-900">{item.name}</p>
-                    <p className="text-sm text-slate-500">{item.description}</p>
-                  </div>
-                  <span className="text-xs font-medium text-white bg-[#E8192C] px-2 py-1 rounded">Download</span>
-                </a>
-              ) : (
-                <div
-                  key={index}
-                  className="flex items-center gap-4 p-5 bg-slate-50 border border-slate-200 rounded-xl opacity-60 cursor-not-allowed"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-slate-200 flex items-center justify-center flex-shrink-0">
-                    <Download className="w-6 h-6 text-slate-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-bold text-slate-700">{item.name}</p>
-                    <p className="text-sm text-slate-400">{item.description}</p>
-                  </div>
-                  <span className="text-xs font-medium text-slate-400 bg-slate-200 px-2 py-1 rounded">Coming soon</span>
+          <h3 className="text-lg font-bold text-slate-900 mb-2 text-center">Go Deeper — The Full Toolkit</h3>
+          <p className="text-slate-500 text-center mb-6 text-sm">Interactive microsites with scripts, audio, calculators, and quizzes.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {products.map((item, index) => (
+              <Link
+                key={index}
+                href={item.href}
+                className="flex items-center gap-4 p-5 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-[#E8192C]/30 rounded-xl transition-all text-left group"
+              >
+                <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
+                  <ExternalLink className="w-5 h-5 text-[#E8192C]" />
                 </div>
-              )
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-slate-900">{item.name}</p>
+                  <p className="text-sm text-slate-500 truncate">{item.description}</p>
+                </div>
+                <span className="text-sm font-bold text-[#E8192C] flex-shrink-0">{item.price}</span>
+              </Link>
             ))}
           </div>
-          <p className="text-center text-sm text-slate-500 mt-4">
-            Additional PDFs coming soon. Contact ETOTO for early access.
-          </p>
+          <div className="mt-6 text-center">
+            <Link 
+              href="/complete-toolkit"
+              className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
+            >
+              <span>Get All 4 for £9.99</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <p className="text-sm text-slate-500 mt-2">Save £5.97 with the Complete Toolkit</p>
+          </div>
         </div>
 
         {/* Closing Line */}

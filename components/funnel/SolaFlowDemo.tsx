@@ -65,9 +65,9 @@ export default function SolaFlowDemo() {
             <iframe
               src="https://vercel-solar-estimator.vercel.app"
               width="100%"
-              height="800"
               frameBorder="0"
-              className="w-full"
+              loading="lazy"
+              className="w-full h-[500px] md:h-[700px] lg:h-[800px]"
               title="SolaFlow Solar Estimator"
             />
           </div>
