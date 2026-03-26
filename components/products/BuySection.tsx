@@ -63,15 +63,24 @@ export default function BuySection({
               ))}
             </ul>
 
-            <a
-              href={buyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold py-4 px-6 rounded-xl transition-all min-h-[56px]"
-            >
-              <span>Buy for {price}</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
+            {buyLink === '#' ? (
+              <a
+                href="mailto:keilan.jd@etotomedia.com?subject=Early%20Access%20Request"
+                className="flex items-center justify-center gap-2 w-full bg-slate-600 hover:bg-slate-500 text-white font-semibold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <span>Early Access - Coming Soon</span>
+              </a>
+            ) : (
+              <a
+                href={buyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <span>Buy for {price}</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            )}
           </div>
 
           {/* Bundle */}
@@ -112,15 +121,24 @@ export default function BuySection({
               </li>
             </ul>
 
-            <a
-              href={bundleLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-white hover:bg-slate-100 text-[#E8192C] font-bold py-4 px-6 rounded-xl transition-all min-h-[56px]"
-            >
-              <span>Get All 4 for {bundlePrice}</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
+            {bundleLink === '#' ? (
+              <a
+                href="mailto:keilan.jd@etotomedia.com?subject=Complete%20Toolkit%20Early%20Access"
+                className="flex items-center justify-center gap-2 w-full bg-white/80 hover:bg-white text-slate-700 font-bold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <span>Get All 4 - Coming Soon</span>
+              </a>
+            ) : (
+              <a
+                href={bundleLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full bg-white hover:bg-slate-100 text-[#E8192C] font-bold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <span>Get All 4 for {bundlePrice}</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            )}
           </div>
         </div>
 
