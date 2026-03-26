@@ -1,27 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
-
-// Product passwords - stored in env vars for security
-// Format: PRODUCT_PASSWORDS='{"sales-script":["SCRIPT-2026","TOOLKIT-2026"],...}'
-function getProductPasswords(): Record<string, string[]> {
-  const envPasswords = process.env.PRODUCT_PASSWORDS
-  if (envPasswords) {
-    try {
-      return JSON.parse(envPasswords)
-    } catch {
-      console.error('Failed to parse PRODUCT_PASSWORDS env var')
-    }
-  }
-  
-  // Default passwords (for development/testing)
-  return {
-    'sales-script': ['SCRIPT-2026', 'TOOLKIT-2026'],
-    'sales-framework': ['FRAMEWORK-2026', 'TOOLKIT-2026'],
-    'appointment-quiz': ['QUIZ-2026', 'TOOLKIT-2026'],
-    'formula-cheat-sheet': ['FORMULAS-2026', 'TOOLKIT-2026'],
-    'complete-toolkit': ['TOOLKIT-2026'],
-  }
-}
+import { getFirebaseAdmin } from '@/lib/firebase-admin'
 
 // Generate a simple token for session validation
 function generateToken(productId: string, code: string): string {
@@ -40,7 +19,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { productId, code, token } = body
 
-    // Token verification (for returning users)
+    // Token verification (for returning users with localStorage token)
     if (token) {
       if (isValidToken(token)) {
         return NextResponse.json({ valid: true })
@@ -53,22 +32,56 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ valid: false, error: 'Missing productId or code' })
     }
 
-    const passwords = getProductPasswords()
-    const validCodes = passwords[productId]
-
-    if (!validCodes) {
-      return NextResponse.json({ valid: false, error: 'Unknown product' })
-    }
-
     const normalizedCode = code.toUpperCase().trim()
-    const isValid = validCodes.includes(normalizedCode)
 
-    if (isValid) {
-      const newToken = generateToken(productId, normalizedCode)
-      return NextResponse.json({ valid: true, token: newToken })
+    const { db } = getFirebaseAdmin()
+
+    // Query Firestore for the code
+    const querySnapshot = await db
+      .collection('purchaseCodes')
+      .where('code', '==', normalizedCode)
+      .limit(1)
+      .get()
+
+    if (querySnapshot.empty) {
+      return NextResponse.json({ valid: false, error: 'Invalid code' })
     }
 
-    return NextResponse.json({ valid: false })
+    const doc = querySnapshot.docs[0]
+    const data = doc.data()
+
+    // Check if code matches productId directly OR is a bundle that includes this product
+    const codeMatchesProduct = data.productId === productId
+    const bundleIncludesProduct = data.isBundle && data.bundleProducts?.includes(productId)
+
+    if (!codeMatchesProduct && !bundleIncludesProduct) {
+      return NextResponse.json({ valid: false, error: 'Code not valid for this product' })
+    }
+
+    // Check activation limit
+    if (data.activations >= data.maxActivations) {
+      return NextResponse.json({ 
+        valid: false, 
+        error: `This code has reached its maximum of ${data.maxActivations} device activations. Please contact support if you need assistance.` 
+      })
+    }
+
+    // Increment activation count
+    await doc.ref.update({
+      activations: data.activations + 1,
+      lastActivatedAt: new Date(),
+    })
+
+    // Generate token for localStorage session
+    const newToken = generateToken(productId, normalizedCode)
+
+    return NextResponse.json({ 
+      valid: true, 
+      token: newToken,
+      isBundle: data.isBundle,
+      bundleProducts: data.bundleProducts || [],
+      activationsRemaining: data.maxActivations - data.activations - 1,
+    })
   } catch (error) {
     console.error('Verify code error:', error)
     return NextResponse.json({ valid: false, error: 'Server error' }, { status: 500 })
