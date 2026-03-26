@@ -1,5 +1,3 @@
-'use client'
-
 import Hero from '@/components/funnel/Hero'
 import TheProblem from '@/components/funnel/TheProblem'
 import TheMethod from '@/components/funnel/TheMethod'
