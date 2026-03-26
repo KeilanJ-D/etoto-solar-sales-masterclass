@@ -6,7 +6,7 @@ import { Calculator, Battery, Sun, Zap, Copy, Check } from 'lucide-react'
 export default function FormulaCalculator() {
   // Inputs
   const [annualSpend, setAnnualSpend] = useState<string>('1200')
-  const [unitRate, setUnitRate] = useState<string>('21.89')
+  const [unitRate, setUnitRate] = useState<string>('21')
   const [offPeakRate, setOffPeakRate] = useState<string>('7')
   const [numPanels, setNumPanels] = useState<string>('14')
   const [panelWattage, setPanelWattage] = useState<string>('470')

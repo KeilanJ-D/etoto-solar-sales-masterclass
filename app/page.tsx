@@ -14,8 +14,6 @@ import Step7Objections from '@/components/funnel/Step7Objections'
 import Step8Close from '@/components/funnel/Step8Close'
 import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 
-import FormulaCalculator from '@/components/funnel/FormulaCalculator'
-
 import LiveCallRecording from '@/components/funnel/LiveCallRecording'
 import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 
@@ -47,9 +45,6 @@ export default function SalesMasterclass() {
       <Step7Objections />
       <Step8Close />
       <Step9FollowUp />
-      
-      {/* Interactive Formula Calculator */}
-      <FormulaCalculator />
       
       {/* ================================
           PART 3: LIVE DEMONSTRATION

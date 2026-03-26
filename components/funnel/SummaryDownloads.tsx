@@ -51,10 +51,10 @@ const formulas = [
 ]
 
 const downloads = [
-  { name: 'Full Sales Script', description: 'Word-for-word version' },
-  { name: 'Sales Framework', description: 'Flexible skeleton' },
-  { name: 'Appointment Setter Quiz', description: 'Training new hires' },
-  { name: 'Formula Cheat Sheet', description: 'All formulas on one page' },
+  { name: 'Full Sales Script', description: 'Word-for-word version', href: '/downloads/full-sales-script.pdf', available: false },
+  { name: 'Sales Framework', description: 'Flexible skeleton', href: '/downloads/sales-framework.pdf', available: false },
+  { name: 'Appointment Setter Quiz', description: 'Training new hires', href: '/downloads/appointment-setter-quiz.pdf', available: false },
+  { name: 'Formula Cheat Sheet', description: 'All formulas on one page', href: '/downloads/formula-cheat-sheet.md', available: true },
 ]
 
 export default function SummaryDownloads() {
@@ -130,23 +130,41 @@ export default function SummaryDownloads() {
           <h3 className="text-lg font-bold text-slate-900 mb-6 text-center">Downloadable Resources</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {downloads.map((item, index) => (
-              <button
-                key={index}
-                className="flex items-center gap-4 p-5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-colors text-left group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
-                  <Download className="w-6 h-6 text-[#E8192C]" />
+              item.available ? (
+                <a
+                  key={index}
+                  href={item.href}
+                  download
+                  className="flex items-center gap-4 p-5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-colors text-left group"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
+                    <Download className="w-6 h-6 text-[#E8192C]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-bold text-slate-900">{item.name}</p>
+                    <p className="text-sm text-slate-500">{item.description}</p>
+                  </div>
+                  <span className="text-xs font-medium text-white bg-[#E8192C] px-2 py-1 rounded">Download</span>
+                </a>
+              ) : (
+                <div
+                  key={index}
+                  className="flex items-center gap-4 p-5 bg-slate-50 border border-slate-200 rounded-xl opacity-60 cursor-not-allowed"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-slate-200 flex items-center justify-center flex-shrink-0">
+                    <Download className="w-6 h-6 text-slate-400" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-bold text-slate-700">{item.name}</p>
+                    <p className="text-sm text-slate-400">{item.description}</p>
+                  </div>
+                  <span className="text-xs font-medium text-slate-400 bg-slate-200 px-2 py-1 rounded">Coming soon</span>
                 </div>
-                <div className="flex-1">
-                  <p className="font-bold text-slate-900">{item.name}</p>
-                  <p className="text-sm text-slate-500">{item.description}</p>
-                </div>
-                <span className="text-xs font-medium text-slate-400 bg-slate-200 px-2 py-1 rounded">PDF</span>
-              </button>
+              )
             ))}
           </div>
           <p className="text-center text-sm text-slate-500 mt-4">
-            Downloads coming soon. Contact ETOTO for access.
+            Additional PDFs coming soon. Contact ETOTO for early access.
           </p>
         </div>
 
