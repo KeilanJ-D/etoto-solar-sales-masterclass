@@ -17,25 +17,25 @@ const products = [
   {
     title: 'Solar Sales Script',
     description: 'Word-for-word script covering the entire 9-step process',
-    price: '£2.99',
+    price: '£3.99',
     href: '/sales-script',
   },
   {
     title: 'Sales Framework Template',
     description: 'Visual reference card for the 9-step formula',
-    price: '£2.99',
+    price: '£3.99',
     href: '/sales-framework',
   },
   {
     title: 'Appointment Setting Quiz',
     description: 'Train your setters with this qualification checklist',
-    price: '£1.99',
+    price: '£3.99',
     href: '/appointment-quiz',
   },
   {
     title: 'Formula Cheat Sheet',
     description: 'One-page calculator reference for customer conversations',
-    price: '£1.99',
+    price: '£3.99',
     href: '/formula-cheat-sheet',
   },
 ]
@@ -110,12 +110,12 @@ export default function ResourcesPage() {
               <div className="flex-1 text-center md:text-left">
                 <h3 className="text-2xl font-bold mb-2">Complete Toolkit Bundle</h3>
                 <p className="text-slate-300">
-                  Get all four resources for one price. Save over 30% compared to buying individually.
+                  Get all four resources for one price. Save £5.97 compared to buying individually.
                 </p>
               </div>
               <div className="text-center md:text-right">
                 <p className="text-3xl font-bold text-[#E8192C]">£9.99</p>
-                <p className="text-sm text-slate-400 line-through">£9.96 individually</p>
+                <p className="text-sm text-slate-400 line-through">£15.96 individually</p>
               </div>
             </div>
           </Link>
