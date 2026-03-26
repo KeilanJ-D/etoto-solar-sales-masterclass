@@ -10,8 +10,8 @@ const raleway = Raleway({
 })
 
 export const metadata: Metadata = {
-  title: 'ETOTO Media × Solar Path — Website Audit',
-  description: 'A forensic audit of solarpath.ie prepared exclusively by ETOTO Media for Solar Path.',
+  title: 'ETOTO Media — Solar Sales Masterclass',
+  description: 'The complete 9-step solar sales system. Scripts, live maths, real call recordings, and the exact formula used across 200+ UK solar installers.',
   generator: 'v0.app',
   icons: {
     icon: [
