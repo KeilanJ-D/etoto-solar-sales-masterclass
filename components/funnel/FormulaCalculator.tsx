@@ -1064,7 +1064,7 @@ export default function FormulaCalculator() {
     const batteryPortionCost = coveredKwh * (offPeakNum / 100)
     const peakPortionCost = Math.max(0, dailyKwh - totalCapacity) * (unitRateNum / 100)
     const newDailyCost = batteryPortionCost + peakPortionCost
-    const dailySaving = dailyEnergyCost - newDailyCost
+    const dailySaving = dailyEnergyCost - newDailyCost // energy cost only, excludes standing charge
     const annualBatterySaving = dailySaving * 365
 
     const systemKwp = (panelsNum * wattageNum) / 1000

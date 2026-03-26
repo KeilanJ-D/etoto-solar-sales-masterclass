@@ -194,30 +194,17 @@ export default function SuccessPage() {
         </div>
 
         {/* Important Info Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <Mail className="w-5 h-5 text-slate-400" />
-            Check Your Email
-          </h3>
-          <p className="text-slate-600 text-sm mb-4">
-            We&apos;ve sent a confirmation email to your inbox with:
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-6">
+          <h3 className="font-bold text-amber-900 mb-3">Important: Save Your Access Code</h3>
+          <p className="text-amber-800 text-sm mb-4">
+            Screenshot this page or write down your code. You&apos;ll need it to access your purchase on other devices or if you clear your browser data.
           </p>
-          <ul className="space-y-2 text-sm text-slate-600">
-            <li className="flex items-start gap-2">
-              <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <span>Your receipt and invoice</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <span>Your access code: <code className="font-mono bg-slate-100 px-1 rounded">{product.code}</code></span>
-            </li>
-            <li className="flex items-start gap-2">
-              <Check className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <span>Direct link to access your purchase anytime</span>
-            </li>
-          </ul>
-          <p className="text-xs text-slate-400 mt-4">
-            Save this code — you&apos;ll need it to access your purchase on other devices or browsers.
+          <div className="bg-white rounded-lg p-4 border border-amber-200">
+            <p className="text-xs text-slate-500 mb-1">Your code:</p>
+            <code className="text-lg font-mono font-bold text-slate-900">{product.code}</code>
+          </div>
+          <p className="text-xs text-amber-700 mt-3">
+            Stripe will email your receipt. Bookmark this page or the product page for easy access.
           </p>
         </div>
 
