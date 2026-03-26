@@ -1,73 +1,73 @@
 'use client'
 
 import Hero from '@/components/funnel/Hero'
-import Problems from '@/components/funnel/Problems'
-import Pipeline from '@/components/funnel/Pipeline'
-import SEOProblems from '@/components/funnel/SEOProblems'
-import LeakyFunnel from '@/components/funnel/LeakyFunnel'
-import BlogProblem from '@/components/funnel/BlogProblem'
+import TheProblem from '@/components/funnel/TheProblem'
+import TheMethod from '@/components/funnel/TheMethod'
 
-import Transition from '@/components/funnel/Transition'
+import Step1Rapport from '@/components/funnel/Step1Rapport'
+import Step2Discovery from '@/components/funnel/Step2Discovery'
+import Step3EnergyAudit from '@/components/funnel/Step3EnergyAudit'
+import Step4BatteryValue from '@/components/funnel/Step4BatteryValue'
+import Step5SolarValue from '@/components/funnel/Step5SolarValue'
+import Step6Financials from '@/components/funnel/Step6Financials'
+import Step7Objections from '@/components/funnel/Step7Objections'
+import Step8Close from '@/components/funnel/Step8Close'
+import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 
-import CompetitorContentGap from '@/components/funnel/CompetitorContentGap'
-import BlogShowcase from '@/components/funnel/BlogShowcase'
+import FormulaCalculator from '@/components/funnel/FormulaCalculator'
 
-import PremierEnergyCaseStudy from '@/components/funnel/PremierEnergyCaseStudy'
+import LiveCallRecording from '@/components/funnel/LiveCallRecording'
+import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 
-import NinetyDayRoadmap from '@/components/funnel/NinetyDayRoadmap'
+import AppointmentSetting from '@/components/funnel/AppointmentSetting'
 
-import Investment from '@/components/funnel/Investment'
-import AddOns from '@/components/funnel/AddOns'
-import FAQ from '@/components/funnel/FAQ'
-import NextSteps from '@/components/funnel/NextSteps'
-
-import Reviews from '@/components/funnel/Reviews'
-import CTA from '@/components/funnel/CTA'
+import InteractiveQuiz from '@/components/funnel/InteractiveQuiz'
+import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
 
-export default function AuditFunnel() {
+export default function SalesMasterclass() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       {/* ================================
-          PART 1: THE AUDIT (pre-meeting)
+          PART 1: CONTEXT
           ================================ */}
       <Hero />
-      <Problems />
-      <Pipeline />
-      <SEOProblems />
-      <LeakyFunnel />
-      <BlogProblem />
+      <TheProblem />
+      <TheMethod />
       
       {/* ================================
-          TRANSITION
+          PART 2: THE 9 SALES STEPS
           ================================ */}
-      <Transition />
+      <Step1Rapport />
+      <Step2Discovery />
+      <Step3EnergyAudit />
+      <Step4BatteryValue />
+      <Step5SolarValue />
+      <Step6Financials />
+      <Step7Objections />
+      <Step8Close />
+      <Step9FollowUp />
+      
+      {/* Interactive Formula Calculator */}
+      <FormulaCalculator />
       
       {/* ================================
-          PART 2: THE EVIDENCE (post-meeting)
+          PART 3: LIVE DEMONSTRATION
           ================================ */}
-      <CompetitorContentGap />
-      <BlogShowcase />
-      <PremierEnergyCaseStudy />
+      <LiveCallRecording />
+      <SolaFlowDemo />
       
       {/* ================================
-          PART 3: THE PLAN
+          PART 4: APPOINTMENT SETTING
           ================================ */}
-      <NinetyDayRoadmap />
+      <AppointmentSetting />
       
       {/* ================================
-          PART 4: THE OFFER
+          PART 5: TEST & RESOURCES
           ================================ */}
-      <Investment />
-      <AddOns />
-      <FAQ />
-      <NextSteps />
+      <InteractiveQuiz />
+      <SummaryDownloads />
       
-      {/* ================================
-          PART 5: TRUST & CLOSE
-          ================================ */}
-      <Reviews />
-      <CTA />
       <Footer />
     </main>
   )
