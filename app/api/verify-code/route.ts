@@ -19,6 +19,7 @@ function getProductPasswords(): Record<string, string[]> {
     'sales-framework': ['FRAMEWORK-2026', 'TOOLKIT-2026'],
     'appointment-quiz': ['QUIZ-2026', 'TOOLKIT-2026'],
     'formula-cheat-sheet': ['FORMULAS-2026', 'TOOLKIT-2026'],
+    'complete-toolkit': ['TOOLKIT-2026'],
   }
 }
 
