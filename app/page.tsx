@@ -22,17 +22,12 @@ import AppointmentSetting from '@/components/funnel/AppointmentSetting'
 import InteractiveQuiz from '@/components/funnel/InteractiveQuiz'
 import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
-import StepNavigation from '@/components/funnel/StepNavigation'
-import DarkModeToggle from '@/components/funnel/DarkModeToggle'
-import QuickCalcButton from '@/components/funnel/QuickCalcButton'
+import JumpToCalcButton from '@/components/funnel/JumpToCalcButton'
 
 export default function SalesMasterclass() {
   return (
-    <main className="bg-[#FAFBFC] dark:bg-slate-950 min-h-screen overflow-x-hidden transition-colors">
-      {/* Sticky Step Navigation */}
-      <StepNavigation />
-      <DarkModeToggle />
-      <QuickCalcButton />
+    <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
+      <JumpToCalcButton />
       {/* ================================
           PART 1: CONTEXT
           ================================ */}
