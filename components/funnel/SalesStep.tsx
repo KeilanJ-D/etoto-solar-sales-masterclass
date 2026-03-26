@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState, ReactNode } from 'react'
+import { Copy, Check } from 'lucide-react'
 
 interface SalesStepProps {
   id: string
@@ -28,8 +29,8 @@ export default function SalesStep({ id, stepNumber, title, goal, children, dark 
     <section 
       id={id} 
       ref={sectionRef} 
-      className={`py-16 md:py-24 px-4 md:px-6 relative overflow-hidden ${
-        dark ? 'bg-slate-900 text-white' : 'bg-white'
+      className={`py-16 md:py-24 px-4 md:px-6 relative overflow-hidden transition-colors ${
+        dark ? 'bg-slate-900 text-white' : 'bg-white dark:bg-slate-900 dark:text-white'
       }`}
     >
       {/* Background decoration */}
@@ -48,18 +49,18 @@ export default function SalesStep({ id, stepNumber, title, goal, children, dark 
           <div className="w-12 h-12 rounded-xl bg-[#E8192C] flex items-center justify-center font-black text-xl text-white shadow-lg">
             {stepNumber}
           </div>
-          <span className={`text-sm font-medium tracking-wide uppercase ${dark ? 'text-slate-400' : 'text-slate-500'}`}>
+          <span className={`text-sm font-medium tracking-wide uppercase ${dark ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}>
             Step {stepNumber} of 9
           </span>
         </div>
 
         {/* Title */}
-        <h2 className={`text-2xl md:text-4xl lg:text-5xl font-black text-center mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-white' : 'text-slate-900'}`}>
+        <h2 className={`text-2xl md:text-4xl lg:text-5xl font-black text-center mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
           {title}
         </h2>
 
         {/* Goal */}
-        <p className={`text-base md:text-lg text-center max-w-2xl mx-auto mb-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-slate-300' : 'text-slate-500'}`}>
+        <p className={`text-base md:text-lg text-center max-w-2xl mx-auto mb-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-slate-300' : 'text-slate-500 dark:text-slate-300'}`}>
           {goal}
         </p>
 
@@ -74,15 +75,46 @@ export default function SalesStep({ id, stepNumber, title, goal, children, dark 
 
 // Reusable components for step content
 export function ScriptBox({ children, title = "What to Say" }: { children: ReactNode, title?: string }) {
+  const [copied, setCopied] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  const handleCopy = () => {
+    if (contentRef.current) {
+      const text = contentRef.current.innerText
+      navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
   return (
-    <div className="bg-slate-900 rounded-2xl p-6 md:p-8 mb-8">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="w-3 h-3 rounded-full bg-red-500" />
-        <div className="w-3 h-3 rounded-full bg-yellow-500" />
-        <div className="w-3 h-3 rounded-full bg-green-500" />
-        <span className="ml-2 text-slate-400 text-sm font-medium">{title}</span>
+    <div className="bg-slate-900 rounded-2xl p-6 md:p-8 mb-8 relative group">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-500" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500" />
+          <div className="w-3 h-3 rounded-full bg-green-500" />
+          <span className="ml-2 text-slate-400 text-sm font-medium">{title}</span>
+        </div>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-1.5 rounded-lg transition-all opacity-0 group-hover:opacity-100"
+          aria-label="Copy script to clipboard"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-green-400" />
+              <span className="text-green-400">Copied!</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
       </div>
-      <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
+      <div ref={contentRef} className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
         {children}
       </div>
     </div>
@@ -91,9 +123,9 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
 
 export function WhyCard({ title, children }: { title: string, children: ReactNode }) {
   return (
-    <div className="bg-slate-50 rounded-xl p-5 border border-slate-100 hover:border-[#E8192C]/30 hover:shadow-lg transition-all duration-300">
-      <h4 className="font-bold text-slate-900 text-sm mb-2">{title}</h4>
-      <p className="text-slate-600 text-sm leading-relaxed">{children}</p>
+    <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 border border-slate-100 dark:border-slate-700 hover:border-[#E8192C]/30 hover:shadow-lg transition-all duration-300">
+      <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-2">{title}</h4>
+      <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{children}</p>
     </div>
   )
 }
@@ -110,16 +142,16 @@ export function KeyLine({ children }: { children: ReactNode }) {
 
 export function FromTheCall({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-slate-50 border-l-4 border-[#F5921E] rounded-r-xl p-5 mt-6">
+    <div className="bg-slate-50 dark:bg-slate-800 border-l-4 border-[#F5921E] rounded-r-xl p-5 mt-6">
       <p className="text-xs font-semibold text-[#F5921E] uppercase tracking-wide mb-2">From the Real Call</p>
-      <p className="text-slate-600 text-sm leading-relaxed italic">{children}</p>
+      <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed italic">{children}</p>
     </div>
   )
 }
 
 export function FormulaBlock({ children }: { children: ReactNode }) {
   return (
-    <div className="bg-slate-100 rounded-xl p-6 font-mono text-sm md:text-base text-slate-800 mb-6">
+    <div className="bg-slate-100 dark:bg-slate-800 rounded-xl p-6 font-mono text-sm md:text-base text-slate-800 dark:text-slate-200 mb-6">
       {children}
     </div>
   )
@@ -127,9 +159,9 @@ export function FormulaBlock({ children }: { children: ReactNode }) {
 
 export function ExampleBlock({ title, children }: { title: string, children: ReactNode }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl p-5 mb-6 shadow-sm">
+    <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 mb-6 shadow-sm">
       <p className="text-xs font-semibold text-[#E8192C] uppercase tracking-wide mb-3">{title}</p>
-      <div className="text-slate-700 text-sm md:text-base leading-relaxed font-mono">
+      <div className="text-slate-700 dark:text-slate-200 text-sm md:text-base leading-relaxed font-mono">
         {children}
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { CheckCircle, XCircle, ChevronRight, RotateCcw, Trophy, Target, AlertCircle } from 'lucide-react'
+import { CheckCircle, XCircle, ChevronRight, RotateCcw, Trophy, Target, AlertCircle, RefreshCw } from 'lucide-react'
 
 type QuestionType = 'multiple' | 'multiselect' | 'shortanswer'
 
@@ -141,12 +141,15 @@ const questions: Question[] = [
 export default function InteractiveQuiz() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null)
   const [showResult, setShowResult] = useState(false)
   const [score, setScore] = useState(0)
   const [quizComplete, setQuizComplete] = useState(false)
   const [selfAssessCorrect, setSelfAssessCorrect] = useState<boolean | null>(null)
+  const [wrongAnswers, setWrongAnswers] = useState<number[]>([])
+  const [isRetryMode, setIsRetryMode] = useState(false)
+  const [activeQuestionIds, setActiveQuestionIds] = useState<number[]>(questions.map(q => q.id))
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -157,7 +160,9 @@ export default function InteractiveQuiz() {
     return () => observer.disconnect()
   }, [])
 
-  const question = questions[currentQuestion]
+  const currentQuestionId = activeQuestionIds[currentQuestionIndex]
+  const question = questions.find(q => q.id === currentQuestionId)!
+  const totalQuestions = activeQuestionIds.length
 
   const handleSelectOption = (option: string) => {
     if (showResult) return
@@ -178,27 +183,38 @@ export default function InteractiveQuiz() {
     if (!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)) return
     setShowResult(true)
     
+    let isCorrect = false
+    
     if (question.type === 'multiselect') {
       const correct = question.correctAnswer as string[]
       const selected = selectedAnswer as string[]
-      const isCorrect = correct.length === selected.length && correct.every(a => selected.includes(a))
-      if (isCorrect) setScore(s => s + 1)
+      isCorrect = correct.length === selected.length && correct.every(a => selected.includes(a))
     } else if (question.type === 'multiple') {
-      if (selectedAnswer === question.correctAnswer) {
-        setScore(s => s + 1)
-      }
+      isCorrect = selectedAnswer === question.correctAnswer
     }
     // For short answer, we wait for self-assessment
+    
+    if (question.type !== 'shortanswer') {
+      if (isCorrect) {
+        setScore(s => s + 1)
+      } else {
+        setWrongAnswers(prev => [...prev, question.id])
+      }
+    }
   }
 
   const handleSelfAssess = (correct: boolean) => {
     setSelfAssessCorrect(correct)
-    if (correct) setScore(s => s + 1)
+    if (correct) {
+      setScore(s => s + 1)
+    } else {
+      setWrongAnswers(prev => [...prev, question.id])
+    }
   }
 
   const handleNextQuestion = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(c => c + 1)
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(c => c + 1)
       setSelectedAnswer(null)
       setShowResult(false)
       setSelfAssessCorrect(null)
@@ -208,12 +224,28 @@ export default function InteractiveQuiz() {
   }
 
   const handleRestart = () => {
-    setCurrentQuestion(0)
+    setCurrentQuestionIndex(0)
     setSelectedAnswer(null)
     setShowResult(false)
     setScore(0)
     setQuizComplete(false)
     setSelfAssessCorrect(null)
+    setWrongAnswers([])
+    setIsRetryMode(false)
+    setActiveQuestionIds(questions.map(q => q.id))
+  }
+
+  const handleRetryWrong = () => {
+    if (wrongAnswers.length === 0) return
+    setCurrentQuestionIndex(0)
+    setSelectedAnswer(null)
+    setShowResult(false)
+    setScore(0)
+    setQuizComplete(false)
+    setSelfAssessCorrect(null)
+    setIsRetryMode(true)
+    setActiveQuestionIds(wrongAnswers)
+    setWrongAnswers([])
   }
 
   const isAnswerCorrect = (option: string) => {
@@ -224,14 +256,19 @@ export default function InteractiveQuiz() {
   }
 
   const getScoreColor = () => {
-    const percentage = (score / questions.length) * 100
+    const percentage = (score / totalQuestions) * 100
     if (percentage >= 80) return 'text-green-600'
     if (percentage >= 60) return 'text-[#F5921E]'
     return 'text-[#E8192C]'
   }
 
   const getScoreMessage = () => {
-    const percentage = (score / questions.length) * 100
+    const percentage = (score / totalQuestions) * 100
+    if (isRetryMode) {
+      if (percentage >= 80) return "Great improvement! You've mastered the gaps."
+      if (percentage >= 60) return "Getting better — keep drilling those weak spots."
+      return "Review the masterclass sections for these topics."
+    }
     if (percentage >= 80) return "You're ready to get on the phones."
     if (percentage >= 60) return "Close — review the formula sections above."
     return "Start from the top. The masterclass is here for a reason."
@@ -251,12 +288,15 @@ export default function InteractiveQuiz() {
           <div className="flex items-center justify-center gap-2 mb-4">
             <Target className="w-4 h-4 text-[#E8192C]" />
             <span className="text-sm font-medium text-slate-400 tracking-wide uppercase">
-              Test Yourself
+              {isRetryMode ? 'Retry Mode — Wrong Answers Only' : 'Test Yourself'}
             </span>
           </div>
           <h2 className="text-2xl md:text-4xl font-black mb-4">Solar PV + Battery Quiz</h2>
           <p className="text-slate-400">
-            Every appointment setter and sales rep should be able to answer these. 80% pass mark. If you can&apos;t hit it, study the masterclass again.
+            {isRetryMode 
+              ? `Drilling ${totalQuestions} questions you got wrong. Master these to fill the gaps.`
+              : "Every appointment setter and sales rep should be able to answer these. 80% pass mark. If you can't hit it, study the masterclass again."
+            }
           </p>
         </div>
 
@@ -266,13 +306,13 @@ export default function InteractiveQuiz() {
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10">
               {/* Progress */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-sm text-slate-400">Question {currentQuestion + 1} of {questions.length}</span>
-                <span className="text-sm font-bold text-[#E8192C]">Score: {score}/{currentQuestion}</span>
+                <span className="text-sm text-slate-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
+                <span className="text-sm font-bold text-[#E8192C]">Score: {score}/{currentQuestionIndex}</span>
               </div>
               <div className="h-2 bg-white/10 rounded-full mb-8">
                 <div 
                   className="h-full bg-[#E8192C] rounded-full transition-all duration-300"
-                  style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+                  style={{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }}
                 />
               </div>
 
@@ -386,7 +426,7 @@ export default function InteractiveQuiz() {
                       onClick={handleNextQuestion}
                       className="flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold rounded-lg transition-colors"
                     >
-                      {currentQuestion < questions.length - 1 ? 'Next Question' : 'See Results'}
+                      {currentQuestionIndex < totalQuestions - 1 ? 'Next Question' : 'See Results'}
                       <ChevronRight className="w-4 h-4" />
                     </button>
                   )
@@ -397,30 +437,44 @@ export default function InteractiveQuiz() {
             /* Results Screen */
             <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 text-center">
               <div className={`w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center ${
-                (score / questions.length) >= 0.8 ? 'bg-green-500/20' : (score / questions.length) >= 0.6 ? 'bg-[#F5921E]/20' : 'bg-[#E8192C]/20'
+                (score / totalQuestions) >= 0.8 ? 'bg-green-500/20' : (score / totalQuestions) >= 0.6 ? 'bg-[#F5921E]/20' : 'bg-[#E8192C]/20'
               }`}>
-                {(score / questions.length) >= 0.8 ? (
+                {(score / totalQuestions) >= 0.8 ? (
                   <Trophy className="w-10 h-10 text-green-500" />
-                ) : (score / questions.length) >= 0.6 ? (
+                ) : (score / totalQuestions) >= 0.6 ? (
                   <Target className="w-10 h-10 text-[#F5921E]" />
                 ) : (
                   <AlertCircle className="w-10 h-10 text-[#E8192C]" />
                 )}
               </div>
               
-              <h3 className="text-2xl md:text-3xl font-black mb-2">Quiz Complete!</h3>
+              <h3 className="text-2xl md:text-3xl font-black mb-2">
+                {isRetryMode ? 'Retry Complete!' : 'Quiz Complete!'}
+              </h3>
               <p className={`text-4xl md:text-5xl font-black mb-4 ${getScoreColor()}`}>
-                {score}/{questions.length}
+                {score}/{totalQuestions}
               </p>
               <p className="text-lg text-slate-300 mb-8">{getScoreMessage()}</p>
               
-              <button
-                onClick={handleRestart}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors"
-              >
-                <RotateCcw className="w-4 h-4" />
-                Try Again
-              </button>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={handleRestart}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Start Over
+                </button>
+                
+                {wrongAnswers.length > 0 && (
+                  <button
+                    onClick={handleRetryWrong}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold rounded-lg transition-colors"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    Retry Wrong Answers ({wrongAnswers.length})
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>
