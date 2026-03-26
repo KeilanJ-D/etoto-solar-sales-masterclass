@@ -121,26 +121,38 @@ function EnergyAuditTab({
   setMonthlyBill, 
   unitRate, 
   setUnitRate,
+  standingCharge,
+  setStandingCharge,
   dailyKwh,
-  dailyCost,
+  dailyEnergyCost,
+  dailyStandingCharge,
+  dailyTotalCost,
   annualKwh,
-  annualSpend
+  annualSpend,
+  annualStandingCharge,
+  annualUsageCost
 }: {
   monthlyBill: string
   setMonthlyBill: (v: string) => void
   unitRate: string
   setUnitRate: (v: string) => void
+  standingCharge: string
+  setStandingCharge: (v: string) => void
   dailyKwh: number
-  dailyCost: number
+  dailyEnergyCost: number
+  dailyStandingCharge: number
+  dailyTotalCost: number
   annualKwh: number
   annualSpend: number
+  annualStandingCharge: number
+  annualUsageCost: number
 }) {
   const monthlyNum = parseFloat(monthlyBill) || 0
 
   return (
     <div className="space-y-8">
       {/* Inputs */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <InputField
           label="Monthly electricity bill"
           value={monthlyBill}
@@ -153,20 +165,35 @@ function EnergyAuditTab({
           value={unitRate}
           onChange={setUnitRate}
           suffix="p/kWh"
-          hint="Ofgem price cap: 28p (Apr 2026)"
+          hint="Ofgem price cap: 24.5p (Apr 2026)"
+        />
+        <InputField
+          label="Standing charge"
+          value={standingCharge}
+          onChange={setStandingCharge}
+          suffix="p/day"
+          hint="UK average ~62p/day. Check your bill."
         />
       </div>
 
-      {/* Conversion display */}
-      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200">
-        <p className="text-sm text-slate-600 mb-1">Annual spend calculation</p>
-        <p className="text-2xl font-bold text-slate-900">
-          £{monthlyNum.toFixed(0)}/month × 12 = <span className="text-[#E8192C]">£{annualSpend.toLocaleString()}/year</span>
-        </p>
+      {/* Conversion display with standing charge breakdown */}
+      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-3">
+        <div className="flex justify-between items-center">
+          <span className="text-slate-600">Monthly bill</span>
+          <span className="font-medium text-slate-900">£{monthlyNum.toFixed(0)}/month (£{annualSpend.toLocaleString()}/year)</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-slate-600">Standing charge</span>
+          <span className="font-medium text-slate-900">{standingCharge}p/day (£{annualStandingCharge.toFixed(0)}/year)</span>
+        </div>
+        <div className="border-t border-slate-300 pt-3 flex justify-between items-center">
+          <span className="font-medium text-slate-700">Energy usage cost</span>
+          <span className="font-bold text-[#E8192C]">£{annualUsageCost.toFixed(0)}/year</span>
+        </div>
       </div>
 
       {/* Results */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
           <p className="text-sm text-slate-500 mb-1">Annual usage</p>
           <p className="text-2xl font-bold text-slate-900">{annualKwh.toLocaleString()} kWh</p>
@@ -175,16 +202,30 @@ function EnergyAuditTab({
           <p className="text-sm text-slate-500 mb-1">Daily usage</p>
           <p className="text-2xl font-bold text-slate-900">{dailyKwh.toFixed(2)} kWh</p>
         </div>
+        <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+          <p className="text-sm text-slate-500 mb-1">Daily energy cost</p>
+          <p className="text-2xl font-bold text-slate-900">£{dailyEnergyCost.toFixed(2)}</p>
+        </div>
         <div className="bg-gradient-to-br from-[#E8192C] to-[#c01424] rounded-xl p-5 text-white shadow-lg">
-          <p className="text-sm text-white/80 mb-1">Daily running cost</p>
-          <p className="text-2xl md:text-3xl font-bold">£{dailyCost.toFixed(2)}</p>
+          <p className="text-sm text-white/80 mb-1">Daily total cost</p>
+          <p className="text-2xl md:text-3xl font-bold">£{dailyTotalCost.toFixed(2)}</p>
+          <p className="text-xs text-white/60 mt-1">(incl. {standingCharge}p standing charge)</p>
+        </div>
+      </div>
+
+      {/* Standing charge note */}
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+        <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+        <div className="text-sm text-amber-800">
+          <p className="font-medium">Standing charge is deducted before calculating kWh</p>
+          <p className="mt-1 text-amber-700">This fixed daily fee (~£{annualStandingCharge.toFixed(0)}/year) doesn&apos;t change with solar — it&apos;s paid regardless of usage. Deducting it gives accurate daily kWh for battery sizing.</p>
         </div>
       </div>
 
       {/* Anchor statement */}
       <div className="text-center py-6 border-t border-slate-200">
         <p className="text-xl text-slate-700">
-          Your home costs <span className="text-[#E8192C] font-bold text-2xl">£{dailyCost.toFixed(2)} a day</span> to run.
+          Your home costs <span className="text-[#E8192C] font-bold text-2xl">£{dailyTotalCost.toFixed(2)} a day</span> to run.
         </p>
         <p className="text-slate-500 mt-1">Let&apos;s change that.</p>
       </div>
@@ -816,8 +857,11 @@ function PaybackTab({
 
 function SummaryFooter({
   monthlyBill,
+  standingCharge,
   dailyKwh,
   annualKwh,
+  annualStandingCharge,
+  annualUsageCost,
   selectedProduct,
   quantity,
   batteryCost,
@@ -834,8 +878,11 @@ function SummaryFooter({
   paybackYears,
 }: {
   monthlyBill: string
+  standingCharge: string
   dailyKwh: number
   annualKwh: number
+  annualStandingCharge: number
+  annualUsageCost: number
   selectedProduct: string
   quantity: number
   batteryCost: number
@@ -860,6 +907,8 @@ function SummaryFooter({
   const handleCopy = () => {
     const monthlyNum = parseFloat(monthlyBill) || 0
     const text = `Monthly bill: £${monthlyNum.toFixed(0)} (£${(monthlyNum * 12).toLocaleString()}/year)
+Standing charge: ${standingCharge}p/day (£${annualStandingCharge.toFixed(0)}/year)
+Energy usage cost: £${annualUsageCost.toFixed(0)}/year
 Usage: ${annualKwh.toLocaleString()} kWh/year, ${dailyKwh.toFixed(2)} kWh/day
 
 Battery: ${quantity}× ${product.name} (${totalCapacity.toFixed(2)} kWh) — £${batteryCost.toLocaleString()}
@@ -872,7 +921,9 @@ Annual export: £${Math.round(annualSolarExport).toLocaleString()}${annualSurplu
 Total system: £${Math.round(totalCost).toLocaleString()}
 Total annual benefit: £${Math.round(totalAnnualBenefit).toLocaleString()}
 Payback: ${paybackYears.toFixed(1)} years
-15-year net profit: £${Math.round(fifteenYearProfit).toLocaleString()}`
+15-year net profit: £${Math.round(fifteenYearProfit).toLocaleString()}
+
+Note: Standing charge (${standingCharge}p/day) is a fixed fee from your supplier regardless of usage. Solar doesn't change it.`
 
     navigator.clipboard.writeText(text)
     setCopied(true)
@@ -960,6 +1011,7 @@ export default function FormulaCalculator() {
   // Tab 1: Energy Audit (now monthly bill)
   const [monthlyBill, setMonthlyBill] = useState('150')
   const [unitRate, setUnitRate] = useState('28')
+  const [standingCharge, setStandingCharge] = useState('61.64')
   
   // Tab 2: Battery
   const [selectedProduct, setSelectedProduct] = useState('sigenergy')
@@ -989,10 +1041,16 @@ export default function FormulaCalculator() {
     const wattageNum = parseInt(wattage) || 470
     const pricePerKwpNum = parseFloat(pricePerKwp) || 1000
 
+    const standingChargeNum = parseFloat(standingCharge) || 61.64
+    
     const annualSpend = monthlyNum * 12
-    const annualKwh = Math.round(annualSpend / (unitRateNum / 100))
+    const annualStandingCharge = (standingChargeNum / 100) * 365
+    const annualUsageCost = Math.max(0, annualSpend - annualStandingCharge)
+    const annualKwh = unitRateNum > 0 ? Math.round(annualUsageCost / (unitRateNum / 100)) : 0
     const dailyKwh = annualKwh / 365
-    const dailyCost = dailyKwh * (unitRateNum / 100)
+    const dailyEnergyCost = dailyKwh * (unitRateNum / 100)
+    const dailyStandingCharge = standingChargeNum / 100
+    const dailyTotalCost = dailyEnergyCost + dailyStandingCharge
 
     const product = BATTERY_PRODUCTS.find(p => p.id === selectedProduct)!
     const totalCapacity = product.usableKwh * quantity
@@ -1022,9 +1080,13 @@ export default function FormulaCalculator() {
 
     return {
       annualSpend,
+      annualStandingCharge,
+      annualUsageCost,
       annualKwh,
       dailyKwh,
-      dailyCost,
+      dailyEnergyCost,
+      dailyStandingCharge,
+      dailyTotalCost,
       totalCapacity,
       batteryCost,
       coveredKwh,
@@ -1039,7 +1101,7 @@ export default function FormulaCalculator() {
       totalAnnualBenefit,
       paybackYears,
     }
-  }, [monthlyBill, unitRate, offPeakRate, exportRate, panels, wattage, pricePerKwp, selectedProduct, quantity, batteryPrices, customSystemCost])
+  }, [monthlyBill, unitRate, standingCharge, offPeakRate, exportRate, panels, wattage, pricePerKwp, selectedProduct, quantity, batteryPrices, customSystemCost])
 
   const setBatteryPrice = (id: string, price: number) => {
     setBatteryPrices(prev => ({ ...prev, [id]: price }))
@@ -1091,16 +1153,22 @@ export default function FormulaCalculator() {
               setMonthlyBill={setMonthlyBill}
               unitRate={unitRate}
               setUnitRate={setUnitRate}
+              standingCharge={standingCharge}
+              setStandingCharge={setStandingCharge}
               dailyKwh={calculations.dailyKwh}
-              dailyCost={calculations.dailyCost}
+              dailyEnergyCost={calculations.dailyEnergyCost}
+              dailyStandingCharge={calculations.dailyStandingCharge}
+              dailyTotalCost={calculations.dailyTotalCost}
               annualKwh={calculations.annualKwh}
               annualSpend={calculations.annualSpend}
+              annualStandingCharge={calculations.annualStandingCharge}
+              annualUsageCost={calculations.annualUsageCost}
             />
           )}
           {activeTab === 1 && (
             <BatterySavingsTab
               dailyKwh={calculations.dailyKwh}
-              dailyCost={calculations.dailyCost}
+              dailyCost={calculations.dailyEnergyCost}
               unitRate={unitRate}
               selectedProduct={selectedProduct}
               setSelectedProduct={setSelectedProduct}
@@ -1142,8 +1210,11 @@ export default function FormulaCalculator() {
         {/* Summary footer */}
         <SummaryFooter
           monthlyBill={monthlyBill}
+          standingCharge={standingCharge}
           dailyKwh={calculations.dailyKwh}
           annualKwh={calculations.annualKwh}
+          annualStandingCharge={calculations.annualStandingCharge}
+          annualUsageCost={calculations.annualUsageCost}
           selectedProduct={selectedProduct}
           quantity={quantity}
           batteryCost={calculations.batteryCost}
