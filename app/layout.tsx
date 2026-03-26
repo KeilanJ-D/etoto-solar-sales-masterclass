@@ -11,8 +11,20 @@ const raleway = Raleway({
 
 export const metadata: Metadata = {
   title: 'ETOTO Media — Solar Sales Masterclass',
-  description: 'The complete 9-step solar sales system. Scripts, live maths, real call recordings, and the exact formula used across 200+ UK solar installers.',
+  description: 'The 9-step formula that closes solar deals. Scripts, live maths, real call recordings. Free training for UK solar installers.',
   generator: 'v0.app',
+  openGraph: {
+    title: 'Sell Solar Like You Built It.',
+    description: 'The 9-step formula used by 200+ UK solar installers. Free masterclass from ETOTO Media.',
+    type: 'website',
+    images: [{ url: '/og/masterclass.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sell Solar Like You Built It.',
+    description: 'The 9-step formula used by 200+ UK solar installers.',
+    images: ['/og/masterclass.jpg'],
+  },
   icons: {
     icon: [
       {

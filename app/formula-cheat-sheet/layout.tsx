@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     title: 'Every Formula. Every Tool. Always in Your Pocket.',
     description: 'The 4 formulas that close solar deals — with a live calculator and tariff comparison table. £3.99.',
     type: 'website',
-    images: [{ url: '/og/formula-cheat-sheet.png', width: 1200, height: 630 }],
+    images: [{ url: '/og/formula-cheat-sheet.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Every Formula. Every Tool. Always in Your Pocket.',
     description: 'The 4 formulas that close solar deals — with a live calculator and tariff comparison table. £3.99.',
-    images: ['/og/formula-cheat-sheet.png'],
+    images: ['/og/formula-cheat-sheet.jpg'],
   },
 }
 

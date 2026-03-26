@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     title: 'The 9-Step Skeleton. Flexible. Adaptable. Yours.',
     description: 'The sales framework for experienced reps who want structure without a script. £3.99.',
     type: 'website',
-    images: [{ url: '/og/sales-framework.png', width: 1200, height: 630 }],
+    images: [{ url: '/og/sales-framework.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'The 9-Step Skeleton. Flexible. Adaptable. Yours.',
     description: 'The sales framework for experienced reps who want structure without a script. £3.99.',
-    images: ['/og/sales-framework.png'],
+    images: ['/og/sales-framework.jpg'],
   },
 }
 

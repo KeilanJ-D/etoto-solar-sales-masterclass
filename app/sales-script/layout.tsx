@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     title: 'The Word-for-Word Script That Closes Solar Deals.',
     description: 'Every sentence. Every question. The exact script used by 200+ UK installers. £3.99.',
     type: 'website',
-    images: [{ url: '/og/sales-script.png', width: 1200, height: 630 }],
+    images: [{ url: '/og/sales-script.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'The Word-for-Word Script That Closes Solar Deals.',
     description: 'Every sentence. Every question. The exact script used by 200+ UK installers. £3.99.',
-    images: ['/og/sales-script.png'],
+    images: ['/og/sales-script.jpg'],
   },
 }
 
