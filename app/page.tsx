@@ -27,7 +27,7 @@ export default function SalesMasterclass() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <JumpToCalcButton />
       {/* ================================
-          PART 1: CONTEXT
+          PART 1: CONTEXT — Solar Sales Masterclass
           ================================ */}
       <Hero />
       <TheProblem />
