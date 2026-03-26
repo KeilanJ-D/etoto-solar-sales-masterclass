@@ -47,6 +47,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li><a href="https://etotomedia.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">etotomedia.com</a></li>
                 <li><a href="mailto:keilan.jd@etotomedia.com" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">keilan.jd@etotomedia.com</a></li>
+                <li><a href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#25D366] text-sm transition-colors">Join the community</a></li>
               </ul>
             </div>
           </div>

@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
-import { Check, ArrowRight, Zap, BarChart3, Users, Clock, Play, ExternalLink } from 'lucide-react'
+import { Check, ArrowRight, Zap, BarChart3, Users, Clock, ExternalLink, Calendar, MessageCircle } from 'lucide-react'
 import ProductFooter from '@/components/products/ProductFooter'
+import Link from 'next/link'
 
 const features = [
   {
@@ -27,60 +27,17 @@ const features = [
   }
 ]
 
-const plans = [
-  {
-    name: 'Starter',
-    price: '£49',
-    period: '/month',
-    description: 'Perfect for solo installers',
-    features: [
-      'Up to 50 quotes/month',
-      '1 user',
-      'Basic branding',
-      'Email support',
-      'Standard integrations'
-    ],
-    cta: 'Start Free Trial',
-    highlighted: false
-  },
-  {
-    name: 'Professional',
-    price: '£149',
-    period: '/month',
-    description: 'For growing sales teams',
-    features: [
-      'Unlimited quotes',
-      'Up to 5 users',
-      'Full white-label branding',
-      'Priority support',
-      'CRM integrations',
-      'Custom pricing rules',
-      'Analytics dashboard'
-    ],
-    cta: 'Start Free Trial',
-    highlighted: true
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: '',
-    description: 'For large installers',
-    features: [
-      'Everything in Professional',
-      'Unlimited users',
-      'Dedicated account manager',
-      'Custom development',
-      'SLA guarantee',
-      'On-premise option'
-    ],
-    cta: 'Contact Sales',
-    highlighted: false
-  }
+const includedFeatures = [
+  'Branded to your business',
+  'Your own products & pricing',
+  'Dashboard access',
+  'Embed code for your website',
+  'Lead capture & notifications',
+  'Ongoing updates included',
+  'Setup & onboarding included',
 ]
 
 export default function SolaFlowPage() {
-  const [showDemo, setShowDemo] = useState(false)
-
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
       {/* Hero */}
@@ -92,78 +49,44 @@ export default function SolaFlowPage() {
         </div>
         
         <div className="max-w-5xl mx-auto relative">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 bg-white/10 text-emerald-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <Zap className="w-4 h-4" />
-                <span>Solar Quote Software</span>
-              </div>
-              
-              <h1 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
-                Generate Solar Quotes in 60 Seconds
-              </h1>
-              
-              <p className="text-lg md:text-xl text-emerald-100 mb-8">
-                SolaFlow is the quote engine trusted by 200+ UK solar installers. 
-                Turn website visitors into qualified leads with instant, accurate proposals.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://vercel-solar-estimator.vercel.app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-emerald-900 font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
-                >
-                  <span>Try Live Demo</span>
-                  <ExternalLink className="w-5 h-5" />
-                </a>
-                <button
-                  onClick={() => setShowDemo(true)}
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
-                >
-                  <Play className="w-5 h-5" />
-                  <span>Watch Video</span>
-                </button>
-              </div>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 text-emerald-200 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <Zap className="w-4 h-4" />
+              <span>Solar Quote Software</span>
             </div>
             
-            <div className="relative">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                <div className="aspect-video bg-slate-900/50 rounded-xl flex items-center justify-center">
-                  <button
-                    onClick={() => setShowDemo(true)}
-                    className="w-20 h-20 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all"
-                  >
-                    <Play className="w-10 h-10 text-white ml-1" />
-                  </button>
-                </div>
-              </div>
+            <h1 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
+              Generate Solar Quotes in 60 Seconds
+            </h1>
+            
+            <p className="text-lg md:text-xl text-emerald-100 mb-8 max-w-3xl mx-auto">
+              SolaFlow is the quote engine trusted by 200+ UK solar installers. 
+              Turn website visitors into qualified leads with instant, accurate proposals.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-emerald-900 font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
+              >
+                <span>Start My Free Trial</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a
+                href="https://calendly.com/etotomediakjd/intromeeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
+              >
+                <Calendar className="w-5 h-5" />
+                <span>Book Your Onboarding Call</span>
+              </a>
             </div>
           </div>
         </div>
       </section>
-      
-      {/* Video Modal */}
-      {showDemo && (
-        <div 
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowDemo(false)}
-        >
-          <div 
-            className="w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-              className="w-full h-full"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="SolaFlow Demo"
-            />
-          </div>
-        </div>
-      )}
       
       {/* Features */}
       <section className="py-16 md:py-24 px-4">
@@ -192,7 +115,7 @@ export default function SolaFlowPage() {
         </div>
       </section>
       
-      {/* Embedded Demo */}
+      {/* Live Demo Embed */}
       <section className="bg-slate-900 py-16 md:py-24 px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-white text-center mb-4">
@@ -212,71 +135,82 @@ export default function SolaFlowPage() {
         </div>
       </section>
       
-      {/* Pricing */}
+      {/* Pricing - Single Plan */}
       <section className="py-16 md:py-24 px-4">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-4">
             Simple, Transparent Pricing
           </h2>
           <p className="text-slate-500 text-center mb-12">
-            Start free, upgrade when you&apos;re ready. No hidden fees.
+            One price. Everything included. 14-day free trial.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`rounded-2xl p-6 ${
-                  plan.highlighted 
-                    ? 'bg-emerald-900 text-white ring-4 ring-emerald-500' 
-                    : 'bg-white border border-slate-200'
-                }`}
-              >
-                {plan.highlighted && (
-                  <div className="text-emerald-300 text-sm font-medium mb-2">Most Popular</div>
-                )}
-                <h3 className={`text-xl font-bold mb-1 ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
-                  {plan.name}
-                </h3>
-                <p className={`text-sm mb-4 ${plan.highlighted ? 'text-emerald-200' : 'text-slate-500'}`}>
-                  {plan.description}
-                </p>
-                
-                <div className="mb-6">
-                  <span className={`text-4xl font-black ${plan.highlighted ? 'text-white' : 'text-slate-900'}`}>
-                    {plan.price}
-                  </span>
-                  <span className={plan.highlighted ? 'text-emerald-200' : 'text-slate-500'}>
-                    {plan.period}
-                  </span>
-                </div>
-                
-                <ul className="space-y-3 mb-6">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                        plan.highlighted ? 'text-emerald-400' : 'text-emerald-500'
-                      }`} />
-                      <span className={`text-sm ${plan.highlighted ? 'text-emerald-100' : 'text-slate-600'}`}>
-                        {feature}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <a
-                  href="mailto:keilan.jd@etotomedia.com?subject=SolaFlow%20Inquiry"
-                  className={`flex items-center justify-center gap-2 w-full font-bold py-3 px-4 rounded-xl transition-all min-h-[48px] ${
-                    plan.highlighted
-                      ? 'bg-white hover:bg-slate-100 text-emerald-900'
-                      : 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                  }`}
-                >
-                  <span>{plan.cta}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+          {/* Single Pricing Card */}
+          <div className="bg-gradient-to-br from-emerald-900 to-teal-900 rounded-3xl p-8 md:p-10 text-white">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-white/10 text-emerald-200 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Zap className="w-4 h-4" />
+                <span>14-Day Free Trial</span>
               </div>
-            ))}
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">SolaFlow</h3>
+              <div className="flex items-baseline justify-center gap-2">
+                <span className="text-5xl md:text-6xl font-black">£200</span>
+                <span className="text-emerald-200 text-xl">/month</span>
+              </div>
+              <p className="text-emerald-200 mt-2">No charge until day 15</p>
+            </div>
+            
+            <ul className="space-y-4 mb-8">
+              {includedFeatures.map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <span className="text-emerald-100">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-emerald-900 font-bold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <span>Start My Free Trial</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <a
+                href="https://calendly.com/etotomediakjd/intromeeting"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              >
+                <Calendar className="w-5 h-5" />
+                <span>Book Your Onboarding Call</span>
+              </a>
+            </div>
+          </div>
+          
+          {/* ETOTO Network Banner */}
+          <div className="mt-8 bg-slate-100 rounded-2xl p-6 border border-slate-200">
+            <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+              <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center flex-shrink-0">
+                <MessageCircle className="w-6 h-6 text-[#25D366]" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-bold text-slate-900 mb-1">All SolaFlow customers get access to The ETOTO Network</h4>
+                <p className="text-sm text-slate-600">Join 200+ installers sharing leads, insights, and best practices.</p>
+              </div>
+              <a
+                href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold py-3 px-5 rounded-full transition-all"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Join WhatsApp</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -290,13 +224,26 @@ export default function SolaFlowPage() {
           <p className="text-emerald-100 mb-8">
             Join 200+ UK installers already using SolaFlow to close more deals.
           </p>
-          <a
-            href="mailto:keilan.jd@etotomedia.com?subject=SolaFlow%20Demo%20Request"
-            className="inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-emerald-900 font-bold py-4 px-8 rounded-full transition-all"
-          >
-            <span>Book a Demo</span>
-            <ArrowRight className="w-5 h-5" />
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-emerald-900 font-bold py-4 px-8 rounded-full transition-all"
+            >
+              <span>Start My Free Trial</span>
+              <ArrowRight className="w-5 h-5" />
+            </a>
+            <a
+              href="https://calendly.com/etotomediakjd/intromeeting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-full transition-all"
+            >
+              <Calendar className="w-5 h-5" />
+              <span>Book a Demo</span>
+            </a>
+          </div>
         </div>
       </section>
       

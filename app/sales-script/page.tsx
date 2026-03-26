@@ -40,7 +40,7 @@ export default function SalesScriptPage() {
         title="The Word-for-Word Script That Closes Solar Deals."
         subtitle="Every sentence. Every pause. Every question. The exact script used across 200+ UK solar installers — from 'Hi, how are you doing?' to '25% deposit by credit card.' Interactive, with copy buttons and audio from a real sales call."
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
         stats={[
           { value: '9', label: 'Steps' },
           { value: '45min', label: 'Audio' },
@@ -85,7 +85,7 @@ export default function SalesScriptPage() {
         productId="sales-script"
         productName="Sales Script"
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-4xl mx-auto">
@@ -196,8 +196,8 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
           productName="Sales Script"
           price="£3.99"
           bundlePrice="£9.99"
-          buyLink="#"
-          bundleLink="#"
+          buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
+          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
           features={[
             '9 complete step scripts',
             'Copy-to-clipboard on every line',

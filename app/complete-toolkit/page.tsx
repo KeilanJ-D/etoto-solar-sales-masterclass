@@ -81,7 +81,9 @@ export default function CompleteToolkitPage() {
             </div>
           ) : (
             <a
-              href="mailto:keilan.jd@etotomedia.com?subject=Complete%20Toolkit%20Purchase"
+              href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
             >
               <span>Get Complete Toolkit</span>
@@ -172,7 +174,9 @@ export default function CompleteToolkitPage() {
           
           {!hasAccess && (
             <a
-              href="mailto:keilan.jd@etotomedia.com?subject=Complete%20Toolkit%20Purchase"
+              href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all"
             >
               <span>Get Complete Toolkit for £9.99</span>

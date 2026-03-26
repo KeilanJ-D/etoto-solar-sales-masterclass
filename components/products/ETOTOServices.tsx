@@ -1,6 +1,6 @@
 'use client'
 
-import { Target, Globe, Video, Calculator, ArrowRight } from 'lucide-react'
+import { Target, Globe, Video, Calculator, ArrowRight, Calendar, MessageCircle } from 'lucide-react'
 
 const services = [
   {
@@ -90,18 +90,51 @@ export default function ETOTOServices() {
           })}
         </div>
 
+        {/* WhatsApp Community Banner */}
+        <div className="mt-10 md:mt-14 bg-[#25D366]/10 border border-[#25D366]/20 rounded-2xl p-6">
+          <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+            <div className="w-12 h-12 rounded-full bg-[#25D366]/20 flex items-center justify-center flex-shrink-0">
+              <MessageCircle className="w-6 h-6 text-[#25D366]" />
+            </div>
+            <div className="flex-1">
+              <h4 className="font-bold text-slate-900 mb-1">Join 200+ installers in The ETOTO Network</h4>
+              <p className="text-sm text-slate-600">Share leads, insights, and best practices with fellow solar professionals.</p>
+            </div>
+            <a
+              href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold py-3 px-5 rounded-full transition-all"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>Join WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
         {/* Contact CTA */}
-        <div className="mt-10 md:mt-14 text-center">
+        <div className="mt-8 text-center">
           <p className="text-slate-600 mb-4">
             Not sure what you need? Let&apos;s talk.
           </p>
-          <a
-            href="mailto:keilan.jd@etotomedia.com"
-            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
-          >
-            <span>Contact ETOTO</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="https://calendly.com/etotomediakjd/intromeeting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Book a Call with Keilan</span>
+            </a>
+            <a
+              href="mailto:keilan.jd@etotomedia.com"
+              className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-full transition-all"
+            >
+              <span>Email Us</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
     </section>

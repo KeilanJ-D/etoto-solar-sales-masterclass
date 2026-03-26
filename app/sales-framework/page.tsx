@@ -182,7 +182,7 @@ export default function SalesFrameworkPage() {
         title="The 9-Step Skeleton. Flexible. Adaptable. Yours."
         subtitle="Not everyone wants word-for-word. Some reps want the structure without the script — the framework they can adapt to their own voice. Interactive cards, printable summaries, and the calculator built in."
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
         stats={[
           { value: '9', label: 'Steps' },
           { value: 'Flexible', label: 'Structure' },
@@ -217,7 +217,7 @@ export default function SalesFrameworkPage() {
         productId="sales-framework"
         productName="Sales Framework"
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-4xl mx-auto">
@@ -329,8 +329,8 @@ export default function SalesFrameworkPage() {
           productName="Sales Framework"
           price="£3.99"
           bundlePrice="£9.99"
-          buyLink="#"
-          bundleLink="#"
+          buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
+          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
           features={[
             'All 9 framework cards',
             'Bullet-point checklists per step',

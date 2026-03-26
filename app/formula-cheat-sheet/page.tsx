@@ -28,7 +28,7 @@ export default function FormulaCheatSheetPage() {
         title="Every Formula. Every Tool. Always in Your Pocket."
         subtitle="The four formulas that close solar deals — live, interactive, with a working calculator you can use on every call. Pin the visual summary to your desk. Use the calculator on your phone mid-pitch."
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         stats={[
           { value: '4', label: 'Core Formulas' },
           { value: '4-Tab', label: 'Calculator' },
@@ -73,7 +73,7 @@ export default function FormulaCheatSheetPage() {
         productId="formula-cheat-sheet"
         productName="Formula Cheat Sheet"
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-5xl mx-auto">
@@ -131,8 +131,8 @@ export default function FormulaCheatSheetPage() {
           productName="Formula Cheat Sheet"
           price="£3.99"
           bundlePrice="£9.99"
-          buyLink="#"
-          bundleLink="#"
+          buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
+          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
           features={[
             'Full 4-tab interactive calculator',
             'Save your default pricing configs',

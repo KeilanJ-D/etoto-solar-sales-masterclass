@@ -28,6 +28,14 @@ export default function ProductFooter() {
               SolaFlow
             </Link>
             <a 
+              href="https://calendly.com/etotomediakjd/intromeeting"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-white transition-colors"
+            >
+              Questions? Book a call
+            </a>
+            <a 
               href="mailto:keilan.jd@etotomedia.com" 
               className="text-slate-400 hover:text-white transition-colors"
             >

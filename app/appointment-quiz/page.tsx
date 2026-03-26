@@ -176,7 +176,7 @@ export default function AppointmentQuizPage() {
         title="Are Your Setters Ready for the Phones?"
         subtitle="18 interactive questions. Solar basics, qualification, objection handling, appointment positioning. 80% pass mark. Track scores, retry wrong answers, drill the gaps."
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
         stats={[
           { value: '18', label: 'Questions' },
           { value: '80%', label: 'Pass Mark' },
@@ -191,7 +191,7 @@ export default function AppointmentQuizPage() {
         productId="appointment-quiz"
         productName="Appointment Setter Quiz"
         price="£3.99"
-        buyLink="#"
+        buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-3xl mx-auto">
@@ -244,8 +244,8 @@ export default function AppointmentQuizPage() {
           productName="Appointment Setter Quiz"
           price="£3.99"
           bundlePrice="£9.99"
-          buyLink="#"
-          bundleLink="#"
+          buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
+          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
           features={[
             'Full 18-question interactive quiz',
             'Detailed explanations for every answer',

@@ -146,7 +146,7 @@ export default function BuySection({
         <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-slate-400">
           <span className="flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-400" />
-            Secure payment via Lemonsqueezy
+            Secure payment via Stripe
           </span>
           <span className="flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-400" />
