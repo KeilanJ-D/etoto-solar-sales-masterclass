@@ -9,7 +9,8 @@ import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight,
 import { StatsBanner } from '@/components/shared/StatsBanner'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
-import { stats, getVideoTestimonialById } from '@/lib/social-proof-data'
+import { stats, getVideoTestimonialById, clientLogos } from '@/lib/social-proof-data'
+import { ClientLogos } from '@/components/shared/ClientLogos'
 
 const ctaCards = [
   {
@@ -118,6 +119,9 @@ export default function SalesMasterclass() {
           </div>
         </section>
       )}
+      
+      {/* CLIENT LOGOS */}
+      <ClientLogos logos={clientLogos} />
       
       {/* PART 3: CTA CARDS */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">

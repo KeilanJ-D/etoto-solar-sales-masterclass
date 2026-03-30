@@ -325,14 +325,17 @@ export const googleReviews = [
 // ============================================
 
 export const clientLogos = [
-  { name: 'Halo Renewables', logoUrl: null },
-  { name: 'EVLM Renewables', logoUrl: null },
-  { name: 'AB Renewables', logoUrl: null },
-  { name: 'JEM Energy', logoUrl: null },
-  { name: 'South Coast Solar', logoUrl: null },
-  { name: 'Carter Renewables', logoUrl: null },
-  { name: 'Genbatt', logoUrl: null },
-  { name: 'UK Renewables', logoUrl: null },
-  { name: 'MCJ Energy Solutions', logoUrl: null },
-  { name: 'UPS Solar', logoUrl: null },
+  { name: 'Halo Renewables', logoUrl: '/logos/halo-renewables.png' },
+  { name: 'EVLM Renewables', logoUrl: '/logos/evlm-renewables.png' },
+  { name: 'AB Renewables', logoUrl: '/logos/ab-renewables.png' },
+  { name: 'JEM Energy', logoUrl: '/logos/jem-energy.png' },
+  { name: 'South Coast Solar', logoUrl: '/logos/south-coast-solar.png' },
+  { name: 'Carter Renewables', logoUrl: '/logos/carter-renewables.png' },
+  { name: 'Genbatt', logoUrl: '/logos/genbatt.png' },
+  { name: 'UK Renewables', logoUrl: '/logos/uk-renewables.png' },
+  { name: 'MCJ Energy Solutions', logoUrl: '/logos/mcj-energy.png' },
+  { name: 'UPS Solar', logoUrl: '/logos/ups-solar.png' },
+  { name: 'YEERS', logoUrl: '/logos/yeers.png' },
+  { name: 'Alltech', logoUrl: '/logos/alltech.png' },
+  { name: 'Energy Concerns', logoUrl: '/logos/energy-concerns.png' },
 ]

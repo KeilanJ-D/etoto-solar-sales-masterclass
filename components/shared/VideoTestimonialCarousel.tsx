@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Play, Quote } from 'lucide-react'
+import { LiteYouTube } from './LiteYouTube'
 
 interface VideoTestimonial {
   id: string
@@ -12,6 +13,7 @@ interface VideoTestimonial {
   videoUrl: string
   featured?: boolean
   isVertical?: boolean
+  embedType?: 'youtube' | 'linkedin'
 }
 
 interface VideoTestimonialCarouselProps {
@@ -21,6 +23,53 @@ interface VideoTestimonialCarouselProps {
 export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const active = testimonials[activeIndex]
+
+  const renderVideo = () => {
+    if (active.embedType === 'linkedin') {
+      return (
+        <div className="relative mx-auto max-w-[320px]">
+          <div className="bg-slate-800 rounded-[2rem] p-2 shadow-2xl">
+            <div className="bg-black rounded-[1.5rem] overflow-hidden">
+              <iframe
+                src={active.videoUrl}
+                height="570"
+                width="100%"
+                frameBorder="0"
+                allowFullScreen
+                title={`${active.name} testimonial`}
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+      )
+    }
+    
+    if (active.isVertical) {
+      return (
+        <div className="relative mx-auto max-w-[280px]">
+          <div className="bg-slate-800 rounded-[2rem] p-2 shadow-2xl">
+            <div className="bg-black rounded-[1.5rem] overflow-hidden">
+              <LiteYouTube
+                videoId={active.videoUrl}
+                title={`${active.name} testimonial`}
+                aspectRatio="vertical"
+              />
+            </div>
+          </div>
+        </div>
+      )
+    }
+    
+    return (
+      <div className="rounded-xl overflow-hidden shadow-2xl">
+        <LiteYouTube
+          videoId={active.videoUrl}
+          title={`${active.name} testimonial`}
+        />
+      </div>
+    )
+  }
 
   return (
     <div className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-slate-900">
@@ -38,31 +87,7 @@ export function VideoTestimonialCarousel({ testimonials }: VideoTestimonialCarou
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-10 mb-8">
           {/* Video */}
           <div className="lg:w-3/5 flex-shrink-0">
-            {active.isVertical ? (
-              <div className="relative mx-auto max-w-[280px]">
-                <div className="bg-slate-800 rounded-[2rem] p-2 shadow-2xl">
-                  <div className="bg-black rounded-[1.5rem] overflow-hidden aspect-[9/16]">
-                    <iframe
-                      src={active.videoUrl}
-                      title={`${active.name} testimonial`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="aspect-video rounded-xl overflow-hidden shadow-2xl bg-black">
-                <iframe
-                  src={active.videoUrl}
-                  title={`${active.name} testimonial`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
-            )}
+            {renderVideo()}
           </div>
 
           {/* Quote */}

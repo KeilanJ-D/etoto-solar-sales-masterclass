@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { Play, Clock } from 'lucide-react'
+import { LiteYouTube } from '@/components/shared/LiteYouTube'
 
 const timestamps = [
   { time: '0:00', label: 'Introduction & rapport' },
@@ -57,17 +58,10 @@ export default function LiveCallRecording() {
 
         {/* YouTube Embed */}
         <div className={`transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-            <iframe
-              width="100%"
-              height="100%"
-              src="https://www.youtube.com/embed/Hm7LvAOx3Ro?si=xTt1x6OSFI_Bhk3g"
+          <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10">
+            <LiteYouTube
+              videoId="Hm7LvAOx3Ro"
               title="ETOTO Solar Sales Call"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="w-full h-full"
             />
           </div>
         </div>

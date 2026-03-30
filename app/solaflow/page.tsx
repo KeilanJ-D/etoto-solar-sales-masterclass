@@ -11,6 +11,8 @@ import Image from 'next/image'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
 import { CustomerJourneyTimeline, yeersCustomerA, yeersCustomerB } from '@/components/shared/CustomerJourneyTimeline'
+import { ClientLogos } from '@/components/shared/ClientLogos'
+import { clientLogos } from '@/lib/social-proof-data'
 
 // ============================================
 // CRM DATA PREVIEW COMPONENT
@@ -522,6 +524,9 @@ export default function SolaFlowPage() {
           </div>
         </div>
       </section>
+
+      {/* CLIENT LOGOS */}
+      <ClientLogos logos={clientLogos} title="Trusted by 200+ UK solar installers" />
 
       {/* ============================================ */}
       {/* THE PIPELINE VISUAL */}

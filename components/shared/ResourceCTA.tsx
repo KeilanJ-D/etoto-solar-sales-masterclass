@@ -106,7 +106,7 @@ export function AppointmentQuizCTA() {
       description="The Appointment Setting Quiz tests your team's lead qualification skills."
       href="/appointment-quiz"
       ctaText="Get the Quiz"
-      price="£2.99"
+      price="£3.99"
     />
   )
 }
@@ -119,7 +119,7 @@ export function FormulaCheatSheetCTA() {
       description="The Formula Cheat Sheet gives you the maths to show customers during calls."
       href="/formula-cheat-sheet"
       ctaText="Get the Cheat Sheet"
-      price="£2.99"
+      price="£3.99"
     />
   )
 }

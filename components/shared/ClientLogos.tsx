@@ -14,9 +14,9 @@ interface ClientLogosProps {
 
 export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installers' }: ClientLogosProps) {
   return (
-    <div className="py-8 sm:py-10 px-4 sm:px-6 bg-white border-y border-slate-100">
+    <div className="py-8 sm:py-10 px-4 sm:px-6 bg-slate-900 border-y border-slate-800">
       <div className="max-w-6xl mx-auto">
-        <p className="text-center text-sm text-slate-500 mb-6">
+        <p className="text-center text-sm text-slate-400 mb-6">
           {title}
         </p>
         {/* Desktop: flex row */}
@@ -24,7 +24,7 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
           {logos.map((logo) => (
             <div
               key={logo.name}
-              className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+              className="opacity-60 hover:opacity-100 transition-all duration-300"
             >
               {logo.logoUrl ? (
                 <Image
@@ -36,7 +36,7 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
                   style={{ width: 'auto', height: 'auto', maxHeight: '40px', maxWidth: '100%' }}
                 />
               ) : (
-                <span className="text-sm font-semibold text-slate-600 whitespace-nowrap">{logo.name}</span>
+                <span className="text-sm font-semibold text-slate-300 whitespace-nowrap">{logo.name}</span>
               )}
             </div>
           ))}
@@ -46,7 +46,7 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
           {logos.map((logo) => (
             <div
               key={logo.name}
-              className="flex-shrink-0 scroll-snap-start grayscale opacity-60"
+              className="flex-shrink-0 scroll-snap-start opacity-60"
             >
               {logo.logoUrl ? (
                 <Image
@@ -58,7 +58,7 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
                   style={{ width: 'auto', height: 'auto', maxHeight: '24px', maxWidth: '100%' }}
                 />
               ) : (
-                <span className="text-xs font-semibold text-slate-600 whitespace-nowrap">{logo.name}</span>
+                <span className="text-xs font-semibold text-slate-300 whitespace-nowrap">{logo.name}</span>
               )}
             </div>
           ))}
