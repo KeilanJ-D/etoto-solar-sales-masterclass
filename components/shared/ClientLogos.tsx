@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 interface ClientLogo {
   name: string
-  logoUrl: string
+  logoUrl: string | null
 }
 
 interface ClientLogosProps {
@@ -26,14 +26,18 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               key={logo.name}
               className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
             >
-              <Image
-                src={logo.logoUrl}
-                alt={logo.name}
-                width={100}
-                height={40}
-                className="object-contain"
-                style={{ width: 'auto', height: 'auto', maxHeight: '40px', maxWidth: '100%' }}
-              />
+              {logo.logoUrl ? (
+                <Image
+                  src={logo.logoUrl}
+                  alt={logo.name}
+                  width={100}
+                  height={40}
+                  className="object-contain"
+                  style={{ width: 'auto', height: 'auto', maxHeight: '40px', maxWidth: '100%' }}
+                />
+              ) : (
+                <span className="text-sm font-semibold text-slate-600 whitespace-nowrap">{logo.name}</span>
+              )}
             </div>
           ))}
         </div>
@@ -44,14 +48,18 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               key={logo.name}
               className="flex-shrink-0 scroll-snap-start grayscale opacity-60"
             >
-              <Image
-                src={logo.logoUrl}
-                alt={logo.name}
-                width={80}
-                height={32}
-                className="object-contain"
-                style={{ width: 'auto', height: 'auto', maxHeight: '24px', maxWidth: '100%' }}
-              />
+              {logo.logoUrl ? (
+                <Image
+                  src={logo.logoUrl}
+                  alt={logo.name}
+                  width={80}
+                  height={32}
+                  className="object-contain"
+                  style={{ width: 'auto', height: 'auto', maxHeight: '24px', maxWidth: '100%' }}
+                />
+              ) : (
+                <span className="text-xs font-semibold text-slate-600 whitespace-nowrap">{logo.name}</span>
+              )}
             </div>
           ))}
         </div>

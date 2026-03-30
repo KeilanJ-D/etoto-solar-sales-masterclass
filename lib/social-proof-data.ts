@@ -32,7 +32,7 @@ export const videoTestimonials = [
     quote: "We did 67 sales in one month. ETOTO transformed our entire operation.",
     stat: '67 sales in 1 month',
     videoUrl: 'https://www.youtube.com/embed/cIuNH45hxVg?si=3WR_UO-mo06R2zgM',
-    logoUrl: '/logos/halo-renewables.png',
+    logoUrl: null,
     featured: true,
   },
   {
@@ -42,7 +42,7 @@ export const videoTestimonials = [
     quote: "We went from 4 installs a month to 4-5 a week. ETOTO didn't just bring leads — they changed how we sell.",
     stat: '4/month → 4-5/week',
     videoUrl: 'https://www.youtube.com/embed/ZcsAfN_A8Mo',
-    logoUrl: '/logos/evlm-renewables.png',
+    logoUrl: null,
     isVertical: true,
   },
   {
@@ -52,7 +52,7 @@ export const videoTestimonials = [
     quote: "£4 million in revenue working with ETOTO. The leads and the system together just work.",
     stat: '£4M in revenue',
     videoUrl: 'https://www.youtube.com/embed/ipBXG6yk5KA?si=TUEczok451_krB_T',
-    logoUrl: '/logos/ab-renewables.png',
+    logoUrl: null,
   },
   {
     id: 'jem-energy',
@@ -61,7 +61,7 @@ export const videoTestimonials = [
     quote: "ETOTO's first ever solar client. Grew with ETOTO and was acquired by 21° Energy for multi-seven figures.",
     stat: 'Acquired for multi-7 figures',
     videoUrl: 'https://www.youtube.com/embed/TmYby-YVlOA?si=KwEdredOSiWvWX_x',
-    logoUrl: '/logos/jem-energy.png',
+    logoUrl: null,
   },
   {
     id: 'genbatt',
@@ -70,7 +70,7 @@ export const videoTestimonials = [
     quote: "Built a 20MW commercial solar pipeline with ETOTO's lead generation and business development.",
     stat: '20MW commercial pipeline',
     videoUrl: 'https://www.youtube.com/embed/PnPr8OfpfFA?si=kuxgAALUpU9Hr1kC',
-    logoUrl: '/logos/genbatt.png',
+    logoUrl: null,
   },
   {
     id: 'carter-electrical',
@@ -79,7 +79,7 @@ export const videoTestimonials = [
     quote: "ETOTO helped us build the business development side from scratch. The leads keep coming.",
     stat: 'Business development transformation',
     videoUrl: 'https://www.youtube.com/embed/hOU1w05aoKk?si=4J-OVvNWWpq0dfRx',
-    logoUrl: '/logos/carter-renewables.png',
+    logoUrl: null,
   },
   {
     id: 'uk-renewables',
@@ -88,7 +88,7 @@ export const videoTestimonials = [
     quote: "Went from a one-man band to a proper SME. Averaging 8 heat pumps a month, 2 teams running, taking on a 3rd.",
     stat: '1-man band → 3 teams',
     videoUrl: 'https://www.youtube.com/embed/8AoOTz4S4O8',
-    logoUrl: '/logos/uk-renewables.png',
+    logoUrl: null,
     isVertical: true,
   },
 ]
@@ -187,7 +187,7 @@ export const screenshotProof = [
     headline: '£60K in new business in one week',
     caption: 'On track for their first ever £100K week',
     source: 'WhatsApp group screenshot',
-    logoUrl: '/logos/south-coast-solar.png',
+    logoUrl: null,
     company: 'South Coast Solar',
   },
   {
@@ -196,7 +196,7 @@ export const screenshotProof = [
     headline: '£450 CPA (down from £1,200)',
     caption: '40 installs at £450 per acquisition',
     source: 'WhatsApp screenshot',
-    logoUrl: '/logos/ups-solar.png',
+    logoUrl: null,
     company: 'UPS Solar',
   },
 ]
@@ -325,14 +325,14 @@ export const googleReviews = [
 // ============================================
 
 export const clientLogos = [
-  { name: 'Halo Renewables', logoUrl: '/logos/halo-renewables.png' },
-  { name: 'EVLM Renewables', logoUrl: '/logos/evlm-renewables.png' },
-  { name: 'AB Renewables', logoUrl: '/logos/ab-renewables.png' },
-  { name: 'JEM Energy', logoUrl: '/logos/jem-energy.png' },
-  { name: 'South Coast Solar', logoUrl: '/logos/south-coast-solar.png' },
-  { name: 'Carter Renewables', logoUrl: '/logos/carter-renewables.png' },
-  { name: 'Genbatt', logoUrl: '/logos/genbatt.png' },
-  { name: 'UK Renewables', logoUrl: '/logos/uk-renewables.png' },
-  { name: 'MCJ Energy Solutions', logoUrl: '/logos/mcj-energy.png' },
-  { name: 'UPS Solar', logoUrl: '/logos/ups-solar.png' },
+  { name: 'Halo Renewables', logoUrl: null },
+  { name: 'EVLM Renewables', logoUrl: null },
+  { name: 'AB Renewables', logoUrl: null },
+  { name: 'JEM Energy', logoUrl: null },
+  { name: 'South Coast Solar', logoUrl: null },
+  { name: 'Carter Renewables', logoUrl: null },
+  { name: 'Genbatt', logoUrl: null },
+  { name: 'UK Renewables', logoUrl: null },
+  { name: 'MCJ Energy Solutions', logoUrl: null },
+  { name: 'UPS Solar', logoUrl: null },
 ]

@@ -1,5 +1,5 @@
 'use client'
-// v3
+// v4 - cache bust
 import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
