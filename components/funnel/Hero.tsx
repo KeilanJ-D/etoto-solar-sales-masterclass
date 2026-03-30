@@ -71,8 +71,8 @@ export default function Hero() {
           alt="ETOTO Media" 
           width={200}
           height={56}
-          style={{ width: 'auto', height: 'auto', maxHeight: '56px' }}
-          className="h-10 md:h-14 object-contain"
+          style={{ width: 'auto', height: 'auto', maxHeight: '56px', maxWidth: '100%' }}
+          className="object-contain"
         />
       </div>
 

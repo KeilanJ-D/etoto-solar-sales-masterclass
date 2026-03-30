@@ -50,29 +50,34 @@ function TabButton({
   onClick, 
   icon: Icon, 
   label, 
-  step 
+  step,
+  shortLabel = ''
 }: { 
   active: boolean
   onClick: () => void
   icon: React.ElementType
   label: string
-  step: number 
+  step: number
+  shortLabel?: string
 }) {
+  const mobile = shortLabel || label.slice(0, 4)
+  
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg font-medium text-sm transition-all touch-action-manipulation min-h-[44px] flex-shrink-0 scroll-snap-start ${
+      className={`flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-lg font-medium text-xs sm:text-sm transition-all touch-action-manipulation min-h-[44px] flex-shrink-0 scroll-snap-start ${
         active 
           ? 'bg-[#E8192C] text-white shadow-lg' 
           : 'bg-white text-slate-600 hover:bg-slate-50 active:bg-slate-100 border border-slate-200'
       }`}
     >
-      <span className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+      <span className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
         active ? 'bg-white/20' : 'bg-slate-100'
       }`}>
         {step}
       </span>
-      <Icon className="w-4 h-4" />
+      <Icon className="w-4 h-4 flex-shrink-0" />
+      <span className="sm:hidden text-xs whitespace-nowrap">{mobile}</span>
       <span className="hidden sm:inline">{label}</span>
     </button>
   )
@@ -95,17 +100,17 @@ function InputField({
 }) {
   return (
     <div className="space-y-1.5">
-      <label className="text-sm font-medium text-slate-700">{label}</label>
+      <label className="text-xs sm:text-sm font-medium text-slate-700">{label}</label>
       <div className="flex items-center gap-2">
-        {prefix && <span className="text-slate-500 font-medium text-sm sm:text-base">{prefix}</span>}
+        {prefix && <span className="text-slate-500 font-medium text-sm">{prefix}</span>}
         <input
           type="text"
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full px-3 sm:px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base min-h-[48px]"
+          className="flex-1 px-3 py-2 sm:py-2.5 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none min-h-[44px] touch-action-manipulation"
         />
-        {suffix && <span className="text-slate-500 font-medium text-sm sm:text-base whitespace-nowrap">{suffix}</span>}
+        {suffix && <span className="text-slate-500 font-medium text-sm">{suffix}</span>}
       </div>
       {hint && <p className="text-xs text-slate-500">{hint}</p>}
     </div>
@@ -302,7 +307,7 @@ function BatterySavingsTab({
       {/* Product Selection */}
       <div>
         <h3 className="text-lg font-bold text-slate-900 mb-4">Choose your battery</h3>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {BATTERY_PRODUCTS.map((p) => (
             <div
               key={p.id}
@@ -310,20 +315,21 @@ function BatterySavingsTab({
                 setSelectedProduct(p.id)
                 setQuantity(1)
               }}
-              className={`relative cursor-pointer rounded-xl border-2 p-5 transition-all ${
+              className={`relative cursor-pointer rounded-xl border-2 p-4 sm:p-5 transition-all ${
                 selectedProduct === p.id
                   ? 'border-[#E8192C] bg-[#E8192C]/5 shadow-lg'
                   : 'border-slate-200 bg-white hover:border-slate-300'
               }`}
             >
               {selectedProduct === p.id && (
-                <div className="absolute top-3 right-3 w-6 h-6 bg-[#E8192C] rounded-full flex items-center justify-center">
+                <div className="absolute top-3 right-3 w-6 h-6 bg-[#E8192C] rounded-full flex items-center justify-center flex-shrink-0">
                   <Check className="w-4 h-4 text-white" />
                 </div>
               )}
               
-              <div className="flex gap-4">
-                <div className="w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0">
+              <div className="flex gap-3 sm:gap-4">
+                {/* Image hidden on mobile, visible on sm and up */}
+                <div className="w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0 hidden sm:block">
                   <Image
                     src={p.image}
                     alt={p.name}
@@ -332,27 +338,28 @@ function BatterySavingsTab({
                     className="w-full h-full object-cover"
                   />
                 </div>
+                {/* Main content - full width on mobile, flex on desktop */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-bold text-slate-900 truncate">{p.name}</h4>
-                  <p className="text-[#E8192C] font-semibold">{p.usableKwh} kWh usable</p>
-                  <p className="text-xs text-slate-500 mt-1">
-                    {p.dodLabel} DoD · {p.cycles} cycles · Stack up to {p.maxStack}
+                  <h4 className="font-bold text-slate-900 text-sm sm:text-base">{p.name}</h4>
+                  <p className="text-[#E8192C] font-semibold text-sm">{p.usableKwh} kWh usable</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {p.dodLabel} DoD · {p.cycles} cycles
                   </p>
                 </div>
               </div>
               
-              {/* Editable price */}
-              <div className="mt-4 pt-4 border-t border-slate-200">
-                <label className="text-xs text-slate-500 block mb-1">Price per battery</label>
+              {/* Editable price - full width on mobile */}
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-200">
+                <label className="text-xs text-slate-500 block mb-2">Price per battery</label>
                 <div className="flex items-center gap-2">
-                  <span className="text-slate-700 font-medium">£</span>
+                  <span className="text-slate-700 font-medium text-sm">£</span>
                   <input
                     type="text"
                     inputMode="decimal"
                     value={batteryPrices[p.id]}
                     onChange={(e) => setBatteryPrice(p.id, parseFloat(e.target.value) || 0)}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-24 px-2 py-2 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none"
+                    className="flex-1 px-3 py-2.5 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none min-h-[44px] touch-action-manipulation"
                   />
                 </div>
               </div>
@@ -361,30 +368,32 @@ function BatterySavingsTab({
         </div>
       </div>
 
-      {/* Quantity selector */}
-      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200">
-        <div className="flex items-center justify-between">
+      {/* Quantity selector - Stack on mobile */}
+      <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h4 className="font-bold text-slate-900">How many batteries?</h4>
-            <p className="text-sm text-slate-500">Max {product.maxStack} for {product.name.split(' ')[0]}</p>
+            <h4 className="font-bold text-slate-900 text-sm sm:text-base">How many batteries?</h4>
+            <p className="text-xs sm:text-sm text-slate-500">Max {product.maxStack} for {product.name.split(' ')[0]}</p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 bg-white rounded-lg p-1 border border-slate-300 w-fit">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-10 h-10 rounded-lg bg-white border border-slate-300 flex items-center justify-center hover:bg-slate-50 transition-colors"
+              className="w-10 h-10 rounded-md bg-white flex items-center justify-center hover:bg-slate-50 transition-colors min-h-[44px] touch-action-manipulation"
+              aria-label="Decrease quantity"
             >
               <Minus className="w-4 h-4 text-slate-600" />
             </button>
-            <span className="text-2xl font-bold text-slate-900 w-8 text-center">{quantity}</span>
+            <span className="text-lg sm:text-2xl font-bold text-slate-900 w-8 text-center">{quantity}</span>
             <button
               onClick={() => setQuantity(Math.min(product.maxStack, quantity + 1))}
-              className="w-10 h-10 rounded-lg bg-white border border-slate-300 flex items-center justify-center hover:bg-slate-50 transition-colors"
+              className="w-10 h-10 rounded-md bg-white flex items-center justify-center hover:bg-slate-50 transition-colors min-h-[44px] touch-action-manipulation"
+              aria-label="Increase quantity"
             >
               <Plus className="w-4 h-4 text-slate-600" />
             </button>
           </div>
         </div>
-        <div className="mt-4 pt-4 border-t border-slate-200 flex justify-between text-sm">
+        <div className="mt-4 pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:justify-between gap-2 text-xs sm:text-sm">
           <span className="text-slate-600">Total capacity: <span className="font-bold text-slate-900">{totalCapacity.toFixed(2)} kWh</span></span>
           <span className="text-slate-600">Cost: <span className="font-bold text-slate-900">£{totalBatteryCost.toLocaleString()}</span></span>
         </div>
@@ -604,16 +613,16 @@ function SolarIncomeTab({
         />
       </div>
 
-      {/* System summary */}
-      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200">
-        <div className="flex justify-between items-center">
+      {/* System summary - Stack on mobile */}
+      <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <div>
-            <p className="text-sm text-slate-500">System size</p>
-            <p className="text-xl font-bold text-slate-900">{panelsNum} × {wattageNum}W = {systemKwp.toFixed(2)} kWp</p>
+            <p className="text-xs sm:text-sm text-slate-500">System size</p>
+            <p className="text-lg sm:text-xl font-bold text-slate-900">{panelsNum} × {wattageNum}W = {systemKwp.toFixed(2)} kWp</p>
           </div>
           <div className="text-right">
-            <p className="text-sm text-slate-500">Solar cost</p>
-            <p className="text-xl font-bold text-[#E8192C]">£{Math.round(solarCost).toLocaleString()}</p>
+            <p className="text-xs sm:text-sm text-slate-500">Solar cost</p>
+            <p className="text-lg sm:text-xl font-bold text-[#E8192C]">£{Math.round(solarCost).toLocaleString()}</p>
           </div>
         </div>
       </div>
@@ -625,46 +634,46 @@ function SolarIncomeTab({
         </div>
         
         <div className="divide-y divide-slate-100">
-          {/* Solar export */}
-          <div className="p-5 flex justify-between items-center">
+          {/* Solar export - Stack on mobile */}
+          <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3">
             <div className="flex items-center gap-3">
-              <Sun className="w-5 h-5 text-amber-500" />
+              <Sun className="w-5 h-5 text-amber-500 flex-shrink-0" />
               <div>
-                <p className="font-medium text-slate-900">Solar export</p>
-                <p className="text-sm text-slate-500">{dailyGeneration.toFixed(1)} kWh/day × {exportRateNum}p</p>
+                <p className="font-medium text-slate-900 text-sm">Solar export</p>
+                <p className="text-xs sm:text-sm text-slate-500">{dailyGeneration.toFixed(1)} kWh/day × {exportRateNum}p</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="font-bold text-slate-900">£{dailySolarExport.toFixed(2)}/day</p>
-              <p className="text-sm text-slate-500">£{Math.round(annualSolarExport).toLocaleString()}/year</p>
+              <p className="font-bold text-slate-900 text-sm">£{dailySolarExport.toFixed(2)}/day</p>
+              <p className="text-xs text-slate-500">£{Math.round(annualSolarExport).toLocaleString()}/year</p>
             </div>
           </div>
           
-          {/* Surplus export */}
+          {/* Surplus export - Stack on mobile */}
           {surplusKwh > 0 && (
-            <div className="p-5 flex justify-between items-center bg-teal-50">
+            <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3 bg-teal-50">
               <div className="flex items-center gap-3">
-                <Battery className="w-5 h-5 text-teal-600" />
+                <Battery className="w-5 h-5 text-teal-600 flex-shrink-0" />
                 <div>
-                  <p className="font-medium text-slate-900">Battery surplus export</p>
-                  <p className="text-sm text-slate-500">{surplusKwh.toFixed(1)} kWh/day × {exportRateNum}p</p>
+                  <p className="font-medium text-slate-900 text-sm">Battery surplus export</p>
+                  <p className="text-xs sm:text-sm text-slate-500">{surplusKwh.toFixed(1)} kWh/day × {exportRateNum}p</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-bold text-teal-600">£{dailySurplusExport.toFixed(2)}/day</p>
-                <p className="text-sm text-teal-600">£{Math.round(annualSurplusExport).toLocaleString()}/year</p>
+                <p className="font-bold text-teal-600 text-sm">£{dailySurplusExport.toFixed(2)}/day</p>
+                <p className="text-xs text-teal-600">£{Math.round(annualSurplusExport).toLocaleString()}/year</p>
               </div>
             </div>
           )}
         </div>
         
-        {/* Total */}
-        <div className="p-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white">
-          <div className="flex justify-between items-center">
-            <p className="font-bold">Total export income</p>
+        {/* Total - Stack on mobile */}
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+            <p className="font-bold text-sm">Total export income</p>
             <div className="text-right">
-              <p className="text-2xl font-bold">£{totalDailyExport.toFixed(2)}/day</p>
-              <p className="text-amber-100">£{Math.round(totalAnnualExport).toLocaleString()}/year</p>
+              <p className="text-xl sm:text-2xl font-bold">£{totalDailyExport.toFixed(2)}/day</p>
+              <p className="text-xs sm:text-sm text-amber-100">£{Math.round(totalAnnualExport).toLocaleString()}/year</p>
             </div>
           </div>
         </div>

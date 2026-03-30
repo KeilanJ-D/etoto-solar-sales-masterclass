@@ -13,8 +13,7 @@ export default function ProductFooter() {
                 alt="ETOTO Media" 
                 width={120}
                 height={24}
-                style={{ width: 'auto', height: 'auto', maxHeight: '24px' }}
-                className="h-6"
+                style={{ width: 'auto', height: 'auto', maxHeight: '24px', maxWidth: '100%' }}
               />
             </div>
           </div>
