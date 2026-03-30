@@ -3,17 +3,15 @@
 import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
-  Check, ArrowRight, Calculator, MessageSquare, Sparkles, ChevronRight, 
-  Star, X, Play
+  Check, ArrowRight, Calculator, MessageSquare, ChevronRight, 
+  Star, X, Users, Target, Award, BarChart3, FileText, Sparkles
 } from 'lucide-react'
 import Image from 'next/image'
-import Link from 'next/link'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
 
 // ============================================
 // GATED CALCULATOR PREVIEW COMPONENT
-// This is the actual calculator from 9 Steps, but with tabs 2-4 gated
 // ============================================
 
 function GatedCalculatorPreview({ 
@@ -31,7 +29,7 @@ function GatedCalculatorPreview({
   const [standingCharge, setStandingCharge] = useState('61.64')
   const [showGate, setShowGate] = useState(false)
 
-  // Calculations (same as original FormulaCalculator)
+  // Calculations
   const monthlyNum = parseFloat(monthlyBill) || 0
   const unitRateNum = parseFloat(unitRate) || 28
   const standingChargeNum = parseFloat(standingCharge) || 61.64
@@ -85,7 +83,7 @@ function GatedCalculatorPreview({
             )}
             <div>
               <h3 className="font-bold text-slate-900 text-sm sm:text-base">{companyName}</h3>
-              <p className="text-xs text-slate-500">Solar Energy Calculator</p>
+              <p className="text-xs text-slate-500">Energy Audit Calculator</p>
             </div>
           </div>
           <span 
@@ -97,7 +95,7 @@ function GatedCalculatorPreview({
         </div>
       </div>
 
-      {/* Tab Navigation - Styled like the real calculator */}
+      {/* Tab Navigation */}
       <div className="p-3 sm:p-4 bg-slate-50 border-b border-slate-200">
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {tabs.map((tab, index) => {
@@ -131,10 +129,9 @@ function GatedCalculatorPreview({
 
       {/* Content Area */}
       <div className="relative min-h-[400px]">
-        {/* Energy Audit Tab (Unlocked) - Full functionality */}
+        {/* Energy Audit Tab (Unlocked) */}
         {!showGate && (
           <div className="p-4 sm:p-6 md:p-8 space-y-6">
-            {/* Input Fields - Same as real calculator */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Monthly electricity bill</label>
@@ -146,10 +143,8 @@ function GatedCalculatorPreview({
                     value={monthlyBill}
                     onChange={(e) => setMonthlyBill(e.target.value)}
                     className="w-full px-3 sm:px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:outline-none transition-all text-slate-900 font-medium text-base min-h-[48px]"
-                    style={{ '--tw-ring-color': `${brandColor}30` } as React.CSSProperties}
                   />
                 </div>
-                <p className="text-xs text-slate-500">Enter your average monthly bill</p>
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Unit rate</label>
@@ -163,7 +158,6 @@ function GatedCalculatorPreview({
                   />
                   <span className="text-slate-500 font-medium whitespace-nowrap">p/kWh</span>
                 </div>
-                <p className="text-xs text-slate-500">Ofgem cap: 24.5p (Apr 2026)</p>
               </div>
               <div className="space-y-1.5">
                 <label className="text-sm font-medium text-slate-700">Standing charge</label>
@@ -177,11 +171,9 @@ function GatedCalculatorPreview({
                   />
                   <span className="text-slate-500 font-medium whitespace-nowrap">p/day</span>
                 </div>
-                <p className="text-xs text-slate-500">UK average ~62p/day</p>
               </div>
             </div>
 
-            {/* Conversion Display */}
             <div 
               className="rounded-xl p-5 border space-y-3"
               style={{ backgroundColor: `${brandColor}05`, borderColor: `${brandColor}20` }}
@@ -200,7 +192,6 @@ function GatedCalculatorPreview({
               </div>
             </div>
 
-            {/* Results Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
               <div className="bg-white rounded-xl p-4 sm:p-5 border border-slate-200 shadow-sm">
                 <p className="text-xs sm:text-sm text-slate-500 mb-1">Annual usage</p>
@@ -220,7 +211,6 @@ function GatedCalculatorPreview({
               </div>
             </div>
 
-            {/* Next Step Prompt */}
             <div className="flex items-center justify-center gap-2 pt-4 border-t border-slate-100">
               <span className="text-slate-500 text-sm">Ready for the next step?</span>
               <button 
@@ -234,10 +224,9 @@ function GatedCalculatorPreview({
           </div>
         )}
 
-        {/* GATED Content Overlay - The money shot */}
+        {/* GATED Content Overlay */}
         {showGate && (
           <div className="relative min-h-[400px]">
-            {/* Blurred fake calculator content */}
             <div className="p-6 sm:p-8 space-y-6 blur-md pointer-events-none select-none opacity-60">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-100 h-40 rounded-xl flex items-center justify-center">
@@ -253,10 +242,8 @@ function GatedCalculatorPreview({
                   <div key={i} className="bg-slate-100 h-20 rounded-xl"></div>
                 ))}
               </div>
-              <div className="bg-slate-100 h-48 rounded-xl"></div>
             </div>
 
-            {/* Gate Overlay CTA */}
             <div className="absolute inset-0 bg-gradient-to-t from-white via-white/98 to-white/90 flex items-center justify-center p-6">
               <div className="text-center max-w-lg">
                 <div 
@@ -273,20 +260,18 @@ function GatedCalculatorPreview({
                   and <strong>ROI payback analysis</strong> — all branded with your company logo and colors.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-                  <a
-                    href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-                    style={{ backgroundColor: brandColor }}
-                  >
-                    Get SolaFlow — £200/month
-                    <ArrowRight className="w-5 h-5" />
-                  </a>
-                </div>
+                <a
+                  href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                  style={{ backgroundColor: brandColor }}
+                >
+                  Get SolaFlow — £200/month
+                  <ArrowRight className="w-5 h-5" />
+                </a>
                 
-                <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-500">
+                <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-slate-500 mt-6">
                   <span className="flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-green-500" />
                     Quiz funnel included
@@ -294,10 +279,6 @@ function GatedCalculatorPreview({
                   <span className="flex items-center gap-1.5">
                     <Check className="w-4 h-4 text-green-500" />
                     PDF quotes
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-500" />
-                    Cancel anytime
                   </span>
                 </div>
 
@@ -317,7 +298,7 @@ function GatedCalculatorPreview({
 }
 
 // ============================================
-// BRANDING CUSTOMIZER COMPONENT
+// BRANDING CUSTOMIZER COMPONENT (Larger, not sticky)
 // ============================================
 
 function BrandingCustomizer({
@@ -355,23 +336,23 @@ function BrandingCustomizer({
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
-      <div className="p-5 border-b border-slate-100 bg-slate-50">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center">
-            <Palette className="w-5 h-5 text-slate-600" />
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+      <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200 flex items-center justify-center">
+            <Palette className="w-7 h-7 text-slate-600" />
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">Brand Preview</h3>
-            <p className="text-sm text-slate-500">Customize and see it live</p>
+            <h3 className="text-xl font-bold text-slate-900">Brand Your Calculator</h3>
+            <p className="text-sm text-slate-500">See changes instantly below</p>
           </div>
         </div>
       </div>
       
-      <div className="p-5 space-y-5">
+      <div className="p-6 space-y-6">
         {/* Company Name */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+        <div className="space-y-3">
+          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
             <Building2 className="w-4 h-4" />
             Company Name
           </label>
@@ -379,78 +360,81 @@ function BrandingCustomizer({
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
-            className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium"
+            className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-lg"
             placeholder="Your Company Name"
             maxLength={25}
           />
         </div>
 
         {/* Brand Color */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+        <div className="space-y-3">
+          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
             <Palette className="w-4 h-4" />
             Brand Color
           </label>
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="grid grid-cols-5 gap-2 mb-4">
             {presetColors.map((preset) => (
               <button
                 key={preset.color}
                 onClick={() => setBrandColor(preset.color)}
-                className={`flex flex-col items-center gap-1 px-2 py-1.5 rounded-lg transition-all ${
-                  brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50'
+                className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
+                  brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'
                 }`}
               >
                 <div 
-                  className="w-7 h-7 rounded-md shadow-sm"
+                  className="w-10 h-10 rounded-lg shadow-md"
                   style={{ backgroundColor: preset.color }}
                 />
-                <span className="text-xs text-slate-500">{preset.label}</span>
+                <span className="text-xs font-medium text-slate-600">{preset.label}</span>
               </button>
             ))}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <input
               type="color"
               value={brandColor}
               onChange={(e) => setBrandColor(e.target.value)}
-              className="w-10 h-10 rounded-lg border border-slate-200 cursor-pointer"
+              className="w-14 h-14 rounded-xl border border-slate-200 cursor-pointer"
             />
-            <input
-              type="text"
-              value={brandColor}
-              onChange={(e) => setBrandColor(e.target.value)}
-              className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm font-mono text-slate-700"
-            />
+            <div className="flex-1">
+              <label className="text-xs text-slate-500 mb-1 block">Custom hex</label>
+              <input
+                type="text"
+                value={brandColor}
+                onChange={(e) => setBrandColor(e.target.value)}
+                className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-mono text-slate-700"
+              />
+            </div>
           </div>
         </div>
 
         {/* Logo Upload */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700 flex items-center gap-2">
+        <div className="space-y-3">
+          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
             <Upload className="w-4 h-4" />
             Company Logo
           </label>
           {logoUrl ? (
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
               <Image 
                 src={logoUrl} 
                 alt="Logo preview" 
-                width={100} 
-                height={40} 
+                width={120} 
+                height={48} 
                 className="object-contain"
-                style={{ height: 'auto', width: 'auto', maxHeight: '40px' }}
+                style={{ height: 'auto', width: 'auto', maxHeight: '48px' }}
               />
               <button
                 onClick={() => setLogoUrl(null)}
-                className="ml-auto p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                className="ml-auto p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
           ) : (
-            <label className="flex items-center justify-center gap-2 px-4 py-6 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-all">
-              <Upload className="w-5 h-5 text-slate-400" />
-              <span className="text-sm text-slate-600 font-medium">Click to upload logo</span>
+            <label className="flex items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-all">
+              <Upload className="w-6 h-6 text-slate-400" />
+              <span className="text-slate-600 font-medium">Click to upload logo</span>
               <input
                 type="file"
                 accept="image/*"
@@ -471,8 +455,32 @@ function BrandingCustomizer({
 
 export default function SolaFlowPage() {
   const [brandColor, setBrandColor] = useState('#E8192C')
-  const [companyName, setCompanyName] = useState('ETOTO Media')
-  const [logoUrl, setLogoUrl] = useState<string | null>('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png')
+  const [companyName, setCompanyName] = useState('Your Company')
+  const [logoUrl, setLogoUrl] = useState<string | null>(null)
+
+  // Quiz flow screenshots
+  const quizScreenshots = [
+    {
+      title: 'Panel Selection',
+      desc: 'Choose from Aiko, DMEGC, Exiom & more',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-fFP0ifJ7liQNT41pxXOkBJSo3LcaBn.png',
+    },
+    {
+      title: 'Battery Options',
+      desc: 'Bexie, EcoFlow, Sigenergy, Fox, Tesla',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-XnLhCoT1oxhhNkwTAYZ5pi93YSrP4h.png',
+    },
+    {
+      title: 'Inverter Choice',
+      desc: 'Auto-matched to system requirements',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LtE3sJgmni0reYChk0RppuzLO7FNAb.png',
+    },
+    {
+      title: 'Instant Estimate',
+      desc: 'Savings, payback & ROI calculated',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hubY9mhSf5N2aLxawVyPe4dNk76yP5.png',
+    },
+  ]
 
   return (
     <main className="min-h-screen bg-white">
@@ -483,180 +491,284 @@ export default function SolaFlowPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full opacity-20" style={{ background: `radial-gradient(circle, ${brandColor} 0%, transparent 70%)` }} />
-          <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full opacity-10" style={{ background: `radial-gradient(circle, #3B82F6 0%, transparent 70%)` }} />
         </div>
 
-        <div className="relative max-w-6xl mx-auto text-center">
+        <div className="relative max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm font-medium mb-6 border border-white/10">
-            <Sparkles className="w-4 h-4" style={{ color: brandColor }} />
-            White-Label Solar Sales Platform
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            The Solar Sales Platform That Actually Closes Deals
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-            Your Brand.<br />
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.1] tracking-tight">
+            Convert 50% More Leads<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E8192C] to-orange-500">
-              Your Calculator.
+              Into Sales
             </span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            SolaFlow gives you a branded <strong className="text-white">quiz funnel</strong> for lead generation 
-            and a powerful <strong className="text-white">energy audit calculator</strong> for closing sales — all in one platform.
+          <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto mb-8 leading-relaxed">
+            OpenSolar, PV Sol, Easy PV — they focus on system <em>design</em>. 
+            <strong className="text-white"> SolaFlow focuses on consumer psychology.</strong> 
+            {' '}Turn every lead into a survey booking with a white-label quiz funnel that produces instant quotes, 
+            and an energy audit calculator that explains the maths so customers actually understand the ROI.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <a
               href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E8192C] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all min-h-[56px]"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E8192C] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all min-h-[56px] text-lg"
             >
               Get SolaFlow — £200/month
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
-              href="#quiz-funnel"
+              href="#how-it-works"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full hover:bg-white/20 transition-all border border-white/10 min-h-[56px]"
             >
-              <Play className="w-5 h-5" />
-              See Both Tools
+              See How It Works
             </a>
           </div>
 
-          {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-10 text-white/50 text-sm">
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-green-400" />
-              Cancel anytime
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-green-400" />
-              Setup in 10 minutes
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="w-4 h-4 text-green-400" />
-              Full white-label
-            </span>
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black text-white">50%</p>
+              <p className="text-sm text-slate-400">More Conversions</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black text-white">200+</p>
+              <p className="text-sm text-slate-400">UK Installers</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl sm:text-4xl font-black text-white">10min</p>
+              <p className="text-sm text-slate-400">Setup Time</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* TOOL 1: QUIZ FUNNEL - Lead Generation */}
-      {/* ============================================ */}
-      <section id="quiz-funnel" className="py-16 sm:py-24 px-4 bg-slate-50">
+      {/* Why SolaFlow is Different */}
+      <section className="py-16 sm:py-20 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
-                <MessageSquare className="w-7 h-7 text-blue-600" />
-              </div>
-              <div>
-                <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-2">
-                  Tool 1 — Lead Generation
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900">
-                  Quiz Funnel Lead Magnet
-                </h2>
-              </div>
-            </div>
-            <div className="lg:max-w-md">
-              <p className="text-slate-600 leading-relaxed">
-                <strong className="text-slate-900">Capture qualified leads online.</strong> Visitors answer a few questions about their energy usage, 
-                and the quiz delivers an <strong>instant indicative estimate</strong> — projected savings, payback period, and ROI — 
-                before they even speak to you.
-              </p>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+              Design Software vs. Sales Software
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Other tools help you design systems. SolaFlow helps you <strong>sell</strong> them.
+            </p>
           </div>
 
-          {/* Quiz iframe */}
-          <div className="bg-slate-950 rounded-2xl p-2 shadow-2xl border border-white/10 mb-8">
-            <div className="flex items-center gap-2 px-4 py-2">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4">
+                <X className="w-6 h-6 text-slate-400" />
               </div>
-              <div className="flex-1 flex justify-center">
-                <div className="bg-slate-800 rounded-full px-4 py-1.5 text-slate-400 text-xs flex items-center gap-2">
-                  <Lock className="w-3 h-3" />
-                  your-company.solaflow.app/quiz
+              <h3 className="text-xl font-bold text-slate-900 mb-3">The Problem with Design Tools</h3>
+              <ul className="space-y-3 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  Customers don&apos;t understand technical specs
+                </li>
+                <li className="flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  Quotes look like engineering documents
+                </li>
+                <li className="flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  No lead capture before revealing prices
+                </li>
+                <li className="flex items-start gap-2">
+                  <X className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                  Can&apos;t explain ROI in a way that resonates
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border-2 border-[#E8192C] shadow-lg">
+              <div className="w-12 h-12 rounded-xl bg-[#E8192C]/10 flex items-center justify-center mb-4">
+                <Check className="w-6 h-6 text-[#E8192C]" />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">The SolaFlow Approach</h3>
+              <ul className="space-y-3 text-slate-600">
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  Consumer-friendly language they understand
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  Beautiful, branded quotes that build trust
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  Lead capture built into the experience
+                </li>
+                <li className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  Step-by-step ROI breakdown customers love
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section id="how-it-works" className="py-16 sm:py-24 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full mb-4">
+              Two Tools, One Platform
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
+              Lead Generation + Sales Closer
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              SolaFlow works at both ends of your funnel — capturing leads online 
+              and helping you close deals in any sales environment.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Tool 1: Quiz Funnel */}
+            <div className="bg-gradient-to-br from-blue-50 to-white rounded-3xl p-6 sm:p-8 border border-blue-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-blue-500 flex items-center justify-center">
+                  <MessageSquare className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-blue-600 uppercase tracking-wide">Tool 1</span>
+                  <h3 className="text-xl font-bold text-slate-900">Quiz Funnel</h3>
                 </div>
               </div>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                <strong className="text-slate-900">Produces instant quotes.</strong> Embed on your website or share as a link. 
+                Visitors answer questions about their energy usage and property, then receive an 
+                <strong className="text-blue-600"> indicative estimate</strong> with savings, payback period, and ROI — 
+                <em> after</em> providing their contact details.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Lead capture', 'Instant estimates', 'Website embed', 'Email sequences'].map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '600px' }}>
-              <iframe
-                src="https://solaflow-dashboard.replit.app/login"
-                className="w-full h-full pointer-events-none"
-                title="SolaFlow Quiz Funnel Preview"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
-                <p className="text-slate-700 font-medium mb-3">This is a preview. Get SolaFlow to embed your own branded quiz.</p>
-                <a
-                  href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-                >
-                  Get Your Quiz Funnel
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+
+            {/* Tool 2: Calculator */}
+            <div className="bg-gradient-to-br from-green-50 to-white rounded-3xl p-6 sm:p-8 border border-green-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center">
+                  <Calculator className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-green-600 uppercase tracking-wide">Tool 2</span>
+                  <h3 className="text-xl font-bold text-slate-900">Energy Audit Calculator</h3>
+                </div>
+              </div>
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                <strong className="text-slate-900">Verifies the maths in person.</strong> Use live with customers — 
+                on the doorstep, on the phone, or via screen share. Walk through the formulas step-by-step so they 
+                <strong className="text-green-600"> understand exactly</strong> how battery arbitrage and solar generation 
+                translate into real savings.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['In-person sales', 'Phone demos', 'Transparent maths', 'PDF quotes'].map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Features */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { title: 'Instant Estimates', desc: 'Indicative pricing, payback & ROI shown immediately' },
-              { title: 'Lead Capture', desc: 'Email & phone required before viewing results' },
-              { title: 'Qualification', desc: 'Filter out tyre-kickers, focus on serious buyers' },
-              { title: 'Website Embed', desc: 'One iframe code, works on any site' },
-            ].map((feature) => (
-              <div key={feature.title} className="bg-white rounded-xl p-5 border border-slate-200">
-                <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
-                <p className="text-sm text-slate-600">{feature.desc}</p>
+      {/* Quiz Funnel Showcase */}
+      <section id="quiz-funnel" className="py-16 sm:py-24 px-4 bg-slate-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-300 text-sm font-semibold rounded-full mb-4">
+              Quiz Funnel Preview
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
+              Customers Design Their Own System
+            </h2>
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+              Step-by-step, they choose panels, batteries, and inverters. 
+              Each choice updates their estimate in real-time. Then they get the results — after giving you their details.
+            </p>
+          </div>
+
+          {/* Screenshot Grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {quizScreenshots.map((screenshot, index) => (
+              <div key={index} className="group">
+                <div className="bg-white rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow mb-3">
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={screenshot.image}
+                      alt={screenshot.title}
+                      fill
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <span className="inline-block px-2 py-0.5 bg-white/10 text-white/80 text-xs font-medium rounded-full mb-1">
+                    Step {index + 1}
+                  </span>
+                  <h4 className="font-bold text-white">{screenshot.title}</h4>
+                  <p className="text-sm text-slate-400">{screenshot.desc}</p>
+                </div>
               </div>
             ))}
           </div>
+
+          {/* Benefits */}
+          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { icon: Target, title: 'Qualify Leads', desc: 'Filter out time-wasters before the first call' },
+              { icon: Users, title: 'Capture Details', desc: 'Name, email, phone required for results' },
+              { icon: FileText, title: 'Instant Quotes', desc: 'Indicative pricing shown automatically' },
+              { icon: BarChart3, title: 'Book Surveys', desc: '50% of quiz completers book appointments' },
+            ].map((item, index) => {
+              const Icon = item.icon
+              return (
+                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                  <Icon className="w-8 h-8 text-blue-400 mb-3" />
+                  <h4 className="font-bold text-white mb-1">{item.title}</h4>
+                  <p className="text-sm text-slate-400">{item.desc}</p>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
-      {/* ============================================ */}
-      {/* TOOL 2: ENERGY AUDIT CALCULATOR - Sales Closer */}
-      {/* ============================================ */}
+      {/* Energy Audit Calculator Section */}
       <section id="calculator" className="py-16 sm:py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
-            <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center flex-shrink-0">
-                <Calculator className="w-7 h-7 text-green-600" />
-              </div>
-              <div>
-                <span className="inline-block px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full mb-2">
-                  Tool 2 — Sales Closer
-                </span>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900">
-                  Energy Audit Calculator
-                </h2>
-              </div>
-            </div>
-            <div className="lg:max-w-md">
-              <p className="text-slate-600 leading-relaxed">
-                <strong className="text-slate-900">Close deals with confidence.</strong> Use this live with customers — in person, on the phone, or via screen share. 
-                <strong> Verify the formulas, explain the maths, and break down exactly </strong> 
-                how battery arbitrage and solar generation translate into real savings.
-              </p>
-            </div>
+          <div className="text-center mb-12">
+            <span className="inline-block px-3 py-1 bg-green-100 text-green-700 text-sm font-semibold rounded-full mb-4">
+              Energy Audit Calculator Preview
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
+              Close the Deal Face-to-Face
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              When you&apos;re with a customer — in person or on a call — this calculator lets you 
+              walk through the numbers together. Customize the branding below and try the Energy Audit tab.
+            </p>
           </div>
 
-          {/* Branding + Calculator */}
-          <div className="grid lg:grid-cols-4 gap-6 items-start">
-            {/* Branding Customizer */}
-            <div className="lg:col-span-1 lg:sticky lg:top-24">
+          {/* Branding Customizer + Calculator */}
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {/* Branding Customizer - Static, not sticky */}
+            <div className="lg:col-span-1">
               <BrandingCustomizer
                 brandColor={brandColor}
                 setBrandColor={setBrandColor}
@@ -668,7 +780,7 @@ export default function SolaFlowPage() {
             </div>
 
             {/* Calculator Preview */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-2">
               <GatedCalculatorPreview
                 brandColor={brandColor}
                 companyName={companyName}
@@ -677,13 +789,13 @@ export default function SolaFlowPage() {
             </div>
           </div>
 
-          {/* Features */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+          {/* Calculator Benefits */}
+          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { title: 'Formula-Driven', desc: 'Transparent maths your customers can trust' },
-              { title: 'Your Products', desc: 'Configure panels & batteries you actually sell' },
-              { title: 'Custom Margins', desc: 'Set your own pricing and profit margins' },
-              { title: 'PDF Quotes', desc: 'Generate professional quotes in seconds' },
+              { title: 'Formula-Driven', desc: 'Transparent calculations customers trust' },
+              { title: 'Your Products', desc: '20+ panels, 15+ batteries pre-loaded' },
+              { title: 'Custom Margins', desc: 'Set your own pricing per product' },
+              { title: 'PDF Quotes', desc: 'Generate professional quotes instantly' },
             ].map((feature) => (
               <div key={feature.title} className="bg-slate-50 rounded-xl p-5 border border-slate-200">
                 <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
@@ -701,9 +813,6 @@ export default function SolaFlowPage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
               Trusted by UK Solar Installers
             </h2>
-            <p className="text-slate-600 max-w-xl mx-auto">
-              Join the installers already using SolaFlow to close more deals.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -724,13 +833,13 @@ export default function SolaFlowPage() {
                 role: "UPS Solar",
               },
             ].map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-shadow">
+              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-slate-700 mb-5 leading-relaxed">&quot;{testimonial.quote}&quot;</p>
+                <p className="text-slate-700 mb-5">&quot;{testimonial.quote}&quot;</p>
                 <div>
                   <p className="font-semibold text-slate-900">{testimonial.name}</p>
                   <p className="text-sm text-slate-500">{testimonial.role}</p>
@@ -752,7 +861,7 @@ export default function SolaFlowPage() {
               Everything You Need
             </h2>
             <p className="text-lg text-slate-600">
-              No hidden fees. No per-lead charges. Just unlimited access.
+              No hidden fees. No per-lead charges. Unlimited access.
             </p>
           </div>
 
@@ -800,10 +909,6 @@ export default function SolaFlowPage() {
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </div>
-
-              <p className="text-center text-sm text-slate-500 mt-6">
-                Questions? <a href="https://wa.me/447123456789" className="text-[#E8192C] font-medium hover:underline">Chat with us on WhatsApp</a>
-              </p>
             </div>
           </div>
         </div>
@@ -813,11 +918,11 @@ export default function SolaFlowPage() {
       <section className="py-16 sm:py-24 px-4 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
-            Ready to Close More Deals?
+            Stop Losing Leads to Confusion
           </h2>
           <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-            Join 200+ UK installers using SolaFlow to generate leads and close 
-            sales faster. Start today, see results this week.
+            Your competitors are still sending PDF quotes that look like spreadsheets. 
+            You&apos;ll be closing deals with interactive tools that customers actually understand.
           </p>
           <a
             href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"

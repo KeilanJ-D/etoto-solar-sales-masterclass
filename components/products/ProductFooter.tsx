@@ -11,7 +11,7 @@ export default function ProductFooter() {
               <img 
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
                 alt="ETOTO Media" 
-                className="h-6 object-contain"
+                className="h-6 w-auto object-contain"
               />
             </div>
           </div>

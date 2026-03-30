@@ -70,7 +70,7 @@ export default function Hero() {
           <img 
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
             alt="ETOTO Media" 
-            className="h-8 md:h-12 object-contain"
+            className="h-8 md:h-12 w-auto object-contain"
           />
         </div>
       </div>
