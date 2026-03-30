@@ -19,7 +19,7 @@ export default function MasterclassNav() {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200 shadow-sm">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center justify-between gap-2 py-3">
           {navItems.map((item) => {
             const isActive = pathname === item.href
             const Icon = item.icon
