@@ -1,5 +1,5 @@
 'use client'
-// v2
+// v3
 import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
@@ -353,8 +353,93 @@ function GatedCalculatorPreview({
 // BRANDING CUSTOMIZER COMPONENT
 // ============================================
 
-function BrandingCustomizer({ brandColor, setBrandColor, companyName, setCompanyName, logoUrl, setLogoUrl }: { brandColor: string; setBrandColor: (c: string) => void; companyName: string; setCompanyName: (n: string) => void; logoUrl: string | null; setLogoUrl: (u: string | null) => void }) {
-  return <div className="p-4 bg-slate-100 rounded-xl text-center text-slate-500">Branding customizer loading...</div>
+function BrandingCustomizer({
+  brandColor, setBrandColor, companyName, setCompanyName, logoUrl, setLogoUrl
+}: {
+  brandColor: string
+  setBrandColor: (c: string) => void
+  companyName: string
+  setCompanyName: (n: string) => void
+  logoUrl: string | null
+  setLogoUrl: (u: string | null) => void
+}) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const presetColors = [
+    { color: '#E8192C', label: 'Red' },
+    { color: '#3B82F6', label: 'Blue' },
+    { color: '#10B981', label: 'Green' },
+    { color: '#FBBF24', label: 'Yellow' },
+    { color: '#F97316', label: 'Orange' },
+  ]
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full p-5 sm:p-6 flex items-center justify-between"
+      >
+        <div className="flex items-center gap-4">
+          <Palette className="w-6 h-6 text-slate-600" />
+          <div className="text-left">
+            <h3 className="text-lg font-bold text-slate-900">Brand Your Calculator</h3>
+            <p className="text-sm text-slate-500">Tap to customise colours and logo</p>
+          </div>
+        </div>
+        <ChevronRight className={`w-5 h-5 text-slate-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
+      </button>
+
+      {isExpanded && (
+        <div className="p-5 sm:p-6 border-t border-slate-200 space-y-6">
+          <div>
+            <label className="text-sm font-semibold text-slate-700 block mb-2">Company Name</label>
+            <input
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="w-full px-4 py-3 border border-slate-200 rounded-xl text-base"
+              placeholder="Your Company Name"
+            />
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-slate-700 block mb-2">Brand Color</label>
+            <div className="grid grid-cols-5 gap-2 mb-4">
+              {presetColors.map((preset) => (
+                <button
+                  key={preset.color}
+                  onClick={() => setBrandColor(preset.color)}
+                  className={`flex flex-col items-center gap-2 p-3 rounded-xl min-h-[44px] ${brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'}`}
+                >
+                  <div className="w-10 h-10 rounded-lg shadow-md" style={{ backgroundColor: preset.color }} />
+                  <span className="text-xs font-medium text-slate-600">{preset.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-3">
+              <input type="color" value={brandColor} onChange={(e) => setBrandColor(e.target.value)} className="w-14 h-14 rounded-xl border border-slate-200 cursor-pointer" />
+              <input type="text" value={brandColor} onChange={(e) => setBrandColor(e.target.value)} className="flex-1 px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-mono text-slate-700" />
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm font-semibold text-slate-700 block mb-2">Company Logo</label>
+            {logoUrl ? (
+              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <Image src={logoUrl} alt="Logo" width={120} height={48} className="object-contain" style={{ height: 'auto', width: 'auto', maxHeight: '48px' }} />
+                <button onClick={() => setLogoUrl(null)} className="ml-auto p-2 text-slate-400 hover:text-red-500 rounded-lg"><X className="w-5 h-5" /></button>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300">
+                <Upload className="w-6 h-6 text-slate-400" />
+                <span className="text-slate-600 font-medium">Click to upload logo</span>
+                <input type="file" accept="image/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) { const r = new FileReader(); r.onload = (ev) => setLogoUrl(ev.target?.result as string); r.readAsDataURL(f) }}} className="hidden" />
+              </label>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
 }
 
 // ============================================
