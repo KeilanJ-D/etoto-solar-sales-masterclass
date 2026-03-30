@@ -34,13 +34,13 @@ const products = [
   {
     title: 'Appointment Setting Quiz',
     description: 'Train your setters with this qualification checklist',
-    price: '£2.99',
+    price: '£3.99',
     href: '/appointment-quiz',
   },
   {
     title: 'Formula Cheat Sheet',
     description: 'One-page calculator reference for customer conversations',
-    price: '£2.99',
+    price: '£3.99',
     href: '/formula-cheat-sheet',
   },
 ]

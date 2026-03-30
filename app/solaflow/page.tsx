@@ -350,7 +350,7 @@ function GatedCalculatorPreview({
 }
 
 // ============================================
-// BRANDING CUSTOMIZER COMPONENT
+// BRANDING CUSTOMIZER COMPONENT  
 // ============================================
 
 function BrandingCustomizer({
@@ -508,6 +508,7 @@ function BrandingCustomizer({
     </div>
   )
 }
+
 
 // ============================================
 // MAIN PAGE COMPONENT
@@ -969,7 +970,7 @@ export default function SolaFlowPage() {
               </div>
               <ul className="space-y-3 text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-slate-400 mt-1">•</span>
+                  <span className="text-slate-400 mt-1">���</span>
                   <span>OpenSolar, PV Sol, Easy PV</span>
                 </li>
                 <li className="flex items-start gap-2">

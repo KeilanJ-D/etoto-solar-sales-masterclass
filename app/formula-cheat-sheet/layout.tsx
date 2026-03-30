@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Solar ROI Calculator & Formula Cheat Sheet — ETOTO Media',
+  title: 'Solar ROI Calculator & Formula Cheat Sheet (£3.99) — ETOTO Media',
   description: 'Every formula. A live calculator. Tariff comparisons. The tools that close solar deals. £3.99.',
   openGraph: {
     title: 'Every Formula. Every Tool. Always in Your Pocket.',

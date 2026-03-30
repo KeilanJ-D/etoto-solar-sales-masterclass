@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Solar Appointment Setter Quiz — ETOTO Media',
+  title: 'Solar Appointment Setter Quiz (£3.99) — ETOTO Media',
   description: '18 interactive questions every appointment setter should answer before making a call. 80% pass mark. £3.99.',
   openGraph: {
     title: 'Are Your Setters Ready for the Phones?',

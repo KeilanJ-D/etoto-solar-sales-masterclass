@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Solar Sales Script — ETOTO Media',
+  title: 'Solar Sales Script (£3.99) — ETOTO Media',
   description: 'The word-for-word script that closes solar deals. 9 steps, copy-to-clipboard, audio from a real closing call. £3.99.',
   openGraph: {
     title: 'The Word-for-Word Script That Closes Solar Deals.',
