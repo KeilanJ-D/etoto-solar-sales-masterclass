@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
-import { Raleway } from 'next/font/google'
+import { Raleway, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const raleway = Raleway({
   subsets: ['latin'],
   variable: '--font-raleway',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -50,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={raleway.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={`${raleway.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased bg-white">
         {children}
         <Analytics />

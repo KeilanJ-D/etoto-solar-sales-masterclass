@@ -64,15 +64,15 @@ export default function Hero() {
         />
       ))}
 
-      {/* Logo - ETOTO only, centred */}
-      <div className={`flex items-center gap-4 md:gap-8 mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        <div className="bg-slate-900 rounded-xl md:rounded-2xl px-6 md:px-8 py-4 md:py-5 shadow-xl">
-          <img 
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-            alt="ETOTO Media" 
-            className="h-8 md:h-12 w-auto object-contain"
-          />
-        </div>
+      {/* Logo - ETOTO wordmark, confident and large */}
+      <div className={`mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
+        <img 
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
+          alt="ETOTO Media" 
+          width={200}
+          height={56}
+          className="h-10 md:h-14 w-auto object-contain"
+        />
       </div>
 
       {/* Badge */}
@@ -119,22 +119,81 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* CTA Button */}
-      <a 
-        href="#problem"
-        className={`mt-8 sm:mt-10 md:mt-12 inline-flex items-center justify-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group min-h-[48px] touch-action-manipulation ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        style={{ transitionDelay: '700ms' }}
-      >
-        Learn The Formula
-        <ChevronDown className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" />
-      </a>
-
-      {/* Scroll indicator */}
-      <div className={`absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-slate-400 rounded-full animate-bounce" />
-        </div>
+      {/* CTA Buttons */}
+      <div className={`flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-8 sm:mt-10 md:mt-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '700ms' }}>
+        <a 
+          href="#problem"
+          className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group min-h-[48px] touch-action-manipulation"
+        >
+          Learn The Formula
+          <ChevronDown className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" />
+        </a>
+        <a 
+          href="/live-call"
+          className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-slate-100 text-slate-700 px-6 sm:px-8 py-3.5 sm:py-4 text-base font-medium rounded-full transition-all duration-300 border border-slate-200 hover:border-slate-300 min-h-[48px] touch-action-manipulation group"
+        >
+          Watch It Work
+          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
       </div>
-    </section>
+
+      {/* Phone mockup showing calculator UI */}
+      <div className={`mt-12 md:mt-16 relative transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div className="relative mx-auto w-[280px] md:w-[320px]">
+          {/* Red glow behind phone */}
+          <div className="absolute -inset-8 bg-gradient-to-b from-[#E8192C]/20 via-[#E8192C]/10 to-transparent rounded-full blur-3xl" />
+          
+          {/* Phone frame */}
+          <div className="relative bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl">
+            {/* Notch */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-900 rounded-b-2xl z-10" />
+            
+            {/* Screen */}
+            <div className="relative bg-white rounded-[2rem] overflow-hidden aspect-[9/19]">
+              {/* Calculator preview */}
+              <div className="p-4 h-full flex flex-col">
+                {/* Header */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-[#E8192C] rounded-lg" />
+                    <span className="text-xs font-bold text-slate-900">Energy Audit</span>
+                  </div>
+                </div>
+                
+                {/* Calculator content mockup */}
+                <div className="space-y-3 flex-1">
+                  <div className="bg-slate-100 rounded-lg p-3">
+                    <p className="text-[10px] text-slate-500 mb-1">Annual Usage</p>
+                    <p className="text-lg font-bold text-slate-900">3,500 kWh</p>
+                  </div>
+                  <div className="bg-slate-100 rounded-lg p-3">
+                    <p className="text-[10px] text-slate-500 mb-1">System Size</p>
+                    <p className="text-lg font-bold text-slate-900">6.6 kWp</p>
+                  </div>
+                  <div className="bg-[#E8192C]/10 rounded-lg p-3 border border-[#E8192C]/20">
+                    <p className="text-[10px] text-[#E8192C] mb-1">Annual Savings</p>
+                    <p className="text-xl font-black text-[#E8192C]">£1,786</p>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-3 border border-green-200">
+                    <p className="text-[10px] text-green-600 mb-1">Payback</p>
+                    <p className="text-lg font-bold text-green-700">6.2 years</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* "See it in action" link */}
+        <p className="text-center mt-4 text-sm text-slate-500">
+          <a href="/solaflow" className="hover:text-[#E8192C] transition-colors">
+            See the full calculator &rarr;
+          </a>
+        </p>
+      </div>
+
+          </section>
   )
 }

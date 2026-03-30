@@ -50,10 +50,10 @@ export default function MasterclassNav() {
                 key={item.href}
                 href={item.href}
                 ref={isActive ? activeRef : null}
-                className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all touch-action-manipulation scroll-snap-start flex-shrink-0 min-h-[44px] ${
+                className={`nav-pill flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 touch-action-manipulation scroll-snap-start flex-shrink-0 min-h-[44px] ${
                   isActive
-                    ? 'bg-[#E8192C] text-white shadow-md'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:bg-slate-300'
+                    ? 'bg-[#E8192C] text-white shadow-lg shadow-[#E8192C]/25'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:bg-slate-300 hover:shadow-md'
                 }`}
               >
                 <Icon className="w-4 h-4 flex-shrink-0" />

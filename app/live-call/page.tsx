@@ -23,24 +23,81 @@ export default function LiveCallPage() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
       
-      {/* Header */}
-      <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-sm font-medium rounded-full mb-4">
+      {/* Cinematic Header */}
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
+        {/* Noise texture */}
+        <div className="absolute inset-0 noise-texture" />
+        
+        {/* Cinematic glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#E8192C]/10 rounded-full blur-3xl" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/10 text-white/90 text-sm font-medium rounded-full mb-6">
             Live Demonstration
           </span>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
             Watch a Real Sales Call
           </h1>
-          <p className="text-slate-300 max-w-2xl mx-auto">
+          <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
             See every step of the formula applied in a real conversation. 
             This is what it looks like when everything clicks.
           </p>
+          
+          {/* Pre-roll context */}
+          <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-2xl mx-auto text-left">
+            <h3 className="text-[#E8192C] font-bold text-sm uppercase tracking-wide mb-3">The Setup</h3>
+            <p className="text-slate-300 text-sm leading-relaxed">
+              Keilan is calling a homeowner who enquired through a Facebook ad 2 hours ago. 
+              They&apos;ve had two other quotes. They haven&apos;t committed to anyone yet. 
+              Watch how the 9-step formula turns this into a closed deal.
+            </p>
+          </div>
         </div>
       </section>
       
       <LiveCallRecording />
       
+      {/* Video Timestamps + Chapters */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 rounded-lg bg-[#E8192C]/10 flex items-center justify-center">
+              <svg className="w-5 h-5 text-[#E8192C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Call Chapters
+            </h3>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              { time: '0:00', step: '1', label: 'Rapport', desc: 'Quick intro, set expectations' },
+              { time: '2:15', step: '2', label: 'Discovery', desc: 'Understanding their situation' },
+              { time: '5:12', step: '3', label: 'Energy Audit', desc: 'The maths that sells itself' },
+              { time: '8:30', step: '4', label: 'Battery Value', desc: 'Peak shaving explained' },
+              { time: '11:00', step: '5', label: 'Solar Value', desc: 'Real savings, no fluff' },
+              { time: '14:00', step: '6', label: 'Objection', desc: 'Handled with data' },
+              { time: '16:45', step: '7', label: 'Finance', desc: 'Monthly vs lump sum' },
+              { time: '18:30', step: '8', label: 'Close', desc: 'The money moment' },
+              { time: '20:00', step: '9', label: 'Follow-up', desc: 'Proposal sent live' },
+            ].map((chapter, i) => (
+              <div key={i} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-200 card-lift group cursor-pointer">
+                <span className="flex-shrink-0 w-8 h-8 bg-[#E8192C] text-white text-xs font-bold rounded-lg flex items-center justify-center">
+                  {chapter.step}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-slate-900 text-sm group-hover:text-[#E8192C] transition-colors">{chapter.label}</p>
+                  <p className="text-slate-500 text-xs truncate">{chapter.desc}</p>
+                </div>
+                <span className="text-[#E8192C] text-xs font-mono font-medium">{chapter.time}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* What to listen for */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto">
@@ -54,11 +111,11 @@ export default function LiveCallPage() {
               { time: '14:00', insight: 'The objection is handled without arguing. No pushback, just data and reassurance.' },
               { time: 'End', insight: 'The proposal is sent DURING the call, not after. That\'s the key to maintaining momentum.' },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100">
-                <span className="flex-shrink-0 px-2.5 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs font-bold rounded">
+              <div key={i} className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="flex-shrink-0 px-3 py-1.5 bg-[#E8192C] text-white text-xs font-bold rounded-lg">
                   {item.time}
                 </span>
-                <p className="text-slate-700 text-sm sm:text-base">{item.insight}</p>
+                <p className="text-slate-700 text-sm sm:text-base leading-relaxed">{item.insight}</p>
               </div>
             ))}
           </div>
