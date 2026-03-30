@@ -1,5 +1,5 @@
 'use client'
-
+// v2
 import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
@@ -350,165 +350,12 @@ function GatedCalculatorPreview({
 }
 
 // ============================================
-// BRANDING CUSTOMIZER COMPONENT  
+// BRANDING CUSTOMIZER COMPONENT
 // ============================================
 
-function BrandingCustomizer({
-  brandColor,
-  setBrandColor,
-  companyName,
-  setCompanyName,
-  logoUrl,
-  setLogoUrl,
-}: {
-  brandColor: string
-  setBrandColor: (c: string) => void
-  companyName: string
-  setCompanyName: (n: string) => void
-  logoUrl: string | null
-  setLogoUrl: (u: string | null) => void
-}) {
-  const [isExpanded, setIsExpanded] = useState(false)
-
-  const presetColors = [
-    { color: '#E8192C', label: 'Red' },
-    { color: '#3B82F6', label: 'Blue' },
-    { color: '#10B981', label: 'Green' },
-    { color: '#FBBF24', label: 'Yellow' },
-    { color: '#F97316', label: 'Orange' },
-  ]
-
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (event) => {
-        setLogoUrl(event.target?.result as string)
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-
-  return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full p-5 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white sm:cursor-default"
-      >
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200 flex items-center justify-center flex-shrink-0">
-            <Palette className="w-6 h-6 sm:w-7 sm:h-7 text-slate-600" />
-          </div>
-          <div className="flex-1 text-left">
-            <h3 className="text-lg sm:text-xl font-bold text-slate-900">Brand Your Calculator</h3>
-            <p className="text-sm text-slate-500">
-              <span className="sm:hidden">{isExpanded ? 'Tap to collapse' : 'Tap to customise'}</span>
-              <span className="hidden sm:inline">See changes instantly below</span>
-            </p>
-          </div>
-          <ChevronRight className={`w-5 h-5 text-slate-400 sm:hidden transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
-        </div>
-      </button>
-
-      <div className={`sm:block ${isExpanded ? 'block' : 'hidden'}`}>
-        <div className="p-5 sm:p-6 space-y-6">
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Building2 className="w-4 h-4" />
-              Company Name
-            </label>
-            <input
-              type="text"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base min-h-[48px]"
-              placeholder="Your Company Name"
-              maxLength={25}
-            />
-          </div>
-
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Palette className="w-4 h-4" />
-              Brand Color
-            </label>
-            <div className="grid grid-cols-5 gap-2 sm:gap-3 mb-4">
-              {presetColors.map((preset) => (
-                <button
-                  key={preset.color}
-                  onClick={() => setBrandColor(preset.color)}
-                  className={`flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-xl transition-all min-h-[72px] touch-action-manipulation ${
-                    brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'
-                  }`}
-                >
-                  <div
-                    className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg shadow-md flex-shrink-0"
-                    style={{ backgroundColor: preset.color }}
-                  />
-                  <span className="text-[10px] sm:text-xs font-medium text-slate-600">{preset.label}</span>
-                </button>
-              ))}
-            </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="color"
-                value={brandColor}
-                onChange={(e) => setBrandColor(e.target.value)}
-                className="w-14 h-14 rounded-xl border border-slate-200 cursor-pointer"
-              />
-              <div className="flex-1">
-                <label className="text-xs text-slate-500 mb-1 block">Custom hex</label>
-                <input
-                  type="text"
-                  value={brandColor}
-                  onChange={(e) => setBrandColor(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-mono text-slate-700"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Upload className="w-4 h-4" />
-              Company Logo
-            </label>
-            {logoUrl ? (
-              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <Image
-                  src={logoUrl}
-                  alt="Logo preview"
-                  width={120}
-                  height={48}
-                  className="object-contain"
-                  style={{ height: 'auto', width: 'auto', maxHeight: '48px' }}
-                />
-                <button
-                  onClick={() => setLogoUrl(null)}
-                  className="ml-auto p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            ) : (
-              <label className="flex items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-all min-h-[100px]">
-                <Upload className="w-6 h-6 text-slate-400" />
-                <span className="text-slate-600 font-medium">Click to upload logo</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleLogoUpload}
-                  className="hidden"
-                />
-              </label>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+function BrandingCustomizer({ brandColor, setBrandColor, companyName, setCompanyName, logoUrl, setLogoUrl }: { brandColor: string; setBrandColor: (c: string) => void; companyName: string; setCompanyName: (n: string) => void; logoUrl: string | null; setLogoUrl: (u: string | null) => void }) {
+  return <div className="p-4 bg-slate-100 rounded-xl text-center text-slate-500">Branding customizer loading...</div>
 }
-
 
 // ============================================
 // MAIN PAGE COMPONENT
@@ -970,7 +817,7 @@ export default function SolaFlowPage() {
               </div>
               <ul className="space-y-3 text-slate-600">
                 <li className="flex items-start gap-2">
-                  <span className="text-slate-400 mt-1">���</span>
+                  <span className="text-slate-400 mt-1">����</span>
                   <span>OpenSolar, PV Sol, Easy PV</span>
                 </li>
                 <li className="flex items-start gap-2">
