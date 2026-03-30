@@ -60,7 +60,8 @@ export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
               alt={company}
               width={180}
               height={60}
-              className="h-12 sm:h-14 w-auto object-contain"
+              className="object-contain"
+              style={{ height: 'auto', width: 'auto', maxHeight: '56px' }}
             />
           </div>
         )}
