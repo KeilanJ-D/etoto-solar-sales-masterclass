@@ -5,7 +5,7 @@ import MasterclassNav from '@/components/funnel/MasterclassNav'
 import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
-import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight } from 'lucide-react'
+import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight, Zap } from 'lucide-react'
 import { StatsBanner } from '@/components/shared/StatsBanner'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
@@ -75,6 +75,31 @@ export default function SalesMasterclass() {
       <Hero />
       <TheProblem />
       <StatsBanner stats={stats} />
+      
+      {/* Featured Result - YEERS Proof */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8 bg-white border-b border-slate-100">
+        <div className="max-w-4xl mx-auto">
+          <Link
+            href="/solaflow#proof"
+            className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900 rounded-xl p-5 sm:p-6 hover:bg-slate-800 transition-colors group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl bg-[#E8192C] flex items-center justify-center flex-shrink-0">
+                <Zap className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <p className="text-white font-bold text-lg">Ad → SolaFlow → CRM → Close. 3 days. £13,100.</p>
+                <p className="text-slate-400 text-sm">YEERS closed £24.4K in their first 2 weeks.</p>
+              </div>
+            </div>
+            <span className="text-[#E8192C] font-medium flex items-center gap-1 group-hover:gap-2 transition-all text-sm whitespace-nowrap">
+              See the full story
+              <ArrowRight className="w-4 h-4" />
+            </span>
+          </Link>
+        </div>
+      </section>
+      
       <TheMethod />
       
       {/* PART 2: EVLM VIDEO TESTIMONIAL */}

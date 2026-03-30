@@ -24,9 +24,12 @@ export default function SolaFlowUpsell() {
             <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
               Want the Calculator Branded to Your Business?
             </h3>
-            <p className="text-slate-400 text-sm md:text-base mb-4 md:mb-0">
+            <p className="text-slate-400 text-sm md:text-base mb-3">
               SolaFlow gives your customers instant solar estimates before you even call them. 
               Your logo, your branding, your leads. <span className="text-white font-medium">£200/month.</span>
+            </p>
+            <p className="text-xs text-slate-500">
+              <span className="text-green-400 font-medium">YEERS closed £24.4K in 2 weeks</span> — ad to deposit in 3 days
             </p>
           </div>
 

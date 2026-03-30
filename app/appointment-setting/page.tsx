@@ -4,6 +4,7 @@ import Footer from '@/components/funnel/Footer'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { AppointmentQuizCTA, SolaFlowCTA } from '@/components/shared/ResourceCTA'
+import { InlineProof } from '@/components/shared/InlineProof'
 import { getTestimonialsByIds, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -40,6 +41,24 @@ export default function AppointmentSettingPage() {
       </section>
       
       <AppointmentSetting />
+      
+      {/* YEERS Appointment Setting Proof */}
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <InlineProof
+            quote="Customer contacted at 6:22 PM — 5 minutes after completing their SolaFlow estimate. Survey booked on the first call. That's appointment setting done right."
+            context="YEERS — first customer closed at £13,100"
+            icon="timeline"
+            variant="highlight"
+          />
+          <InlineProof
+            quote="A second customer was visited the next day and signed the proposal the day after. No chase. No 'I need to think about it.' SolaFlow pre-qualifies so your setter's show rate goes through the roof."
+            context="YEERS — second customer closed at £11,300"
+            icon="stat"
+            variant="default"
+          />
+        </div>
+      </section>
       
       {/* Carter Electrical Video Testimonial */}
       {carterVideo && (

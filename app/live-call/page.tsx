@@ -4,6 +4,7 @@ import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 import Footer from '@/components/funnel/Footer'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { SalesScriptCTA, QuizCTA } from '@/components/shared/ResourceCTA'
+import { InlineProof } from '@/components/shared/InlineProof'
 import { getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -84,8 +85,44 @@ export default function LiveCallPage() {
         </section>
       )}
       
+      {/* SolaFlow + Process Proof */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+              When This Process Runs Through SolaFlow
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
+              The Method is the Same. SolaFlow Automates Steps 1-3.
+            </h3>
+          </div>
+          
+          <div className="grid sm:grid-cols-3 gap-4 mb-8">
+            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 text-center">
+              <p className="text-3xl font-black text-[#E8192C] mb-1">5 min</p>
+              <p className="text-sm text-slate-600">Estimate to call</p>
+            </div>
+            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 text-center">
+              <p className="text-3xl font-black text-slate-900 mb-1">3 days</p>
+              <p className="text-sm text-slate-600">Ad to deposit</p>
+            </div>
+            <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 text-center">
+              <p className="text-3xl font-black text-green-600 mb-1">£24,400</p>
+              <p className="text-sm text-slate-600">2 deals, 2 weeks</p>
+            </div>
+          </div>
+
+          <InlineProof
+            quote="The process in the recording is the same process YEERS used through SolaFlow. Ad → Estimate → Call → Survey → Close. £24,400 in the first 2 weeks."
+            context="The method is the same. SolaFlow just automates steps 1-3."
+            icon="timeline"
+            variant="highlight"
+          />
+        </div>
+      </section>
+      
       {/* Cross-links */}
-      <section className="py-8 px-4 sm:px-6 bg-white">
+      <section className="py-8 px-4 sm:px-6 bg-slate-50">
         <div className="max-w-2xl mx-auto space-y-4">
           <SalesScriptCTA />
           <QuizCTA />

@@ -6,6 +6,7 @@ import { ArrowRight, Package } from 'lucide-react'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { ScreenshotProof } from '@/components/shared/ScreenshotProof'
 import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { InlineProof } from '@/components/shared/InlineProof'
 import { screenshotProof, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -69,6 +70,18 @@ export default function ResourcesPage() {
       </section>
       
       <SummaryDownloads />
+      
+      {/* YEERS Ecosystem Proof */}
+      <section className="py-8 px-4 sm:px-6 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-2xl mx-auto">
+          <InlineProof
+            quote="Everything on this site — the scripts, the calculator, the quiz, SolaFlow — works together. YEERS used all of it and closed £24,400 in their first 2 weeks."
+            context="The ecosystem in action"
+            icon="stat"
+            variant="highlight"
+          />
+        </div>
+      </section>
       
       {/* AB Renewables Video Testimonial */}
       {abRenewablesVideo && (
