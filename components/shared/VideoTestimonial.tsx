@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import { Quote } from 'lucide-react'
+import { LiteYouTube } from './LiteYouTube'
 
 interface VideoTestimonialData {
   id: string
@@ -23,32 +24,27 @@ export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
   
   return (
     <div className={`flex flex-col ${isVertical ? 'md:flex-row md:items-center' : 'lg:flex-row lg:items-center'} gap-6 md:gap-10`}>
-      {/* Video */}
+      {/* Video - Lite YouTube (loads thumbnail first, iframe on click) */}
       <div className={`${isVertical ? 'md:w-2/5' : 'lg:w-1/2'} flex-shrink-0`}>
         {isVertical ? (
           // Phone-frame style for vertical videos
           <div className="relative mx-auto max-w-[280px]">
             <div className="bg-slate-900 rounded-[2rem] p-2 shadow-2xl">
-              <div className="bg-black rounded-[1.5rem] overflow-hidden aspect-[9/16]">
-                <iframe
-                  src={videoUrl}
+              <div className="bg-black rounded-[1.5rem] overflow-hidden">
+                <LiteYouTube 
+                  videoId={videoUrl} 
                   title={`${name} testimonial`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
+                  aspectRatio="vertical"
                 />
               </div>
             </div>
           </div>
         ) : (
           // Standard 16:9 aspect ratio
-          <div className="aspect-video rounded-xl overflow-hidden shadow-2xl bg-slate-900">
-            <iframe
-              src={videoUrl}
+          <div className="rounded-xl overflow-hidden shadow-2xl">
+            <LiteYouTube 
+              videoId={videoUrl} 
               title={`${name} testimonial`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
             />
           </div>
         )}
