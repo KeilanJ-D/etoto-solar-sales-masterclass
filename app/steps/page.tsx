@@ -15,6 +15,7 @@ import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { StepProgress } from '@/components/shared/StepProgress'
 import { SalesScriptCTA, FormulaCheatSheetCTA } from '@/components/shared/ResourceCTA'
 import { InlineProof } from '@/components/shared/InlineProof'
+import { NextStepCTA } from '@/components/shared/NextStepCTA'
 import { getTestimonialsByIds, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -140,6 +141,9 @@ export default function StepsPage() {
         testimonials={endTestimonials} 
         title="Real results from real installers"
       />
+      
+      {/* Next Step in funnel */}
+      <NextStepCTA currentStep="learn" />
       
       <Footer />
     </main>

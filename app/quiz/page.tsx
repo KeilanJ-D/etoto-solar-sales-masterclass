@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
 import { StatsBanner } from '@/components/shared/StatsBanner'
+import { NextStepCTA } from '@/components/shared/NextStepCTA'
 
 // Dynamic import - InteractiveQuiz is a large client component
 // Note: ssr: false not allowed in Server Components, but loading skeleton still works
@@ -58,6 +59,9 @@ export default function QuizPage() {
       />
       
       <InteractiveQuiz />
+      
+      {/* Next Step in funnel */}
+      <NextStepCTA currentStep="test" />
       
       <Footer />
     </main>

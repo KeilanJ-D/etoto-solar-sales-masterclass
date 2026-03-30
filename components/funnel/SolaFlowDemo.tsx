@@ -1,8 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Smartphone, User, TrendingUp, ArrowRight } from 'lucide-react'
+import { Smartphone, User, TrendingUp, ArrowRight, Zap } from 'lucide-react'
 import Link from 'next/link'
+
+interface SolaFlowDemoProps {
+  variant?: 'full' | 'teaser'
+}
 
 const useCases = [
   {
@@ -22,7 +26,7 @@ const useCases = [
   },
 ]
 
-export default function SolaFlowDemo() {
+export default function SolaFlowDemo({ variant = 'full' }: SolaFlowDemoProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -34,6 +38,37 @@ export default function SolaFlowDemo() {
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
+
+  // Teaser variant: compact CTA card without iframe embed
+  if (variant === 'teaser') {
+    return (
+      <section ref={sectionRef} className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-900 text-white">
+        <div className="max-w-4xl mx-auto">
+          <div className={`bg-white/5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="w-16 h-16 rounded-xl bg-[#E8192C] flex items-center justify-center flex-shrink-0">
+                <Zap className="w-8 h-8 text-white" />
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <p className="text-sm text-[#F5921E] font-medium mb-1">Your Secret Weapon</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">SolaFlow — Instant Quotes Before You Arrive</h3>
+                <p className="text-slate-400 text-sm sm:text-base">
+                  Your setters run customers through SolaFlow on the first call. By the time you arrive, they already know the price.
+                </p>
+              </div>
+              <Link
+                href="/solaflow"
+                className="flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3 px-6 rounded-full transition-all whitespace-nowrap min-h-[48px]"
+              >
+                <span>See SolaFlow</span>
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section ref={sectionRef} className="py-20 md:py-32 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">

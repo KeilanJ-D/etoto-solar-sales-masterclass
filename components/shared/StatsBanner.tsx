@@ -12,9 +12,18 @@ interface StatsBannerProps {
   dark?: boolean
 }
 
+// Parse target number from stat value (e.g., "£5,000+" -> 5000)
+const parseTarget = (value: string) => {
+  const match = value.match(/[\d,]+/)
+  return match ? parseInt(match[0].replace(/,/g, '')) : 0
+}
+
 export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
+  // Initialize with final values for SSR (prevents £0 flash)
+  const targets = stats.map(stat => parseTarget(stat.value))
   const [isVisible, setIsVisible] = useState(false)
-  const [counts, setCounts] = useState<number[]>(stats.map(() => 0))
+  const [counts, setCounts] = useState<number[]>(targets)
+  const [hasAnimated, setHasAnimated] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -32,14 +41,13 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
     return () => observer.disconnect()
   }, [])
 
-  // Animate numbers when visible
+  // Animate numbers when visible (only once)
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible || hasAnimated) return
+    setHasAnimated(true)
 
-    const targets = stats.map(stat => {
-      const match = stat.value.match(/[\d,]+/)
-      return match ? parseInt(match[0].replace(/,/g, '')) : 0
-    })
+    // Reset to 0 to animate up
+    setCounts(targets.map(() => 0))
 
     const duration = 1500
     const steps = 60
@@ -58,7 +66,7 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
     }, stepTime)
 
     return () => clearInterval(interval)
-  }, [isVisible, stats])
+  }, [isVisible, hasAnimated, targets])
 
   // Format the count with the original prefix/suffix
   const formatStat = (stat: Stat, count: number) => {

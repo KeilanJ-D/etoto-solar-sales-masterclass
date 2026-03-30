@@ -5,6 +5,7 @@ import { TestimonialRow } from '@/components/shared/TestimonialRow'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { AppointmentQuizCTA, SolaFlowCTA } from '@/components/shared/ResourceCTA'
 import { InlineProof } from '@/components/shared/InlineProof'
+import { NextStepCTA } from '@/components/shared/NextStepCTA'
 import { getTestimonialsByIds, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -90,6 +91,9 @@ export default function AppointmentSettingPage() {
           <SolaFlowCTA />
         </div>
       </section>
+      
+      {/* Next Step in funnel - directs to quiz */}
+      <NextStepCTA currentStep="watch" />
       
       <Footer />
     </main>

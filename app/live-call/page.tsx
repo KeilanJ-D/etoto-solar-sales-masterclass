@@ -5,6 +5,7 @@ import Footer from '@/components/funnel/Footer'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { SalesScriptCTA, QuizCTA } from '@/components/shared/ResourceCTA'
 import { InlineProof } from '@/components/shared/InlineProof'
+import { NextStepCTA } from '@/components/shared/NextStepCTA'
 import { getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
@@ -57,62 +58,21 @@ export default function LiveCallPage() {
       
       <LiveCallRecording />
       
-      {/* Video Timestamps + Chapters */}
+      {/* Key Moments - consolidated timestamp section */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-[#E8192C]/10 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[#E8192C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-              Call Chapters
-            </h3>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {[
-              { time: '0:00', step: '1', label: 'Rapport', desc: 'Quick intro, set expectations' },
-              { time: '2:15', step: '2', label: 'Discovery', desc: 'Understanding their situation' },
-              { time: '5:12', step: '3', label: 'Energy Audit', desc: 'The maths that sells itself' },
-              { time: '8:30', step: '4', label: 'Battery Value', desc: 'Peak shaving explained' },
-              { time: '11:00', step: '5', label: 'Solar Value', desc: 'Real savings, no fluff' },
-              { time: '14:00', step: '6', label: 'Objection', desc: 'Handled with data' },
-              { time: '16:45', step: '7', label: 'Finance', desc: 'Monthly vs lump sum' },
-              { time: '18:30', step: '8', label: 'Close', desc: 'The money moment' },
-              { time: '20:00', step: '9', label: 'Follow-up', desc: 'Proposal sent live' },
-            ].map((chapter, i) => (
-              <div key={i} className="flex items-center gap-3 p-3 bg-white rounded-xl border border-slate-200 card-lift group cursor-pointer">
-                <span className="flex-shrink-0 w-8 h-8 bg-[#E8192C] text-white text-xs font-bold rounded-lg flex items-center justify-center">
-                  {chapter.step}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-slate-900 text-sm group-hover:text-[#E8192C] transition-colors">{chapter.label}</p>
-                  <p className="text-slate-500 text-xs truncate">{chapter.desc}</p>
-                </div>
-                <span className="text-[#E8192C] text-xs font-mono font-medium">{chapter.time}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What to listen for - timestamps stack on mobile */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
-        <div className="max-w-4xl mx-auto">
           <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
-            Things to notice in this call
+            Key Moments
           </h3>
           <div className="grid gap-4">
             {[
               { time: '5:12', insight: 'The customer says "so basically it pays for itself?" — that\'s self-selling. The maths did the work.' },
-              { time: 'Step 6', insight: 'He doesn\'t mention price until Step 6. The customer is already sold on the value before they hear a number.' },
+              { time: '8:30', insight: 'Battery value explained with peak shaving. Instant, tangible savings the customer can visualise.' },
               { time: '14:00', insight: 'The objection is handled without arguing. No pushback, just data and reassurance.' },
-              { time: 'End', insight: 'The proposal is sent DURING the call, not after. That\'s the key to maintaining momentum.' },
+              { time: '18:30', insight: 'The proposal is sent DURING the call, not after. That\'s the key to maintaining momentum.' },
             ].map((item, i) => (
-              <div key={i} className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200">
-                <span className="flex-shrink-0 px-4 py-2 bg-[#E8192C] text-white text-sm sm:text-base font-bold rounded-lg w-fit min-h-[40px] flex items-center">
+              <div key={i} className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 sm:p-5 bg-white rounded-xl border border-slate-200">
+                <span className="flex-shrink-0 px-4 py-2 bg-[#E8192C] text-white text-sm sm:text-base font-bold rounded-lg w-fit min-h-[40px] flex items-center font-mono">
                   {item.time}
                 </span>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed">{item.insight}</p>
@@ -187,6 +147,9 @@ export default function LiveCallPage() {
       </section>
       
       <SolaFlowDemo />
+      
+      {/* Next Step in funnel */}
+      <NextStepCTA currentStep="watch" />
       
       <Footer />
     </main>

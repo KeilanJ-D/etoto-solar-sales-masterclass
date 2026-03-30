@@ -3,11 +3,12 @@ import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
 import { ArrowRight, Package } from 'lucide-react'
-import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { ScreenshotProof } from '@/components/shared/ScreenshotProof'
-import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
+import { googleReviewsUrl } from '@/lib/social-proof-data'
 import { InlineProof } from '@/components/shared/InlineProof'
-import { screenshotProof, getVideoTestimonialById } from '@/lib/social-proof-data'
+import { NextStepCTA } from '@/components/shared/NextStepCTA'
+import { screenshotProof } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Sales Resources & Toolkit — ETOTO Media',
@@ -46,9 +47,6 @@ const products = [
 ]
 
 export default function ResourcesPage() {
-  const abRenewablesVideo = getVideoTestimonialById('ab-renewables')
-  const genbattVideo = getVideoTestimonialById('genbatt')
-  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -83,42 +81,8 @@ export default function ResourcesPage() {
         </div>
       </section>
       
-      {/* AB Renewables Video Testimonial */}
-      {abRenewablesVideo && (
-        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
-                Client Success Story
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                &ldquo;{abRenewablesVideo.stat}&rdquo;
-              </h2>
-            </div>
-            <VideoTestimonial testimonial={abRenewablesVideo} />
-          </div>
-        </section>
-      )}
-      
       {/* Screenshot Proof - WhatsApp screenshots */}
       <ScreenshotProof items={screenshotProof} />
-      
-      {/* Genbatt Video Testimonial */}
-      {genbattVideo && (
-        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-8">
-              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
-                Commercial Solar
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-                &ldquo;{genbattVideo.stat}&rdquo;
-              </h2>
-            </div>
-            <VideoTestimonial testimonial={genbattVideo} />
-          </div>
-        </section>
-      )}
       
       {/* Paid Products */}
       <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-50">
@@ -179,8 +143,15 @@ export default function ResourcesPage() {
         </div>
       </section>
       
-      {/* Google Reviews Carousel */}
-      <GoogleReviewsCarousel />
+      {/* Google Reviews Badge */}
+      <section className="py-8 px-4 sm:px-6 bg-slate-50 border-t border-slate-100">
+        <div className="flex justify-center">
+          <GoogleReviewsBadge url={googleReviewsUrl} />
+        </div>
+      </section>
+      
+      {/* Next Step in funnel */}
+      <NextStepCTA currentStep="buy" />
       
       <Footer />
     </main>

@@ -6,7 +6,8 @@ import Link from 'next/link'
 import ProductFooter from '@/components/products/ProductFooter'
 import { StatsBanner } from '@/components/shared/StatsBanner'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
-import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
+import { googleReviewsUrl } from '@/lib/social-proof-data'
 import { stats, getTestimonialsByIds } from '@/lib/social-proof-data'
 
 const products = [
@@ -344,8 +345,12 @@ export default function CompleteToolkitPage() {
         title="Join 200+ UK solar installers"
       />
       
-      {/* Google Reviews Carousel */}
-      <GoogleReviewsCarousel />
+      {/* Google Reviews Badge */}
+      <section className="py-8 px-4 sm:px-6 bg-slate-50 border-t border-slate-100">
+        <div className="flex justify-center">
+          <GoogleReviewsBadge url={googleReviewsUrl} />
+        </div>
+      </section>
       
       <ProductFooter />
     </main>
