@@ -172,7 +172,7 @@ export default function SolaFlowPage() {
               Real results, real conversations
             </h3>
           </div>
-          <ScreenshotProof screenshots={screenshotProof.filter(s => s.id === 'ups-solar')} />
+          <ScreenshotProof items={screenshotProof.filter(s => s.id === 'ups-solar')} />
         </div>
       </section>
       
