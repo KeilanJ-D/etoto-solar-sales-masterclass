@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
   Check, ArrowRight, Calculator, MessageSquare, Sparkles, ChevronRight, 
-  Star, Play, X
+  Star, X, Play
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -515,11 +515,11 @@ export default function SolaFlowPage() {
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
-              href="#demo"
+              href="#quiz-funnel"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full hover:bg-white/20 transition-all border border-white/10 min-h-[56px]"
             >
               <Play className="w-5 h-5" />
-              Try the Calculator
+              See Both Tools
             </a>
           </div>
 
@@ -541,84 +541,121 @@ export default function SolaFlowPage() {
         </div>
       </section>
 
-      {/* Two Tools Section */}
-      <section className="py-16 sm:py-24 px-4 bg-slate-50">
+      {/* ============================================ */}
+      {/* TOOL 1: QUIZ FUNNEL - Lead Generation */}
+      {/* ============================================ */}
+      <section id="quiz-funnel" className="py-16 sm:py-24 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-semibold rounded-full mb-4">
-              Two Powerful Tools
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
-              Lead Gen + Sales Closer
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              SolaFlow works at both ends of your funnel — capturing leads online 
-              and helping you close deals in any sales environment.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Quiz Funnel Card */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 hover:shadow-xl hover:border-slate-300 transition-all group">
-              <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center flex-shrink-0">
                 <MessageSquare className="w-7 h-7 text-blue-600" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Quiz Funnel Lead Magnet</h3>
-              <p className="text-slate-600 mb-5 leading-relaxed">
-                Embed a branded quiz on your website that qualifies leads and calculates 
-                their potential savings. Capture contact details before revealing results.
-              </p>
-              <ul className="space-y-2.5 text-slate-700">
-                {['Customizable quiz questions', 'Lead capture before results', 'Automated email sequences', 'Website embed or standalone'].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4 text-blue-500 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Energy Audit Card */}
-            <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 hover:shadow-xl hover:border-slate-300 transition-all group">
-              <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                <Calculator className="w-7 h-7 text-green-600" />
+              <div>
+                <span className="inline-block px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full mb-2">
+                  Tool 1 — Lead Generation
+                </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900">
+                  Quiz Funnel Lead Magnet
+                </h2>
               </div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">Energy Audit Calculator</h3>
-              <p className="text-slate-600 mb-5 leading-relaxed">
-                Run the numbers live with customers. Show them exactly how much they&apos;ll 
-                save with solar + battery — using your products and your pricing.
-              </p>
-              <ul className="space-y-2.5 text-slate-700">
-                {['Your products, your margins', 'Real-time ROI calculations', 'Generate PDF quotes instantly', 'Use on tablet, phone, or laptop'].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
             </div>
+            <div className="lg:max-w-md">
+              <p className="text-slate-600 leading-relaxed">
+                <strong className="text-slate-900">Capture qualified leads online.</strong> Visitors answer a few questions about their energy usage, 
+                and the quiz delivers an <strong>instant indicative estimate</strong> — projected savings, payback period, and ROI — 
+                before they even speak to you.
+              </p>
+            </div>
+          </div>
+
+          {/* Quiz iframe */}
+          <div className="bg-slate-950 rounded-2xl p-2 shadow-2xl border border-white/10 mb-8">
+            <div className="flex items-center gap-2 px-4 py-2">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="bg-slate-800 rounded-full px-4 py-1.5 text-slate-400 text-xs flex items-center gap-2">
+                  <Lock className="w-3 h-3" />
+                  your-company.solaflow.app/quiz
+                </div>
+              </div>
+            </div>
+            <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '600px' }}>
+              <iframe
+                src="https://solaflow-dashboard.replit.app/login"
+                className="w-full h-full pointer-events-none"
+                title="SolaFlow Quiz Funnel Preview"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                <p className="text-slate-700 font-medium mb-3">This is a preview. Get SolaFlow to embed your own branded quiz.</p>
+                <a
+                  href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+                >
+                  Get Your Quiz Funnel
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Features */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: 'Instant Estimates', desc: 'Indicative pricing, payback & ROI shown immediately' },
+              { title: 'Lead Capture', desc: 'Email & phone required before viewing results' },
+              { title: 'Qualification', desc: 'Filter out tyre-kickers, focus on serious buyers' },
+              { title: 'Website Embed', desc: 'One iframe code, works on any site' },
+            ].map((feature) => (
+              <div key={feature.title} className="bg-white rounded-xl p-5 border border-slate-200">
+                <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
+                <p className="text-sm text-slate-600">{feature.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Interactive Calculator Demo - THE MAIN EVENT */}
-      <section id="demo" className="py-16 sm:py-24 px-4 bg-white">
+      {/* ============================================ */}
+      {/* TOOL 2: ENERGY AUDIT CALCULATOR - Sales Closer */}
+      {/* ============================================ */}
+      <section id="calculator" className="py-16 sm:py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-semibold rounded-full mb-4">
-              Interactive Preview
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4">
-              Try It Yourself
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Customize the colors, add your logo, and test the Energy Audit tab. 
-              <strong className="text-slate-900"> The other tabs are locked</strong> — get SolaFlow to unlock everything.
-            </p>
+          {/* Header */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+            <div className="flex items-start gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                <Calculator className="w-7 h-7 text-green-600" />
+              </div>
+              <div>
+                <span className="inline-block px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full mb-2">
+                  Tool 2 — Sales Closer
+                </span>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900">
+                  Energy Audit Calculator
+                </h2>
+              </div>
+            </div>
+            <div className="lg:max-w-md">
+              <p className="text-slate-600 leading-relaxed">
+                <strong className="text-slate-900">Close deals with confidence.</strong> Use this live with customers — in person, on the phone, or via screen share. 
+                <strong> Verify the formulas, explain the maths, and break down exactly </strong> 
+                how battery arbitrage and solar generation translate into real savings.
+              </p>
+            </div>
           </div>
 
+          {/* Branding + Calculator */}
           <div className="grid lg:grid-cols-4 gap-6 items-start">
-            {/* Branding Customizer - Smaller on the side */}
+            {/* Branding Customizer */}
             <div className="lg:col-span-1 lg:sticky lg:top-24">
               <BrandingCustomizer
                 brandColor={brandColor}
@@ -630,17 +667,29 @@ export default function SolaFlowPage() {
               />
             </div>
 
-            {/* Calculator Preview - Main focus */}
+            {/* Calculator Preview */}
             <div className="lg:col-span-3">
               <GatedCalculatorPreview
                 brandColor={brandColor}
                 companyName={companyName}
                 logoUrl={logoUrl}
               />
-              <p className="text-center text-sm text-slate-500 mt-4">
-                This is the exact calculator your sales team will use — fully branded to your business
-              </p>
             </div>
+          </div>
+
+          {/* Features */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+            {[
+              { title: 'Formula-Driven', desc: 'Transparent maths your customers can trust' },
+              { title: 'Your Products', desc: 'Configure panels & batteries you actually sell' },
+              { title: 'Custom Margins', desc: 'Set your own pricing and profit margins' },
+              { title: 'PDF Quotes', desc: 'Generate professional quotes in seconds' },
+            ].map((feature) => (
+              <div key={feature.title} className="bg-slate-50 rounded-xl p-5 border border-slate-200">
+                <h4 className="font-bold text-slate-900 mb-1">{feature.title}</h4>
+                <p className="text-sm text-slate-600">{feature.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
