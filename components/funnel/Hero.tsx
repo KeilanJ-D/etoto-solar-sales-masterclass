@@ -1,17 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ChevronDown, AlertTriangle, Info } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { useCountUp } from '@/hooks/use-animate-on-scroll'
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false)
   const [showStats, setShowStats] = useState(false)
-  const [expandedStat, setExpandedStat] = useState<number | null>(null)
   
-  const seoScore = useCountUp(34, 1500, showStats)
-  const issues = useCountUp(6, 1200, showStats)
-  const revenue = useCountUp(48, 1800, showStats)
+  const steps = useCountUp(9, 1500, showStats)
+  const avgGP = useCountUp(2500, 1800, showStats)
+  const avgMins = useCountUp(25, 1200, showStats)
 
   useEffect(() => {
     setIsVisible(true)
@@ -21,31 +20,29 @@ export default function Hero() {
 
   const stats = [
     { 
-      value: seoScore, 
-      suffix: '/100', 
-      label: 'SEO Score', 
-      color: '#DC2626',
-      context: 'Based on Google Lighthouse audit of solarpath.ie. Industry benchmark for solar installers is 65+. Your score of 34 indicates severe technical SEO deficiencies including missing meta descriptions on 80% of pages, no structured data markup, and poor Core Web Vitals.'
-    },
-    { 
-      value: issues, 
-      suffix: '', 
-      label: 'Critical Issues', 
+      value: steps, 
+      suffix: ' Steps', 
+      label: 'The complete sales flow', 
       color: '#E8192C',
-      context: 'Six fundamental problems identified: (1) No email capture on calculators, (2) Missing local SEO for key counties, (3) Blog dormant since 2024, (4) No lead magnets, (5) Poor mobile conversion paths, (6) Weak trust signals vs competitors.'
     },
     { 
-      value: revenue, 
-      prefix: '€', 
-      suffix: 'K+', 
-      label: 'Revenue at Risk', 
+      prefix: '£',
+      value: avgGP, 
+      suffix: '+', 
+      label: 'Average GP per closed deal', 
       color: '#F5921E',
-      context: 'Calculation: Average solar installation = €12,000 AOV. Conservative estimate of 4 lost leads/month due to poor SEO visibility and conversion issues. 4 leads × €12,000 × 12 months = €48,000 annually. Based on competitor traffic analysis and industry conversion benchmarks.'
+    },
+    { 
+      prefix: '<',
+      value: avgMins, 
+      suffix: ' mins', 
+      label: 'Average call to close', 
+      color: '#E8192C',
     },
   ]
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-6 py-16 md:py-20 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
+    <section className="relative min-h-[100dvh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-20 w-72 h-72 md:w-96 md:h-96 bg-[#E8192C]/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
@@ -67,54 +64,44 @@ export default function Hero() {
         />
       ))}
 
-      {/* Logos - Fixed with dark background cards */}
-      <div className={`flex items-center gap-4 md:gap-8 mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        <div className="bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 shadow-xl">
-          <img 
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-            alt="ETOTO Media" 
-            className="h-6 md:h-10 object-contain"
-          />
-        </div>
-        <span className="text-[#E8192C] font-black text-xl md:text-3xl animate-pulse">×</span>
-        <div className="bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 shadow-xl">
-          <img 
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/solar%20path%20logo-gb9aYzjnVnp3LFRgT565BJqotuLeRG.png" 
-            alt="Solar Path" 
-            className="h-6 md:h-10 object-contain"
-          />
-        </div>
+      {/* Logo - ETOTO wordmark, confident and large */}
+      <div className={`mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
+        <img 
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
+          alt="ETOTO Media" 
+          width={200}
+          height={56}
+          style={{ width: 'auto', height: 'auto', maxHeight: '56px', maxWidth: '100%' }}
+          className="object-contain"
+        />
       </div>
 
       {/* Badge */}
       <div className={`mb-6 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
         <span className="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-600 text-xs md:text-sm font-medium px-4 py-2 rounded-full shadow-sm">
           <span className="w-2 h-2 bg-[#E8192C] rounded-full animate-pulse" />
-          Exclusive Website Audit — March 2026
+          ETOTO Media — Solar Sales Masterclass
         </span>
       </div>
 
       {/* Main headline */}
       <div className={`text-center max-w-5xl transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
         <h1 className="text-3xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-6 text-balance">
-          Your Website Is Leaking Leads.
+          Sell Solar Like You Built It.
           <span className="block text-[#E8192C] relative">
-            Your Pipeline Should Be Full.
+            The 9-Step Formula That Closes.
             <svg className="absolute -bottom-2 left-0 w-full h-3 text-[#E8192C]/20" viewBox="0 0 200 8" preserveAspectRatio="none">
               <path d="M0,5 Q50,0 100,5 T200,5" fill="none" stroke="currentColor" strokeWidth="3" className="animate-draw" />
             </svg>
           </span>
         </h1>
         <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          A forensic website audit, real Irish campaign data, a 90-day growth plan, and 10 ready-to-publish blog articles — built specifically for <span className="font-semibold text-slate-900">Ken and Jackie at Solar Path</span>.
-        </p>
-        <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto mt-3">
-          Scroll down. This is everything you need to hit 50 installs a month.
+          A complete sales system for solar installers — from the first phone call to the 25% deposit. Scripts, live maths, real call recordings, and the exact formula we use across <span className="font-semibold text-slate-900">200+ clients</span>.
         </p>
       </div>
 
-      {/* Animated stats with expandable context */}
-      <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-10 md:mt-14 w-full max-w-3xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+      {/* Animated stats */}
+      <div className={`grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 mt-8 sm:mt-10 md:mt-14 w-full max-w-3xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
         {stats.map((stat, i) => (
           <div 
             key={i} 
@@ -122,50 +109,37 @@ export default function Hero() {
             style={{ transitionDelay: `${i * 100}ms` }}
           >
             <div 
-              className="px-2 md:px-6 py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group cursor-pointer"
-              onClick={() => setExpandedStat(expandedStat === i ? null : i)}
+              className="px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 md:hover:-translate-y-2 group h-full"
             >
-              <p className="text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
-                {stat.prefix}{stat.value}{stat.suffix}
+              <p className="text-lg sm:text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
+                {stat.prefix}{stat.value.toLocaleString()}{stat.suffix}
               </p>
-              <p className="text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2">{stat.label}</p>
-              <button className="mt-2 inline-flex items-center gap-1 text-xs text-slate-400 hover:text-[#E8192C] transition-colors">
-                <Info className="w-3 h-3" />
-                <span className="hidden md:inline">How we calculated this</span>
-                <span className="md:hidden">Details</span>
-              </button>
+              <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2 leading-tight">{stat.label}</p>
             </div>
-            
-            {/* Expanded context */}
-            {expandedStat === i && (
-              <div className="absolute top-full left-0 right-0 mt-2 z-20 bg-slate-900 text-white text-xs md:text-sm p-4 rounded-xl shadow-2xl animate-fade-in-up">
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-[#F5921E] flex-shrink-0 mt-0.5" />
-                  <p className="leading-relaxed">{stat.context}</p>
-                </div>
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-slate-900 rotate-45" />
-              </div>
-            )}
           </div>
         ))}
       </div>
 
-      {/* CTA Button */}
-      <a 
-        href="#problems"
-        className={`mt-10 md:mt-12 inline-flex items-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] text-white px-6 md:px-10 py-3 md:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        style={{ transitionDelay: '700ms' }}
-      >
-        See What We Found
-        <ChevronDown className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" />
-      </a>
-
-      {/* Scroll indicator */}
-      <div className={`absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-6 h-10 border-2 border-slate-300 rounded-full flex justify-center pt-2">
-          <div className="w-1.5 h-3 bg-slate-400 rounded-full animate-bounce" />
-        </div>
+      {/* CTA Buttons */}
+      <div className={`flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-8 sm:mt-10 md:mt-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '700ms' }}>
+        <a 
+          href="#problem"
+          className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group min-h-[48px] touch-action-manipulation"
+        >
+          Learn The Formula
+          <ChevronDown className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-y-1 transition-transform" />
+        </a>
+        <a 
+          href="/live-call"
+          className="inline-flex items-center justify-center gap-2 bg-transparent hover:bg-slate-100 text-slate-700 px-6 sm:px-8 py-3.5 sm:py-4 text-base font-medium rounded-full transition-all duration-300 border border-slate-200 hover:border-slate-300 min-h-[48px] touch-action-manipulation group"
+        >
+          Watch It Work
+          <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
       </div>
-    </section>
+
+          </section>
   )
 }
