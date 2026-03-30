@@ -53,9 +53,11 @@ export default function PasswordGate({
       } else {
         localStorage.removeItem(`access_${productId}`)
       }
-    } catch {
-      // If API fails, allow access if token exists (graceful degradation)
-      setIsUnlocked(true)
+    } catch (err) {
+      // Fail closed - never grant access on API failure
+      console.error('Token verification failed:', err)
+      localStorage.removeItem(`access_${productId}`)
+      setIsUnlocked(false)
     } finally {
       setIsChecking(false)
     }

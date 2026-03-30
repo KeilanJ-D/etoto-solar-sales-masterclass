@@ -1,30 +1,96 @@
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { getFirebaseAdmin } from '@/lib/firebase-admin'
+import { checkRateLimit } from '@/lib/rate-limit'
+import { z } from 'zod'
 
-// Generate a simple token for session validation
-function generateToken(productId: string, code: string): string {
-  const secret = process.env.TOKEN_SECRET || 'default-secret-change-in-production'
-  const data = `${productId}:${code}:${Date.now()}`
-  return crypto.createHmac('sha256', secret).update(data).digest('hex').slice(0, 32)
+// Zod schema for input validation
+const verifyCodeSchema = z.object({
+  productId: z.string().min(1).max(50).optional(),
+  code: z.string().min(1).max(50).optional(),
+  token: z.string().max(500).optional(),
+}).refine(data => data.token || (data.productId && data.code), {
+  message: 'Must provide either token or productId + code'
+})
+
+// Get token secret - throws if not set
+function getTokenSecret(): string {
+  const secret = process.env.TOKEN_SECRET
+  if (!secret) {
+    throw new Error('TOKEN_SECRET environment variable is not set')
+  }
+  return secret
 }
 
-// Verify a stored token (simplified - just checks format)
-function isValidToken(token: string): boolean {
-  return typeof token === 'string' && token.length === 32 && /^[a-f0-9]+$/.test(token)
+// Generate a signed token with expiry
+function generateToken(productId: string): string {
+  const secret = getTokenSecret()
+  const exp = Date.now() + (30 * 24 * 60 * 60 * 1000) // 30 days
+  const payload = `${productId}:${exp}`
+  const signature = crypto.createHmac('sha256', secret).update(payload).digest('hex')
+  return Buffer.from(JSON.stringify({ productId, exp, sig: signature })).toString('base64')
+}
+
+// Verify a stored token with timing-safe comparison
+function verifyToken(token: string, productId: string): boolean {
+  try {
+    const secret = getTokenSecret()
+    const decoded = JSON.parse(Buffer.from(token, 'base64').toString('utf8'))
+    
+    // Check expiry
+    if (Date.now() > decoded.exp) {
+      return false
+    }
+    
+    // Check productId matches
+    if (decoded.productId !== productId) {
+      return false
+    }
+    
+    // Recreate signature and compare
+    const payload = `${decoded.productId}:${decoded.exp}`
+    const expectedSig = crypto.createHmac('sha256', secret).update(payload).digest('hex')
+    
+    // Timing-safe comparison
+    if (expectedSig.length !== decoded.sig.length) {
+      return false
+    }
+    return crypto.timingSafeEqual(Buffer.from(expectedSig), Buffer.from(decoded.sig))
+  } catch {
+    return false
+  }
 }
 
 export async function POST(request: NextRequest) {
+  // Rate limiting - 10 requests per minute per IP
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  const { allowed } = checkRateLimit(ip, 10, 60000)
+  
+  if (!allowed) {
+    return NextResponse.json(
+      { valid: false, error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': '60' } }
+    )
+  }
+
   try {
     const body = await request.json()
-    const { productId, code, token } = body
+    
+    // Validate input with Zod
+    const parseResult = verifyCodeSchema.safeParse(body)
+    if (!parseResult.success) {
+      return NextResponse.json(
+        { valid: false, error: 'Invalid request' },
+        { status: 400 }
+      )
+    }
+    
+    const { productId, code, token } = parseResult.data
 
     // Token verification (for returning users with localStorage token)
-    if (token) {
-      if (isValidToken(token)) {
-        return NextResponse.json({ valid: true })
-      }
-      return NextResponse.json({ valid: false })
+    if (token && productId) {
+      const isValid = verifyToken(token, productId)
+      return NextResponse.json({ valid: isValid })
     }
 
     // Code verification (for new unlocks)
@@ -72,8 +138,8 @@ export async function POST(request: NextRequest) {
       lastActivatedAt: new Date(),
     })
 
-    // Generate token for localStorage session
-    const newToken = generateToken(productId, normalizedCode)
+    // Generate secure token for localStorage session
+    const newToken = generateToken(productId)
 
     return NextResponse.json({ 
       valid: true, 

@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // purchaseCodes — server-only via Admin SDK
+    // All client access is denied - only API routes can read/write
+    match /purchaseCodes/{document=**} {
+      allow read, write: if false;
+    }
+
+    // Default deny all other collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+// IMPORTANT: Coordinate with Tom before deploying!
+// The SolaFlow dashboard uses the same Firebase project.
+// You'll need to MERGE these rules with whatever rules
+// Tom already has for tenants, globalProducts, tenantProducts, etc.
+//
+// Deploy with: firebase deploy --only firestore:rules
