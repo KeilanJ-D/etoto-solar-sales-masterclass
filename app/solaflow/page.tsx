@@ -626,97 +626,85 @@ export default function SolaFlowPage() {
       {/* TOOL 1: QUIZ FUNNEL */}
       {/* ============================================ */}
       <section id="quiz-funnel" className="py-16 sm:py-24 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-            {/* Left: Explanation */}
-            <div className="lg:w-1/3 lg:sticky lg:top-24">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                  <MessageSquare className="w-6 h-6 text-blue-600" />
-                </div>
-                <span className="px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
-                  TOOL 1
-                </span>
+        <div className="max-w-5xl mx-auto">
+          {/* Header + Features - Above the embed */}
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-blue-600" />
               </div>
-              
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4">
-                Quiz Funnel
-              </h2>
-              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                <strong className="text-slate-900">Your customer-facing lead magnet.</strong> They see an ad, land on your quiz, 
-                design their own system, and get an instant indicative quote — all before you say a word.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Instant indicative pricing</p>
-                    <p className="text-sm text-slate-500">Savings, payback, ROI — shown immediately</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Lead capture before results</p>
-                    <p className="text-sm text-slate-500">Email + phone required to see their quote</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Pre-qualified leads</p>
-                    <p className="text-sm text-slate-500">They&apos;ve already designed their system</p>
-                  </div>
-                </div>
-              </div>
-
-              <a
-                href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"
-              >
-                Get Your Quiz Funnel
-                <ArrowRight className="w-4 h-4" />
-              </a>
+              <span className="px-2.5 py-0.5 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">
+                TOOL 1
+              </span>
             </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+              Quiz Funnel
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              <strong className="text-slate-900">Your customer-facing lead magnet.</strong> They see an ad, land on your quiz, 
+              design their own system, and get an instant indicative quote — all before you say a word.
+            </p>
+          </div>
 
-            {/* Right: Quiz Funnel Embed */}
-            <div className="lg:w-2/3">
-              <div className="bg-slate-950 rounded-2xl p-2 shadow-2xl border border-white/10">
-                <div className="flex items-center gap-2 px-4 py-2">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                  </div>
-                  <div className="flex-1 flex justify-center">
-                    <div className="bg-slate-800 rounded-full px-4 py-1.5 text-slate-400 text-xs flex items-center gap-2">
-                      <Lock className="w-3 h-3" />
-                      your-company.solaflow.app
-                    </div>
-                  </div>
-                </div>
-                <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '700px' }}>
-                  <iframe
-                    src="https://vercel-solar-estimator.vercel.app"
-                    className="w-full h-full"
-                    title="SolaFlow Quiz Funnel"
-                    allow="clipboard-write"
-                  />
+          {/* 3 Feature pills - horizontal */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-green-50 rounded-full border border-green-200">
+              <Check className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-slate-700">Instant indicative pricing</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-green-50 rounded-full border border-green-200">
+              <Check className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-slate-700">Lead capture before results</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2.5 bg-green-50 rounded-full border border-green-200">
+              <Check className="w-4 h-4 text-green-600" />
+              <span className="text-sm font-medium text-slate-700">Pre-qualified leads</span>
+            </div>
+          </div>
+
+          {/* Quiz Funnel Embed - Full width, capped height */}
+          <div className="bg-slate-950 rounded-2xl p-2 shadow-2xl border border-white/10 max-w-4xl mx-auto">
+            <div className="flex items-center gap-2 px-4 py-2">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="bg-slate-800 rounded-full px-4 py-1.5 text-slate-400 text-xs flex items-center gap-2">
+                  <Lock className="w-3 h-3" />
+                  your-company.solaflow.app
                 </div>
               </div>
-              <p className="text-center text-sm text-slate-500 mt-4">
-                This is a live demo. Your version will be fully branded with your logo, colors, and products.
-              </p>
             </div>
+            <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '500px' }}>
+              <iframe
+                src="https://vercel-solar-estimator.vercel.app"
+                className="w-full h-full"
+                title="SolaFlow Quiz Funnel"
+                allow="clipboard-write"
+              />
+              {/* Scroll hint overlay at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none flex items-end justify-center pb-2">
+                <span className="text-xs text-slate-400 font-medium">Scroll to explore</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="text-center mt-6">
+            <p className="text-sm text-slate-500 mb-4">
+              This is a live demo. Your version will be fully branded with your logo, colors, and products.
+            </p>
+            <a
+              href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+            >
+              Get Your Quiz Funnel — £200/month
+              <ArrowRight className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </section>

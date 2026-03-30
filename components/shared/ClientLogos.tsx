@@ -31,7 +31,8 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
                 alt={logo.name}
                 width={100}
                 height={40}
-                className="h-8 lg:h-10 w-auto object-contain"
+                className="h-8 lg:h-10 object-contain"
+                style={{ width: 'auto', height: 'auto', maxHeight: '40px' }}
               />
             </div>
           ))}
@@ -48,7 +49,8 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
                 alt={logo.name}
                 width={80}
                 height={32}
-                className="h-6 w-auto object-contain"
+                className="h-6 object-contain"
+                style={{ width: 'auto', height: 'auto', maxHeight: '24px' }}
               />
             </div>
           ))}

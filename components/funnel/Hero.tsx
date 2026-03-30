@@ -139,61 +139,6 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* Phone mockup showing calculator UI */}
-      <div className={`mt-12 md:mt-16 relative transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-        <div className="relative mx-auto w-[280px] md:w-[320px]">
-          {/* Red glow behind phone */}
-          <div className="absolute -inset-8 bg-gradient-to-b from-[#E8192C]/20 via-[#E8192C]/10 to-transparent rounded-full blur-3xl" />
-          
-          {/* Phone frame */}
-          <div className="relative bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl">
-            {/* Notch */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-900 rounded-b-2xl z-10" />
-            
-            {/* Screen */}
-            <div className="relative bg-white rounded-[2rem] overflow-hidden aspect-[9/19]">
-              {/* Calculator preview */}
-              <div className="p-4 h-full flex flex-col">
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-[#E8192C] rounded-lg" />
-                    <span className="text-xs font-bold text-slate-900">Energy Audit</span>
-                  </div>
-                </div>
-                
-                {/* Calculator content mockup */}
-                <div className="space-y-3 flex-1">
-                  <div className="bg-slate-100 rounded-lg p-3">
-                    <p className="text-[10px] text-slate-500 mb-1">Annual Usage</p>
-                    <p className="text-lg font-bold text-slate-900">3,500 kWh</p>
-                  </div>
-                  <div className="bg-slate-100 rounded-lg p-3">
-                    <p className="text-[10px] text-slate-500 mb-1">System Size</p>
-                    <p className="text-lg font-bold text-slate-900">6.6 kWp</p>
-                  </div>
-                  <div className="bg-[#E8192C]/10 rounded-lg p-3 border border-[#E8192C]/20">
-                    <p className="text-[10px] text-[#E8192C] mb-1">Annual Savings</p>
-                    <p className="text-xl font-black text-[#E8192C]">£1,786</p>
-                  </div>
-                  <div className="bg-green-50 rounded-lg p-3 border border-green-200">
-                    <p className="text-[10px] text-green-600 mb-1">Payback</p>
-                    <p className="text-lg font-bold text-green-700">6.2 years</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* "See it in action" link */}
-        <p className="text-center mt-4 text-sm text-slate-500">
-          <a href="/solaflow" className="hover:text-[#E8192C] transition-colors">
-            See the full calculator &rarr;
-          </a>
-        </p>
-      </div>
-
           </section>
   )
 }

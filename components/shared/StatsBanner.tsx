@@ -93,7 +93,11 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
       )}
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className={`grid gap-8 md:gap-12 ${
+          stats.length === 2 
+            ? 'grid-cols-2 max-w-2xl mx-auto' 
+            : 'grid-cols-2 md:grid-cols-4'
+        }`}>
           {stats.map((stat, i) => (
             <div
               key={i}
