@@ -1,6 +1,7 @@
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import InteractiveQuiz from '@/components/funnel/InteractiveQuiz'
 import Footer from '@/components/funnel/Footer'
+import { StatsBanner } from '@/components/shared/StatsBanner'
 
 export const metadata = {
   title: 'Solar Sales Knowledge Quiz — ETOTO Media',
@@ -31,6 +32,14 @@ export default function QuizPage() {
           </p>
         </div>
       </section>
+      
+      {/* Compact StatsBanner */}
+      <StatsBanner 
+        stats={[
+          { value: "200+", label: "UK Installers" },
+          { value: "£175M+", label: "Attributed Sales" },
+        ]} 
+      />
       
       <InteractiveQuiz />
       

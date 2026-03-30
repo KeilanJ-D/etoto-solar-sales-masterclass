@@ -2,9 +2,10 @@ import MasterclassNav from '@/components/funnel/MasterclassNav'
 import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
-import { ArrowRight, FileText, Layout, HelpCircle, Package } from 'lucide-react'
-import { TestimonialRow } from '@/components/shared/TestimonialRow'
-import { testimonials } from '@/lib/social-proof-data'
+import { ArrowRight, Package } from 'lucide-react'
+import { ScreenshotProof } from '@/components/shared/ScreenshotProof'
+import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { screenshotProof } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Sales Resources & Toolkit — ETOTO Media',
@@ -31,13 +32,13 @@ const products = [
   {
     title: 'Appointment Setting Quiz',
     description: 'Train your setters with this qualification checklist',
-    price: '£3.99',
+    price: '£2.99',
     href: '/appointment-quiz',
   },
   {
     title: 'Formula Cheat Sheet',
     description: 'One-page calculator reference for customer conversations',
-    price: '£3.99',
+    price: '£2.99',
     href: '/formula-cheat-sheet',
   },
 ]
@@ -65,11 +66,20 @@ export default function ResourcesPage() {
       
       <SummaryDownloads />
       
-      {/* Testimonials */}
-      <TestimonialRow 
-        testimonials={testimonials.slice(3, 6)} 
-        title="Join 200+ UK solar installers"
-      />
+      {/* Screenshot Proof */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-8">
+            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+              Real Results
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+              What our clients are saying
+            </h2>
+          </div>
+          <ScreenshotProof screenshots={screenshotProof} />
+        </div>
+      </section>
       
       {/* Paid Products */}
       <section className="py-16 md:py-24 px-4 md:px-6 bg-white">
@@ -129,6 +139,9 @@ export default function ResourcesPage() {
           </Link>
         </div>
       </section>
+      
+      {/* Google Reviews Carousel */}
+      <GoogleReviewsCarousel />
       
       <Footer />
     </main>

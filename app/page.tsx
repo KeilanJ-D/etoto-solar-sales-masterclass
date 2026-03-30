@@ -7,9 +7,10 @@ import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
 import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight } from 'lucide-react'
 import { StatsBanner } from '@/components/shared/StatsBanner'
-import { VideoTestimonialCarousel } from '@/components/shared/VideoTestimonialCarousel'
-import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
-import { stats, videoTestimonials, googleReviewsUrl } from '@/lib/social-proof-data'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
+import { ClientLogos } from '@/components/shared/ClientLogos'
+import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { stats, getVideoTestimonialById, clientLogos } from '@/lib/social-proof-data'
 
 const ctaCards = [
   {
@@ -57,6 +58,8 @@ const ctaCards = [
 ]
 
 export default function SalesMasterclass() {
+  const evlmTestimonial = getVideoTestimonialById('evlm')
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -67,7 +70,27 @@ export default function SalesMasterclass() {
       <StatsBanner stats={stats} />
       <TheMethod />
       
-      {/* PART 2: CTA CARDS */}
+      {/* PART 2: EVLM VIDEO TESTIMONIAL - Single hero video */}
+      {evlmTestimonial && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Client Success Story
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{evlmTestimonial.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={evlmTestimonial} />
+          </div>
+        </section>
+      )}
+      
+      {/* PART 3: CLIENT LOGOS */}
+      <ClientLogos logos={clientLogos} />
+      
+      {/* PART 4: CTA CARDS */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
           {/* Quick Start CTA */}
@@ -132,16 +155,11 @@ export default function SalesMasterclass() {
         </div>
       </section>
       
-      {/* PART 3: VIDEO TESTIMONIALS */}
-      <VideoTestimonialCarousel testimonials={videoTestimonials} />
-      
-      {/* PART 4: SOLAFLOW TEASER */}
+      {/* PART 5: SOLAFLOW TEASER */}
       <SolaFlowDemo />
       
-      {/* Google Reviews */}
-      <div className="py-8 flex justify-center bg-slate-50">
-        <GoogleReviewsBadge url={googleReviewsUrl} />
-      </div>
+      {/* PART 6: GOOGLE REVIEWS CAROUSEL */}
+      <GoogleReviewsCarousel />
       
       <Footer />
     </main>

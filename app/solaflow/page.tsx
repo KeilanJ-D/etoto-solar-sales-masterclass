@@ -1,8 +1,12 @@
 'use client'
 
-import { Check, ArrowRight, Zap, BarChart3, Users, Clock, ExternalLink, Calendar, MessageCircle } from 'lucide-react'
+import { Check, ArrowRight, Zap, BarChart3, Users, Clock, Calendar, MessageCircle } from 'lucide-react'
 import ProductFooter from '@/components/products/ProductFooter'
-import Link from 'next/link'
+import { StatsBanner } from '@/components/shared/StatsBanner'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
+import { ScreenshotProof } from '@/components/shared/ScreenshotProof'
+import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { stats, getVideoTestimonialById, screenshotProof } from '@/lib/social-proof-data'
 
 const features = [
   {
@@ -38,6 +42,8 @@ const includedFeatures = [
 ]
 
 export default function SolaFlowPage() {
+  const abTestimonial = getVideoTestimonialById('ab-renewables')
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
       {/* Hero */}
@@ -88,6 +94,9 @@ export default function SolaFlowPage() {
         </div>
       </section>
       
+      {/* Stats Banner */}
+      <StatsBanner stats={stats} />
+      
       {/* Features */}
       <section className="py-16 md:py-24 px-4">
         <div className="max-w-5xl mx-auto">
@@ -132,6 +141,38 @@ export default function SolaFlowPage() {
               title="SolaFlow Demo"
             />
           </div>
+        </div>
+      </section>
+      
+      {/* AB Renewables Testimonial */}
+      {abTestimonial && (
+        <section className="py-16 md:py-24 px-4 bg-slate-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-emerald-100 text-emerald-700 text-xs sm:text-sm font-medium rounded-full mb-3">
+                Client Success
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{abTestimonial.stat}&rdquo;
+              </h2>
+              <p className="text-slate-600 mt-2">
+                AB Renewables — full ETOTO + SolaFlow results
+              </p>
+            </div>
+            <VideoTestimonial testimonial={abTestimonial} />
+          </div>
+        </section>
+      )}
+      
+      {/* Screenshot Proof */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+              Real results, real conversations
+            </h3>
+          </div>
+          <ScreenshotProof screenshots={screenshotProof.filter(s => s.id === 'ups-solar')} />
         </div>
       </section>
       
@@ -214,6 +255,9 @@ export default function SolaFlowPage() {
           </div>
         </div>
       </section>
+      
+      {/* Google Reviews Carousel */}
+      <GoogleReviewsCarousel />
       
       {/* CTA */}
       <section className="bg-gradient-to-r from-emerald-600 to-teal-600 py-16 px-4">

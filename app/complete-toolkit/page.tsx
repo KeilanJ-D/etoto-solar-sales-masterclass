@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react'
 import { Check, ArrowRight, Package, FileText, Calculator, HelpCircle, ClipboardList, Lock, Unlock, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 import ProductFooter from '@/components/products/ProductFooter'
+import { StatsBanner } from '@/components/shared/StatsBanner'
+import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
+import { stats, getTestimonialsByIds } from '@/lib/social-proof-data'
 
 const products = [
   {
@@ -37,6 +41,9 @@ const products = [
 ]
 
 export default function CompleteToolkitPage() {
+  // YEERS (sales training), Alltech (appointment), Halo (overall)
+  const bundleTestimonials = getTestimonialsByIds(['yeers', 'alltech', 'halo'])
+  
   const [hasAccess, setHasAccess] = useState(false)
   const [isChecking, setIsChecking] = useState(true)
   const [inputValue, setInputValue] = useState('')
@@ -152,6 +159,9 @@ export default function CompleteToolkitPage() {
           )}
         </div>
       </section>
+      
+      {/* Stats Banner */}
+      <StatsBanner stats={stats} />
 
       {/* Enter Access Code Section - Only show if not already unlocked */}
       {!hasAccess && !isChecking && (
@@ -327,6 +337,15 @@ export default function CompleteToolkitPage() {
           </div>
         </div>
       </section>
+      
+      {/* Testimonials */}
+      <TestimonialRow 
+        testimonials={bundleTestimonials} 
+        title="Join 200+ UK solar installers"
+      />
+      
+      {/* Google Reviews Carousel */}
+      <GoogleReviewsCarousel />
       
       <ProductFooter />
     </main>

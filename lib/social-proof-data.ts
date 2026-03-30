@@ -11,10 +11,10 @@
 // ============================================
 
 export const stats = [
-  { value: "200+", label: "UK Solar Installers" },
-  { value: "£175M+", label: "Attributed Sales" },
-  { value: "67", label: "Sales in One Month (Halo)" },
-  { value: "£450", label: "CPA (vs £1,200 Previous Agency)" },
+  { value: "£175M+", label: "Sales for Clients" },
+  { value: "£5M/m", label: "Average Client Sales" },
+  { value: "£12,500", label: "Average Client AOV" },
+  { value: "<£500", label: "Average Client CPA" },
 ]
 
 
@@ -32,7 +32,7 @@ export const videoTestimonials = [
     quote: "We did 67 sales in one month. ETOTO transformed our entire operation.",
     stat: '67 sales in 1 month',
     videoUrl: 'https://www.youtube.com/embed/cIuNH45hxVg?si=3WR_UO-mo06R2zgM',
-    featured: true, // Use as the hero video testimonial
+    featured: true,
   },
   {
     id: 'evlm',
@@ -41,7 +41,7 @@ export const videoTestimonials = [
     quote: "We went from 4 installs a month to 4-5 a week. ETOTO didn't just bring leads — they changed how we sell.",
     stat: '4/month → 4-5/week',
     videoUrl: 'https://www.youtube.com/embed/ZcsAfN_A8Mo',
-    isVertical: true, // Portrait video — needs different aspect ratio
+    isVertical: true,
   },
   {
     id: 'ab-renewables',
@@ -82,7 +82,7 @@ export const videoTestimonials = [
     quote: "Went from a one-man band to a proper SME. Averaging 8 heat pumps a month, 2 teams running, taking on a 3rd.",
     stat: '1-man band → 3 teams',
     videoUrl: 'https://www.youtube.com/embed/8AoOTz4S4O8',
-    isVertical: true, // Portrait video
+    isVertical: true,
   },
 ]
 
@@ -94,54 +94,63 @@ export const videoTestimonials = [
 
 export const testimonials = [
   {
+    id: 'halo',
     quote: "We did 67 sales in one month. ETOTO transformed our entire operation.",
     name: "Matt",
     company: "Halo Renewables",
     stat: "67 sales in 1 month",
   },
   {
+    id: 'evlm',
     quote: "We went from 4 installs a month to 4-5 a week. ETOTO didn't just bring leads — they changed how we sell.",
     name: "Lloyd",
     company: "EVLM Renewables",
     stat: "4/month → 4-5/week",
   },
   {
+    id: 'yeers',
     quote: "Closed 2 deals worth £25,000 in the first week of using ETOTO's sales training. The formula just works.",
     name: "Tom",
     company: "YEERS — Yorkshire Energy",
     stat: "£25K in week one",
   },
   {
+    id: 'mcj',
     quote: "Phil's now booking 5 weeks out. We can't install fast enough — that's the kind of problem you want to have.",
     name: "Phil",
     company: "MCJ Solar",
     stat: "Booked 5 weeks ahead",
   },
   {
+    id: 'alltech',
     quote: "7 appointments booked per week on average, closing 50% into sales. ETOTO's appointment setting has completely changed our pipeline.",
     name: "Alltech Solar",
     company: "Alltech, Scotland",
     stat: "7 appts/week, 50% close rate",
   },
   {
+    id: 'ab-renewables',
     quote: "£4 million in revenue working with ETOTO. The leads and the system together just work.",
     name: "AB Renewables",
     company: "AB Renewables",
     stat: "£4M in revenue",
   },
   {
+    id: 'uk-renewables',
     quote: "Grew from a one-man band to a proper SME — 2 teams running, taking on a 3rd. Averaging 8 heat pumps a month now.",
     name: "UK Renewables",
     company: "UK Renewables",
     stat: "1-man band → 3 teams",
   },
   {
+    id: 'genbatt',
     quote: "Built a 20MW commercial pipeline. ETOTO opened doors we didn't know existed.",
     name: "Genbatt",
     company: "Genbatt",
     stat: "20MW pipeline",
   },
   {
+    id: 'jem-energy',
     quote: "First ever solar client with ETOTO. Grew so fast we were acquired by 21° Energy for multi-seven figures.",
     name: "JEM Energy",
     company: "JEM Energy",
@@ -149,57 +158,160 @@ export const testimonials = [
   },
 ]
 
+// Helper to get testimonials by IDs
+export function getTestimonialsByIds(ids: string[]) {
+  return testimonials.filter(t => ids.includes(t.id))
+}
+
+// Helper to get video testimonial by ID
+export function getVideoTestimonialById(id: string) {
+  return videoTestimonials.find(v => v.id === id)
+}
+
 
 // ============================================
 // WHATSAPP SCREENSHOT PROOF (ScreenshotProof component)
 // ============================================
-// Real WhatsApp conversations showing results.
-// These are images stored in /public/proof/
-//
-// Dev: display these as styled cards with the screenshot
-// image, a headline stat, and a one-liner caption.
 
 export const screenshotProof = [
   {
     id: 'south-coast-solar',
-    image: '/proof/south-coast-solar-60k-week.png',
+    image: '/proof/scs-60k-week.png',
     headline: '£60K in new business in one week',
     caption: 'South Coast Solar — on track for their first ever £100K week',
     source: 'WhatsApp group screenshot',
-    // Direct quote from Dean: "60k in new business since monday
-    // and there is a very good chance of our first ever 100k week"
   },
   {
     id: 'ups-solar',
     image: '/proof/ups-solar-450-cpa.png',
     headline: '£450 CPA (down from £1,200)',
-    caption: 'UPS Solar — previous agency was charging £1,200 per acquisition. ETOTO got it to £450.',
+    caption: 'UPS Solar — 40 installs at £450 per acquisition',
     source: 'WhatsApp screenshot',
-    // Direct quote: "Weve spent 20k for 40 installs and got at
-    // least another 10 sat in DNO thats £450 a job! Im delighted with that!"
   },
 ]
 
 
 // ============================================
-// GOOGLE REVIEWS LINK
+// GOOGLE REVIEWS
 // ============================================
 
 export const googleReviewsUrl = 'https://share.google/6XzoycwagpqI9rmmA'
 
-// Embed this as a "See our Google reviews" link with a star
-// rating visual (e.g. ★★★★★ 5.0 on Google) that opens the
-// reviews page in a new tab.
+export const googleReviews = [
+  {
+    name: "Finn J.W.",
+    rating: 5,
+    text: "ETOTO talk a BIG game on the sales call but you'll find out why. I have just finished my first month with ETOTO.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Callum Conroy",
+    rating: 5,
+    text: "We've been working with ETOTO Media for 4 months now and they are doing a great job. We've seen our leads triple since the team came on board.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "John Bloomfield",
+    rating: 5,
+    text: "Great team especially Keilan. They have exceeded our expectations and we are very happy with the service so far. The increase in enquiries is very noticeable.",
+    timeAgo: "1 month ago",
+  },
+  {
+    name: "Richard Murray",
+    rating: 5,
+    text: "A breath of fresh air; creative ideas, excellent communication and top-class marketing. After multiple failed trails with other companies, it seems we've now found the one.",
+    timeAgo: "2 years ago",
+  },
+  {
+    name: "David Ewen",
+    rating: 5,
+    text: "The amount of high quality leads we have received since has been amazing — over 120. We had many chats and zoom calls with the team before getting started.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Daniel Millar",
+    rating: 5,
+    text: "After working with a few agencies Etoto are who we have stuck with. The quality of leads and supporting software they provide is unmatched.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "James Burrell",
+    rating: 5,
+    text: "We've only been working with ETOTO for a few weeks, but we're already seeing great results and good quality leads. The team has been proactive, responsive, and clearly know their stuff.",
+    timeAgo: "11 months ago",
+  },
+  {
+    name: "Lead Pro Solutions",
+    rating: 5,
+    text: "Started our business at the start of July, needed someone to help us improve our lead quality. Halfway through the month and we've hit 100k in sales.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Robert Atkinson",
+    rating: 5,
+    text: "These guys are hard working and ambitious. We get a sense they really want the best for our company and not just want our cash like many marketing companies.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Karim Shabankareh",
+    rating: 5,
+    text: "ETOTO media are a young, expert and enthusiastic team. Jordan, Keilan and Joel have absolutely nailed their processes and have helped me scale my business.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Sarah Haysmore",
+    rating: 5,
+    text: "The guys at Etoto are like an extension of your work force. Always on hand if you need them, especially Keilan who was working on a project with me until 9pm one evening.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "Georgia Memon",
+    rating: 5,
+    text: "The most fantastic, ambitious, committed team. I have had the pleasure of working with Keilan and Alex over the 5 months.",
+    timeAgo: "1 year ago",
+  },
+  {
+    name: "CHRIS CHARLTON",
+    rating: 5,
+    text: "We have been working with Jordan and the team for a year now and would highly recommend them. Since working with ETOTO we have had an increase in traffic to our website.",
+    timeAgo: "2 years ago",
+  },
+  {
+    name: "Aid",
+    rating: 5,
+    text: "Known the guys for a few years now. Onboarding was easy and I feel like I have 24 hour access to the team when needed.",
+    timeAgo: "1 week ago",
+  },
+  {
+    name: "Simon Jakins",
+    rating: 5,
+    text: "Had a call with Alex today, great guy no pushy sales just great honest advice, really like the service they provide and very knowledgeable!",
+    timeAgo: "1 week ago",
+  },
+  {
+    name: "Donovan Fawcett",
+    rating: 5,
+    text: "An incredible company to work with. A great group of very intelligent hard working and capable individuals. Very driven and a pleasure to work alongside.",
+    timeAgo: "4 weeks ago",
+  },
+  {
+    name: "Holly Deacon",
+    rating: 5,
+    text: "They're a fantastic team. Very communicative and positive in what they do. And crucially produce results!",
+    timeAgo: "2 years ago",
+  },
+  {
+    name: "Nick Turner",
+    rating: 5,
+    text: "ETOTO were recommended to us by a company we work closely with, and could personally see the increase in sales they were making.",
+    timeAgo: "1 year ago",
+  },
+]
 
 
 // ============================================
 // CLIENT LOGOS (ClientLogos component)
 // ============================================
-// Export from Figma:
-// https://www.figma.com/design/Gfs9rqeMWE0Yo8BpQaSDks/Proposals-Board?node-id=630-28&m=dev
-//
-// Export each logo as PNG/SVG with transparent background.
-// Save to /public/logos/
 
 export const clientLogos = [
   { name: 'Halo Renewables', logoUrl: '/logos/halo.png' },
@@ -216,40 +328,3 @@ export const clientLogos = [
   { name: 'UPS Solar', logoUrl: '/logos/ups-solar.png' },
   { name: 'Energy Concerns', logoUrl: '/logos/energy-concerns.png' },
 ]
-
-
-// ============================================
-// WHERE EVERYTHING GOES (reference for dev)
-// ============================================
-//
-// HOME PAGE (/):
-//   → StatsBanner: below TheProblem, above TheMethod
-//   → VideoTestimonial (Halo, featured): between TheMethod and CTA cards
-//   → ClientLogos: below hero headline
-//   → Google Reviews link: near footer
-//
-// /steps:
-//   → TestimonialRow (3 cards): after Step 9, before footer
-//
-// /live-call:
-//   → TestimonialRow: after the video section
-//
-// /resources:
-//   → TestimonialRow: between formula section and paid products
-//   → ScreenshotProof (both): alongside testimonial cards
-//
-// /solaflow:
-//   → VideoTestimonial (Halo): above pricing card
-//   → StatsBanner: in hero section
-//   → ScreenshotProof: above pricing as extra proof
-//   → Google Reviews link: near CTA
-//
-// /complete-toolkit:
-//   → StatsBanner: above buy button
-//   → TestimonialRow: in the buy section
-//
-// EVERY PRODUCT MICROSITE buy section:
-//   → TestimonialRow (2 cards): above the buy button
-//
-// SUCCESS PAGES:
-//   → "Join 200+ installers" one-liner (no full testimonials)

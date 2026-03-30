@@ -1,6 +1,9 @@
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import AppointmentSetting from '@/components/funnel/AppointmentSetting'
 import Footer from '@/components/funnel/Footer'
+import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { AppointmentQuizCTA, SolaFlowCTA } from '@/components/shared/ResourceCTA'
+import { getTestimonialsByIds } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Appointment Setter Playbook — ETOTO Media',
@@ -12,6 +15,9 @@ export const metadata = {
 }
 
 export default function AppointmentSettingPage() {
+  // Alltech = 7 appts/week, 50% close; MCJ = booked 5 weeks out
+  const appointmentTestimonials = getTestimonialsByIds(['alltech', 'mcj'])
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -33,6 +39,20 @@ export default function AppointmentSettingPage() {
       </section>
       
       <AppointmentSetting />
+      
+      {/* Testimonials - appointment setting results */}
+      <TestimonialRow 
+        testimonials={appointmentTestimonials} 
+        title="Appointment setting results"
+      />
+      
+      {/* Cross-links */}
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <AppointmentQuizCTA />
+          <SolaFlowCTA />
+        </div>
+      </section>
       
       <Footer />
     </main>

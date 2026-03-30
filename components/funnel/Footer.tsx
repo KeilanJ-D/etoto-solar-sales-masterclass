@@ -1,5 +1,8 @@
 'use client'
 
+import { Star } from 'lucide-react'
+import { googleReviewsUrl } from '@/lib/social-proof-data'
+
 export default function Footer() {
   return (
     <footer className="py-10 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-slate-900">
@@ -48,6 +51,17 @@ export default function Footer() {
                 <li><a href="https://etotomedia.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">etotomedia.com</a></li>
                 <li><a href="mailto:keilan.jd@etotomedia.com" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5 truncate">keilan.jd@etotomedia.com</a></li>
                 <li><a href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#25D366] active:text-[#25D366] text-sm transition-colors block py-0.5">Join the community</a></li>
+                <li>
+                  <a 
+                    href={googleReviewsUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-1.5 text-white/50 hover:text-yellow-400 active:text-yellow-400 text-sm transition-colors py-0.5"
+                  >
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    Rate us on Google
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

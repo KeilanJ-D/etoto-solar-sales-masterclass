@@ -1,7 +1,8 @@
 'use client'
 
 import { useParams, useSearchParams } from 'next/navigation'
-import { Check, Copy, ArrowRight, ExternalLink, Loader2, AlertCircle, RefreshCw } from 'lucide-react'
+import { Check, Copy, ArrowRight, ExternalLink, Loader2, AlertCircle, RefreshCw, Star } from 'lucide-react'
+import { googleReviewsUrl } from '@/lib/social-proof-data'
 import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 
@@ -316,6 +317,31 @@ function SuccessPageContent() {
                 </Link>
               </div>
             )}
+
+            {/* Social Proof One-liner */}
+            <div className="text-center py-4 mb-4">
+              <p className="text-slate-500 text-sm">
+                Join <span className="font-semibold text-slate-700">200+ UK solar installers</span> using this system
+              </p>
+            </div>
+            
+            {/* Leave a Review */}
+            <div className="bg-slate-50 rounded-xl p-4 mb-6 text-center">
+              <p className="text-slate-600 text-sm mb-2">Enjoying your purchase?</p>
+              <a
+                href={googleReviewsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#E8192C] hover:text-[#D01622] font-medium text-sm transition-colors"
+              >
+                <div className="flex gap-0.5">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="w-4 h-4 fill-current" />
+                  ))}
+                </div>
+                Leave us a review on Google
+              </a>
+            </div>
 
             {/* Important Info Card */}
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-6">

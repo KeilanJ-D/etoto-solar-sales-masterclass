@@ -11,8 +11,10 @@ import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 import Footer from '@/components/funnel/Footer'
 import JumpToCalcButton from '@/components/funnel/JumpToCalcButton'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { TestimonialCard } from '@/components/shared/TestimonialCard'
 import { StepProgress } from '@/components/shared/StepProgress'
-import { testimonials } from '@/lib/social-proof-data'
+import { SalesScriptCTA, FormulaCheatSheetCTA } from '@/components/shared/ResourceCTA'
+import { getTestimonialsByIds } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'The 9-Step Solar Sales Formula — ETOTO Media',
@@ -24,6 +26,10 @@ export const metadata = {
 }
 
 export default function StepsPage() {
+  const yeersTestimonial = getTestimonialsByIds(['yeers'])[0]
+  const abTestimonial = getTestimonialsByIds(['ab-renewables'])[0]
+  const endTestimonials = getTestimonialsByIds(['yeers', 'mcj', 'alltech'])
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -46,20 +52,56 @@ export default function StepsPage() {
         </div>
       </section>
       
-      {/* All 9 Steps */}
+      {/* Steps 1-3 */}
       <Step1Rapport />
       <Step2Discovery />
       <Step3EnergyAudit />
+      
+      {/* Inline testimonial after Step 3 */}
+      {yeersTestimonial && (
+        <section className="py-8 px-4 sm:px-6 bg-slate-50">
+          <div className="max-w-2xl mx-auto">
+            <TestimonialCard testimonial={yeersTestimonial} />
+          </div>
+        </section>
+      )}
+      
+      {/* Cross-link after Step 3 */}
+      <section className="py-6 px-4 sm:px-6 bg-white">
+        <div className="max-w-2xl mx-auto">
+          <FormulaCheatSheetCTA />
+        </div>
+      </section>
+      
+      {/* Steps 4-7 */}
       <Step4BatteryValue />
       <Step5SolarValue />
       <Step6Financials />
       <Step7Objections />
+      
+      {/* Inline testimonial after Step 7 */}
+      {abTestimonial && (
+        <section className="py-8 px-4 sm:px-6 bg-slate-50">
+          <div className="max-w-2xl mx-auto">
+            <TestimonialCard testimonial={abTestimonial} />
+          </div>
+        </section>
+      )}
+      
+      {/* Steps 8-9 */}
       <Step8Close />
       <Step9FollowUp />
       
-      {/* Testimonials */}
+      {/* Cross-link after Step 9 */}
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <div className="max-w-2xl mx-auto">
+          <SalesScriptCTA />
+        </div>
+      </section>
+      
+      {/* Testimonials - specific ones */}
       <TestimonialRow 
-        testimonials={testimonials.slice(0, 3)} 
+        testimonials={endTestimonials} 
         title="Real results from real installers"
       />
       

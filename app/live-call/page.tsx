@@ -2,8 +2,9 @@ import MasterclassNav from '@/components/funnel/MasterclassNav'
 import LiveCallRecording from '@/components/funnel/LiveCallRecording'
 import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 import Footer from '@/components/funnel/Footer'
-import { TestimonialRow } from '@/components/shared/TestimonialRow'
-import { testimonials } from '@/lib/social-proof-data'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
+import { SalesScriptCTA, QuizCTA } from '@/components/shared/ResourceCTA'
+import { getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Watch a Real Solar Sales Call — ETOTO Media',
@@ -15,6 +16,8 @@ export const metadata = {
 }
 
 export default function LiveCallPage() {
+  const haloTestimonial = getVideoTestimonialById('halo')
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -61,11 +64,33 @@ export default function LiveCallPage() {
         </div>
       </section>
       
-      {/* Testimonials */}
-      <TestimonialRow 
-        testimonials={testimonials.slice(0, 3)} 
-        title="What our clients say"
-      />
+      {/* Halo Video Testimonial - Matt's 67 sales result */}
+      {haloTestimonial && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Result
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{haloTestimonial.stat}&rdquo;
+              </h2>
+              <p className="text-slate-600 mt-2">
+                Matt from Halo Renewables used this exact method
+              </p>
+            </div>
+            <VideoTestimonial testimonial={haloTestimonial} />
+          </div>
+        </section>
+      )}
+      
+      {/* Cross-links */}
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <SalesScriptCTA />
+          <QuizCTA />
+        </div>
+      </section>
       
       <SolaFlowDemo />
       
