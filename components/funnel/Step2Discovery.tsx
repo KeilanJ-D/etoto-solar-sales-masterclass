@@ -33,7 +33,7 @@ const questions = [
 export default function Step2Discovery() {
   return (
     <SalesStep
-      id="step2"
+      id="step-2"
       stepNumber={2}
       title="Understand Their World Before You Pitch"
       goal="Gather the numbers you need for the maths AND understand what they actually care about."

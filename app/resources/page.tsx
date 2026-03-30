@@ -3,6 +3,8 @@ import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
 import { ArrowRight, FileText, Layout, HelpCircle, Package } from 'lucide-react'
+import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { testimonials } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Sales Resources & Toolkit — ETOTO Media',
@@ -62,6 +64,12 @@ export default function ResourcesPage() {
       </section>
       
       <SummaryDownloads />
+      
+      {/* Testimonials */}
+      <TestimonialRow 
+        testimonials={testimonials.slice(3, 6)} 
+        title="Join 200+ UK solar installers"
+      />
       
       {/* Paid Products */}
       <section className="py-16 md:py-24 px-4 md:px-6 bg-white">

@@ -44,7 +44,7 @@ const closeSequence = [
 export default function Step8Close() {
   return (
     <SalesStep
-      id="step8"
+      id="step-8"
       stepNumber={8}
       title="Close on the Call. Not After."
       goal="The proposal goes out while you're still talking. Not tomorrow. Not 'when I'm back at the office.' Now."

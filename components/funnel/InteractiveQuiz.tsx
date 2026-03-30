@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { CheckCircle, XCircle, ChevronRight, RotateCcw, Trophy, Target, AlertCircle, RefreshCw } from 'lucide-react'
+import { CheckCircle, XCircle, ChevronRight, RotateCcw, Trophy, Target, AlertCircle, RefreshCw, Share2, Copy, Linkedin } from 'lucide-react'
 
 type QuestionType = 'multiple' | 'multiselect' | 'shortanswer'
 
@@ -434,32 +434,80 @@ export default function InteractiveQuiz() {
               </div>
             </div>
           ) : (
-            /* Results Screen */
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 text-center">
-              <div className={`w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center ${
-                (score / totalQuestions) >= 0.8 ? 'bg-green-500/20' : (score / totalQuestions) >= 0.6 ? 'bg-[#F5921E]/20' : 'bg-[#E8192C]/20'
-              }`}>
-                {(score / totalQuestions) >= 0.8 ? (
-                  <Trophy className="w-10 h-10 text-green-500" />
-                ) : (score / totalQuestions) >= 0.6 ? (
-                  <Target className="w-10 h-10 text-[#F5921E]" />
-                ) : (
-                  <AlertCircle className="w-10 h-10 text-[#E8192C]" />
-                )}
+            /* Results Screen - Shareable Card */
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-12 border border-white/10">
+              {/* Shareable Result Card */}
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 sm:p-8 mb-8 border border-white/10 text-center max-w-md mx-auto">
+                <div className="mb-4">
+                  <span className={`inline-block px-3 py-1 rounded-full text-sm font-bold ${
+                    (score / totalQuestions) >= 0.8 
+                      ? 'bg-green-500/20 text-green-400' 
+                      : (score / totalQuestions) >= 0.6 
+                        ? 'bg-[#F5921E]/20 text-[#F5921E]' 
+                        : 'bg-[#E8192C]/20 text-[#E8192C]'
+                  }`}>
+                    {(score / totalQuestions) >= 0.8 
+                      ? 'Solar Sales Ready' 
+                      : (score / totalQuestions) >= 0.6 
+                        ? 'Getting There' 
+                        : 'Keep Studying'}
+                  </span>
+                </div>
+                
+                <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center ${
+                  (score / totalQuestions) >= 0.8 ? 'bg-green-500/20' : (score / totalQuestions) >= 0.6 ? 'bg-[#F5921E]/20' : 'bg-[#E8192C]/20'
+                }`}>
+                  {(score / totalQuestions) >= 0.8 ? (
+                    <Trophy className="w-8 h-8 text-green-500" />
+                  ) : (score / totalQuestions) >= 0.6 ? (
+                    <Target className="w-8 h-8 text-[#F5921E]" />
+                  ) : (
+                    <AlertCircle className="w-8 h-8 text-[#E8192C]" />
+                  )}
+                </div>
+                
+                <p className={`text-5xl sm:text-6xl font-black mb-2 ${getScoreColor()}`}>
+                  {score}/{totalQuestions}
+                </p>
+                <p className="text-lg text-white mb-1">
+                  {Math.round((score / totalQuestions) * 100)}%
+                </p>
+                
+                <div className="mt-6 pt-4 border-t border-white/10">
+                  <p className="text-slate-400 text-xs mb-1">Certified by</p>
+                  <p className="text-white font-bold">ETOTO Media</p>
+                  <p className="text-slate-500 text-xs">Solar Sales Masterclass 2026</p>
+                </div>
               </div>
               
-              <h3 className="text-2xl md:text-3xl font-black mb-2">
-                {isRetryMode ? 'Retry Complete!' : 'Quiz Complete!'}
-              </h3>
-              <p className={`text-4xl md:text-5xl font-black mb-4 ${getScoreColor()}`}>
-                {score}/{totalQuestions}
-              </p>
-              <p className="text-lg text-slate-300 mb-8">{getScoreMessage()}</p>
+              {/* Share Buttons */}
+              <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://solar-sales-masterclass.vercel.app/quiz')}&title=${encodeURIComponent(`Just scored ${Math.round((score / totalQuestions) * 100)}% on the ETOTO Solar Sales Quiz`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#0A66C2] hover:bg-[#004182] text-white font-medium rounded-lg transition-colors min-h-[44px] touch-action-manipulation"
+                >
+                  <Linkedin className="w-4 h-4" />
+                  Share on LinkedIn
+                </a>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText('https://solar-sales-masterclass.vercel.app/quiz')
+                    alert('Link copied!')
+                  }}
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg transition-colors min-h-[44px] touch-action-manipulation"
+                >
+                  <Copy className="w-4 h-4" />
+                  Copy Link
+                </button>
+              </div>
               
+              {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <button
                   onClick={handleRestart}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors min-h-[48px] touch-action-manipulation"
                 >
                   <RotateCcw className="w-4 h-4" />
                   Start Over
@@ -468,11 +516,21 @@ export default function InteractiveQuiz() {
                 {wrongAnswers.length > 0 && (
                   <button
                     onClick={handleRetryWrong}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold rounded-lg transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold rounded-lg transition-colors min-h-[48px] touch-action-manipulation"
                   >
                     <RefreshCw className="w-4 h-4" />
                     Retry Wrong Answers ({wrongAnswers.length})
                   </button>
+                )}
+                
+                {(score / totalQuestions) < 0.6 && (
+                  <a
+                    href="/steps"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-lg transition-colors min-h-[48px] touch-action-manipulation"
+                  >
+                    Review the 9 Steps
+                    <ChevronRight className="w-4 h-4" />
+                  </a>
                 )}
               </div>
             </div>

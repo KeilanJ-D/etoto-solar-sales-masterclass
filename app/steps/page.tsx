@@ -10,6 +10,9 @@ import Step8Close from '@/components/funnel/Step8Close'
 import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 import Footer from '@/components/funnel/Footer'
 import JumpToCalcButton from '@/components/funnel/JumpToCalcButton'
+import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { StepProgress } from '@/components/shared/StepProgress'
+import { testimonials } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'The 9-Step Solar Sales Formula — ETOTO Media',
@@ -25,6 +28,7 @@ export default function StepsPage() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
       <JumpToCalcButton />
+      <StepProgress />
       
       {/* Header */}
       <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
@@ -52,6 +56,12 @@ export default function StepsPage() {
       <Step7Objections />
       <Step8Close />
       <Step9FollowUp />
+      
+      {/* Testimonials */}
+      <TestimonialRow 
+        testimonials={testimonials.slice(0, 3)} 
+        title="Real results from real installers"
+      />
       
       <Footer />
     </main>

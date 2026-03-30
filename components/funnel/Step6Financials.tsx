@@ -16,7 +16,7 @@ const sequence = [
 export default function Step6Financials() {
   return (
     <SalesStep
-      id="step6"
+      id="step-6"
       stepNumber={6}
       title="Show Them the Full Picture"
       goal="Combine everything. The price only lands after the customer already knows the return."

@@ -36,7 +36,7 @@ const followUpSequence = [
 export default function Step9FollowUp() {
   return (
     <SalesStep
-      id="step9"
+      id="step-9"
       stepNumber={9}
       title="Stay in Control of the Timeline"
       goal="The deal isn't done until the deposit lands."

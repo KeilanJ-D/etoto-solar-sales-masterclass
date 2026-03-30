@@ -6,7 +6,7 @@ import { Battery, TrendingDown, Zap } from 'lucide-react'
 export default function Step4BatteryValue() {
   return (
     <SalesStep
-      id="step4"
+      id="step-4"
       stepNumber={4}
       title="Battery = Savings. Always Lead Here."
       goal="Show the customer their daily cost dropping — before you mention a single solar panel."

@@ -282,6 +282,41 @@ function SuccessPageContent() {
               </Link>
             </div>
 
+            {/* Cross-sell */}
+            {productKey !== 'toolkit' && (
+              <div className="bg-slate-900 rounded-2xl p-6 mb-6 text-white">
+                <p className="text-slate-400 text-sm mb-2">Get more value</p>
+                <h3 className="font-bold text-lg mb-2">Upgrade to the Complete Toolkit</h3>
+                <p className="text-slate-300 text-sm mb-4">
+                  Get all 4 premium resources and save £5.97 compared to buying individually.
+                </p>
+                <Link
+                  href="/complete-toolkit"
+                  className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
+                >
+                  View Complete Toolkit
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            )}
+            
+            {productKey === 'toolkit' && (
+              <div className="bg-slate-900 rounded-2xl p-6 mb-6 text-white">
+                <p className="text-slate-400 text-sm mb-2">Ready to scale?</p>
+                <h3 className="font-bold text-lg mb-2">Want the calculator for your business?</h3>
+                <p className="text-slate-300 text-sm mb-4">
+                  SolaFlow gives your team a branded proposal tool that closes deals faster.
+                </p>
+                <Link
+                  href="/solaflow"
+                  className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
+                >
+                  Learn about SolaFlow
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            )}
+
             {/* Important Info Card */}
             <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-6">
               <h3 className="font-bold text-amber-900 mb-3">Important: Save Your Access Code</h3>

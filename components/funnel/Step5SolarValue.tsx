@@ -6,7 +6,7 @@ import { Sun, TrendingUp, PlusCircle } from 'lucide-react'
 export default function Step5SolarValue() {
   return (
     <SalesStep
-      id="step5"
+      id="step-5"
       stepNumber={5}
       title="Solar = Income. The Cherry on Top."
       goal="They're already saving £788/year on batteries. Now show them the money-making machine."

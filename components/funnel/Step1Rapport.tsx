@@ -5,7 +5,7 @@ import SalesStep, { ScriptBox, WhyCard, KeyLine, FromTheCall } from './SalesStep
 export default function Step1Rapport() {
   return (
     <SalesStep
-      id="step1"
+      id="step-1"
       stepNumber={1}
       title="Set the Tone in 30 Seconds"
       goal="Build rapport and position yourself as an advisor, not a salesperson."

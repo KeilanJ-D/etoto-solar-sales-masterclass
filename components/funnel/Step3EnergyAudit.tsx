@@ -6,7 +6,7 @@ import FormulaCalculator from './FormulaCalculator'
 export default function Step3EnergyAudit() {
   return (
     <SalesStep
-      id="step3"
+      id="step-3"
       stepNumber={3}
       title="The Energy Audit — Do the Maths Live"
       goal="Become the expert in the room in 60 seconds."

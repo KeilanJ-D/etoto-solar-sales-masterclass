@@ -86,7 +86,7 @@ export default function Step7Objections() {
 
   return (
     <SalesStep
-      id="step7"
+      id="step-7"
       stepNumber={7}
       title="Handle Objections with Data, Not Pressure"
       goal="Every objection has a numbers-based answer."

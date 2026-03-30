@@ -6,6 +6,10 @@ import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
 import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight } from 'lucide-react'
+import { StatsBanner } from '@/components/shared/StatsBanner'
+import { VideoTestimonialCarousel } from '@/components/shared/VideoTestimonialCarousel'
+import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
+import { stats, videoTestimonials, googleReviewsUrl } from '@/lib/social-proof-data'
 
 const ctaCards = [
   {
@@ -60,11 +64,33 @@ export default function SalesMasterclass() {
       {/* PART 1: THE HOOK */}
       <Hero />
       <TheProblem />
+      <StatsBanner stats={stats} />
       <TheMethod />
       
       {/* PART 2: CTA CARDS */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
+          {/* Quick Start CTA */}
+          <div className="bg-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 mb-10 sm:mb-12 text-center">
+            <p className="text-slate-400 text-sm mb-2">New here?</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+              <Link
+                href="/steps"
+                className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold px-6 py-3 rounded-full transition-colors min-h-[48px] touch-action-manipulation"
+              >
+                Start with the 9 Steps
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <span className="text-slate-500 text-sm">or</span>
+              <Link
+                href="/steps#formula-calculator"
+                className="text-white hover:text-[#E8192C] font-medium transition-colors"
+              >
+                Jump to the Calculator
+              </Link>
+            </div>
+          </div>
+
           <div className="text-center mb-8 sm:mb-12">
             <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3 sm:mb-4">
               Explore the Masterclass
@@ -106,8 +132,16 @@ export default function SalesMasterclass() {
         </div>
       </section>
       
-      {/* PART 3: SOLAFLOW TEASER */}
+      {/* PART 3: VIDEO TESTIMONIALS */}
+      <VideoTestimonialCarousel testimonials={videoTestimonials} />
+      
+      {/* PART 4: SOLAFLOW TEASER */}
       <SolaFlowDemo />
+      
+      {/* Google Reviews */}
+      <div className="py-8 flex justify-center bg-slate-50">
+        <GoogleReviewsBadge url={googleReviewsUrl} />
+      </div>
       
       <Footer />
     </main>
