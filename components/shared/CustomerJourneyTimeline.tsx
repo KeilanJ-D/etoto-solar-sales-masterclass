@@ -207,7 +207,7 @@ export const yeersCustomerA: TimelineStep[] = [
     timestamp: 'Mar 20, 2:28 PM',
     event: 'Customer compares quotes',
     detail: 'Received cheaper competitor quote using Fox equipment',
-    quote: 'I&apos;ve had another quote cheaper, but using Fox equipment and I&apos;ve looked online and seen that the Sigenergy stuff is loads better like you said.',
+    quote: "I've had another quote cheaper, but using Fox equipment and I've looked online and seen that the Sigenergy stuff is loads better like you said.",
     icon: 'message',
   },
   {

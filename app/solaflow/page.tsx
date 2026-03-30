@@ -872,82 +872,75 @@ export default function SolaFlowPage() {
       {/* TOOL 2: CALCULATOR */}
       {/* ============================================ */}
       <section id="calculator" className="py-16 sm:py-24 px-4 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
-            {/* Left: Explanation */}
-            <div className="lg:w-1/3">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
-                  <Calculator className="w-6 h-6 text-green-600" />
-                </div>
-                <span className="px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full">
-                  TOOL 2
-                </span>
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center">
+                <Calculator className="w-6 h-6 text-green-600" />
               </div>
-              
-              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4">
-                Energy Audit Calculator
-              </h2>
-              <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-                <strong className="text-slate-900">Your rep-facing sales tool.</strong> Use this live with customers — 
-                in person, on the phone, or via screen share. Verify the formulas, explain the maths, 
-                close the deal.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Transparent formula</p>
-                    <p className="text-sm text-slate-500">Show exactly how savings are calculated</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Your products, your margins</p>
-                    <p className="text-sm text-slate-500">Configure what you actually sell</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Check className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-slate-900">Build trust in real-time</p>
-                    <p className="text-sm text-slate-500">Customers see the maths, not just the result</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Branding Customizer */}
-              <div className="mb-6">
-                <BrandingCustomizer
-                  brandColor={brandColor}
-                  setBrandColor={setBrandColor}
-                  companyName={companyName}
-                  setCompanyName={setCompanyName}
-                  logoUrl={logoUrl}
-                  setLogoUrl={setLogoUrl}
-                />
-              </div>
+              <span className="px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full">
+                TOOL 2
+              </span>
             </div>
+            
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mb-4">
+              Energy Audit Calculator
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              <strong className="text-slate-900">Your rep-facing sales tool.</strong> Use this live with customers — 
+              in person, on the phone, or via screen share. Verify the formulas, explain the maths, 
+              close the deal.
+            </p>
+          </div>
 
-            {/* Right: Calculator Preview */}
-            <div className="lg:w-2/3">
-              <GatedCalculatorPreview
-                brandColor={brandColor}
-                companyName={companyName}
-                logoUrl={logoUrl}
-              />
-              <p className="text-center text-sm text-slate-500 mt-4">
-                Tab 1 is fully functional. Tabs 2-4 require SolaFlow subscription.
-              </p>
+          {/* Features row */}
+          <div className="grid sm:grid-cols-3 gap-4 mb-12">
+            <div className="bg-white rounded-xl p-5 border border-slate-200 text-center">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                <Check className="w-5 h-5 text-green-600" />
+              </div>
+              <p className="font-bold text-slate-900 mb-1">Transparent formula</p>
+              <p className="text-sm text-slate-500">Show exactly how savings are calculated</p>
             </div>
+            <div className="bg-white rounded-xl p-5 border border-slate-200 text-center">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                <Check className="w-5 h-5 text-green-600" />
+              </div>
+              <p className="font-bold text-slate-900 mb-1">Your products, your margins</p>
+              <p className="text-sm text-slate-500">Configure what you actually sell</p>
+            </div>
+            <div className="bg-white rounded-xl p-5 border border-slate-200 text-center">
+              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-3">
+                <Check className="w-5 h-5 text-green-600" />
+              </div>
+              <p className="font-bold text-slate-900 mb-1">Build trust in real-time</p>
+              <p className="text-sm text-slate-500">Customers see the maths, not just the result</p>
+            </div>
+          </div>
+
+          {/* Branding Customizer - Full width above calculator */}
+          <div className="mb-8">
+            <BrandingCustomizer
+              brandColor={brandColor}
+              setBrandColor={setBrandColor}
+              companyName={companyName}
+              setCompanyName={setCompanyName}
+              logoUrl={logoUrl}
+              setLogoUrl={setLogoUrl}
+            />
+          </div>
+
+          {/* Calculator Preview - Full width */}
+          <div>
+            <GatedCalculatorPreview
+              brandColor={brandColor}
+              companyName={companyName}
+              logoUrl={logoUrl}
+            />
+            <p className="text-center text-sm text-slate-500 mt-4">
+              Tab 1 is fully functional. Tabs 2-4 require SolaFlow subscription.
+            </p>
           </div>
         </div>
       </section>
