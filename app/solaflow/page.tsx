@@ -3,9 +3,8 @@
 import { useState } from 'react'
 import { 
   Zap, Battery, Sun, TrendingUp, Lock, Upload, Palette, Building2, 
-  Check, ArrowRight, Calculator, MessageSquare, FileText, Settings,
-  Shield, Users, BarChart3, Sparkles, ChevronRight, Star, ExternalLink,
-  Package, Sliders, BadgeCheck, Code, Play, X
+  Check, ArrowRight, Calculator, MessageSquare, Sparkles, ChevronRight, 
+  Star, Play, X
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -73,7 +72,8 @@ function GatedCalculatorPreview({
                 alt={companyName} 
                 width={120} 
                 height={40} 
-                className="h-8 sm:h-10 w-auto object-contain"
+                className="object-contain"
+                style={{ height: 'auto', width: 'auto', maxHeight: '40px' }}
               />
             ) : (
               <div 
@@ -336,14 +336,11 @@ function BrandingCustomizer({
   setLogoUrl: (u: string | null) => void
 }) {
   const presetColors = [
-    '#E8192C', // ETOTO Red
-    '#10B981', // Green
-    '#3B82F6', // Blue
-    '#8B5CF6', // Purple
-    '#F59E0B', // Orange
-    '#EC4899', // Pink
-    '#06B6D4', // Cyan
-    '#1E293B', // Slate
+    { color: '#E8192C', label: 'Red' },
+    { color: '#3B82F6', label: 'Blue' },
+    { color: '#10B981', label: 'Green' },
+    { color: '#FBBF24', label: 'Yellow' },
+    { color: '#F97316', label: 'Orange' },
   ]
 
   const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -395,15 +392,20 @@ function BrandingCustomizer({
             Brand Color
           </label>
           <div className="flex flex-wrap gap-2 mb-3">
-            {presetColors.map((color) => (
+            {presetColors.map((preset) => (
               <button
-                key={color}
-                onClick={() => setBrandColor(color)}
-                className={`w-9 h-9 rounded-lg transition-all ${
-                  brandColor === color ? 'ring-2 ring-offset-2 ring-slate-400 scale-110' : 'hover:scale-105'
+                key={preset.color}
+                onClick={() => setBrandColor(preset.color)}
+                className={`flex flex-col items-center gap-1 px-2 py-1.5 rounded-lg transition-all ${
+                  brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50'
                 }`}
-                style={{ backgroundColor: color }}
-              />
+              >
+                <div 
+                  className="w-7 h-7 rounded-md shadow-sm"
+                  style={{ backgroundColor: preset.color }}
+                />
+                <span className="text-xs text-slate-500">{preset.label}</span>
+              </button>
             ))}
           </div>
           <div className="flex items-center gap-2">
@@ -435,7 +437,8 @@ function BrandingCustomizer({
                 alt="Logo preview" 
                 width={100} 
                 height={40} 
-                className="h-10 w-auto object-contain"
+                className="object-contain"
+                style={{ height: 'auto', width: 'auto', maxHeight: '40px' }}
               />
               <button
                 onClick={() => setLogoUrl(null)}
@@ -463,45 +466,6 @@ function BrandingCustomizer({
 }
 
 // ============================================
-// DASHBOARD FEATURES DATA
-// ============================================
-
-const dashboardFeatures = [
-  {
-    step: 1,
-    icon: Package,
-    title: 'Choose Your Products',
-    description: 'Toggle on the solar panels and batteries you actually sell. 20+ panels, 15+ batteries pre-loaded.',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-DLxm9bWmT0GyzSoqleyeskKXUkpy9J.png',
-    bullets: ['Aiko, DMEG, Jinko, Eurener panels', 'Tesla, Sigenergy, EcoFlow, Fox batteries', 'Enable/disable with one click'],
-  },
-  {
-    step: 2,
-    icon: Sliders,
-    title: 'Set Your Pricing',
-    description: 'Configure your margins, multi-battery discounts, and roof surcharges. Your numbers, your profit.',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-1lELhTGemwiFPgzcWPd81xYf6PaIzA.png',
-    bullets: ['Flat rate or per-kWp pricing', 'Multi-battery discount rules', 'Slate/flat roof surcharges'],
-  },
-  {
-    step: 3,
-    icon: FileText,
-    title: 'Customize PDF Quotes',
-    description: 'Add your warranty statement, disclaimers, and trust badges. Generate professional quotes instantly.',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-H8YdilmWuUDeEQgQT2aHHlswuA91rI.png',
-    bullets: ['Header & CTA text', 'MCS, Trustmark, HIES badges', 'Custom warranty statements'],
-  },
-  {
-    step: 4,
-    icon: Code,
-    title: 'Embed Anywhere',
-    description: 'Drop the calculator on your website or share a direct link. One line of code, infinite leads.',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-j9WRXHeKAnOIX4bkM9KhZyljLPKYOL.png',
-    bullets: ['Simple iframe embed code', 'Custom subdomain included', 'Works on any website'],
-  },
-]
-
-// ============================================
 // MAIN PAGE COMPONENT
 // ============================================
 
@@ -509,11 +473,10 @@ export default function SolaFlowPage() {
   const [brandColor, setBrandColor] = useState('#E8192C')
   const [companyName, setCompanyName] = useState('ETOTO Media')
   const [logoUrl, setLogoUrl] = useState<string | null>('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png')
-  const [activeFeature, setActiveFeature] = useState(0)
 
   return (
     <main className="min-h-screen bg-white">
-      <MasterclassNav currentPage="solaflow" />
+      <MasterclassNav />
 
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 sm:pt-32 sm:pb-24 px-4 overflow-hidden">
@@ -677,114 +640,6 @@ export default function SolaFlowPage() {
               <p className="text-center text-sm text-slate-500 mt-4">
                 This is the exact calculator your sales team will use — fully branded to your business
               </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Dashboard Walkthrough */}
-      <section className="py-16 sm:py-24 px-4 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-3 py-1 bg-white/10 text-white/90 text-sm font-semibold rounded-full mb-4">
-              Your Dashboard
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
-              Set It Up in 4 Steps
-            </h2>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              Configure products, set pricing, customize quotes, and embed anywhere — 
-              all from one simple dashboard.
-            </p>
-          </div>
-
-          {/* Feature Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {dashboardFeatures.map((feature, index) => {
-              const Icon = feature.icon
-              return (
-                <button
-                  key={index}
-                  onClick={() => setActiveFeature(index)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-medium text-sm transition-all ${
-                    activeFeature === index
-                      ? 'bg-[#E8192C] text-white shadow-lg'
-                      : 'bg-white/10 text-white/70 hover:bg-white/20 border border-white/10'
-                  }`}
-                >
-                  <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">
-                    {feature.step}
-                  </span>
-                  <Icon className="w-4 h-4" />
-                  <span className="hidden sm:inline">{feature.title}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          {/* Feature Content */}
-          <div className="bg-white rounded-2xl overflow-hidden shadow-2xl">
-            <div className="grid md:grid-cols-2">
-              <div className="p-8 sm:p-10 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-8 h-8 rounded-full bg-[#E8192C] text-white flex items-center justify-center font-bold text-sm">
-                    {dashboardFeatures[activeFeature].step}
-                  </span>
-                  <h3 className="text-2xl font-bold text-slate-900">
-                    {dashboardFeatures[activeFeature].title}
-                  </h3>
-                </div>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  {dashboardFeatures[activeFeature].description}
-                </p>
-                <ul className="space-y-3">
-                  {dashboardFeatures[activeFeature].bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-center gap-2 text-slate-700">
-                      <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="relative bg-slate-100 min-h-[350px]">
-                <Image
-                  src={dashboardFeatures[activeFeature].image}
-                  alt={dashboardFeatures[activeFeature].title}
-                  fill
-                  className="object-cover object-left-top"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Dashboard Login Preview */}
-          <div className="mt-16">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">See the Dashboard</h3>
-              <p className="text-slate-400">Preview of the SolaFlow admin interface (read-only)</p>
-            </div>
-            <div className="bg-slate-950 rounded-2xl p-2 shadow-2xl border border-white/10">
-              <div className="flex items-center gap-2 px-4 py-2">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div className="flex-1 flex justify-center">
-                  <div className="bg-slate-800 rounded-full px-4 py-1.5 text-slate-400 text-xs flex items-center gap-2">
-                    <Lock className="w-3 h-3" />
-                    solaflow-dashboard.replit.app
-                  </div>
-                </div>
-              </div>
-              <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '500px' }}>
-                <iframe
-                  src="https://solaflow-dashboard.replit.app/login"
-                  className="w-full h-full pointer-events-none"
-                  title="SolaFlow Dashboard Preview"
-                />
-                <div className="absolute inset-0 bg-transparent" />
-              </div>
             </div>
           </div>
         </div>

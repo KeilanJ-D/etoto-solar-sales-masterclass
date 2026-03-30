@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-import { Home, ListOrdered, Video, Phone, HelpCircle, Package } from 'lucide-react'
+import { Home, ListOrdered, Video, Phone, HelpCircle, Package, Zap } from 'lucide-react'
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -12,6 +12,7 @@ const navItems = [
   { href: '/appointment-setting', label: 'Appointment Setting', icon: Phone },
   { href: '/quiz', label: 'Quiz', icon: HelpCircle },
   { href: '/resources', label: 'Resources', icon: Package },
+  { href: '/solaflow', label: 'SolaFlow', icon: Zap },
 ]
 
 export default function MasterclassNav() {

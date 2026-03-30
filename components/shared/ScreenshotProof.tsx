@@ -47,7 +47,8 @@ export function ScreenshotProof({ items }: ScreenshotProofProps) {
                       alt={item.company || 'Client logo'}
                       width={160}
                       height={48}
-                      className="w-auto h-auto max-h-12 object-contain"
+                      className="object-contain"
+                      style={{ width: 'auto', height: 'auto', maxHeight: '48px' }}
                     />
                   </div>
                 )}
@@ -67,8 +68,8 @@ export function ScreenshotProof({ items }: ScreenshotProofProps) {
                     alt={item.headline}
                     width={600}
                     height={500}
-                    className="w-full h-auto object-contain"
-                    style={{ maxHeight: '420px' }}
+                    className="object-contain"
+                    style={{ width: '100%', height: 'auto', maxHeight: '420px' }}
                   />
                 </div>
               </div>
