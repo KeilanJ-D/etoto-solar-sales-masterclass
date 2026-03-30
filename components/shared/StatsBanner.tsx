@@ -19,12 +19,18 @@ const parseTarget = (value: string) => {
 }
 
 export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
-  // Initialize with final values for SSR (prevents £0 flash)
-  const targets = stats.map(stat => parseTarget(stat.value))
   const [isVisible, setIsVisible] = useState(false)
-  const [counts, setCounts] = useState<number[]>(targets)
-  const [hasAnimated, setHasAnimated] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const [counts, setCounts] = useState<number[]>([])
   const ref = useRef<HTMLDivElement>(null)
+  
+  // Get targets once
+  const targets = stats.map(stat => parseTarget(stat.value))
+
+  // Mount check to prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,14 +47,11 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
     return () => observer.disconnect()
   }, [])
 
-  // Animate numbers when visible (only once)
+  // Animate numbers when visible
   useEffect(() => {
-    if (!isVisible || hasAnimated) return
-    setHasAnimated(true)
+    if (!isVisible || !mounted) return
 
-    // Reset to 0 to animate up
-    setCounts(targets.map(() => 0))
-
+    // Start from 0 and animate up
     const duration = 1500
     const steps = 60
     const stepTime = duration / steps
@@ -66,7 +69,7 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
     }, stepTime)
 
     return () => clearInterval(interval)
-  }, [isVisible, hasAnimated, targets])
+  }, [isVisible, mounted, targets])
 
   // Format the count with the original prefix/suffix
   const formatStat = (stat: Stat, count: number) => {
@@ -122,7 +125,7 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
                   dark ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                {formatStat(stat, counts[i])}
+                {mounted ? formatStat(stat, counts[i] || targets[i]) : formatStat(stat, targets[i])}
               </p>
               
               {/* Label */}
