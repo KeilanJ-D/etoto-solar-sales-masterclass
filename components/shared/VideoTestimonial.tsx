@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Quote } from 'lucide-react'
 
 interface VideoTestimonialData {
@@ -10,6 +11,7 @@ interface VideoTestimonialData {
   stat: string
   videoUrl: string
   isVertical?: boolean
+  logoUrl?: string
 }
 
 interface VideoTestimonialProps {
@@ -17,7 +19,7 @@ interface VideoTestimonialProps {
 }
 
 export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
-  const { videoUrl, quote, name, company, stat, isVertical = false } = testimonial
+  const { videoUrl, quote, name, company, stat, isVertical = false, logoUrl } = testimonial
   
   return (
     <div className={`flex flex-col ${isVertical ? 'md:flex-row md:items-center' : 'lg:flex-row lg:items-center'} gap-6 md:gap-10`}>
@@ -52,8 +54,21 @@ export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
         )}
       </div>
 
-      {/* Quote */}
+      {/* Quote & Company Info */}
       <div className={`${isVertical ? 'md:w-3/5' : 'lg:w-1/2'} flex flex-col justify-center`}>
+        {/* Logo - Bold and prominent */}
+        {logoUrl && (
+          <div className="mb-6">
+            <Image
+              src={logoUrl}
+              alt={company}
+              width={180}
+              height={60}
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
+          </div>
+        )}
+        
         <Quote className="w-8 h-8 text-[#E8192C]/30 mb-4" />
         <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-slate-900 leading-relaxed mb-6">
           &ldquo;{quote}&rdquo;
@@ -61,7 +76,7 @@ export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
         <div>
           <p className="font-bold text-slate-900">{name}</p>
           <p className="text-slate-500 text-sm">{company}</p>
-          <span className="inline-block mt-3 px-3 py-1.5 bg-[#E8192C] text-white text-sm font-semibold rounded-full">
+          <span className="inline-block mt-3 px-4 py-2 bg-[#E8192C] text-white text-sm font-bold rounded-full">
             {stat}
           </span>
         </div>
