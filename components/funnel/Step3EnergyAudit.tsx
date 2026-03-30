@@ -69,11 +69,15 @@ That's really useful because it tells us exactly how much energy your home needs
         </WhyCard>
       </div>
 
-      {/* Interactive Calculator */}
-      <div className="mt-10">
-        <h3 className="text-xl font-bold text-slate-900 mb-2 text-center">Try It Yourself</h3>
-        <p className="text-slate-500 text-center text-sm mb-6">Enter your numbers to see the maths in action</p>
-        <FormulaCalculator />
+      {/* Interactive Calculator - Mobile First */}
+      <div className="mt-8 sm:mt-10 -mx-4 sm:mx-0 px-4 sm:px-0">
+        <div className="bg-gradient-to-b from-slate-50 to-transparent rounded-t-2xl sm:rounded-2xl py-6 sm:py-8 px-0 sm:px-0">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-1.5 text-center">Try It Yourself</h3>
+          <p className="text-slate-500 text-center text-xs sm:text-sm px-4">Enter your numbers to see the maths in action</p>
+        </div>
+        <div className="bg-white sm:rounded-b-2xl">
+          <FormulaCalculator />
+        </div>
       </div>
     </SalesStep>
   )

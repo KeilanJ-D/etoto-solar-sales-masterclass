@@ -20,7 +20,8 @@ export default function Footer() {
               alt="ETOTO Media" 
               width={200}
               height={56}
-              className="h-12 md:h-14 w-auto object-contain"
+              style={{ width: 'auto', height: 'auto', maxHeight: '56px' }}
+              className="h-12 md:h-14"
             />
           </Link>
           
