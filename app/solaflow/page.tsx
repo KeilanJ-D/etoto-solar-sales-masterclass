@@ -452,59 +452,60 @@ function BrandingCustomizer({
                 </button>
               ))}
             </div>
-          <div className="flex items-center gap-3">
-            <input
-              type="color"
-              value={brandColor}
-              onChange={(e) => setBrandColor(e.target.value)}
-              className="w-14 h-14 rounded-xl border border-slate-200 cursor-pointer"
-            />
-            <div className="flex-1">
-              <label className="text-xs text-slate-500 mb-1 block">Custom hex</label>
+            <div className="flex items-center gap-3">
               <input
-                type="text"
+                type="color"
                 value={brandColor}
                 onChange={(e) => setBrandColor(e.target.value)}
-                className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-mono text-slate-700"
+                className="w-14 h-14 rounded-xl border border-slate-200 cursor-pointer"
               />
+              <div className="flex-1">
+                <label className="text-xs text-slate-500 mb-1 block">Custom hex</label>
+                <input
+                  type="text"
+                  value={brandColor}
+                  onChange={(e) => setBrandColor(e.target.value)}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-sm font-mono text-slate-700"
+                />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="space-y-3">
-          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <Upload className="w-4 h-4" />
-            Company Logo
-          </label>
-          {logoUrl ? (
-            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
-              <Image 
-                src={logoUrl} 
-                alt="Logo preview" 
-                width={120} 
-                height={48} 
-                className="object-contain"
-                style={{ height: 'auto', width: 'auto', maxHeight: '48px' }}
-              />
-              <button
-                onClick={() => setLogoUrl(null)}
-                className="ml-auto p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-          ) : (
-            <label className="flex items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-all">
-              <Upload className="w-6 h-6 text-slate-400" />
-              <span className="text-slate-600 font-medium">Click to upload logo</span>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleLogoUpload}
-                className="hidden"
-              />
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Upload className="w-4 h-4" />
+              Company Logo
             </label>
-          )}
+            {logoUrl ? (
+              <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
+                <Image 
+                  src={logoUrl} 
+                  alt="Logo preview" 
+                  width={120} 
+                  height={48} 
+                  className="object-contain"
+                  style={{ height: 'auto', width: 'auto', maxHeight: '48px' }}
+                />
+                <button
+                  onClick={() => setLogoUrl(null)}
+                  className="ml-auto p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center gap-3 px-6 py-8 border-2 border-dashed border-slate-200 rounded-xl cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-all min-h-[100px]">
+                <Upload className="w-6 h-6 text-slate-400" />
+                <span className="text-slate-600 font-medium">Click to upload logo</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  className="hidden"
+                />
+              </label>
+            )}
+          </div>
         </div>
       </div>
     </div>
