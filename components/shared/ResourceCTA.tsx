@@ -22,10 +22,10 @@ export function ResourceCTA({ icon: Icon, title, description, href, ctaText, pri
           <p className="text-sm text-slate-600 mb-3">{description}</p>
           <Link
             href={href}
-            className="inline-flex items-center gap-2 text-[#E8192C] hover:text-[#D01622] font-medium text-sm transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center sm:inline-flex gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-medium text-sm py-3 px-4 rounded-lg transition-colors min-h-[48px] touch-action-manipulation"
           >
             {ctaText}
-            {price && <span className="text-slate-500">— {price}</span>}
+            {price && <span className="opacity-80">— {price}</span>}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

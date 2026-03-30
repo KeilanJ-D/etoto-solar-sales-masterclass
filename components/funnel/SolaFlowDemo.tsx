@@ -75,13 +75,13 @@ export default function SolaFlowDemo() {
         </div>
 
         {/* SolaFlow CTA */}
-        <div className={`mt-8 bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 text-center transition-all duration-700 delay-350 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <p className="text-lg text-slate-300 mb-4">
+        <div className={`mt-8 bg-white/5 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-white/10 text-center transition-all duration-700 delay-350 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <p className="text-base sm:text-lg text-slate-300 mb-4">
             Want this branded to <strong className="text-white">YOUR</strong> business? <span className="text-[#F5921E] font-semibold">SolaFlow — £200/month</span>
           </p>
           <Link
             href="/solaflow"
-            className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3 px-6 rounded-full transition-all"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold py-4 px-6 rounded-xl sm:rounded-full transition-all min-h-[56px] touch-action-manipulation"
           >
             <span>Get SolaFlow for Your Business</span>
             <ArrowRight className="w-5 h-5" />

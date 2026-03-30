@@ -117,7 +117,7 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
     
     const lines = content.split('\n')
     return (
-      <div className="space-y-1">
+      <div className="space-y-2 sm:space-y-1">
         {lines.map((line, i) => {
           // Detect speaker labels
           let formattedLine = line
@@ -135,8 +135,8 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
             .replace(/\[CUSTOMER\]/g, '<span class="text-green-400 font-bold">[CUSTOMER]</span>')
           
           return (
-            <div key={i} className={`flex gap-3 ${speakerClass} py-0.5`}>
-              <span className="script-line-number font-mono">{i + 1}</span>
+            <div key={i} className={`flex gap-3 ${speakerClass} py-1 sm:py-0.5`}>
+              <span className="script-line-number font-mono text-xs sm:text-sm hidden sm:block">{i + 1}</span>
               <span 
                 className="flex-1"
                 dangerouslySetInnerHTML={{ __html: formattedLine }}
@@ -151,26 +151,27 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
   return (
     <div className="relative mb-6 sm:mb-8 group">
       {/* Cinematic red glow on left */}
-      <div className="absolute left-0 top-4 bottom-4 w-1 rounded-full bg-gradient-to-b from-[#E8192C] via-[#F5921E] to-[#E8192C] shadow-[0_0_30px_rgba(232,25,44,0.4),0_0_60px_rgba(232,25,44,0.2)] group-hover:shadow-[0_0_40px_rgba(232,25,44,0.5),0_0_80px_rgba(232,25,44,0.3)] transition-shadow duration-500" />
+      <div className="absolute left-0 top-4 bottom-4 w-1.5 sm:w-1 rounded-full bg-gradient-to-b from-[#E8192C] via-[#F5921E] to-[#E8192C] shadow-[0_0_30px_rgba(232,25,44,0.4),0_0_60px_rgba(232,25,44,0.2)] group-hover:shadow-[0_0_40px_rgba(232,25,44,0.5),0_0_80px_rgba(232,25,44,0.3)] transition-shadow duration-500" />
       
-      <div className="bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 relative ml-2 noise-texture overflow-hidden">
+      <div className="bg-slate-900 rounded-xl sm:rounded-2xl relative ml-3 sm:ml-2 noise-texture overflow-hidden">
         {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-800/50 via-transparent to-slate-950/50 pointer-events-none" />
         
         <div className="relative z-10">
-          {/* Header bar */}
-          <div className="flex items-center justify-between mb-4 sm:mb-5 gap-2 pb-3 border-b border-white/10">
+          {/* Sticky Header bar on mobile */}
+          <div className="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-sm flex items-center justify-between gap-2 px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-b border-white/10">
             <div className="flex items-center gap-2">
               <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" />
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500" />
               </div>
-              <span className="ml-2 text-slate-400 text-sm font-medium tracking-wide">{title}</span>
+              <span className="ml-2 text-slate-400 text-xs sm:text-sm font-medium tracking-wide">{title}</span>
             </div>
+            {/* Desktop copy button in header */}
             <button
               onClick={handleCopy}
-              className={`flex items-center gap-2 text-sm bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 px-4 py-2.5 rounded-lg transition-all min-h-[44px] touch-action-manipulation flex-shrink-0 border border-white/10 hover:border-white/20 ${
+              className={`hidden sm:flex items-center gap-2 text-sm bg-white/5 hover:bg-white/10 active:bg-white/15 text-slate-300 px-4 py-2.5 rounded-lg transition-all min-h-[44px] touch-action-manipulation flex-shrink-0 border border-white/10 hover:border-white/20 ${
                 showPulse ? 'ring-2 ring-[#E8192C]/40 ring-offset-2 ring-offset-slate-900' : ''
               } ${copied ? 'copy-success' : ''}`}
               aria-label="Copy script to clipboard"
@@ -189,15 +190,18 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
             </button>
           </div>
           
-          {/* Script content with line numbers */}
-          <div ref={contentRef} className="text-slate-100 text-base sm:text-base md:text-lg leading-relaxed font-mono">
+          {/* Script content - larger text on mobile for mid-call reading */}
+          <div 
+            ref={contentRef} 
+            className="text-slate-100 text-base sm:text-base md:text-lg leading-[1.8] sm:leading-relaxed font-mono px-4 sm:px-6 md:px-8 py-4 sm:py-5"
+          >
             {typeof children === 'string' ? formatScript(children) : (
               <div className="whitespace-pre-wrap">{children}</div>
             )}
           </div>
           
           {/* Legend */}
-          <div className="flex items-center gap-4 mt-4 pt-3 border-t border-white/10 text-xs text-slate-500">
+          <div className="flex items-center gap-4 px-4 sm:px-6 md:px-8 py-3 border-t border-white/10 text-xs text-slate-500">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#E8192C]" />
               You
@@ -207,6 +211,29 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
               Customer
             </span>
           </div>
+          
+          {/* Mobile-only full-width copy button at bottom */}
+          <button
+            onClick={handleCopy}
+            className={`sm:hidden w-full flex items-center justify-center gap-2 text-base font-bold py-4 transition-all min-h-[56px] touch-action-manipulation ${
+              copied 
+                ? 'bg-green-500 text-white' 
+                : 'bg-green-600 hover:bg-green-700 active:bg-green-800 text-white'
+            } ${showPulse ? 'animate-pulse' : ''}`}
+            aria-label="Copy script to clipboard"
+          >
+            {copied ? (
+              <>
+                <Check className="w-5 h-5" />
+                <span>Copied to Clipboard!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-5 h-5" />
+                <span>Copy Script</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

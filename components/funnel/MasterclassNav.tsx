@@ -6,13 +6,13 @@ import { useEffect, useRef } from 'react'
 import { Home, ListOrdered, Video, Phone, HelpCircle, Package, Zap } from 'lucide-react'
 
 const navItems = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/steps', label: 'The 9 Steps', icon: ListOrdered },
-  { href: '/live-call', label: 'Live Call', icon: Video },
-  { href: '/appointment-setting', label: 'Appointment Setting', icon: Phone },
-  { href: '/quiz', label: 'Quiz', icon: HelpCircle },
-  { href: '/resources', label: 'Resources', icon: Package },
-  { href: '/solaflow', label: 'SolaFlow', icon: Zap },
+  { href: '/', label: 'Home', shortLabel: 'Home', icon: Home },
+  { href: '/steps', label: 'The 9 Steps', shortLabel: 'Steps', icon: ListOrdered },
+  { href: '/live-call', label: 'Live Call', shortLabel: 'Call', icon: Video },
+  { href: '/appointment-setting', label: 'Appointment Setting', shortLabel: 'Appts', icon: Phone },
+  { href: '/quiz', label: 'Quiz', shortLabel: 'Quiz', icon: HelpCircle },
+  { href: '/resources', label: 'Resources', shortLabel: 'Docs', icon: Package },
+  { href: '/solaflow', label: 'SolaFlow', shortLabel: 'Flow', icon: Zap },
 ]
 
 export default function MasterclassNav() {
@@ -50,15 +50,15 @@ export default function MasterclassNav() {
                 key={item.href}
                 href={item.href}
                 ref={isActive ? activeRef : null}
-                className={`nav-pill flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 touch-action-manipulation scroll-snap-start flex-shrink-0 min-h-[44px] ${
+                className={`nav-pill flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all duration-200 touch-action-manipulation scroll-snap-start flex-shrink-0 min-h-[44px] ${
                   isActive
                     ? 'bg-[#E8192C] text-white shadow-lg shadow-[#E8192C]/25'
                     : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:bg-slate-300 hover:shadow-md'
                 }`}
               >
                 <Icon className="w-4 h-4 flex-shrink-0" />
-                <span className="hidden xs:inline sm:inline">{item.label}</span>
-                <span className="xs:hidden sm:hidden">{item.label.split(' ')[0]}</span>
+                <span className="sm:hidden">{item.shortLabel}</span>
+                <span className="hidden sm:inline">{item.label}</span>
               </Link>
             )
           })}

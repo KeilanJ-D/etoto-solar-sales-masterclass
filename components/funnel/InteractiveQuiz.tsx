@@ -373,7 +373,7 @@ export default function InteractiveQuiz() {
               
               <button
                 onClick={() => setQuizStarted(true)}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl transition-all hover:scale-105 active:scale-95 min-h-[56px] touch-action-manipulation text-lg shadow-lg shadow-[#E8192C]/25"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl transition-all hover:scale-105 active:scale-95 min-h-[56px] touch-action-manipulation text-lg shadow-lg shadow-[#E8192C]/25"
               >
                 Start Quiz
                 <ChevronRight className="w-5 h-5" />
@@ -381,24 +381,26 @@ export default function InteractiveQuiz() {
             </div>
           ) : !quizComplete ? (
             <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
-              {/* Progress */}
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-sm text-slate-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
-                <span className="text-sm font-bold text-[#E8192C]">Score: {score}/{currentQuestionIndex}</span>
-              </div>
-              <div className="h-2 bg-white/10 rounded-full mb-8">
-                <div 
-                  className="h-full bg-[#E8192C] rounded-full transition-all duration-300"
-                  style={{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }}
-                />
+              {/* Sticky Progress bar on mobile */}
+              <div className="sticky top-0 z-10 -mx-4 sm:mx-0 -mt-4 sm:mt-0 px-4 sm:px-0 pt-4 sm:pt-0 pb-4 bg-slate-900/95 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm text-slate-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
+                  <span className="text-sm font-bold text-[#E8192C]">Score: {score}/{currentQuestionIndex}</span>
+                </div>
+                <div className="h-2 bg-white/10 rounded-full">
+                  <div 
+                    className="h-full bg-[#E8192C] rounded-full transition-all duration-300"
+                    style={{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }}
+                  />
+                </div>
               </div>
 
-              {/* Question */}
-              <h3 className="text-lg md:text-xl font-bold mb-6">{question.question}</h3>
+              {/* Question - larger on mobile */}
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-6 mt-4 sm:mt-6">{question.question}</h3>
 
-              {/* Options */}
+              {/* Options - 56px min-height touch targets with 16px gap */}
               {question.type !== 'shortanswer' ? (
-                <div className="space-y-3 sm:space-y-4 mb-6">
+                <div className="space-y-4 mb-6">
                   {question.options?.map((option, index) => {
                     const isSelected = question.type === 'multiselect' 
                       ? (selectedAnswer as string[] || []).includes(option)
@@ -410,7 +412,7 @@ export default function InteractiveQuiz() {
                         key={index}
                         onClick={() => handleSelectOption(option)}
                         disabled={showResult}
-                        className={`w-full text-left p-3 sm:p-4 rounded-lg border transition-all touch-action-manipulation min-h-[52px] ${
+                        className={`w-full text-left p-4 rounded-xl border-2 transition-all touch-action-manipulation min-h-[56px] ${
                           showResult
                             ? isCorrect
                               ? 'bg-green-500/20 border-green-500 text-green-100'
@@ -423,7 +425,7 @@ export default function InteractiveQuiz() {
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                             showResult
                               ? isCorrect
                                 ? 'border-green-500 bg-green-500'
@@ -434,11 +436,11 @@ export default function InteractiveQuiz() {
                                 ? 'border-[#E8192C] bg-[#E8192C]'
                                 : 'border-white/30'
                           }`}>
-                            {showResult && isCorrect && <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
-                            {showResult && isSelected && !isCorrect && <XCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
-                            {!showResult && isSelected && <div className="w-2 h-2 bg-white rounded-full" />}
+                            {showResult && isCorrect && <CheckCircle className="w-4 h-4 text-white" />}
+                            {showResult && isSelected && !isCorrect && <XCircle className="w-4 h-4 text-white" />}
+                            {!showResult && isSelected && <div className="w-2.5 h-2.5 bg-white rounded-full" />}
                           </div>
-                          <span className="text-sm sm:text-base">{option}</span>
+                          <span className="text-base">{option}</span>
                         </div>
                       </button>
                     )

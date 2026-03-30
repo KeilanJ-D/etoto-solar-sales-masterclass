@@ -13,7 +13,7 @@ interface GoogleReview {
 
 function ReviewCard({ review }: { review: GoogleReview }) {
   return (
-    <div className="flex-shrink-0 w-[300px] sm:w-[340px] bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+    <div className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] bg-white rounded-xl p-5 shadow-sm border border-slate-100">
       {/* Stars */}
       <div className="flex gap-0.5 mb-3">
         {Array.from({ length: review.rating }).map((_, i) => (

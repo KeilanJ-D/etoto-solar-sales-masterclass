@@ -135,19 +135,19 @@ export default function ResourcesPage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-8">
             {products.map((product) => (
               <Link
                 key={product.href}
                 href={product.href}
-                className="group bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 transition-all hover:shadow-lg hover:border-slate-300"
+                className="group bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 transition-all hover:shadow-lg hover:border-slate-300 min-h-[120px] touch-action-manipulation"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="font-bold text-slate-900">{product.title}</h3>
-                  <span className="text-[#E8192C] font-bold">{product.price}</span>
+                <div className="flex justify-between items-start mb-2 sm:mb-3">
+                  <h3 className="font-bold text-slate-900 text-base">{product.title}</h3>
+                  <span className="text-[#E8192C] font-bold text-lg">{product.price}</span>
                 </div>
                 <p className="text-sm text-slate-500 mb-4">{product.description}</p>
-                <span className="inline-flex items-center gap-1 text-sm font-medium text-[#E8192C] group-hover:gap-2 transition-all">
+                <span className="w-full sm:w-auto flex items-center justify-center sm:inline-flex gap-2 text-sm font-medium bg-[#E8192C] text-white py-3 px-4 rounded-lg group-hover:bg-[#D01622] transition-all min-h-[48px]">
                   Learn more
                   <ArrowRight className="w-4 h-4" />
                 </span>

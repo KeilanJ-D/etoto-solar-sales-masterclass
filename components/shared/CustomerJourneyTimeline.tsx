@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Check, Clock, Phone, Calendar, FileText, MessageSquare, Trophy } from 'lucide-react'
+import { Check, Clock, Phone, Calendar, FileText, MessageSquare, Trophy, ChevronDown } from 'lucide-react'
 
 interface TimelineStep {
   timestamp: string
@@ -37,7 +37,28 @@ export function CustomerJourneyTimeline({
   totalValue
 }: CustomerJourneyTimelineProps) {
   const [visibleSteps, setVisibleSteps] = useState<number[]>([])
+  const [expandedSteps, setExpandedSteps] = useState<Set<number>>(new Set())
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  // On mobile, auto-expand the "WON" step (highlighted)
+  useEffect(() => {
+    const highlightedIndex = steps.findIndex(s => s.highlight)
+    if (highlightedIndex !== -1) {
+      setExpandedSteps(new Set([highlightedIndex]))
+    }
+  }, [steps])
+
+  const toggleStep = (index: number) => {
+    setExpandedSteps(prev => {
+      const next = new Set(prev)
+      if (next.has(index)) {
+        next.delete(index)
+      } else {
+        next.add(index)
+      }
+      return next
+    })
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -106,41 +127,52 @@ export function CustomerJourneyTimeline({
                 }`}>
                   {/* Content card */}
                   <div className={`flex-1 ${isAlternate ? 'sm:text-right sm:pr-8' : 'sm:pl-8'} sm:w-1/2`}>
-                    <div className={`bg-white rounded-xl border p-4 sm:p-5 shadow-sm ${
-                      step.highlight 
-                        ? 'border-green-300 bg-green-50' 
-                        : 'border-slate-200 hover:border-slate-300'
-                    } transition-colors`}>
-                      {/* Timestamp */}
-                      <p className="text-xs font-medium text-slate-400 mb-1">{step.timestamp}</p>
+                    {/* On mobile: collapsible card. On desktop: always expanded */}
+                    <button
+                      onClick={() => toggleStep(index)}
+                      className={`sm:cursor-default w-full text-left bg-white rounded-xl border p-4 sm:p-5 shadow-sm ${
+                        step.highlight 
+                          ? 'border-green-300 bg-green-50' 
+                          : 'border-slate-200 hover:border-slate-300'
+                      } transition-colors`}
+                    >
+                      {/* Timestamp + expand indicator on mobile */}
+                      <div className="flex items-center justify-between gap-2 sm:block">
+                        <p className="text-xs font-medium text-slate-400 mb-1">{step.timestamp}</p>
+                        <ChevronDown className={`w-4 h-4 text-slate-400 sm:hidden transition-transform ${
+                          expandedSteps.has(index) || step.highlight ? 'rotate-180' : ''
+                        }`} />
+                      </div>
                       
-                      {/* Event */}
+                      {/* Event - always visible */}
                       <h4 className={`font-bold mb-1 ${
                         step.highlight ? 'text-green-700' : 'text-slate-900'
                       }`}>
                         {step.event}
                       </h4>
                       
-                      {/* Detail */}
-                      <p className={`text-sm ${
-                        step.highlight ? 'text-green-600' : 'text-slate-600'
-                      }`}>
-                        {step.detail}
-                      </p>
-                      
-                      {/* Quote */}
-                      {step.quote && (
-                        <div className={`mt-3 pt-3 border-t ${
-                          step.highlight ? 'border-green-200' : 'border-slate-100'
+                      {/* Detail + Quote - collapsible on mobile, always visible on desktop */}
+                      <div className={`${expandedSteps.has(index) || step.highlight ? 'block' : 'hidden'} sm:block`}>
+                        <p className={`text-sm ${
+                          step.highlight ? 'text-green-600' : 'text-slate-600'
                         }`}>
-                          <p className={`text-sm italic ${
-                            step.highlight ? 'text-green-700' : 'text-slate-700'
+                          {step.detail}
+                        </p>
+                        
+                        {/* Quote */}
+                        {step.quote && (
+                          <div className={`mt-3 pt-3 border-t ${
+                            step.highlight ? 'border-green-200' : 'border-slate-100'
                           }`}>
-                            &ldquo;{step.quote}&rdquo;
-                          </p>
-                        </div>
-                      )}
-                    </div>
+                            <p className={`text-sm italic ${
+                              step.highlight ? 'text-green-700' : 'text-slate-700'
+                            }`}>
+                              &ldquo;{step.quote}&rdquo;
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    </button>
                   </div>
 
                   {/* Hidden spacer for desktop alternating layout */}

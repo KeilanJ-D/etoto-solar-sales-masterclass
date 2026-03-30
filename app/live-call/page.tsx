@@ -98,7 +98,7 @@ export default function LiveCallPage() {
         </div>
       </section>
 
-      {/* What to listen for */}
+      {/* What to listen for - timestamps stack on mobile */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto">
           <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
@@ -111,8 +111,8 @@ export default function LiveCallPage() {
               { time: '14:00', insight: 'The objection is handled without arguing. No pushback, just data and reassurance.' },
               { time: 'End', insight: 'The proposal is sent DURING the call, not after. That\'s the key to maintaining momentum.' },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <span className="flex-shrink-0 px-3 py-1.5 bg-[#E8192C] text-white text-xs font-bold rounded-lg">
+              <div key={i} className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 sm:p-5 bg-slate-50 rounded-xl border border-slate-200">
+                <span className="flex-shrink-0 px-4 py-2 bg-[#E8192C] text-white text-sm sm:text-base font-bold rounded-lg w-fit min-h-[40px] flex items-center">
                   {item.time}
                 </span>
                 <p className="text-slate-700 text-sm sm:text-base leading-relaxed">{item.insight}</p>

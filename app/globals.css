@@ -68,9 +68,20 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  /* Prevent iOS zoom on input focus - 16px minimum */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  @media (min-width: 640px) {
+    input, textarea, select {
+      font-size: inherit;
+    }
   }
 }
 

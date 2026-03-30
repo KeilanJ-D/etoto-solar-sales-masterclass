@@ -73,7 +73,7 @@ export default function ProductHero({
               href={buyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold py-4 px-8 rounded-full transition-all shadow-lg hover:shadow-xl min-h-[56px]"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-semibold py-4 px-8 rounded-xl sm:rounded-full transition-all shadow-lg hover:shadow-xl min-h-[56px] touch-action-manipulation"
             >
               <span>Buy Access — Unlock Instantly</span>
               <ArrowRight className="w-5 h-5" />

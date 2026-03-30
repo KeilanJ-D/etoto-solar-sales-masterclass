@@ -368,6 +368,8 @@ function BrandingCustomizer({
   logoUrl: string | null
   setLogoUrl: (u: string | null) => void
 }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  
   const presetColors = [
     { color: '#E8192C', label: 'Red' },
     { color: '#3B82F6', label: 'Blue' },
@@ -389,56 +391,67 @@ function BrandingCustomizer({
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
-      <div className="p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white">
+      {/* Collapsible header on mobile */}
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="w-full p-5 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white sm:cursor-default"
+      >
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200 flex items-center justify-center">
-            <Palette className="w-7 h-7 text-slate-600" />
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-slate-100 to-slate-50 border border-slate-200 flex items-center justify-center flex-shrink-0">
+            <Palette className="w-6 h-6 sm:w-7 sm:h-7 text-slate-600" />
           </div>
-          <div>
-            <h3 className="text-xl font-bold text-slate-900">Brand Your Calculator</h3>
-            <p className="text-sm text-slate-500">See changes instantly below</p>
+          <div className="flex-1 text-left">
+            <h3 className="text-lg sm:text-xl font-bold text-slate-900">Brand Your Calculator</h3>
+            <p className="text-sm text-slate-500">
+              <span className="sm:hidden">{isExpanded ? 'Tap to collapse' : 'Tap to customise'}</span>
+              <span className="hidden sm:inline">See changes instantly below</span>
+            </p>
           </div>
+          <ChevronRight className={`w-5 h-5 text-slate-400 sm:hidden transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
         </div>
-      </div>
+      </button>
       
-      <div className="p-6 space-y-6">
-        <div className="space-y-3">
-          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <Building2 className="w-4 h-4" />
-            Company Name
-          </label>
-          <input
-            type="text"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
-            className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-lg"
-            placeholder="Your Company Name"
-            maxLength={25}
-          />
-        </div>
-
-        <div className="space-y-3">
-          <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <Palette className="w-4 h-4" />
-            Brand Color
-          </label>
-          <div className="grid grid-cols-5 gap-2 mb-4">
-            {presetColors.map((preset) => (
-              <button
-                key={preset.color}
-                onClick={() => setBrandColor(preset.color)}
-                className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
-                  brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'
-                }`}
-              >
-                <div 
-                  className="w-10 h-10 rounded-lg shadow-md"
-                  style={{ backgroundColor: preset.color }}
-                />
-                <span className="text-xs font-medium text-slate-600">{preset.label}</span>
-              </button>
-            ))}
+      {/* Content - always visible on desktop, collapsible on mobile */}
+      <div className={`sm:block ${isExpanded ? 'block' : 'hidden'}`}>
+        <div className="p-5 sm:p-6 space-y-6">
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Building2 className="w-4 h-4" />
+              Company Name
+            </label>
+            <input
+              type="text"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              className="w-full px-4 py-3.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base min-h-[48px]"
+              placeholder="Your Company Name"
+              maxLength={25}
+            />
           </div>
+
+          <div className="space-y-3">
+            <label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+              <Palette className="w-4 h-4" />
+              Brand Color
+            </label>
+            {/* 44px minimum touch targets for color buttons */}
+            <div className="grid grid-cols-5 gap-2 sm:gap-3 mb-4">
+              {presetColors.map((preset) => (
+                <button
+                  key={preset.color}
+                  onClick={() => setBrandColor(preset.color)}
+                  className={`flex flex-col items-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-xl transition-all min-h-[72px] touch-action-manipulation ${
+                    brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'
+                  }`}
+                >
+                  <div 
+                    className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg shadow-md flex-shrink-0"
+                    style={{ backgroundColor: preset.color }}
+                  />
+                  <span className="text-[10px] sm:text-xs font-medium text-slate-600">{preset.label}</span>
+                </button>
+              ))}
+            </div>
           <div className="flex items-center gap-3">
             <input
               type="color"
@@ -538,19 +551,19 @@ export default function SolaFlowPage() {
             Your leads pre-qualify themselves, pre-build their system, and land in your CRM ready to buy.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 w-full max-w-md sm:max-w-none mx-auto">
             <a
               href="https://buy.stripe.com/bJeeVfgPQ1k95zc1XYfEk07"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#E8192C] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl sm:rounded-full shadow-lg hover:shadow-xl transition-all min-h-[56px] touch-action-manipulation"
             >
               Get SolaFlow — £200/month
               <ArrowRight className="w-5 h-5" />
             </a>
             <a
               href="#proof"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-medium rounded-full hover:bg-white/20 transition-all border border-white/10"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-medium rounded-xl sm:rounded-full hover:bg-white/20 active:bg-white/30 transition-all border border-white/10 min-h-[56px] touch-action-manipulation"
             >
               See It Working
               <ChevronRight className="w-5 h-5" />
