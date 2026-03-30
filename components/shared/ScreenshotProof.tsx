@@ -17,7 +17,7 @@ interface ScreenshotProofProps {
 
 export function ScreenshotProof({ items }: ScreenshotProofProps) {
   return (
-    <div className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-8">
           <span className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full mb-3">
@@ -29,29 +29,39 @@ export function ScreenshotProof({ items }: ScreenshotProofProps) {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {items.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden"
+              className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden flex flex-col"
             >
-              <div className="p-4 sm:p-5">
-                <p className="text-lg sm:text-xl font-bold text-slate-900 mb-3">
+              {/* Header with headline */}
+              <div className="p-4 sm:p-5 bg-slate-900 text-white">
+                <p className="text-lg sm:text-xl font-bold">
                   {item.headline}
                 </p>
-                <div className="relative rounded-lg overflow-hidden bg-slate-100 border border-slate-200">
+                <p className="text-sm text-slate-400 mt-1">
+                  {item.caption}
+                </p>
+              </div>
+              
+              {/* Screenshot - constrained height with object-contain */}
+              <div className="relative bg-[#0B141A] flex-1 flex items-center justify-center p-4">
+                <div className="relative w-full max-h-[400px] overflow-hidden rounded-lg">
                   <Image
                     src={item.image}
                     alt={item.headline}
-                    width={400}
-                    height={300}
-                    className="w-full h-auto"
+                    width={600}
+                    height={400}
+                    className="w-full h-auto max-h-[400px] object-contain"
+                    style={{ objectFit: 'contain' }}
                   />
                 </div>
-                <p className="mt-3 text-sm text-slate-600">
-                  {item.caption}
-                </p>
-                <p className="mt-1 text-xs text-slate-400">
+              </div>
+              
+              {/* Footer with source */}
+              <div className="px-4 py-3 bg-slate-50 border-t border-slate-100">
+                <p className="text-xs text-slate-500">
                   {item.source}
                 </p>
               </div>
@@ -59,6 +69,6 @@ export function ScreenshotProof({ items }: ScreenshotProofProps) {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

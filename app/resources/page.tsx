@@ -3,9 +3,10 @@ import SummaryDownloads from '@/components/funnel/SummaryDownloads'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
 import { ArrowRight, Package } from 'lucide-react'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { ScreenshotProof } from '@/components/shared/ScreenshotProof'
 import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
-import { screenshotProof } from '@/lib/social-proof-data'
+import { screenshotProof, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Sales Resources & Toolkit — ETOTO Media',
@@ -44,6 +45,9 @@ const products = [
 ]
 
 export default function ResourcesPage() {
+  const abRenewablesVideo = getVideoTestimonialById('ab-renewables')
+  const genbattVideo = getVideoTestimonialById('genbatt')
+  
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
@@ -66,23 +70,45 @@ export default function ResourcesPage() {
       
       <SummaryDownloads />
       
-      {/* Screenshot Proof */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8">
-            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
-              Real Results
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
-              What our clients are saying
-            </h2>
+      {/* AB Renewables Video Testimonial */}
+      {abRenewablesVideo && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Client Success Story
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{abRenewablesVideo.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={abRenewablesVideo} />
           </div>
-          <ScreenshotProof items={screenshotProof} />
-        </div>
-      </section>
+        </section>
+      )}
+      
+      {/* Screenshot Proof - WhatsApp screenshots */}
+      <ScreenshotProof items={screenshotProof} />
+      
+      {/* Genbatt Video Testimonial */}
+      {genbattVideo && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Commercial Solar
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{genbattVideo.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={genbattVideo} />
+          </div>
+        </section>
+      )}
       
       {/* Paid Products */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-white">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-medium rounded-full mb-4">
@@ -101,7 +127,7 @@ export default function ResourcesPage() {
               <Link
                 key={product.href}
                 href={product.href}
-                className="group bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-6 transition-all hover:shadow-lg hover:border-slate-300"
+                className="group bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-6 transition-all hover:shadow-lg hover:border-slate-300"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="font-bold text-slate-900">{product.title}</h3>

@@ -2,8 +2,9 @@ import MasterclassNav from '@/components/funnel/MasterclassNav'
 import AppointmentSetting from '@/components/funnel/AppointmentSetting'
 import Footer from '@/components/funnel/Footer'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { AppointmentQuizCTA, SolaFlowCTA } from '@/components/shared/ResourceCTA'
-import { getTestimonialsByIds } from '@/lib/social-proof-data'
+import { getTestimonialsByIds, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'Solar Appointment Setter Playbook — ETOTO Media',
@@ -15,7 +16,7 @@ export const metadata = {
 }
 
 export default function AppointmentSettingPage() {
-  // Alltech = 7 appts/week, 50% close; MCJ = booked 5 weeks out
+  const carterVideo = getVideoTestimonialById('carter-electrical')
   const appointmentTestimonials = getTestimonialsByIds(['alltech', 'mcj'])
   
   return (
@@ -39,6 +40,23 @@ export default function AppointmentSettingPage() {
       </section>
       
       <AppointmentSetting />
+      
+      {/* Carter Electrical Video Testimonial */}
+      {carterVideo && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Client Success Story
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{carterVideo.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={carterVideo} />
+          </div>
+        </section>
+      )}
       
       {/* Testimonials - appointment setting results */}
       <TestimonialRow 

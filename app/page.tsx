@@ -8,9 +8,8 @@ import Link from 'next/link'
 import { ListOrdered, Video, Phone, HelpCircle, Calculator, Package, ArrowRight } from 'lucide-react'
 import { StatsBanner } from '@/components/shared/StatsBanner'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
-import { ClientLogos } from '@/components/shared/ClientLogos'
 import { GoogleReviewsCarousel } from '@/components/shared/GoogleReviewsCarousel'
-import { stats, getVideoTestimonialById, clientLogos } from '@/lib/social-proof-data'
+import { stats, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 const ctaCards = [
   {
@@ -59,6 +58,7 @@ const ctaCards = [
 
 export default function SalesMasterclass() {
   const evlmTestimonial = getVideoTestimonialById('evlm')
+  const jemTestimonial = getVideoTestimonialById('jem-energy')
   
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
@@ -70,10 +70,10 @@ export default function SalesMasterclass() {
       <StatsBanner stats={stats} />
       <TheMethod />
       
-      {/* PART 2: EVLM VIDEO TESTIMONIAL - Single hero video */}
+      {/* PART 2: EVLM VIDEO TESTIMONIAL */}
       {evlmTestimonial && (
         <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-8">
               <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
                 Client Success Story
@@ -87,11 +87,8 @@ export default function SalesMasterclass() {
         </section>
       )}
       
-      {/* PART 3: CLIENT LOGOS */}
-      <ClientLogos logos={clientLogos} />
-      
-      {/* PART 4: CTA CARDS */}
-      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* PART 3: CTA CARDS */}
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           {/* Quick Start CTA */}
           <div className="bg-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 mb-10 sm:mb-12 text-center">
@@ -133,7 +130,7 @@ export default function SalesMasterclass() {
                 <Link
                   key={card.href}
                   href={card.href}
-                  className="group bg-slate-50 hover:bg-slate-100 active:bg-slate-200 border border-slate-200 rounded-lg sm:rounded-xl p-4 sm:p-6 transition-all hover:shadow-lg hover:border-slate-300 touch-action-manipulation"
+                  className="group bg-white hover:bg-slate-50 active:bg-slate-100 border border-slate-200 rounded-lg sm:rounded-xl p-4 sm:p-6 transition-all hover:shadow-lg hover:border-slate-300 touch-action-manipulation"
                 >
                   <div className="flex items-start gap-3 sm:gap-4">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
@@ -154,6 +151,23 @@ export default function SalesMasterclass() {
           </div>
         </div>
       </section>
+      
+      {/* PART 4: JEM ENERGY VIDEO TESTIMONIAL */}
+      {jemTestimonial && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                ETOTO&apos;s First Solar Client
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{jemTestimonial.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={jemTestimonial} />
+          </div>
+        </section>
+      )}
       
       {/* PART 5: SOLAFLOW TEASER */}
       <SolaFlowDemo />

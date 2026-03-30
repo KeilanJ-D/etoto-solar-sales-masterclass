@@ -11,10 +11,10 @@ import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 import Footer from '@/components/funnel/Footer'
 import JumpToCalcButton from '@/components/funnel/JumpToCalcButton'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
-import { TestimonialCard } from '@/components/shared/TestimonialCard'
+import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
 import { StepProgress } from '@/components/shared/StepProgress'
 import { SalesScriptCTA, FormulaCheatSheetCTA } from '@/components/shared/ResourceCTA'
-import { getTestimonialsByIds } from '@/lib/social-proof-data'
+import { getTestimonialsByIds, getVideoTestimonialById } from '@/lib/social-proof-data'
 
 export const metadata = {
   title: 'The 9-Step Solar Sales Formula — ETOTO Media',
@@ -26,8 +26,7 @@ export const metadata = {
 }
 
 export default function StepsPage() {
-  const yeersTestimonial = getTestimonialsByIds(['yeers'])[0]
-  const abTestimonial = getTestimonialsByIds(['ab-renewables'])[0]
+  const ukRenewablesVideo = getVideoTestimonialById('uk-renewables')
   const endTestimonials = getTestimonialsByIds(['yeers', 'mcj', 'alltech'])
   
   return (
@@ -57,15 +56,6 @@ export default function StepsPage() {
       <Step2Discovery />
       <Step3EnergyAudit />
       
-      {/* Inline testimonial after Step 3 */}
-      {yeersTestimonial && (
-        <section className="py-8 px-4 sm:px-6 bg-slate-50">
-          <div className="max-w-2xl mx-auto">
-            <TestimonialCard testimonial={yeersTestimonial} />
-          </div>
-        </section>
-      )}
-      
       {/* Cross-link after Step 3 */}
       <section className="py-6 px-4 sm:px-6 bg-white">
         <div className="max-w-2xl mx-auto">
@@ -79,11 +69,19 @@ export default function StepsPage() {
       <Step6Financials />
       <Step7Objections />
       
-      {/* Inline testimonial after Step 7 */}
-      {abTestimonial && (
-        <section className="py-8 px-4 sm:px-6 bg-slate-50">
-          <div className="max-w-2xl mx-auto">
-            <TestimonialCard testimonial={abTestimonial} />
+      {/* UK Renewables Video Testimonial */}
+      {ukRenewablesVideo && (
+        <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3">
+                Client Success Story
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                &ldquo;{ukRenewablesVideo.stat}&rdquo;
+              </h2>
+            </div>
+            <VideoTestimonial testimonial={ukRenewablesVideo} />
           </div>
         </section>
       )}
