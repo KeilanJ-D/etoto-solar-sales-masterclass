@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Star } from 'lucide-react'
 import { googleReviewsUrl } from '@/lib/social-proof-data'
 
@@ -8,13 +9,13 @@ export default function Footer() {
     <footer className="py-10 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-slate-900">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-4">
             <img 
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
               alt="ETOTO Media" 
               className="h-10 md:h-12 object-contain"
             />
-          </div>
+          </Link>
           
           <div className="text-center md:text-right">
             <p className="text-white/60 text-sm md:text-base font-medium">
@@ -31,18 +32,18 @@ export default function Footer() {
             <div>
               <h4 className="text-white/80 font-semibold text-sm mb-3">Quick Links</h4>
               <ul className="space-y-2.5 sm:space-y-2">
-                <li><a href="#the-problem" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Problem</a></li>
-                <li><a href="#the-method" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Method</a></li>
-                <li><a href="#step-1" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The 9 Steps</a></li>
-                <li><a href="#live-call" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Live Call</a></li>
+                <li><Link href="/#the-problem" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Problem</Link></li>
+                <li><Link href="/#the-method" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Method</Link></li>
+                <li><Link href="/steps" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The 9 Steps</Link></li>
+                <li><Link href="/live-call" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Live Call</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white/80 font-semibold text-sm mb-3">Resources</h4>
               <ul className="space-y-2.5 sm:space-y-2">
-                <li><a href="#formula-calculator" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Calculator</a></li>
-                <li><a href="#quiz" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Quiz</a></li>
-                <li><a href="#downloads" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Downloads</a></li>
+                <li><Link href="/steps#formula-calculator" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Calculator</Link></li>
+                <li><Link href="/quiz" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Quiz</Link></li>
+                <li><Link href="/resources" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Downloads</Link></li>
               </ul>
             </div>
             <div className="col-span-2 sm:col-span-1">

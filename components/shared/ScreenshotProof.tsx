@@ -67,8 +67,8 @@ export function ScreenshotProof({ items }: ScreenshotProofProps) {
                     alt={item.headline}
                     width={600}
                     height={500}
-                    className="w-full object-contain"
-                    style={{ maxHeight: '420px', height: 'auto' }}
+                    className="object-contain"
+                    style={{ width: '100%', height: 'auto', maxHeight: '420px' }}
                   />
                 </div>
               </div>
