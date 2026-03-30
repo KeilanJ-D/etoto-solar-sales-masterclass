@@ -3,9 +3,17 @@ import Stripe from 'stripe'
 import { getFirebaseAdmin } from '@/lib/firebase-admin'
 import { FieldValue } from 'firebase-admin/firestore'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-04-30.basil',
-})
+// Lazy initialization to avoid build-time errors
+let stripeInstance: Stripe | null = null
+
+function getStripe(): Stripe {
+  if (!stripeInstance) {
+    stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: '2025-04-30.basil',
+    })
+  }
+  return stripeInstance
+}
 
 // Product prefixes for code generation
 const PRODUCT_PREFIXES: Record<string, string> = {
@@ -39,6 +47,7 @@ export async function POST(request: NextRequest) {
   let event: Stripe.Event
 
   try {
+    const stripe = getStripe()
     event = stripe.webhooks.constructEvent(
       body,
       signature,
