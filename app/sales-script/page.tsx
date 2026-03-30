@@ -285,7 +285,7 @@ function ScriptStep({
               )}
             </button>
           </div>
-          <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap font-sans">
+          <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap break-words overflow-hidden font-sans">
             {script}
           </pre>
         </div>
@@ -656,7 +656,7 @@ function ObjectionResponse({ response }: { response: string }) {
           )}
         </button>
       </div>
-      <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap font-sans">
+      <pre className="text-white text-sm leading-relaxed whitespace-pre-wrap break-words overflow-hidden font-sans">
         {response}
       </pre>
     </div>

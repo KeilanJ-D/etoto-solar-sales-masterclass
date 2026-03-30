@@ -37,7 +37,7 @@ export default function Step4BatteryValue() {
           <div className="w-3 h-3 rounded-full bg-green-500" />
           <span className="ml-2 text-slate-400 text-sm font-medium">What to Say</span>
         </div>
-        <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
+        <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap break-words overflow-hidden">
 {`"Right now, your house costs £3.28 a day to run. What if I told you we could get that down to £1.12?
 
 We fill your batteries up overnight at 7p per unit instead of the 21p you're paying now. That's an immediate saving of £788 per year — just by buying your energy at a different time of day.

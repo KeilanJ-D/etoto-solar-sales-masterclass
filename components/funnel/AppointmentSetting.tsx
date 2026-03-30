@@ -144,7 +144,7 @@ export default function AppointmentSetting() {
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="ml-2 text-slate-400 text-sm font-medium">Booking Script</span>
           </div>
-          <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
+          <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap break-words overflow-hidden">
 {`"Based on what you've told me and the estimate from our calculator, it looks like a system could save you around [SolaFlow estimate] per year.
 
 What we'd like to do is send one of our energy consultants to take a proper look at your roof and confirm those numbers.

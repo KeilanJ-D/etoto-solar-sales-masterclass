@@ -57,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${raleway.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth">
-      <body className="font-sans antialiased bg-white">
+      <body className="font-sans antialiased bg-white overflow-x-hidden">
         {children}
         <Analytics />
       </body>

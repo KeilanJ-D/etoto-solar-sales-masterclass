@@ -45,7 +45,7 @@ export default function Step6Financials() {
           <div className="w-3 h-3 rounded-full bg-green-500" />
           <span className="ml-2 text-slate-400 text-sm font-medium">What to Say</span>
         </div>
-        <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
+        <div className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap break-words overflow-hidden">
 {`"So here's the full picture. Between your battery savings and your solar export income, you're looking at a net benefit of £2,517 per year.
 
 The system costs £12,567. Divide one by the other — you've paid for the entire system in just under 5 years.

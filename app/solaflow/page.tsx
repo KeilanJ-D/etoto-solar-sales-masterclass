@@ -369,7 +369,7 @@ function BrandingCustomizer({
   setLogoUrl: (u: string | null) => void
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
-  
+
   const presetColors = [
     { color: '#E8192C', label: 'Red' },
     { color: '#3B82F6', label: 'Blue' },
@@ -391,8 +391,7 @@ function BrandingCustomizer({
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
-      {/* Collapsible header on mobile */}
-      <button 
+      <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full p-5 sm:p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white sm:cursor-default"
       >
@@ -410,8 +409,7 @@ function BrandingCustomizer({
           <ChevronRight className={`w-5 h-5 text-slate-400 sm:hidden transition-transform ${isExpanded ? 'rotate-90' : ''}`} />
         </div>
       </button>
-      
-      {/* Content - always visible on desktop, collapsible on mobile */}
+
       <div className={`sm:block ${isExpanded ? 'block' : 'hidden'}`}>
         <div className="p-5 sm:p-6 space-y-6">
           <div className="space-y-3">
@@ -434,7 +432,6 @@ function BrandingCustomizer({
               <Palette className="w-4 h-4" />
               Brand Color
             </label>
-            {/* 44px minimum touch targets for color buttons */}
             <div className="grid grid-cols-5 gap-2 sm:gap-3 mb-4">
               {presetColors.map((preset) => (
                 <button
@@ -444,7 +441,7 @@ function BrandingCustomizer({
                     brandColor === preset.color ? 'ring-2 ring-offset-2 ring-slate-400 bg-slate-100' : 'hover:bg-slate-50 border border-slate-100'
                   }`}
                 >
-                  <div 
+                  <div
                     className="w-11 h-11 sm:w-10 sm:h-10 rounded-lg shadow-md flex-shrink-0"
                     style={{ backgroundColor: preset.color }}
                   />
@@ -478,11 +475,11 @@ function BrandingCustomizer({
             </label>
             {logoUrl ? (
               <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200">
-                <Image 
-                  src={logoUrl} 
-                  alt="Logo preview" 
-                  width={120} 
-                  height={48} 
+                <Image
+                  src={logoUrl}
+                  alt="Logo preview"
+                  width={120}
+                  height={48}
                   className="object-contain"
                   style={{ height: 'auto', width: 'auto', maxHeight: '48px' }}
                 />
@@ -692,7 +689,7 @@ export default function SolaFlowPage() {
                 </div>
               </div>
             </div>
-            <div className="relative rounded-xl overflow-hidden bg-white" style={{ height: '500px' }}>
+            <div className="relative rounded-xl overflow-hidden bg-white h-[400px] sm:h-[500px] md:h-[600px]">
               <iframe
                 src="https://vercel-solar-estimator.vercel.app"
                 className="w-full h-full"

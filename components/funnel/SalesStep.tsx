@@ -193,10 +193,10 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
           {/* Script content - larger text on mobile for mid-call reading */}
           <div 
             ref={contentRef} 
-            className="text-slate-100 text-base sm:text-base md:text-lg leading-[1.8] sm:leading-relaxed font-mono px-4 sm:px-6 md:px-8 py-4 sm:py-5"
+            className="text-slate-100 text-base sm:text-base md:text-lg leading-[1.8] sm:leading-relaxed font-mono px-4 sm:px-6 md:px-8 py-4 sm:py-5 overflow-hidden break-words"
           >
             {typeof children === 'string' ? formatScript(children) : (
-              <div className="whitespace-pre-wrap">{children}</div>
+              <div className="whitespace-pre-wrap break-words">{children}</div>
             )}
           </div>
           
