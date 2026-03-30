@@ -77,7 +77,7 @@ export default function ResourcesPage() {
               What our clients are saying
             </h2>
           </div>
-          <ScreenshotProof screenshots={screenshotProof} />
+          <ScreenshotProof items={screenshotProof} />
         </div>
       </section>
       
