@@ -1,7 +1,25 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import SalesStep, { ScriptBox, WhyCard, FormulaBlock, ExampleBlock } from './SalesStep'
-import FormulaCalculator from './FormulaCalculator'
+
+// Dynamic import - FormulaCalculator is 1,200+ lines with Recharts
+const FormulaCalculator = dynamic(() => import('./FormulaCalculator'), {
+  loading: () => (
+    <div className="bg-white rounded-xl border border-slate-200 p-8 animate-pulse">
+      <div className="h-8 bg-slate-200 rounded w-1/3 mx-auto mb-6" />
+      <div className="grid grid-cols-5 gap-2 mb-6">
+        {[1,2,3,4,5].map(i => <div key={i} className="h-10 bg-slate-100 rounded" />)}
+      </div>
+      <div className="space-y-4">
+        <div className="h-12 bg-slate-100 rounded" />
+        <div className="h-12 bg-slate-100 rounded" />
+        <div className="h-32 bg-slate-100 rounded" />
+      </div>
+    </div>
+  ),
+  ssr: false,
+})
 
 export default function Step3EnergyAudit() {
   return (

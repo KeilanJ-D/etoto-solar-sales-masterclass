@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { Copy, Check, Zap, Battery, Sun, TrendingUp, Clock, AlertCircle, ChevronRight, Minus, Plus } from 'lucide-react'
+import { useState, useMemo, useEffect } from 'react'
+import { Copy, Check, Zap, Battery, Sun, TrendingUp, Clock, AlertCircle, ChevronRight, Minus, Plus, RotateCcw } from 'lucide-react'
 import Image from 'next/image'
 
 // ============================================
@@ -1001,35 +1001,111 @@ Note: Standing charge (${standingCharge}p/day) is a fixed fee from your supplier
 }
 
 // ============================================
+// DEFAULT VALUES (for reset)
+// ============================================
+
+const DEFAULT_VALUES = {
+  monthlyBill: '150',
+  unitRate: '28',
+  standingCharge: '61.64',
+  selectedProduct: 'sigenergy',
+  quantity: 2,
+  batteryPrices: { sigenergy: 2500, ecoflow: 1200 },
+  offPeakRate: '7',
+  panels: '12',
+  wattage: '470',
+  exportRate: '15',
+  pricePerKwp: '1000',
+  customSystemCost: '',
+}
+
+const STORAGE_KEY = 'etoto-calculator-state'
+
+// ============================================
 // MAIN COMPONENT
 // ============================================
 
 export default function FormulaCalculator() {
   // Tab state
   const [activeTab, setActiveTab] = useState(0)
+  const [isHydrated, setIsHydrated] = useState(false)
   
   // Tab 1: Energy Audit (now monthly bill)
-  const [monthlyBill, setMonthlyBill] = useState('150')
-  const [unitRate, setUnitRate] = useState('28')
-  const [standingCharge, setStandingCharge] = useState('61.64')
+  const [monthlyBill, setMonthlyBill] = useState(DEFAULT_VALUES.monthlyBill)
+  const [unitRate, setUnitRate] = useState(DEFAULT_VALUES.unitRate)
+  const [standingCharge, setStandingCharge] = useState(DEFAULT_VALUES.standingCharge)
   
   // Tab 2: Battery
-  const [selectedProduct, setSelectedProduct] = useState('sigenergy')
-  const [quantity, setQuantity] = useState(2)
-  const [batteryPrices, setBatteryPrices] = useState<Record<string, number>>({
-    sigenergy: 2500,
-    ecoflow: 1200,
-  })
-  const [offPeakRate, setOffPeakRate] = useState('7')
+  const [selectedProduct, setSelectedProduct] = useState(DEFAULT_VALUES.selectedProduct)
+  const [quantity, setQuantity] = useState(DEFAULT_VALUES.quantity)
+  const [batteryPrices, setBatteryPrices] = useState<Record<string, number>>(DEFAULT_VALUES.batteryPrices)
+  const [offPeakRate, setOffPeakRate] = useState(DEFAULT_VALUES.offPeakRate)
   
   // Tab 3: Solar
-  const [panels, setPanels] = useState('12')
-  const [wattage, setWattage] = useState('470')
-  const [exportRate, setExportRate] = useState('15')
-  const [pricePerKwp, setPricePerKwp] = useState('1000')
+  const [panels, setPanels] = useState(DEFAULT_VALUES.panels)
+  const [wattage, setWattage] = useState(DEFAULT_VALUES.wattage)
+  const [exportRate, setExportRate] = useState(DEFAULT_VALUES.exportRate)
+  const [pricePerKwp, setPricePerKwp] = useState(DEFAULT_VALUES.pricePerKwp)
   
   // Tab 4: Payback
-  const [customSystemCost, setCustomSystemCost] = useState('')
+  const [customSystemCost, setCustomSystemCost] = useState(DEFAULT_VALUES.customSystemCost)
+
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY)
+      if (saved) {
+        const state = JSON.parse(saved)
+        if (state.monthlyBill) setMonthlyBill(state.monthlyBill)
+        if (state.unitRate) setUnitRate(state.unitRate)
+        if (state.standingCharge) setStandingCharge(state.standingCharge)
+        if (state.selectedProduct) setSelectedProduct(state.selectedProduct)
+        if (state.quantity) setQuantity(state.quantity)
+        if (state.batteryPrices) setBatteryPrices(state.batteryPrices)
+        if (state.offPeakRate) setOffPeakRate(state.offPeakRate)
+        if (state.panels) setPanels(state.panels)
+        if (state.wattage) setWattage(state.wattage)
+        if (state.exportRate) setExportRate(state.exportRate)
+        if (state.pricePerKwp) setPricePerKwp(state.pricePerKwp)
+        if (state.customSystemCost) setCustomSystemCost(state.customSystemCost)
+      }
+    } catch (e) {
+      // Ignore storage errors
+    }
+    setIsHydrated(true)
+  }, [])
+
+  // Save to sessionStorage on change
+  useEffect(() => {
+    if (!isHydrated) return
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        monthlyBill, unitRate, standingCharge,
+        selectedProduct, quantity, batteryPrices, offPeakRate,
+        panels, wattage, exportRate, pricePerKwp, customSystemCost
+      }))
+    } catch (e) {
+      // Ignore storage errors
+    }
+  }, [isHydrated, monthlyBill, unitRate, standingCharge, selectedProduct, quantity, batteryPrices, offPeakRate, panels, wattage, exportRate, pricePerKwp, customSystemCost])
+
+  // Reset to defaults
+  const handleReset = () => {
+    setMonthlyBill(DEFAULT_VALUES.monthlyBill)
+    setUnitRate(DEFAULT_VALUES.unitRate)
+    setStandingCharge(DEFAULT_VALUES.standingCharge)
+    setSelectedProduct(DEFAULT_VALUES.selectedProduct)
+    setQuantity(DEFAULT_VALUES.quantity)
+    setBatteryPrices(DEFAULT_VALUES.batteryPrices)
+    setOffPeakRate(DEFAULT_VALUES.offPeakRate)
+    setPanels(DEFAULT_VALUES.panels)
+    setWattage(DEFAULT_VALUES.wattage)
+    setExportRate(DEFAULT_VALUES.exportRate)
+    setPricePerKwp(DEFAULT_VALUES.pricePerKwp)
+    setCustomSystemCost(DEFAULT_VALUES.customSystemCost)
+    setActiveTab(0)
+    sessionStorage.removeItem(STORAGE_KEY)
+  }
 
   // Derived values
   const calculations = useMemo(() => {
@@ -1118,7 +1194,16 @@ export default function FormulaCalculator() {
     <section id="formula-calculator" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-100">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-10 relative">
+          {/* Reset button - top right */}
+          <button
+            onClick={handleReset}
+            className="absolute right-0 top-0 flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#E8192C] transition-colors"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="hidden sm:inline">Reset</span>
+          </button>
+          
           <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-medium rounded-full mb-4">
             Interactive Calculator
           </span>

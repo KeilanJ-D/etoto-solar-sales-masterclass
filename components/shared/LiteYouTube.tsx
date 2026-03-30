@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Play } from 'lucide-react'
 
 interface LiteYouTubeProps {
   videoId: string
@@ -12,20 +11,20 @@ interface LiteYouTubeProps {
 
 // Extracts video ID from various YouTube URL formats
 function extractVideoId(url: string): string {
-  // Already a video ID
+  // Already a video ID (no slashes or dots)
   if (!url.includes('/') && !url.includes('.')) {
     return url
   }
   
-  // Handle embed URLs
+  // Handle embed URLs: youtube.com/embed/VIDEO_ID
   const embedMatch = url.match(/youtube\.com\/embed\/([^?&]+)/)
   if (embedMatch) return embedMatch[1]
   
-  // Handle watch URLs
+  // Handle watch URLs: youtube.com/watch?v=VIDEO_ID
   const watchMatch = url.match(/youtube\.com\/watch\?v=([^&]+)/)
   if (watchMatch) return watchMatch[1]
   
-  // Handle short URLs
+  // Handle short URLs: youtu.be/VIDEO_ID
   const shortMatch = url.match(/youtu\.be\/([^?]+)/)
   if (shortMatch) return shortMatch[1]
   
@@ -34,10 +33,13 @@ function extractVideoId(url: string): string {
 
 export function LiteYouTube({ videoId, title = 'Video', className = '', aspectRatio = 'video' }: LiteYouTubeProps) {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [thumbnailError, setThumbnailError] = useState(false)
   const id = extractVideoId(videoId)
   
-  // YouTube thumbnail URLs
-  const thumbnailUrl = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+  // Use maxresdefault for best quality, fallback to hqdefault if it doesn't exist
+  const thumbnailUrl = thumbnailError 
+    ? `https://img.youtube.com/vi/${id}/hqdefault.jpg`
+    : `https://img.youtube.com/vi/${id}/maxresdefault.jpg`
   
   const aspectClass = aspectRatio === 'vertical' 
     ? 'aspect-[9/16] max-w-[320px] mx-auto' 
@@ -60,26 +62,33 @@ export function LiteYouTube({ videoId, title = 'Video', className = '', aspectRa
   return (
     <button
       onClick={() => setIsLoaded(true)}
-      className={`relative ${aspectClass} ${className} group cursor-pointer overflow-hidden rounded-xl bg-slate-900`}
+      className={`relative ${aspectClass} ${className} group cursor-pointer overflow-hidden rounded-xl bg-slate-800`}
       aria-label={`Play ${title}`}
     >
-      {/* Thumbnail */}
+      {/* Thumbnail - styled to look like a real YouTube embed */}
       <img
         src={thumbnailUrl}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        className="w-full h-full object-cover"
         loading="lazy"
+        onError={() => !thumbnailError && setThumbnailError(true)}
       />
       
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+      {/* Subtle vignette overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
       
-      {/* Play button */}
+      {/* YouTube-style play button - red circle with white triangle */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="w-16 h-16 md:w-20 md:h-20 bg-[#E8192C] rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-          <Play className="w-7 h-7 md:w-8 md:h-8 text-white fill-white ml-1" />
+        <div className="relative w-[68px] h-[48px] bg-[#E8192C] rounded-xl flex items-center justify-center shadow-lg transition-all duration-200 group-hover:bg-[#FF0000] group-hover:scale-110">
+          {/* Play triangle */}
+          <svg viewBox="0 0 24 24" className="w-6 h-6 text-white ml-0.5" fill="currentColor">
+            <path d="M8 5v14l11-7z" />
+          </svg>
         </div>
       </div>
+      
+      {/* Hover state - slight brightness increase */}
+      <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
     </button>
   )
 }

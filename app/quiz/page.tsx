@@ -1,7 +1,23 @@
+import dynamic from 'next/dynamic'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
-import InteractiveQuiz from '@/components/funnel/InteractiveQuiz'
 import Footer from '@/components/funnel/Footer'
 import { StatsBanner } from '@/components/shared/StatsBanner'
+
+// Dynamic import - InteractiveQuiz is a large client component
+const InteractiveQuiz = dynamic(() => import('@/components/funnel/InteractiveQuiz'), {
+  loading: () => (
+    <div className="py-12 px-4">
+      <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 shadow-lg animate-pulse">
+        <div className="h-6 bg-slate-200 rounded w-24 mx-auto mb-4" />
+        <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto mb-8" />
+        <div className="space-y-3">
+          {[1,2,3,4].map(i => <div key={i} className="h-14 bg-slate-100 rounded-xl" />)}
+        </div>
+      </div>
+    </div>
+  ),
+  ssr: false,
+})
 
 export const metadata = {
   title: 'Solar Sales Knowledge Quiz — ETOTO Media',
