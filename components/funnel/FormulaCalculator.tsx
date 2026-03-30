@@ -1,0 +1,1330 @@
+'use client'
+
+import { useState, useMemo, useEffect } from 'react'
+import { Copy, Check, Zap, Battery, Sun, TrendingUp, Clock, AlertCircle, ChevronRight, Minus, Plus, RotateCcw } from 'lucide-react'
+import Image from 'next/image'
+
+// ============================================
+// PRODUCT DATA
+// ============================================
+
+const BATTERY_PRODUCTS = [
+  {
+    id: 'sigenergy',
+    name: 'Sigenergy SigenStor 10.0',
+    nominalKwh: 9.04,
+    usableKwh: 8.76,
+    dod: 100,
+    dodLabel: '100%',
+    cycles: '10,000',
+    maxStack: 6,
+    chargeRateW: 4600,
+    ipRating: 'IP66',
+    warranty: '10 years',
+    defaultPrice: 2500,
+    image: '/products/sigenergy-10.jpg',
+  },
+  {
+    id: 'ecoflow',
+    name: 'EcoFlow PowerOcean 5kWh',
+    nominalKwh: 5.12,
+    usableKwh: 4.8,
+    dod: 95,
+    dodLabel: '95%',
+    cycles: '6,000',
+    maxStack: 4,
+    chargeRateW: 3300,
+    ipRating: 'IP65',
+    warranty: '15 years',
+    defaultPrice: 1200,
+    image: '/products/ecoflow-powerocean.jpg',
+  },
+]
+
+// ============================================
+// UTILITY COMPONENTS
+// ============================================
+
+function TabButton({ 
+  active, 
+  onClick, 
+  icon: Icon, 
+  label, 
+  step,
+  shortLabel = ''
+}: { 
+  active: boolean
+  onClick: () => void
+  icon: React.ElementType
+  label: string
+  step: number
+  shortLabel?: string
+}) {
+  const mobile = shortLabel || label.slice(0, 4)
+  
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1 sm:gap-2 px-2.5 sm:px-4 py-2.5 sm:py-3 rounded-lg font-medium text-xs sm:text-sm transition-all touch-action-manipulation min-h-[44px] flex-shrink-0 scroll-snap-start ${
+        active 
+          ? 'bg-[#E8192C] text-white shadow-lg' 
+          : 'bg-white text-slate-600 hover:bg-slate-50 active:bg-slate-100 border border-slate-200'
+      }`}
+    >
+      <span className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${
+        active ? 'bg-white/20' : 'bg-slate-100'
+      }`}>
+        {step}
+      </span>
+      <Icon className="w-4 h-4 flex-shrink-0" />
+      <span className="sm:hidden text-xs whitespace-nowrap">{mobile}</span>
+      <span className="hidden sm:inline">{label}</span>
+    </button>
+  )
+}
+
+function InputField({ 
+  label, 
+  value, 
+  onChange, 
+  prefix = '', 
+  suffix = '',
+  hint = '',
+}: { 
+  label: string
+  value: string
+  onChange: (v: string) => void
+  prefix?: string
+  suffix?: string
+  hint?: string
+}) {
+  return (
+    <div className="space-y-1.5">
+      <label className="text-xs sm:text-sm font-medium text-slate-700">{label}</label>
+      <div className="flex items-center gap-2">
+        {prefix && <span className="text-slate-500 font-medium text-sm">{prefix}</span>}
+        <input
+          type="text"
+          inputMode="decimal"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="flex-1 px-3 py-2 sm:py-2.5 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none min-h-[44px] touch-action-manipulation"
+        />
+        {suffix && <span className="text-slate-500 font-medium text-sm">{suffix}</span>}
+      </div>
+      {hint && <p className="text-xs text-slate-500">{hint}</p>}
+    </div>
+  )
+}
+
+// ============================================
+// TAB 1: ENERGY AUDIT
+// ============================================
+
+function EnergyAuditTab({ 
+  monthlyBill, 
+  setMonthlyBill, 
+  unitRate, 
+  setUnitRate,
+  standingCharge,
+  setStandingCharge,
+  dailyKwh,
+  dailyEnergyCost,
+  dailyStandingCharge,
+  dailyTotalCost,
+  annualKwh,
+  annualSpend,
+  annualStandingCharge,
+  annualUsageCost
+}: {
+  monthlyBill: string
+  setMonthlyBill: (v: string) => void
+  unitRate: string
+  setUnitRate: (v: string) => void
+  standingCharge: string
+  setStandingCharge: (v: string) => void
+  dailyKwh: number
+  dailyEnergyCost: number
+  dailyStandingCharge: number
+  dailyTotalCost: number
+  annualKwh: number
+  annualSpend: number
+  annualStandingCharge: number
+  annualUsageCost: number
+}) {
+  const monthlyNum = parseFloat(monthlyBill) || 0
+
+  return (
+    <div className="space-y-8">
+      {/* Inputs */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+        <InputField
+          label="Monthly electricity bill"
+          value={monthlyBill}
+          onChange={setMonthlyBill}
+          prefix="£"
+          hint="Enter your average monthly electricity bill"
+        />
+        <InputField
+          label="Unit rate"
+          value={unitRate}
+          onChange={setUnitRate}
+          suffix="p/kWh"
+          hint="Ofgem price cap: 24.5p (Apr 2026)"
+        />
+        <InputField
+          label="Standing charge"
+          value={standingCharge}
+          onChange={setStandingCharge}
+          suffix="p/day"
+          hint="UK average ~62p/day. Check your bill."
+        />
+      </div>
+
+      {/* Conversion display with standing charge breakdown */}
+      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200 space-y-3">
+        <div className="flex justify-between items-center">
+          <span className="text-slate-600">Monthly bill</span>
+          <span className="font-medium text-slate-900">£{monthlyNum.toFixed(0)}/month (£{annualSpend.toLocaleString()}/year)</span>
+        </div>
+        <div className="flex justify-between items-center">
+          <span className="text-slate-600">Standing charge</span>
+          <span className="font-medium text-slate-900">{standingCharge}p/day (£{annualStandingCharge.toFixed(0)}/year)</span>
+        </div>
+        <div className="border-t border-slate-300 pt-3 flex justify-between items-center">
+          <span className="font-medium text-slate-700">Energy usage cost</span>
+          <span className="font-bold text-[#E8192C]">£{annualUsageCost.toFixed(0)}/year</span>
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+          <p className="text-sm text-slate-500 mb-1">Annual usage</p>
+          <p className="text-2xl font-bold text-slate-900">{annualKwh.toLocaleString()} kWh</p>
+        </div>
+        <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+          <p className="text-sm text-slate-500 mb-1">Daily usage</p>
+          <p className="text-2xl font-bold text-slate-900">{dailyKwh.toFixed(2)} kWh</p>
+        </div>
+        <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+          <p className="text-sm text-slate-500 mb-1">Daily energy cost</p>
+          <p className="text-2xl font-bold text-slate-900">£{dailyEnergyCost.toFixed(2)}</p>
+        </div>
+        <div className="bg-gradient-to-br from-[#E8192C] to-[#c01424] rounded-xl p-5 text-white shadow-lg">
+          <p className="text-sm text-white/80 mb-1">Daily total cost</p>
+          <p className="text-2xl md:text-3xl font-bold">£{dailyTotalCost.toFixed(2)}</p>
+          <p className="text-xs text-white/60 mt-1">(incl. {standingCharge}p standing charge)</p>
+        </div>
+      </div>
+
+      {/* Standing charge note */}
+      <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+        <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+        <div className="text-sm text-amber-800">
+          <p className="font-medium">Standing charge is deducted before calculating kWh</p>
+          <p className="mt-1 text-amber-700">This fixed daily fee (~£{annualStandingCharge.toFixed(0)}/year) doesn&apos;t change with solar — it&apos;s paid regardless of usage. Deducting it gives accurate daily kWh for battery sizing.</p>
+        </div>
+      </div>
+
+      {/* Anchor statement */}
+      <div className="text-center py-6 border-t border-slate-200">
+        <p className="text-xl text-slate-700">
+          Your home costs <span className="text-[#E8192C] font-bold text-2xl">£{dailyTotalCost.toFixed(2)} a day</span> to run.
+        </p>
+        <p className="text-slate-500 mt-1">Let&apos;s change that.</p>
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// TAB 2: BATTERY SAVINGS
+// ============================================
+
+function BatterySavingsTab({
+  dailyKwh,
+  dailyCost,
+  unitRate,
+  selectedProduct,
+  setSelectedProduct,
+  quantity,
+  setQuantity,
+  batteryPrices,
+  setBatteryPrice,
+  offPeakRate,
+  setOffPeakRate,
+}: {
+  dailyKwh: number
+  dailyCost: number
+  unitRate: string
+  selectedProduct: string
+  setSelectedProduct: (v: string) => void
+  quantity: number
+  setQuantity: (v: number) => void
+  batteryPrices: Record<string, number>
+  setBatteryPrice: (id: string, price: number) => void
+  offPeakRate: string
+  setOffPeakRate: (v: string) => void
+}) {
+  const product = BATTERY_PRODUCTS.find(p => p.id === selectedProduct)!
+  const totalCapacity = product.usableKwh * quantity
+  const totalBatteryCost = batteryPrices[selectedProduct] * quantity
+  
+  const offPeakNum = parseFloat(offPeakRate) || 7
+  const unitRateNum = parseFloat(unitRate) || 28
+  
+  // Coverage calculations
+  const coveredKwh = Math.min(totalCapacity, dailyKwh)
+  const gapKwh = Math.max(0, dailyKwh - totalCapacity)
+  const surplusKwh = Math.max(0, totalCapacity - dailyKwh)
+  const coveragePercent = Math.min(100, (totalCapacity / dailyKwh) * 100)
+  
+  // Charge time
+  const chargeHours = totalCapacity / (product.chargeRateW / 1000)
+  const canChargeOvernight = chargeHours <= 6
+  
+  // Savings calculations
+  const batteryPortionCost = coveredKwh * (offPeakNum / 100)
+  const peakPortionCost = gapKwh * (unitRateNum / 100)
+  const newDailyCost = batteryPortionCost + peakPortionCost
+  const dailySaving = dailyCost - newDailyCost
+  const annualSaving = dailySaving * 365
+
+  return (
+    <div className="space-y-8">
+      {/* Daily usage reference */}
+      <div className="bg-slate-900 text-white rounded-xl p-5">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm text-slate-400">Your daily usage (from Tab 1)</p>
+            <p className="text-2xl font-bold">{dailyKwh.toFixed(2)} kWh/day</p>
+          </div>
+          <Zap className="w-10 h-10 text-[#E8192C]" />
+        </div>
+      </div>
+
+      {/* Product Selection */}
+      <div>
+        <h3 className="text-lg font-bold text-slate-900 mb-4">Choose your battery</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+          {BATTERY_PRODUCTS.map((p) => (
+            <div
+              key={p.id}
+              onClick={() => {
+                setSelectedProduct(p.id)
+                setQuantity(1)
+              }}
+              className={`relative cursor-pointer rounded-xl border-2 p-4 sm:p-5 transition-all ${
+                selectedProduct === p.id
+                  ? 'border-[#E8192C] bg-[#E8192C]/5 shadow-lg'
+                  : 'border-slate-200 bg-white hover:border-slate-300'
+              }`}
+            >
+              {selectedProduct === p.id && (
+                <div className="absolute top-3 right-3 w-6 h-6 bg-[#E8192C] rounded-full flex items-center justify-center flex-shrink-0">
+                  <Check className="w-4 h-4 text-white" />
+                </div>
+              )}
+              
+              <div className="flex gap-3 sm:gap-4">
+                {/* Image hidden on mobile, visible on sm and up */}
+                <div className="w-20 h-20 bg-slate-100 rounded-lg overflow-hidden flex-shrink-0 hidden sm:block">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Main content - full width on mobile, flex on desktop */}
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-slate-900 text-sm sm:text-base">{p.name}</h4>
+                  <p className="text-[#E8192C] font-semibold text-sm">{p.usableKwh} kWh usable</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    {p.dodLabel} DoD · {p.cycles} cycles
+                  </p>
+                </div>
+              </div>
+              
+              {/* Editable price - full width on mobile */}
+              <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-slate-200">
+                <label className="text-xs text-slate-500 block mb-2">Price per battery</label>
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-700 font-medium text-sm">£</span>
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={batteryPrices[p.id]}
+                    onChange={(e) => setBatteryPrice(p.id, parseFloat(e.target.value) || 0)}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex-1 px-3 py-2.5 border border-slate-300 rounded text-slate-900 font-medium text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none min-h-[44px] touch-action-manipulation"
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Quantity selector - Stack on mobile */}
+      <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h4 className="font-bold text-slate-900 text-sm sm:text-base">How many batteries?</h4>
+            <p className="text-xs sm:text-sm text-slate-500">Max {product.maxStack} for {product.name.split(' ')[0]}</p>
+          </div>
+          <div className="flex items-center gap-3 bg-white rounded-lg p-1 border border-slate-300 w-fit">
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="w-10 h-10 rounded-md bg-white flex items-center justify-center hover:bg-slate-50 transition-colors min-h-[44px] touch-action-manipulation"
+              aria-label="Decrease quantity"
+            >
+              <Minus className="w-4 h-4 text-slate-600" />
+            </button>
+            <span className="text-lg sm:text-2xl font-bold text-slate-900 w-8 text-center">{quantity}</span>
+            <button
+              onClick={() => setQuantity(Math.min(product.maxStack, quantity + 1))}
+              className="w-10 h-10 rounded-md bg-white flex items-center justify-center hover:bg-slate-50 transition-colors min-h-[44px] touch-action-manipulation"
+              aria-label="Increase quantity"
+            >
+              <Plus className="w-4 h-4 text-slate-600" />
+            </button>
+          </div>
+        </div>
+        <div className="mt-4 pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:justify-between gap-2 text-xs sm:text-sm">
+          <span className="text-slate-600">Total capacity: <span className="font-bold text-slate-900">{totalCapacity.toFixed(2)} kWh</span></span>
+          <span className="text-slate-600">Cost: <span className="font-bold text-slate-900">£{totalBatteryCost.toLocaleString()}</span></span>
+        </div>
+      </div>
+
+      {/* Coverage bar */}
+      <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm">
+        <h4 className="font-bold text-slate-900 mb-4">Daily coverage</h4>
+        
+        {/* The bar */}
+        <div className="relative h-12 bg-slate-200 rounded-lg overflow-hidden mb-4">
+          {/* Green: covered at off-peak */}
+          <div
+            className="absolute inset-y-0 left-0 bg-emerald-500 transition-all duration-500"
+            style={{ width: `${Math.min(100, coveragePercent)}%` }}
+          />
+          {/* Teal: surplus for export */}
+          {surplusKwh > 0 && (
+            <div
+              className="absolute inset-y-0 bg-teal-400 transition-all duration-500"
+              style={{ 
+                left: `${(dailyKwh / totalCapacity) * 100}%`,
+                width: `${(surplusKwh / totalCapacity) * 100}%`
+              }}
+            />
+          )}
+          {/* Usage marker */}
+          {surplusKwh > 0 && (
+            <div
+              className="absolute inset-y-0 w-0.5 bg-slate-900"
+              style={{ left: `${(dailyKwh / totalCapacity) * 100}%` }}
+            />
+          )}
+        </div>
+        
+        {/* Legend */}
+        <div className="flex flex-wrap gap-4 text-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-emerald-500 rounded" />
+            <span className="text-slate-600">Covered at off-peak: <span className="font-medium">{coveredKwh.toFixed(1)} kWh</span></span>
+          </div>
+          {gapKwh > 0 && (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-slate-200 rounded" />
+              <span className="text-slate-600">Gap at peak rate: <span className="font-medium text-red-600">{gapKwh.toFixed(1)} kWh</span></span>
+            </div>
+          )}
+          {surplusKwh > 0 && (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 bg-teal-400 rounded" />
+              <span className="text-slate-600">Surplus for export: <span className="font-medium text-teal-600">{surplusKwh.toFixed(1)} kWh</span></span>
+            </div>
+          )}
+        </div>
+        
+        <p className="mt-4 text-lg font-medium text-slate-900">
+          {coveragePercent >= 100 
+            ? `100% covered + ${surplusKwh.toFixed(1)} kWh surplus`
+            : `${coveragePercent.toFixed(1)}% covered`
+          }
+        </p>
+      </div>
+
+      {/* Charge time */}
+      <div className={`rounded-xl p-5 border ${canChargeOvernight ? 'bg-emerald-50 border-emerald-200' : 'bg-amber-50 border-amber-200'}`}>
+        <div className="flex items-start gap-4">
+          <Clock className={`w-6 h-6 flex-shrink-0 ${canChargeOvernight ? 'text-emerald-600' : 'text-amber-600'}`} />
+          <div>
+            <h4 className="font-bold text-slate-900">Charge time</h4>
+            <p className="text-sm text-slate-600 mt-1">
+              {quantity}× {product.name.split(' ')[0]}: {totalCapacity.toFixed(1)} kWh ÷ {(product.chargeRateW / 1000).toFixed(1)} kW = <span className="font-bold">{chargeHours.toFixed(1)} hours</span>
+            </p>
+            <p className={`text-sm mt-2 font-medium ${canChargeOvernight ? 'text-emerald-700' : 'text-amber-700'}`}>
+              {canChargeOvernight 
+                ? '✓ Fully charged in one night (6-hour off-peak window)'
+                : '⚠ May need 2 nights to fully charge on 6-hour off-peak window'
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Off-peak rate input */}
+      <div className="bg-slate-50 rounded-xl p-5 border border-slate-200">
+        <InputField
+          label="Off-peak rate"
+          value={offPeakRate}
+          onChange={setOffPeakRate}
+          suffix="p/kWh"
+          hint="Octopus Intelligent Go: ~7p | Economy 7: ~10p"
+        />
+      </div>
+
+      {/* Savings calculation */}
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 text-white">
+        <h4 className="text-lg font-bold mb-4">With {quantity}× {product.name.split(' ')[0]}</h4>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <p className="text-sm text-slate-400">Daily cost</p>
+            <p className="text-xl">
+              <span className="line-through text-slate-500">£{dailyCost.toFixed(2)}</span>
+              <ChevronRight className="w-4 h-4 inline mx-1" />
+              <span className="font-bold text-emerald-400">£{newDailyCost.toFixed(2)}</span>
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-slate-400">Daily saving</p>
+            <p className="text-xl font-bold text-emerald-400">£{dailySaving.toFixed(2)}</p>
+          </div>
+        </div>
+        
+        <div className="pt-4 border-t border-slate-700">
+          <div className="flex justify-between items-end">
+            <div>
+              <p className="text-sm text-slate-400">Annual saving</p>
+              <p className="text-2xl md:text-3xl font-bold text-emerald-400">£{Math.round(annualSaving).toLocaleString()}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-sm text-slate-400">Battery cost</p>
+              <p className="text-xl font-medium">£{totalBatteryCost.toLocaleString()}</p>
+            </div>
+          </div>
+        </div>
+        
+        {surplusKwh > 0 && (
+          <div className="mt-4 pt-4 border-t border-slate-700 flex items-center gap-2 text-teal-400">
+            <AlertCircle className="w-4 h-4" />
+            <span className="text-sm">Surplus: {surplusKwh.toFixed(1)} kWh/day → rolls into Solar Income</span>
+            <ChevronRight className="w-4 h-4" />
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// TAB 3: SOLAR INCOME
+// ============================================
+
+function SolarIncomeTab({
+  panels,
+  setPanels,
+  wattage,
+  setWattage,
+  exportRate,
+  setExportRate,
+  pricePerKwp,
+  setPricePerKwp,
+  surplusKwh,
+}: {
+  panels: string
+  setPanels: (v: string) => void
+  wattage: string
+  setWattage: (v: string) => void
+  exportRate: string
+  setExportRate: (v: string) => void
+  pricePerKwp: string
+  setPricePerKwp: (v: string) => void
+  surplusKwh: number
+}) {
+  const panelsNum = parseInt(panels) || 12
+  const wattageNum = parseInt(wattage) || 470
+  const exportRateNum = parseFloat(exportRate) || 15
+  const pricePerKwpNum = parseFloat(pricePerKwp) || 1000
+  
+  const systemKwp = (panelsNum * wattageNum) / 1000
+  const solarCost = systemKwp * pricePerKwpNum
+  
+  // Solar generation (UK average ~4.5 peak sun hours)
+  const dailyGeneration = systemKwp * 4.5
+  const dailySolarExport = dailyGeneration * (exportRateNum / 100)
+  const annualSolarExport = dailySolarExport * 365
+  
+  // Surplus from battery
+  const dailySurplusExport = surplusKwh * (exportRateNum / 100)
+  const annualSurplusExport = dailySurplusExport * 365
+  
+  const totalDailyExport = dailySolarExport + dailySurplusExport
+  const totalAnnualExport = annualSolarExport + annualSurplusExport
+
+  return (
+    <div className="space-y-8">
+      {/* Inputs */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <InputField
+          label="Number of panels"
+          value={panels}
+          onChange={setPanels}
+          hint="Typical UK roof: 10-16 panels"
+        />
+        <InputField
+          label="Panel wattage"
+          value={wattage}
+          onChange={setWattage}
+          suffix="W"
+          hint="Modern panels: 400-500W"
+        />
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <InputField
+          label="Export rate"
+          value={exportRate}
+          onChange={setExportRate}
+          suffix="p/kWh"
+          hint="SEG rates vary: 12-15p typical"
+        />
+        <InputField
+          label="Price per kWp installed"
+          value={pricePerKwp}
+          onChange={setPricePerKwp}
+          prefix="£"
+          suffix="/kWp"
+          hint="Covers panels, inverter, labour, scaffold — everything"
+        />
+      </div>
+
+      {/* System summary - Stack on mobile */}
+      <div className="bg-slate-50 rounded-xl p-4 sm:p-5 border border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div>
+            <p className="text-xs sm:text-sm text-slate-500">System size</p>
+            <p className="text-lg sm:text-xl font-bold text-slate-900">{panelsNum} × {wattageNum}W = {systemKwp.toFixed(2)} kWp</p>
+          </div>
+          <div className="text-right">
+            <p className="text-xs sm:text-sm text-slate-500">Solar cost</p>
+            <p className="text-lg sm:text-xl font-bold text-[#E8192C]">£{Math.round(solarCost).toLocaleString()}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Export income breakdown */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="p-5 border-b border-slate-200">
+          <h4 className="font-bold text-slate-900">Export income breakdown</h4>
+        </div>
+        
+        <div className="divide-y divide-slate-100">
+          {/* Solar export - Stack on mobile */}
+          <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-3">
+              <Sun className="w-5 h-5 text-amber-500 flex-shrink-0" />
+              <div>
+                <p className="font-medium text-slate-900 text-sm">Solar export</p>
+                <p className="text-xs sm:text-sm text-slate-500">{dailyGeneration.toFixed(1)} kWh/day × {exportRateNum}p</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className="font-bold text-slate-900 text-sm">£{dailySolarExport.toFixed(2)}/day</p>
+              <p className="text-xs text-slate-500">£{Math.round(annualSolarExport).toLocaleString()}/year</p>
+            </div>
+          </div>
+          
+          {/* Surplus export - Stack on mobile */}
+          {surplusKwh > 0 && (
+            <div className="p-4 sm:p-5 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3 bg-teal-50">
+              <div className="flex items-center gap-3">
+                <Battery className="w-5 h-5 text-teal-600 flex-shrink-0" />
+                <div>
+                  <p className="font-medium text-slate-900 text-sm">Battery surplus export</p>
+                  <p className="text-xs sm:text-sm text-slate-500">{surplusKwh.toFixed(1)} kWh/day × {exportRateNum}p</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="font-bold text-teal-600 text-sm">£{dailySurplusExport.toFixed(2)}/day</p>
+                <p className="text-xs text-teal-600">£{Math.round(annualSurplusExport).toLocaleString()}/year</p>
+              </div>
+            </div>
+          )}
+        </div>
+        
+        {/* Total - Stack on mobile */}
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-amber-500 to-orange-500 text-white">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+            <p className="font-bold text-sm">Total export income</p>
+            <div className="text-right">
+              <p className="text-xl sm:text-2xl font-bold">£{totalDailyExport.toFixed(2)}/day</p>
+              <p className="text-xs sm:text-sm text-amber-100">£{Math.round(totalAnnualExport).toLocaleString()}/year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// TAB 4: PAYBACK
+// ============================================
+
+function PaybackTab({
+  batteryCost,
+  solarCost,
+  annualBatterySaving,
+  annualSolarExport,
+  annualSurplusExport,
+  customSystemCost,
+  setCustomSystemCost,
+  systemKwp,
+}: {
+  batteryCost: number
+  solarCost: number
+  annualBatterySaving: number
+  annualSolarExport: number
+  annualSurplusExport: number
+  customSystemCost: string
+  setCustomSystemCost: (v: string) => void
+  systemKwp: number
+}) {
+  const calculatedCost = batteryCost + solarCost
+  const systemCost = customSystemCost ? parseFloat(customSystemCost) : calculatedCost
+  const totalAnnualBenefit = annualBatterySaving + annualSolarExport + annualSurplusExport
+  const paybackYears = totalAnnualBenefit > 0 ? systemCost / totalAnnualBenefit : 0
+  const fifteenYearProfit = (totalAnnualBenefit * 15) - systemCost
+
+  // Generate chart data
+  const chartData = Array.from({ length: 16 }, (_, i) => ({
+    year: i,
+    savings: totalAnnualBenefit * i,
+  }))
+
+  const maxSavings = totalAnnualBenefit * 15
+
+  return (
+    <div className="space-y-8">
+      {/* Cost breakdown */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="p-5 border-b border-slate-200">
+          <h4 className="font-bold text-slate-900">System cost breakdown</h4>
+        </div>
+        <div className="p-5 space-y-3">
+          <div className="flex justify-between">
+            <span className="text-slate-600">Solar ({systemKwp.toFixed(2)} kWp)</span>
+            <span className="font-medium text-slate-900">£{Math.round(solarCost).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-600">Battery</span>
+            <span className="font-medium text-slate-900">£{Math.round(batteryCost).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between pt-3 border-t border-slate-200">
+            <span className="font-bold text-slate-900">Calculated total</span>
+            <span className="font-bold text-slate-900">£{Math.round(calculatedCost).toLocaleString()}</span>
+          </div>
+        </div>
+        
+        {/* Custom override */}
+        <div className="p-5 bg-slate-50 border-t border-slate-200">
+          <InputField
+            label="Or enter custom price (for discounts)"
+            value={customSystemCost}
+            onChange={setCustomSystemCost}
+            prefix="£"
+            hint="Leave blank to use calculated cost"
+          />
+        </div>
+      </div>
+
+      {/* Benefit breakdown */}
+      <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+        <div className="p-5 border-b border-slate-200">
+          <h4 className="font-bold text-slate-900">Annual benefit breakdown</h4>
+        </div>
+        <div className="p-5 space-y-3">
+          <div className="flex justify-between">
+            <span className="text-slate-600">Battery saving</span>
+            <span className="font-medium text-emerald-600">£{Math.round(annualBatterySaving).toLocaleString()}/year</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-600">Solar export</span>
+            <span className="font-medium text-amber-600">£{Math.round(annualSolarExport).toLocaleString()}/year</span>
+          </div>
+          {annualSurplusExport > 0 && (
+            <div className="flex justify-between">
+              <span className="text-slate-600">Surplus export</span>
+              <span className="font-medium text-teal-600">£{Math.round(annualSurplusExport).toLocaleString()}/year</span>
+            </div>
+          )}
+          <div className="flex justify-between pt-3 border-t border-slate-200">
+            <span className="font-bold text-slate-900">Total annual benefit</span>
+            <span className="font-bold text-emerald-600">£{Math.round(totalAnnualBenefit).toLocaleString()}/year</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Payback result */}
+      <div className="bg-gradient-to-br from-[#E8192C] to-[#c01424] rounded-xl p-8 text-white text-center">
+        <p className="text-white/80 text-sm uppercase tracking-wide mb-2">Payback period</p>
+        <p className="text-3xl md:text-5xl font-bold">{paybackYears.toFixed(1)} years</p>
+        <p className="text-white/80 mt-4">
+          After payback: <span className="font-bold text-white">£{Math.round(totalAnnualBenefit).toLocaleString()}/year</span> in pure savings
+        </p>
+      </div>
+
+      {/* 15-year projection chart */}
+      <div className="bg-white rounded-xl border border-slate-200 p-5">
+        <h4 className="font-bold text-slate-900 mb-4">15-year projection</h4>
+        
+        {/* Simple SVG chart */}
+        <div className="relative h-64">
+          <svg viewBox="0 0 400 200" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+            {/* Grid lines */}
+            {[0, 1, 2, 3, 4].map(i => (
+              <line key={i} x1="40" y1={40 + i * 35} x2="380" y2={40 + i * 35} stroke="#e2e8f0" strokeWidth="1" />
+            ))}
+            
+            {/* Investment line */}
+            <line 
+              x1="40" 
+              y1={180 - (systemCost / maxSavings * 140)} 
+              x2="380" 
+              y2={180 - (systemCost / maxSavings * 140)} 
+              stroke="#E8192C" 
+              strokeWidth="2" 
+              strokeDasharray="5,5" 
+            />
+            
+            {/* Savings curve */}
+            <path
+              d={`M 40 180 ${chartData.map((d, i) => `L ${40 + (i * 22.67)} ${180 - (d.savings / maxSavings * 140)}`).join(' ')}`}
+              fill="none"
+              stroke="#10b981"
+              strokeWidth="3"
+            />
+            
+            {/* Crossover point */}
+            {paybackYears <= 15 && paybackYears > 0 && (
+              <circle
+                cx={40 + paybackYears * 22.67}
+                cy={180 - (systemCost / maxSavings * 140)}
+                r="6"
+                fill="#E8192C"
+              />
+            )}
+            
+            {/* Labels */}
+            <text x="40" y="198" fontSize="10" fill="#64748b">0</text>
+            <text x="150" y="198" fontSize="10" fill="#64748b">5 years</text>
+            <text x="260" y="198" fontSize="10" fill="#64748b">10 years</text>
+            <text x="360" y="198" fontSize="10" fill="#64748b">15</text>
+          </svg>
+          
+          {/* Legend */}
+          <div className="absolute bottom-0 right-0 flex gap-4 text-xs">
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-0.5 bg-emerald-500" />
+              <span className="text-slate-600">Cumulative savings</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-3 h-0.5 bg-[#E8192C]" style={{ borderStyle: 'dashed' }} />
+              <span className="text-slate-600">Investment</span>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-4 pt-4 border-t border-slate-200 text-center">
+          <p className="text-lg text-slate-700">
+            15-year net profit: <span className="font-bold text-emerald-600">£{Math.round(fifteenYearProfit).toLocaleString()}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// SUMMARY FOOTER
+// ============================================
+
+function SummaryFooter({
+  monthlyBill,
+  standingCharge,
+  dailyKwh,
+  annualKwh,
+  annualStandingCharge,
+  annualUsageCost,
+  selectedProduct,
+  quantity,
+  batteryCost,
+  solarCost,
+  systemKwp,
+  panels,
+  wattage,
+  annualBatterySaving,
+  annualSolarExport,
+  annualSurplusExport,
+  totalCapacity,
+  coveragePercent,
+  chargeHours,
+  paybackYears,
+}: {
+  monthlyBill: string
+  standingCharge: string
+  dailyKwh: number
+  annualKwh: number
+  annualStandingCharge: number
+  annualUsageCost: number
+  selectedProduct: string
+  quantity: number
+  batteryCost: number
+  solarCost: number
+  systemKwp: number
+  panels: string
+  wattage: string
+  annualBatterySaving: number
+  annualSolarExport: number
+  annualSurplusExport: number
+  totalCapacity: number
+  coveragePercent: number
+  chargeHours: number
+  paybackYears: number
+}) {
+  const [copied, setCopied] = useState(false)
+  const product = BATTERY_PRODUCTS.find(p => p.id === selectedProduct)!
+  const totalCost = batteryCost + solarCost
+  const totalAnnualBenefit = annualBatterySaving + annualSolarExport + annualSurplusExport
+  const fifteenYearProfit = (totalAnnualBenefit * 15) - totalCost
+
+  const handleCopy = () => {
+    const monthlyNum = parseFloat(monthlyBill) || 0
+    const text = `Monthly bill: £${monthlyNum.toFixed(0)} (£${(monthlyNum * 12).toLocaleString()}/year)
+Standing charge: ${standingCharge}p/day (£${annualStandingCharge.toFixed(0)}/year)
+Energy usage cost: £${annualUsageCost.toFixed(0)}/year
+Usage: ${annualKwh.toLocaleString()} kWh/year, ${dailyKwh.toFixed(2)} kWh/day
+
+Battery: ${quantity}× ${product.name} (${totalCapacity.toFixed(2)} kWh) — £${batteryCost.toLocaleString()}
+Coverage: ${coveragePercent.toFixed(1)}% | Charge time: ${chargeHours.toFixed(1)} hours
+Annual saving: £${Math.round(annualBatterySaving).toLocaleString()}
+
+Solar: ${panels}× ${wattage}W panels (${systemKwp.toFixed(2)} kWp) — £${Math.round(solarCost).toLocaleString()}
+Annual export: £${Math.round(annualSolarExport).toLocaleString()}${annualSurplusExport > 0 ? `\nSurplus export: £${Math.round(annualSurplusExport).toLocaleString()}` : ''}
+
+Total system: £${Math.round(totalCost).toLocaleString()}
+Total annual benefit: £${Math.round(totalAnnualBenefit).toLocaleString()}
+Payback: ${paybackYears.toFixed(1)} years
+15-year net profit: £${Math.round(fifteenYearProfit).toLocaleString()}
+
+Note: Standing charge (${standingCharge}p/day) is a fixed fee from your supplier regardless of usage. Solar doesn't change it.`
+
+    navigator.clipboard.writeText(text)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="bg-slate-900 text-white rounded-xl p-6 mt-8">
+      <div className="flex items-center justify-between mb-4">
+        <h4 className="text-lg font-bold">Your system summary</h4>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors text-sm"
+        >
+          {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+          {copied ? 'Copied!' : 'Copy'}
+        </button>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {/* Costs */}
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-400">Solar ({systemKwp.toFixed(2)} kWp)</span>
+            <span>£{Math.round(solarCost).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-400">Battery ({quantity}× {product.name.split(' ')[0]})</span>
+            <span>£{Math.round(batteryCost).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between pt-2 border-t border-slate-700">
+            <span className="font-medium">Total cost</span>
+            <span className="font-bold">£{Math.round(totalCost).toLocaleString()}</span>
+          </div>
+        </div>
+        
+        {/* Benefits */}
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-400">Battery saving</span>
+            <span className="text-emerald-400">£{Math.round(annualBatterySaving).toLocaleString()}/yr</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-400">Solar export</span>
+            <span className="text-amber-400">£{Math.round(annualSolarExport).toLocaleString()}/yr</span>
+          </div>
+          {annualSurplusExport > 0 && (
+            <div className="flex justify-between text-sm">
+              <span className="text-slate-400">Surplus export</span>
+              <span className="text-teal-400">£${Math.round(annualSurplusExport).toLocaleString()}/yr</span>
+            </div>
+          )}
+          <div className="flex justify-between pt-2 border-t border-slate-700">
+            <span className="font-medium">Total benefit</span>
+            <span className="font-bold text-emerald-400">£{Math.round(totalAnnualBenefit).toLocaleString()}/yr</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Payback bar */}
+      <div className="mt-6 pt-6 border-t border-slate-700">
+        <div className="bg-slate-800 rounded-lg h-4 overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#E8192C] to-emerald-500 transition-all duration-500"
+            style={{ width: `${Math.min(100, (1 / paybackYears) * 100 * 3)}%` }}
+          />
+        </div>
+        <div className="flex justify-between mt-2 text-sm">
+          <span className="text-slate-400">Payback</span>
+          <span className="font-bold text-[#E8192C]">{paybackYears.toFixed(1)} years</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// DEFAULT VALUES (for reset)
+// ============================================
+
+const DEFAULT_VALUES = {
+  monthlyBill: '150',
+  unitRate: '28',
+  standingCharge: '61.64',
+  selectedProduct: 'sigenergy',
+  quantity: 2,
+  batteryPrices: { sigenergy: 2500, ecoflow: 1200 },
+  offPeakRate: '7',
+  panels: '12',
+  wattage: '470',
+  exportRate: '15',
+  pricePerKwp: '1000',
+  customSystemCost: '',
+}
+
+const STORAGE_KEY = 'etoto-calculator-state'
+
+// ============================================
+// MAIN COMPONENT
+// ============================================
+
+export default function FormulaCalculator() {
+  // Tab state
+  const [activeTab, setActiveTab] = useState(0)
+  const [isHydrated, setIsHydrated] = useState(false)
+  
+  // Tab 1: Energy Audit (now monthly bill)
+  const [monthlyBill, setMonthlyBill] = useState(DEFAULT_VALUES.monthlyBill)
+  const [unitRate, setUnitRate] = useState(DEFAULT_VALUES.unitRate)
+  const [standingCharge, setStandingCharge] = useState(DEFAULT_VALUES.standingCharge)
+  
+  // Tab 2: Battery
+  const [selectedProduct, setSelectedProduct] = useState(DEFAULT_VALUES.selectedProduct)
+  const [quantity, setQuantity] = useState(DEFAULT_VALUES.quantity)
+  const [batteryPrices, setBatteryPrices] = useState<Record<string, number>>(DEFAULT_VALUES.batteryPrices)
+  const [offPeakRate, setOffPeakRate] = useState(DEFAULT_VALUES.offPeakRate)
+  
+  // Tab 3: Solar
+  const [panels, setPanels] = useState(DEFAULT_VALUES.panels)
+  const [wattage, setWattage] = useState(DEFAULT_VALUES.wattage)
+  const [exportRate, setExportRate] = useState(DEFAULT_VALUES.exportRate)
+  const [pricePerKwp, setPricePerKwp] = useState(DEFAULT_VALUES.pricePerKwp)
+  
+  // Tab 4: Payback
+  const [customSystemCost, setCustomSystemCost] = useState(DEFAULT_VALUES.customSystemCost)
+
+  // Load from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(STORAGE_KEY)
+      if (saved) {
+        const state = JSON.parse(saved)
+        if (state.monthlyBill) setMonthlyBill(state.monthlyBill)
+        if (state.unitRate) setUnitRate(state.unitRate)
+        if (state.standingCharge) setStandingCharge(state.standingCharge)
+        if (state.selectedProduct) setSelectedProduct(state.selectedProduct)
+        if (state.quantity) setQuantity(state.quantity)
+        if (state.batteryPrices) setBatteryPrices(state.batteryPrices)
+        if (state.offPeakRate) setOffPeakRate(state.offPeakRate)
+        if (state.panels) setPanels(state.panels)
+        if (state.wattage) setWattage(state.wattage)
+        if (state.exportRate) setExportRate(state.exportRate)
+        if (state.pricePerKwp) setPricePerKwp(state.pricePerKwp)
+        if (state.customSystemCost) setCustomSystemCost(state.customSystemCost)
+      }
+    } catch (e) {
+      // Ignore storage errors
+    }
+    setIsHydrated(true)
+  }, [])
+
+  // Save to sessionStorage on change
+  useEffect(() => {
+    if (!isHydrated) return
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        monthlyBill, unitRate, standingCharge,
+        selectedProduct, quantity, batteryPrices, offPeakRate,
+        panels, wattage, exportRate, pricePerKwp, customSystemCost
+      }))
+    } catch (e) {
+      // Ignore storage errors
+    }
+  }, [isHydrated, monthlyBill, unitRate, standingCharge, selectedProduct, quantity, batteryPrices, offPeakRate, panels, wattage, exportRate, pricePerKwp, customSystemCost])
+
+  // Reset to defaults
+  const handleReset = () => {
+    setMonthlyBill(DEFAULT_VALUES.monthlyBill)
+    setUnitRate(DEFAULT_VALUES.unitRate)
+    setStandingCharge(DEFAULT_VALUES.standingCharge)
+    setSelectedProduct(DEFAULT_VALUES.selectedProduct)
+    setQuantity(DEFAULT_VALUES.quantity)
+    setBatteryPrices(DEFAULT_VALUES.batteryPrices)
+    setOffPeakRate(DEFAULT_VALUES.offPeakRate)
+    setPanels(DEFAULT_VALUES.panels)
+    setWattage(DEFAULT_VALUES.wattage)
+    setExportRate(DEFAULT_VALUES.exportRate)
+    setPricePerKwp(DEFAULT_VALUES.pricePerKwp)
+    setCustomSystemCost(DEFAULT_VALUES.customSystemCost)
+    setActiveTab(0)
+    sessionStorage.removeItem(STORAGE_KEY)
+  }
+
+  // Derived values
+  const calculations = useMemo(() => {
+    const monthlyNum = parseFloat(monthlyBill) || 0
+    const unitRateNum = parseFloat(unitRate) || 28
+    const offPeakNum = parseFloat(offPeakRate) || 7
+    const exportRateNum = parseFloat(exportRate) || 15
+    const panelsNum = parseInt(panels) || 12
+    const wattageNum = parseInt(wattage) || 470
+    const pricePerKwpNum = parseFloat(pricePerKwp) || 1000
+
+    const standingChargeNum = parseFloat(standingCharge) || 61.64
+    
+    const annualSpend = monthlyNum * 12
+    const annualStandingCharge = (standingChargeNum / 100) * 365
+    const annualUsageCost = Math.max(0, annualSpend - annualStandingCharge)
+    const annualKwh = unitRateNum > 0 ? Math.round(annualUsageCost / (unitRateNum / 100)) : 0
+    const dailyKwh = annualKwh / 365
+    const dailyEnergyCost = dailyKwh * (unitRateNum / 100)
+    const dailyStandingCharge = standingChargeNum / 100
+    const dailyTotalCost = dailyEnergyCost + dailyStandingCharge
+
+    const product = BATTERY_PRODUCTS.find(p => p.id === selectedProduct)!
+    const totalCapacity = product.usableKwh * quantity
+    const batteryCost = batteryPrices[selectedProduct] * quantity
+    
+    const coveredKwh = Math.min(totalCapacity, dailyKwh)
+    const surplusKwh = Math.max(0, totalCapacity - dailyKwh)
+    const coveragePercent = dailyKwh > 0 ? Math.min(100, (totalCapacity / dailyKwh) * 100) : 0
+    const chargeHours = totalCapacity / (product.chargeRateW / 1000)
+    
+    const batteryPortionCost = coveredKwh * (offPeakNum / 100)
+    const peakPortionCost = Math.max(0, dailyKwh - totalCapacity) * (unitRateNum / 100)
+    const newDailyCost = batteryPortionCost + peakPortionCost
+    const dailySaving = dailyEnergyCost - newDailyCost // energy cost only, excludes standing charge
+    const annualBatterySaving = dailySaving * 365
+
+    const systemKwp = (panelsNum * wattageNum) / 1000
+    const solarCost = systemKwp * pricePerKwpNum
+    const dailyGeneration = systemKwp * 4.5
+    const annualSolarExport = dailyGeneration * (exportRateNum / 100) * 365
+    const annualSurplusExport = surplusKwh * (exportRateNum / 100) * 365
+
+    const calculatedCost = batteryCost + solarCost
+    const systemCost = customSystemCost ? parseFloat(customSystemCost) : calculatedCost
+    const totalAnnualBenefit = annualBatterySaving + annualSolarExport + annualSurplusExport
+    const paybackYears = totalAnnualBenefit > 0 ? systemCost / totalAnnualBenefit : 0
+
+    return {
+      annualSpend,
+      annualStandingCharge,
+      annualUsageCost,
+      annualKwh,
+      dailyKwh,
+      dailyEnergyCost,
+      dailyStandingCharge,
+      dailyTotalCost,
+      totalCapacity,
+      batteryCost,
+      coveredKwh,
+      surplusKwh,
+      coveragePercent,
+      chargeHours,
+      annualBatterySaving,
+      systemKwp,
+      solarCost,
+      annualSolarExport,
+      annualSurplusExport,
+      totalAnnualBenefit,
+      paybackYears,
+    }
+  }, [monthlyBill, unitRate, standingCharge, offPeakRate, exportRate, panels, wattage, pricePerKwp, selectedProduct, quantity, batteryPrices, customSystemCost])
+
+  const setBatteryPrice = (id: string, price: number) => {
+    setBatteryPrices(prev => ({ ...prev, [id]: price }))
+  }
+
+  const tabs = [
+    { icon: Zap, label: 'Energy Audit' },
+    { icon: Battery, label: 'Battery' },
+    { icon: Sun, label: 'Solar' },
+    { icon: TrendingUp, label: 'Payback' },
+  ]
+
+  return (
+    <section id="formula-calculator" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-100">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-10 relative">
+          {/* Reset button - top right */}
+          <button
+            onClick={handleReset}
+            className="absolute right-0 top-0 flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#E8192C] transition-colors"
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="hidden sm:inline">Reset</span>
+          </button>
+          
+          <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-medium rounded-full mb-4">
+            Interactive Calculator
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            Run the numbers live
+          </h2>
+          <p className="text-slate-600 max-w-2xl mx-auto">
+            Enter the customer&apos;s details and watch the savings calculate in real-time. 
+            All prices are editable — adjust to match your own margins.
+          </p>
+        </div>
+
+        {/* Tab navigation */}
+        <div className="flex gap-2 mb-6 sm:mb-8 overflow-x-auto scrollbar-hide scroll-snap-x pb-2 sm:pb-0 sm:flex-wrap sm:justify-center sm:overflow-visible">
+          {tabs.map((tab, i) => (
+            <TabButton
+              key={i}
+              active={activeTab === i}
+              onClick={() => setActiveTab(i)}
+              icon={tab.icon}
+              label={tab.label}
+              step={i + 1}
+            />
+          ))}
+        </div>
+
+        {/* Tab content */}
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+          {activeTab === 0 && (
+            <EnergyAuditTab
+              monthlyBill={monthlyBill}
+              setMonthlyBill={setMonthlyBill}
+              unitRate={unitRate}
+              setUnitRate={setUnitRate}
+              standingCharge={standingCharge}
+              setStandingCharge={setStandingCharge}
+              dailyKwh={calculations.dailyKwh}
+              dailyEnergyCost={calculations.dailyEnergyCost}
+              dailyStandingCharge={calculations.dailyStandingCharge}
+              dailyTotalCost={calculations.dailyTotalCost}
+              annualKwh={calculations.annualKwh}
+              annualSpend={calculations.annualSpend}
+              annualStandingCharge={calculations.annualStandingCharge}
+              annualUsageCost={calculations.annualUsageCost}
+            />
+          )}
+          {activeTab === 1 && (
+            <BatterySavingsTab
+              dailyKwh={calculations.dailyKwh}
+              dailyCost={calculations.dailyEnergyCost}
+              unitRate={unitRate}
+              selectedProduct={selectedProduct}
+              setSelectedProduct={setSelectedProduct}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              batteryPrices={batteryPrices}
+              setBatteryPrice={setBatteryPrice}
+              offPeakRate={offPeakRate}
+              setOffPeakRate={setOffPeakRate}
+            />
+          )}
+          {activeTab === 2 && (
+            <SolarIncomeTab
+              panels={panels}
+              setPanels={setPanels}
+              wattage={wattage}
+              setWattage={setWattage}
+              exportRate={exportRate}
+              setExportRate={setExportRate}
+              pricePerKwp={pricePerKwp}
+              setPricePerKwp={setPricePerKwp}
+              surplusKwh={calculations.surplusKwh}
+            />
+          )}
+          {activeTab === 3 && (
+            <PaybackTab
+              batteryCost={calculations.batteryCost}
+              solarCost={calculations.solarCost}
+              annualBatterySaving={calculations.annualBatterySaving}
+              annualSolarExport={calculations.annualSolarExport}
+              annualSurplusExport={calculations.annualSurplusExport}
+              customSystemCost={customSystemCost}
+              setCustomSystemCost={setCustomSystemCost}
+              systemKwp={calculations.systemKwp}
+            />
+          )}
+        </div>
+
+        {/* Summary footer */}
+        <SummaryFooter
+          monthlyBill={monthlyBill}
+          standingCharge={standingCharge}
+          dailyKwh={calculations.dailyKwh}
+          annualKwh={calculations.annualKwh}
+          annualStandingCharge={calculations.annualStandingCharge}
+          annualUsageCost={calculations.annualUsageCost}
+          selectedProduct={selectedProduct}
+          quantity={quantity}
+          batteryCost={calculations.batteryCost}
+          solarCost={calculations.solarCost}
+          systemKwp={calculations.systemKwp}
+          panels={panels}
+          wattage={wattage}
+          annualBatterySaving={calculations.annualBatterySaving}
+          annualSolarExport={calculations.annualSolarExport}
+          annualSurplusExport={calculations.annualSurplusExport}
+          totalCapacity={calculations.totalCapacity}
+          coveragePercent={calculations.coveragePercent}
+          chargeHours={calculations.chargeHours}
+          paybackYears={calculations.paybackYears}
+        />
+      </div>
+    </section>
+  )
+}
