@@ -112,23 +112,23 @@ export default function PasswordGate({
       )}
 
       {/* Password gate card */}
-      <div className="relative z-10 -mt-32 mx-4 md:mx-auto max-w-xl">
-        <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div className="relative z-10 -mt-32 mx-3 sm:mx-4 md:mx-auto max-w-xl">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
           {/* Header */}
-          <div className="bg-slate-900 text-white p-6 text-center">
-            <div className="w-16 h-16 rounded-full bg-[#E8192C]/20 flex items-center justify-center mx-auto mb-4">
-              <Lock className="w-8 h-8 text-[#E8192C]" />
+          <div className="bg-slate-900 text-white p-4 sm:p-6 text-center">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E8192C]/20 flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-[#E8192C]" />
             </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-2">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-balance">
               Unlock the Full {productName}
             </h3>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-400 text-xs sm:text-sm">
               Enter your access code to unlock all content
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <form onSubmit={handleSubmit} className="p-4 sm:p-6 space-y-4">
             <div>
               <label htmlFor="accessCode" className="block text-sm font-medium text-slate-700 mb-2">
                 Access Code
@@ -139,7 +139,7 @@ export default function PasswordGate({
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="e.g. SCRIPT-2026"
-                className="w-full px-4 py-3 border border-slate-300 rounded-xl text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all uppercase"
+                className="w-full px-3 sm:px-4 py-3 border border-slate-300 rounded-lg sm:rounded-xl text-base focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all uppercase min-h-[48px]"
                 autoComplete="off"
                 autoCapitalize="characters"
               />
@@ -155,7 +155,7 @@ export default function PasswordGate({
             <button
               type="submit"
               disabled={isLoading || !inputValue.trim()}
-              className="w-full flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              className="w-full flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-semibold py-3.5 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all min-h-[52px] sm:min-h-[56px] touch-action-manipulation"
             >
               {isLoading ? (
                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -174,15 +174,15 @@ export default function PasswordGate({
           </div>
 
           {/* Buy section */}
-          <div className="p-6 bg-slate-50">
-            <p className="text-center text-slate-600 text-sm mb-4">
+          <div className="p-4 sm:p-6 bg-slate-50">
+            <p className="text-center text-slate-600 text-sm mb-3 sm:mb-4">
               Don&apos;t have a code?
             </p>
             <a
               href={buyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-4 px-6 rounded-xl transition-all min-h-[56px]"
+              className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-white font-semibold py-3.5 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all min-h-[52px] sm:min-h-[56px] touch-action-manipulation"
             >
               <span>Buy Access for {price}</span>
               <ArrowRight className="w-5 h-5" />

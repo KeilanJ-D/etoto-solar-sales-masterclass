@@ -42,7 +42,7 @@ export default function Hero() {
   ]
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center px-4 md:px-6 py-16 md:py-20 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
+    <section className="relative min-h-[100dvh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 -left-20 w-72 h-72 md:w-96 md:h-96 bg-[#E8192C]/5 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
@@ -100,7 +100,7 @@ export default function Hero() {
       </div>
 
       {/* Animated stats */}
-      <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mt-10 md:mt-14 w-full max-w-3xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+      <div className={`grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 mt-8 sm:mt-10 md:mt-14 w-full max-w-3xl transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
         {stats.map((stat, i) => (
           <div 
             key={i} 
@@ -108,12 +108,12 @@ export default function Hero() {
             style={{ transitionDelay: `${i * 100}ms` }}
           >
             <div 
-              className="px-2 md:px-6 py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group"
+              className="px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 md:hover:-translate-y-2 group h-full"
             >
-              <p className="text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
+              <p className="text-lg sm:text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
                 {stat.prefix}{stat.value.toLocaleString()}{stat.suffix}
               </p>
-              <p className="text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2">{stat.label}</p>
+              <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2 leading-tight">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -122,7 +122,7 @@ export default function Hero() {
       {/* CTA Button */}
       <a 
         href="#problem"
-        className={`mt-10 md:mt-12 inline-flex items-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] text-white px-6 md:px-10 py-3 md:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        className={`mt-8 sm:mt-10 md:mt-12 inline-flex items-center justify-center gap-2 md:gap-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white px-6 sm:px-8 md:px-10 py-3.5 sm:py-4 text-base md:text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105 active:scale-95 shadow-xl hover:shadow-2xl hover:shadow-[#E8192C]/30 group min-h-[48px] touch-action-manipulation ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         style={{ transitionDelay: '700ms' }}
       >
         Learn The Formula

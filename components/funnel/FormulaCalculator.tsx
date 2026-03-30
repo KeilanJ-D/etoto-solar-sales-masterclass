@@ -61,13 +61,13 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-4 py-3 rounded-lg font-medium text-sm transition-all ${
+      className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg font-medium text-sm transition-all touch-action-manipulation min-h-[44px] flex-shrink-0 scroll-snap-start ${
         active 
           ? 'bg-[#E8192C] text-white shadow-lg' 
-          : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+          : 'bg-white text-slate-600 hover:bg-slate-50 active:bg-slate-100 border border-slate-200'
       }`}
     >
-      <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+      <span className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-xs font-bold ${
         active ? 'bg-white/20' : 'bg-slate-100'
       }`}>
         {step}
@@ -94,18 +94,18 @@ function InputField({
   hint?: string
 }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-1.5">
       <label className="text-sm font-medium text-slate-700">{label}</label>
       <div className="flex items-center gap-2">
-        {prefix && <span className="text-slate-500 font-medium">{prefix}</span>}
+        {prefix && <span className="text-slate-500 font-medium text-sm sm:text-base">{prefix}</span>}
         <input
           type="text"
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full px-3 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base"
+          className="w-full px-3 sm:px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/20 focus:border-[#E8192C] outline-none transition-all text-slate-900 font-medium text-base min-h-[48px]"
         />
-        {suffix && <span className="text-slate-500 font-medium">{suffix}</span>}
+        {suffix && <span className="text-slate-500 font-medium text-sm sm:text-base whitespace-nowrap">{suffix}</span>}
       </div>
       {hint && <p className="text-xs text-slate-500">{hint}</p>}
     </div>
@@ -1115,7 +1115,7 @@ export default function FormulaCalculator() {
   ]
 
   return (
-    <section id="formula-calculator" className="py-16 md:py-24 px-4 md:px-6 bg-slate-100">
+    <section id="formula-calculator" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-100">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-10">
@@ -1132,7 +1132,7 @@ export default function FormulaCalculator() {
         </div>
 
         {/* Tab navigation */}
-        <div className="flex flex-wrap gap-2 mb-8 justify-center">
+        <div className="flex gap-2 mb-6 sm:mb-8 overflow-x-auto scrollbar-hide scroll-snap-x pb-2 sm:pb-0 sm:flex-wrap sm:justify-center sm:overflow-visible">
           {tabs.map((tab, i) => (
             <TabButton
               key={i}
@@ -1146,7 +1146,7 @@ export default function FormulaCalculator() {
         </div>
 
         {/* Tab content */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
           {activeTab === 0 && (
             <EnergyAuditTab
               monthlyBill={monthlyBill}

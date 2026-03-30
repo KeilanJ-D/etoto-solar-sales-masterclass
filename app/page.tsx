@@ -63,39 +63,39 @@ export default function SalesMasterclass() {
       <TheMethod />
       
       {/* PART 2: CTA CARDS */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-white">
+      <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-sm font-medium rounded-full mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="inline-block px-3 py-1 bg-[#E8192C]/10 text-[#E8192C] text-xs sm:text-sm font-medium rounded-full mb-3 sm:mb-4">
               Explore the Masterclass
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-3 sm:mb-4">
               Choose where to start
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto">
               Everything you need to sell solar professionally — from scripts to live demonstrations to hands-on tools.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {ctaCards.map((card) => {
               const Icon = card.icon
               return (
                 <Link
                   key={card.href}
                   href={card.href}
-                  className="group bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl p-6 transition-all hover:shadow-lg hover:border-slate-300"
+                  className="group bg-slate-50 hover:bg-slate-100 active:bg-slate-200 border border-slate-200 rounded-lg sm:rounded-xl p-4 sm:p-6 transition-all hover:shadow-lg hover:border-slate-300 touch-action-manipulation"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
-                      <Icon className="w-6 h-6 text-[#E8192C]" />
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8192C]/20 transition-colors">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#E8192C]" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-slate-900 mb-1">{card.title}</h3>
-                      <p className="text-sm text-slate-500 mb-3">{card.description}</p>
-                      <span className="inline-flex items-center gap-1 text-sm font-medium text-[#E8192C] group-hover:gap-2 transition-all">
+                      <h3 className="font-bold text-slate-900 text-sm sm:text-base mb-0.5 sm:mb-1">{card.title}</h3>
+                      <p className="text-xs sm:text-sm text-slate-500 mb-2 sm:mb-3">{card.description}</p>
+                      <span className="inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-[#E8192C] group-hover:gap-2 transition-all">
                         {card.cta}
-                        <ArrowRight className="w-4 h-4" />
+                        <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                       </span>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ export default function SalesStep({ id, stepNumber, title, goal, children, dark 
     <section 
       id={id} 
       ref={sectionRef} 
-      className={`py-16 md:py-24 px-4 md:px-6 relative overflow-hidden transition-colors ${
+      className={`py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-colors ${
         dark ? 'bg-slate-900 text-white' : 'bg-white dark:bg-slate-900 dark:text-white'
       }`}
     >
@@ -45,22 +45,22 @@ export default function SalesStep({ id, stepNumber, title, goal, children, dark 
       
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Step number badge */}
-        <div className={`flex items-center justify-center gap-3 mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="w-12 h-12 rounded-xl bg-[#E8192C] flex items-center justify-center font-black text-xl text-white shadow-lg">
+        <div className={`flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[#E8192C] flex items-center justify-center font-black text-lg sm:text-xl text-white shadow-lg">
             {stepNumber}
           </div>
-          <span className={`text-sm font-medium tracking-wide uppercase ${dark ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}>
+          <span className={`text-xs sm:text-sm font-medium tracking-wide uppercase ${dark ? 'text-slate-400' : 'text-slate-500 dark:text-slate-400'}`}>
             Step {stepNumber} of 9
           </span>
         </div>
 
         {/* Title */}
-        <h2 className={`text-2xl md:text-4xl lg:text-5xl font-black text-center mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
+        <h2 className={`text-xl sm:text-2xl md:text-4xl lg:text-5xl font-black text-center mb-3 sm:mb-4 transition-all duration-700 delay-100 text-balance ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
           {title}
         </h2>
 
         {/* Goal */}
-        <p className={`text-base md:text-lg text-center max-w-2xl mx-auto mb-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-slate-300' : 'text-slate-500 dark:text-slate-300'}`}>
+        <p className={`text-sm sm:text-base md:text-lg text-center max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${dark ? 'text-slate-300' : 'text-slate-500 dark:text-slate-300'}`}>
           {goal}
         </p>
 
@@ -88,17 +88,17 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
   }
 
   return (
-    <div className="bg-slate-900 rounded-2xl p-6 md:p-8 mb-8 relative group">
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-          <span className="ml-2 text-slate-400 text-sm font-medium">{title}</span>
+    <div className="bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 relative group">
+      <div className="flex items-center justify-between mb-3 sm:mb-4 gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500" />
+          <span className="ml-1.5 sm:ml-2 text-slate-400 text-xs sm:text-sm font-medium truncate">{title}</span>
         </div>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 text-slate-300 px-3 py-2 rounded-lg transition-all min-h-[44px]"
+          className="flex items-center gap-1.5 text-xs bg-white/10 hover:bg-white/20 active:bg-white/30 text-slate-300 px-3 py-2.5 rounded-lg transition-all min-h-[44px] touch-action-manipulation flex-shrink-0"
           aria-label="Copy script to clipboard"
         >
           {copied ? (
@@ -109,13 +109,12 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
           ) : (
             <>
               <Copy className="w-4 h-4" />
-              <span className="hidden sm:inline">Copy</span>
-              <span className="sm:hidden">Tap to copy</span>
+              <span>Copy</span>
             </>
           )}
         </button>
       </div>
-      <div ref={contentRef} className="text-slate-100 text-sm md:text-base leading-relaxed font-mono whitespace-pre-wrap">
+      <div ref={contentRef} className="text-slate-100 text-sm sm:text-base leading-relaxed sm:leading-loose font-mono whitespace-pre-wrap">
         {children}
       </div>
     </div>
@@ -124,8 +123,8 @@ export function ScriptBox({ children, title = "What to Say" }: { children: React
 
 export function WhyCard({ title, children }: { title: string, children: ReactNode }) {
   return (
-    <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 border border-slate-100 dark:border-slate-700 hover:border-[#E8192C]/30 hover:shadow-lg transition-all duration-300">
-      <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-2">{title}</h4>
+    <div className="bg-slate-50 dark:bg-slate-800 rounded-lg sm:rounded-xl p-4 sm:p-5 border border-slate-100 dark:border-slate-700 hover:border-[#E8192C]/30 hover:shadow-lg transition-all duration-300">
+      <h4 className="font-bold text-slate-900 dark:text-white text-sm mb-1.5 sm:mb-2">{title}</h4>
       <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">{children}</p>
     </div>
   )

@@ -223,3 +223,185 @@
 .stagger-4 { animation-delay: 400ms; }
 .stagger-5 { animation-delay: 500ms; }
 .stagger-6 { animation-delay: 600ms; }
+
+/* ================================================
+   RESPONSIVE UTILITIES
+   ================================================ */
+
+/* Touch target minimum - 44x44px per WCAG */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Prevent double-tap zoom on interactive elements */
+.touch-action-manipulation {
+  touch-action: manipulation;
+}
+
+/* Input styling to prevent iOS zoom (requires 16px+ font) */
+.input-no-zoom {
+  font-size: 16px !important;
+}
+
+@media (min-width: 768px) {
+  .input-no-zoom {
+    font-size: 14px !important;
+  }
+}
+
+/* Scroll padding for sticky nav */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Horizontal scroll with snap */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-center {
+  scroll-snap-align: center;
+}
+
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
+
+/* Section spacing - mobile first */
+.section-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+/* Responsive typography */
+.text-responsive-h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .text-responsive-h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-h1 {
+    font-size: 4rem;
+  }
+}
+
+.text-responsive-h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .text-responsive-h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.text-responsive-h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .text-responsive-h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-responsive-h3 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Card grid utilities */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Button base - touch friendly */
+.btn-touch {
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  touch-action: manipulation;
+}
+
+@media (min-width: 768px) {
+  .btn-touch {
+    min-height: 44px;
+    padding: 0.625rem 1.25rem;
+  }
+}
+
+/* Input base - touch friendly, no iOS zoom */
+.input-touch {
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  font-size: 16px;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .input-touch {
+    min-height: 44px;
+    font-size: 14px;
+  }
+}

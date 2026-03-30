@@ -275,7 +275,7 @@ export default function InteractiveQuiz() {
   }
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-1/4 w-72 h-72 bg-[#E8192C] rounded-full blur-3xl" />
@@ -303,7 +303,7 @@ export default function InteractiveQuiz() {
         {/* Quiz Content */}
         <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {!quizComplete ? (
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
               {/* Progress */}
               <div className="flex items-center justify-between mb-6">
                 <span className="text-sm text-slate-400">Question {currentQuestionIndex + 1} of {totalQuestions}</span>
@@ -321,7 +321,7 @@ export default function InteractiveQuiz() {
 
               {/* Options */}
               {question.type !== 'shortanswer' ? (
-                <div className="space-y-3 mb-6">
+                <div className="space-y-3 sm:space-y-4 mb-6">
                   {question.options?.map((option, index) => {
                     const isSelected = question.type === 'multiselect' 
                       ? (selectedAnswer as string[] || []).includes(option)
@@ -333,7 +333,7 @@ export default function InteractiveQuiz() {
                         key={index}
                         onClick={() => handleSelectOption(option)}
                         disabled={showResult}
-                        className={`w-full text-left p-4 rounded-lg border transition-all ${
+                        className={`w-full text-left p-3 sm:p-4 rounded-lg border transition-all touch-action-manipulation min-h-[52px] ${
                           showResult
                             ? isCorrect
                               ? 'bg-green-500/20 border-green-500 text-green-100'
@@ -342,11 +342,11 @@ export default function InteractiveQuiz() {
                                 : 'bg-white/5 border-white/10 text-slate-400'
                             : isSelected
                               ? 'bg-[#E8192C]/20 border-[#E8192C] text-white'
-                              : 'bg-white/5 border-white/10 hover:border-white/30 text-slate-300'
+                              : 'bg-white/5 border-white/10 hover:border-white/30 active:bg-white/10 text-slate-300'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                          <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                             showResult
                               ? isCorrect
                                 ? 'border-green-500 bg-green-500'
@@ -357,11 +357,11 @@ export default function InteractiveQuiz() {
                                 ? 'border-[#E8192C] bg-[#E8192C]'
                                 : 'border-white/30'
                           }`}>
-                            {showResult && isCorrect && <CheckCircle className="w-4 h-4 text-white" />}
-                            {showResult && isSelected && !isCorrect && <XCircle className="w-4 h-4 text-white" />}
+                            {showResult && isCorrect && <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
+                            {showResult && isSelected && !isCorrect && <XCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />}
                             {!showResult && isSelected && <div className="w-2 h-2 bg-white rounded-full" />}
                           </div>
-                          <span className="text-sm md:text-base">{option}</span>
+                          <span className="text-sm sm:text-base">{option}</span>
                         </div>
                       </button>
                     )
@@ -375,7 +375,7 @@ export default function InteractiveQuiz() {
                     onChange={(e) => setSelectedAnswer(e.target.value)}
                     disabled={showResult}
                     placeholder="Type your answer..."
-                    className="w-full p-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-slate-500 resize-none focus:outline-none focus:border-[#E8192C]"
+                    className="w-full p-3 sm:p-4 rounded-lg bg-white/5 border border-white/10 text-white placeholder-slate-500 resize-none focus:outline-none focus:border-[#E8192C] text-base min-h-[100px]"
                     rows={3}
                   />
                   
@@ -416,7 +416,7 @@ export default function InteractiveQuiz() {
                   <button
                     onClick={handleSubmitAnswer}
                     disabled={!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)}
-                    className="flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+                    className="flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors min-h-[48px] touch-action-manipulation w-full sm:w-auto"
                   >
                     Submit Answer
                   </button>
@@ -424,7 +424,7 @@ export default function InteractiveQuiz() {
                   (question.type !== 'shortanswer' || selfAssessCorrect !== null) && (
                     <button
                       onClick={handleNextQuestion}
-                      className="flex items-center gap-2 px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold rounded-lg transition-colors"
+                      className="flex items-center justify-center gap-2 px-5 sm:px-6 py-3 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-semibold rounded-lg transition-colors min-h-[48px] touch-action-manipulation w-full sm:w-auto"
                     >
                       {currentQuestionIndex < totalQuestions - 1 ? 'Next Question' : 'See Results'}
                       <ChevronRight className="w-4 h-4" />

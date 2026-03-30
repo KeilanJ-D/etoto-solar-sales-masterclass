@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="py-12 md:py-16 px-4 md:px-6 bg-slate-900">
+    <footer className="py-10 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-slate-900">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
@@ -24,30 +24,30 @@ export default function Footer() {
         </div>
         
         <div className="mt-8 pt-8 border-t border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8 mb-8">
             <div>
               <h4 className="text-white/80 font-semibold text-sm mb-3">Quick Links</h4>
-              <ul className="space-y-2">
-                <li><a href="#the-problem" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">The Problem</a></li>
-                <li><a href="#the-method" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">The Method</a></li>
-                <li><a href="#step-1" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">The 9 Steps</a></li>
-                <li><a href="#live-call" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">Live Call Recording</a></li>
+              <ul className="space-y-2.5 sm:space-y-2">
+                <li><a href="#the-problem" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Problem</a></li>
+                <li><a href="#the-method" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The Method</a></li>
+                <li><a href="#step-1" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">The 9 Steps</a></li>
+                <li><a href="#live-call" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Live Call</a></li>
               </ul>
             </div>
             <div>
               <h4 className="text-white/80 font-semibold text-sm mb-3">Resources</h4>
-              <ul className="space-y-2">
-                <li><a href="#formula-calculator" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">Formula Calculator</a></li>
-                <li><a href="#quiz" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">Knowledge Quiz</a></li>
-                <li><a href="#downloads" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">Downloads</a></li>
+              <ul className="space-y-2.5 sm:space-y-2">
+                <li><a href="#formula-calculator" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Calculator</a></li>
+                <li><a href="#quiz" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Quiz</a></li>
+                <li><a href="#downloads" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">Downloads</a></li>
               </ul>
             </div>
-            <div>
+            <div className="col-span-2 sm:col-span-1">
               <h4 className="text-white/80 font-semibold text-sm mb-3">Contact</h4>
-              <ul className="space-y-2">
-                <li><a href="https://etotomedia.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">etotomedia.com</a></li>
-                <li><a href="mailto:keilan.jd@etotomedia.com" className="text-white/50 hover:text-[#E8192C] text-sm transition-colors">keilan.jd@etotomedia.com</a></li>
-                <li><a href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#25D366] text-sm transition-colors">Join the community</a></li>
+              <ul className="space-y-2.5 sm:space-y-2">
+                <li><a href="https://etotomedia.com" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5">etotomedia.com</a></li>
+                <li><a href="mailto:keilan.jd@etotomedia.com" className="text-white/50 hover:text-[#E8192C] active:text-[#E8192C] text-sm transition-colors block py-0.5 truncate">keilan.jd@etotomedia.com</a></li>
+                <li><a href="https://chat.whatsapp.com/FSM9iEeKpPj9Oux4qYyFSz?mode=gi_t" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-[#25D366] active:text-[#25D366] text-sm transition-colors block py-0.5">Join the community</a></li>
               </ul>
             </div>
           </div>
