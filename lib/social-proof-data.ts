@@ -41,9 +41,9 @@ export const videoTestimonials = [
     company: 'EVLM Renewables',
     quote: "We went from 4 installs a month to 4-5 a week. ETOTO didn't just bring leads — they changed how we sell.",
     stat: '4/month → 4-5/week',
-    videoUrl: 'https://www.youtube.com/embed/ZcsAfN_A8Mo',
+    videoUrl: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7442510522643705856?collapsed=1',
     logoUrl: null,
-    isVertical: true,
+    embedType: 'linkedin' as const,
   },
   {
     id: 'ab-renewables',

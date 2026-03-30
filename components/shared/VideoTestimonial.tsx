@@ -12,7 +12,8 @@ interface VideoTestimonialData {
   stat: string
   videoUrl: string
   isVertical?: boolean
-  logoUrl?: string
+  logoUrl?: string | null
+  embedType?: 'youtube' | 'linkedin'
 }
 
 interface VideoTestimonialProps {
@@ -20,34 +21,60 @@ interface VideoTestimonialProps {
 }
 
 export function VideoTestimonial({ testimonial }: VideoTestimonialProps) {
-  const { videoUrl, quote, name, company, stat, isVertical = false, logoUrl } = testimonial
+  const { videoUrl, quote, name, company, stat, isVertical = false, logoUrl, embedType = 'youtube' } = testimonial
   
-  return (
-    <div className={`flex flex-col ${isVertical ? 'md:flex-row md:items-center' : 'lg:flex-row lg:items-center'} gap-6 md:gap-10`}>
-      {/* Video - Lite YouTube (loads thumbnail first, iframe on click) */}
-      <div className={`${isVertical ? 'md:w-2/5' : 'lg:w-1/2'} flex-shrink-0`}>
-        {isVertical ? (
-          // Phone-frame style for vertical videos
-          <div className="relative mx-auto max-w-[280px]">
-            <div className="bg-slate-900 rounded-[2rem] p-2 shadow-2xl">
-              <div className="bg-black rounded-[1.5rem] overflow-hidden">
-                <LiteYouTube 
-                  videoId={videoUrl} 
-                  title={`${name} testimonial`}
-                  aspectRatio="vertical"
-                />
-              </div>
+  const renderVideo = () => {
+    if (embedType === 'linkedin') {
+      return (
+        <div className="relative mx-auto max-w-[320px]">
+          <div className="bg-slate-900 rounded-[2rem] p-2 shadow-2xl">
+            <div className="bg-black rounded-[1.5rem] overflow-hidden">
+              <iframe
+                src={videoUrl}
+                height="570"
+                width="100%"
+                frameBorder="0"
+                allowFullScreen
+                title={`${name} testimonial`}
+                className="w-full"
+              />
             </div>
           </div>
-        ) : (
-          // Standard 16:9 aspect ratio
-          <div className="rounded-xl overflow-hidden shadow-2xl">
-            <LiteYouTube 
-              videoId={videoUrl} 
-              title={`${name} testimonial`}
-            />
+        </div>
+      )
+    }
+    
+    if (isVertical) {
+      return (
+        <div className="relative mx-auto max-w-[280px]">
+          <div className="bg-slate-900 rounded-[2rem] p-2 shadow-2xl">
+            <div className="bg-black rounded-[1.5rem] overflow-hidden">
+              <LiteYouTube 
+                videoId={videoUrl} 
+                title={`${name} testimonial`}
+                aspectRatio="vertical"
+              />
+            </div>
           </div>
-        )}
+        </div>
+      )
+    }
+    
+    return (
+      <div className="rounded-xl overflow-hidden shadow-2xl">
+        <LiteYouTube 
+          videoId={videoUrl} 
+          title={`${name} testimonial`}
+        />
+      </div>
+    )
+  }
+  
+  return (
+    <div className={`flex flex-col ${isVertical || embedType === 'linkedin' ? 'md:flex-row md:items-center' : 'lg:flex-row lg:items-center'} gap-6 md:gap-10`}>
+      {/* Video */}
+      <div className={`${isVertical || embedType === 'linkedin' ? 'md:w-2/5' : 'lg:w-1/2'} flex-shrink-0`}>
+        {renderVideo()}
       </div>
 
       {/* Quote & Company Info */}
