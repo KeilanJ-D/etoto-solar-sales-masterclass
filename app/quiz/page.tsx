@@ -4,6 +4,7 @@ import Footer from '@/components/funnel/Footer'
 import { StatsBanner } from '@/components/shared/StatsBanner'
 
 // Dynamic import - InteractiveQuiz is a large client component
+// Note: ssr: false not allowed in Server Components, but loading skeleton still works
 const InteractiveQuiz = dynamic(() => import('@/components/funnel/InteractiveQuiz'), {
   loading: () => (
     <div className="py-12 px-4">
@@ -16,7 +17,6 @@ const InteractiveQuiz = dynamic(() => import('@/components/funnel/InteractiveQui
       </div>
     </div>
   ),
-  ssr: false,
 })
 
 export const metadata = {
