@@ -12,25 +12,9 @@ interface StatsBannerProps {
   dark?: boolean
 }
 
-// Parse target number from stat value (e.g., "£5,000+" -> 5000)
-const parseTarget = (value: string) => {
-  const match = value.match(/[\d,]+/)
-  return match ? parseInt(match[0].replace(/,/g, '')) : 0
-}
-
 export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
   const [isVisible, setIsVisible] = useState(false)
-  const [mounted, setMounted] = useState(false)
-  const [counts, setCounts] = useState<number[]>([])
   const ref = useRef<HTMLDivElement>(null)
-  
-  // Get targets once
-  const targets = stats.map(stat => parseTarget(stat.value))
-
-  // Mount check to prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,39 +30,6 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
     if (ref.current) observer.observe(ref.current)
     return () => observer.disconnect()
   }, [])
-
-  // Animate numbers when visible
-  useEffect(() => {
-    if (!isVisible || !mounted) return
-
-    // Start from 0 and animate up
-    const duration = 1500
-    const steps = 60
-    const stepTime = duration / steps
-
-    let step = 0
-    const interval = setInterval(() => {
-      step++
-      const progress = step / steps
-      // Easing function for smooth count-up
-      const eased = 1 - Math.pow(1 - progress, 3)
-      
-      setCounts(targets.map(target => Math.round(target * eased)))
-      
-      if (step >= steps) clearInterval(interval)
-    }, stepTime)
-
-    return () => clearInterval(interval)
-  }, [isVisible, mounted, targets])
-
-  // Format the count with the original prefix/suffix
-  const formatStat = (stat: Stat, count: number) => {
-    const match = stat.value.match(/^([^0-9]*)[\d,]+(.*)$/)
-    if (match) {
-      return `${match[1]}${count.toLocaleString()}${match[2]}`
-    }
-    return stat.value
-  }
 
   return (
     <div
@@ -119,13 +70,13 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              {/* Large stat value - SSR shows final value, client animates */}
+              {/* Large stat value */}
               <p
                 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-2 tracking-tight ${
                   dark ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                {mounted ? formatStat(stat, counts[i] ?? targets[i]) : stat.value}
+                {stat.value}
               </p>
               
               {/* Label */}
