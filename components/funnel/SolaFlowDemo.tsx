@@ -39,31 +39,28 @@ export default function SolaFlowDemo({ variant = 'full' }: SolaFlowDemoProps) {
     return () => observer.disconnect()
   }, [])
 
-  // Teaser variant: compact CTA card without iframe embed
+  // Teaser variant: compact single-line CTA
   if (variant === 'teaser') {
     return (
-      <section ref={sectionRef} className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-900 text-white">
-        <div className="max-w-4xl mx-auto">
-          <div className={`bg-white/5 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-16 h-16 rounded-xl bg-[#E8192C] flex items-center justify-center flex-shrink-0">
-                <Zap className="w-8 h-8 text-white" />
+      <section ref={sectionRef} className="py-10 sm:py-12 px-4 sm:px-6 bg-slate-900 text-white">
+        <div className="max-w-3xl mx-auto">
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="flex items-center gap-4 text-center sm:text-left">
+              <Zap className="w-6 h-6 text-[#E8192C] hidden sm:block" />
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-white">
+                  SolaFlow: <span className="text-[#E8192C]">£24.4K closed in 2 weeks</span>
+                </h3>
+                <p className="text-sm text-slate-400">Instant quotes before you arrive</p>
               </div>
-              <div className="flex-1 text-center md:text-left">
-                <p className="text-sm text-[#F5921E] font-medium mb-1">Your Secret Weapon</p>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">SolaFlow — Instant Quotes Before You Arrive</h3>
-                <p className="text-slate-400 text-sm sm:text-base">
-                  Your setters run customers through SolaFlow on the first call. By the time you arrive, they already know the price.
-                </p>
-              </div>
-              <Link
-                href="/solaflow"
-                className="flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3 px-6 rounded-full transition-all whitespace-nowrap min-h-[48px]"
-              >
-                <span>See SolaFlow</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
             </div>
+            <Link
+              href="/solaflow"
+              className="flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold py-2.5 px-5 rounded-lg transition-all whitespace-nowrap text-sm"
+            >
+              Learn More
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

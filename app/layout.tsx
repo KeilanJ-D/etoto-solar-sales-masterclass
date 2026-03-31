@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
-import { Raleway, JetBrains_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const raleway = Raleway({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-raleway',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-heading',
+  weight: ['500', '600', '700', '800'],
+})
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  weight: ['400', '500', '600', '700'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -56,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${raleway.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth">
       <body className="font-sans antialiased bg-white overflow-x-hidden">
         {children}
         <Analytics />

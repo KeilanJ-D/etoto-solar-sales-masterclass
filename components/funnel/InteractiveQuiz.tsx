@@ -141,7 +141,7 @@ const questions: Question[] = [
 export default function InteractiveQuiz() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [quizStarted, setQuizStarted] = useState(true) // Auto-start quiz immediately
+  const [quizStarted, setQuizStarted] = useState(false)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -292,14 +292,70 @@ export default function InteractiveQuiz() {
       </div>
 
       <div className="max-w-3xl mx-auto relative z-10">
-        {/* Header */}
-        <div className={`text-center mb-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Target className="w-4 h-4 text-[#E8192C]" />
-            <span className="text-sm font-medium text-slate-400 tracking-wide uppercase">
-              {isRetryMode ? 'Retry Mode — Wrong Answers Only' : 'Test Yourself'}
+        {/* Pre-Quiz Immersive Start Screen */}
+        {!quizStarted && (
+          <div className={`text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="max-w-xl mx-auto">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 text-slate-400 text-xs font-semibold uppercase tracking-wider rounded-full mb-8">
+                <Target className="w-3.5 h-3.5 text-[#E8192C]" />
+                Certification
+              </span>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight leading-tight">
+                Could You Close<br />This Deal?
+              </h1>
+              
+              <p className="text-slate-400 text-lg mb-10 max-w-md mx-auto leading-relaxed">
+                18 questions stand between you and proof that you actually know how to sell solar.
+                <span className="text-white font-semibold"> 80% pass mark. Most fail first time.</span>
+              </p>
+              
+              {/* Stats */}
+              <div className="flex items-center justify-center gap-4 sm:gap-8 mb-10">
+                <div className="text-center px-4 sm:px-6 py-3 bg-white/5 rounded-xl border border-white/10">
+                  <p className="text-2xl sm:text-3xl font-black text-white">18</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">Questions</p>
+                </div>
+                <div className="text-center px-4 sm:px-6 py-3 bg-white/5 rounded-xl border border-white/10">
+                  <p className="text-2xl sm:text-3xl font-black text-white">5 min</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">Average</p>
+                </div>
+                <div className="text-center px-4 sm:px-6 py-3 bg-[#E8192C]/10 rounded-xl border border-[#E8192C]/30">
+                  <p className="text-2xl sm:text-3xl font-black text-[#E8192C]">80%</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wide">To Pass</p>
+                </div>
+              </div>
+              
+              {/* Topics */}
+              <p className="text-sm text-slate-500 mb-8">
+                <span className="text-slate-400">Covers:</span> Energy Audit Maths · Battery vs Solar · Objection Handling · Closing Techniques · Product Knowledge
+              </p>
+              
+              {/* Start Button */}
+              <button
+                onClick={() => setQuizStarted(true)}
+                className="inline-flex items-center gap-3 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:scale-[0.98] text-white font-bold text-lg rounded-xl transition-all shadow-lg shadow-[#E8192C]/25 hover:shadow-[#E8192C]/40"
+              >
+                Start the Exam
+                <ChevronRight className="w-5 h-5" />
+              </button>
+              
+              <p className="text-xs text-slate-600 mt-8 italic">
+                &ldquo;If you can&apos;t pass this, you&apos;re not ready for the phones.&rdquo; — Keilan, ETOTO
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Quiz Header - shown during quiz */}
+        {quizStarted && !quizComplete && (
+          <div className={`text-center mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <span className={`inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider ${isRetryMode ? 'text-[#F5921E]' : 'text-slate-400'}`}>
+              <Target className="w-4 h-4 text-[#E8192C]" />
+              {isRetryMode ? 'Retry Mode — Wrong Answers Only' : 'Solar Sales Quiz'}
             </span>
           </div>
+        )}
           <h2 className="text-2xl md:text-4xl font-black mb-4">Solar PV + Battery Quiz</h2>
           <p className="text-slate-400">
             {isRetryMode 
@@ -340,7 +396,8 @@ export default function InteractiveQuiz() {
         )}
 
         {/* Quiz Content */}
-        <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        {quizStarted && (
+          <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           {!quizComplete ? (
             <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
               {/* Sticky Progress bar on mobile */}
@@ -576,7 +633,8 @@ export default function InteractiveQuiz() {
               </div>
             </div>
           )}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   )

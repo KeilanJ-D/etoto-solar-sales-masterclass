@@ -118,17 +118,11 @@ export default function Footer() {
         
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-white/10">
-          <div className="flex items-center gap-4">
-            <p className="text-white/30 text-xs">
-              © 2026 ETOTO Media. All rights reserved.
-            </p>
-            <span className="hidden md:inline text-white/20">|</span>
-            <p className="text-white/30 text-xs">
-              Part of the ETOTO Media family
-            </p>
-          </div>
           <p className="text-white/30 text-xs">
-            Confidential — For internal training purposes only
+            © 2026 ETOTO Media. All rights reserved.
+          </p>
+          <p className="text-white/30 text-xs">
+            Built by ETOTO Media
           </p>
         </div>
       </div>

@@ -5,24 +5,21 @@ import { NextStepCTA } from '@/components/shared/NextStepCTA'
 
 const InteractiveQuiz = dynamic(() => import('@/components/funnel/InteractiveQuiz'), {
   loading: () => (
-    <div className="py-12 px-4">
-      <div className="max-w-2xl mx-auto bg-white rounded-2xl p-8 shadow-lg animate-pulse">
-        <div className="h-6 bg-slate-200 rounded w-24 mx-auto mb-4" />
-        <div className="h-8 bg-slate-200 rounded w-3/4 mx-auto mb-8" />
-        <div className="space-y-3">
-          {[1,2,3,4].map(i => <div key={i} className="h-14 bg-slate-100 rounded-xl" />)}
-        </div>
+    <div className="min-h-[80vh] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-[#E8192C]/30 border-t-[#E8192C] rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-slate-500 text-sm">Loading quiz...</p>
       </div>
     </div>
   ),
 })
 
 export const metadata = {
-  title: 'Solar Sales Knowledge Quiz — ETOTO Media',
-  description: '18 questions every solar rep and appointment setter should answer. 80% pass mark. Test yourself.',
+  title: 'Solar Sales Certification Quiz — ETOTO Media',
+  description: '18 questions. 80% to pass. Most fail first time. Prove you can close solar deals.',
   openGraph: {
-    title: 'Solar Sales Knowledge Quiz — ETOTO Media',
-    description: '18 questions every solar rep and appointment setter should answer. 80% pass mark. Test yourself.',
+    title: 'Could You Close This Deal? — Solar Sales Quiz',
+    description: '18 questions. 80% to pass. Most fail first time. Prove you can close solar deals.',
   },
 }
 
@@ -31,11 +28,11 @@ export default function QuizPage() {
     <main className="bg-slate-900 min-h-screen overflow-x-hidden">
       <MasterclassNav />
 
-      {/* Full page quiz experience */}
+      {/* Full-screen immersive quiz */}
       <InteractiveQuiz />
 
-      {/* Next Step in funnel */}
-      <section className="py-8 px-4 sm:px-6 bg-white">
+      {/* Next Step - only visible after completing */}
+      <section className="py-12 px-4 sm:px-6 bg-slate-800 border-t border-white/5">
         <NextStepCTA currentStep="test" />
       </section>
 

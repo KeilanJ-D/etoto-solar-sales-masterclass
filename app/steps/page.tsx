@@ -1,4 +1,5 @@
 import MasterclassNav from '@/components/funnel/MasterclassNav'
+import StepsNav from '@/components/funnel/StepsNav'
 import Step1Rapport from '@/components/funnel/Step1Rapport'
 import Step2Discovery from '@/components/funnel/Step2Discovery'
 import Step3EnergyAudit from '@/components/funnel/Step3EnergyAudit'
@@ -32,6 +33,7 @@ export default function StepsPage() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
+      <StepsNav />
       
       {/* Header */}
       <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
