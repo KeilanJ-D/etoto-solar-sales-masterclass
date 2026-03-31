@@ -119,13 +119,13 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
               }`}
               style={{ transitionDelay: `${i * 150}ms` }}
             >
-              {/* Large stat value */}
+              {/* Large stat value - SSR shows final value, client animates */}
               <p
                 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-2 tracking-tight ${
                   dark ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                {mounted ? formatStat(stat, counts[i] ?? 0) : formatStat(stat, 0)}
+                {mounted ? formatStat(stat, counts[i] ?? targets[i]) : stat.value}
               </p>
               
               {/* Label */}
