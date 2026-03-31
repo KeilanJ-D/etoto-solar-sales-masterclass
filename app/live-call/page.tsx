@@ -149,7 +149,9 @@ export default function LiveCallPage() {
       <SolaFlowDemo />
       
       {/* Next Step in funnel */}
-      <NextStepCTA currentStep="watch" />
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <NextStepCTA currentStep="watch" />
+      </section>
       
       <Footer />
     </main>

@@ -1,11 +1,9 @@
 import dynamic from 'next/dynamic'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
-import { StatsBanner } from '@/components/shared/StatsBanner'
 import { NextStepCTA } from '@/components/shared/NextStepCTA'
 
 // Dynamic import - InteractiveQuiz is a large client component
-// Note: ssr: false not allowed in Server Components, but loading skeleton still works
 const InteractiveQuiz = dynamic(() => import('@/components/funnel/InteractiveQuiz'), {
   loading: () => (
     <div className="py-12 px-4">
@@ -34,34 +32,90 @@ export default function QuizPage() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
       
-      {/* Header */}
-      <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-sm font-medium rounded-full mb-4">
-            Test Your Knowledge
-          </span>
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">
-            Solar Sales Quiz
-          </h1>
-          <p className="text-slate-300 max-w-2xl mx-auto">
-            18 questions covering the entire 9-step formula. 
-            Score 80% or higher to pass. Miss a question? We&apos;ll tell you which step to review.
-          </p>
+      {/* Full-width cinematic hero */}
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
+        {/* Noise texture */}
+        <div className="absolute inset-0 noise-texture" />
+        
+        {/* Cinematic glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#E8192C]/10 rounded-full blur-3xl" />
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 bg-[#E8192C] text-white text-sm font-bold rounded-full mb-6 uppercase tracking-wide">
+              Test Yourself
+            </span>
+            <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
+              Do You Actually Know<br />How to Sell Solar?
+            </h1>
+            <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed mb-2">
+              18 questions. 5 minute average. 80% to pass.
+            </p>
+            <p className="text-slate-400 text-base">
+              Most reps fail on their first attempt.
+            </p>
+          </div>
+
+          {/* Quiz stats */}
+          <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-12">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 text-center">
+              <p className="text-3xl font-black text-white mb-1">18</p>
+              <p className="text-sm text-slate-400">Questions</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 text-center">
+              <p className="text-3xl font-black text-white mb-1">5 min</p>
+              <p className="text-sm text-slate-400">Average</p>
+            </div>
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 text-center">
+              <p className="text-3xl font-black text-white mb-1">80%</p>
+              <p className="text-sm text-slate-400">To Pass</p>
+            </div>
+          </div>
+
+          {/* Topics covered */}
+          <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 max-w-2xl mx-auto mb-8">
+            <p className="text-sm text-slate-400 uppercase tracking-wide font-semibold mb-4">Topics covered:</p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {[
+                'Energy Audit Maths',
+                'Battery vs Solar',
+                'Objection Handling',
+                'Closing Techniques',
+                'Appointment Setting',
+                'Product Knowledge',
+              ].map((topic, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#E8192C]" />
+                  <span className="text-sm text-slate-300">{topic}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Start button */}
+          <div className="text-center">
+            <button 
+              onClick={() => document.getElementById('quiz-section')?.scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold px-8 py-4 rounded-full transition-all text-lg"
+            >
+              Start the Quiz
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
       
-      {/* Compact StatsBanner */}
-      <StatsBanner 
-        stats={[
-          { value: "200+", label: "UK Installers" },
-          { value: "£175M+", label: "Attributed Sales" },
-        ]} 
-      />
-      
-      <InteractiveQuiz />
+      {/* Quiz component */}
+      <div id="quiz-section" className="py-12 px-4 md:px-6 bg-[#FAFBFC]">
+        <InteractiveQuiz />
+      </div>
       
       {/* Next Step in funnel */}
-      <NextStepCTA currentStep="test" />
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <NextStepCTA currentStep="test" />
+      </section>
       
       <Footer />
     </main>

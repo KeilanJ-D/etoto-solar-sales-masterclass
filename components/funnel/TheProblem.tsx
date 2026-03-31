@@ -24,9 +24,16 @@ const problemCards = [
 export default function TheProblem() {
   const [visibleCards, setVisibleCards] = useState<number[]>([])
   const [sectionVisible, setSectionVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -46,7 +53,7 @@ export default function TheProblem() {
 
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
+  }, [mounted])
 
   return (
     <section id="problem" ref={sectionRef} className="py-16 md:py-32 px-4 md:px-6 bg-white relative overflow-hidden">

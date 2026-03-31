@@ -143,7 +143,9 @@ export default function StepsPage() {
       />
       
       {/* Next Step in funnel */}
-      <NextStepCTA currentStep="learn" />
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <NextStepCTA currentStep="learn" />
+      </section>
       
       <Footer />
     </main>

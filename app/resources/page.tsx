@@ -151,7 +151,9 @@ export default function ResourcesPage() {
       </section>
       
       {/* Next Step in funnel */}
-      <NextStepCTA currentStep="buy" />
+      <section className="py-8 px-4 sm:px-6 bg-white">
+        <NextStepCTA currentStep="buy" />
+      </section>
       
       <Footer />
     </main>

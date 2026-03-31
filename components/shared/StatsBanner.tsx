@@ -125,7 +125,7 @@ export function StatsBanner({ stats, dark = true }: StatsBannerProps) {
                   dark ? 'text-white' : 'text-slate-900'
                 }`}
               >
-                {mounted ? formatStat(stat, counts[i] || targets[i]) : formatStat(stat, targets[i])}
+                {mounted ? formatStat(stat, counts[i] ?? 0) : formatStat(stat, 0)}
               </p>
               
               {/* Label */}
