@@ -356,14 +356,6 @@ export default function InteractiveQuiz() {
             </span>
           </div>
         )}
-          <h2 className="text-2xl md:text-4xl font-black mb-4">Solar PV + Battery Quiz</h2>
-          <p className="text-slate-400">
-            {isRetryMode 
-              ? `Drilling ${totalQuestions} questions you got wrong. Master these to fill the gaps.`
-              : "Every appointment setter and sales rep should be able to answer these. 80% pass mark. If you can't hit it, study the masterclass again."
-            }
-          </p>
-        </div>
 
         {/* Confetti Animation */}
         {showConfetti && (
@@ -399,7 +391,7 @@ export default function InteractiveQuiz() {
         {quizStarted && (
           <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {!quizComplete ? (
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
+              <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
               {/* Sticky Progress bar on mobile */}
               <div className="sticky top-0 z-10 -mx-4 sm:mx-0 -mt-4 sm:mt-0 px-4 sm:px-0 pt-4 sm:pt-0 pb-4 bg-slate-900/95 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none">
                 <div className="flex items-center justify-between mb-3">
@@ -633,7 +625,7 @@ export default function InteractiveQuiz() {
               </div>
             </div>
           )}
-          </div>
+        </div>
         )}
       </div>
     </section>
