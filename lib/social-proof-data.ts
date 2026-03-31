@@ -177,42 +177,6 @@ export function getVideoTestimonialById(id: string) {
 
 
 // ============================================
-// CLIENT RESULTS (ScreenshotProof component - conversation UI)
-// ============================================
-
-export const screenshotProof = [
-  {
-    id: 'south-coast-solar',
-    company: 'South Coast Solar',
-    headline: '£60K in new business in one week',
-    message: "Just hit £60K this week. On track for our first ever £100K week. The leads from ETOTO are converting like crazy.",
-    stat: '£60K/week',
-  },
-  {
-    id: 'ups-solar',
-    company: 'UPS Solar',
-    headline: '£450 CPA (down from £1,200)',
-    message: "40 installs this month at £450 per acquisition. We were paying £1,200 before ETOTO. The quality of leads makes all the difference.",
-    stat: '£450 CPA',
-  },
-  {
-    id: 'crafted-electrics',
-    company: 'Crafted Electrics',
-    headline: 'First £100K month',
-    message: "Just closed our first £100K month using the 9-step formula. Never thought we'd hit this number so fast.",
-    stat: '£100K month',
-  },
-  {
-    id: 'green-energy-solar',
-    company: 'Green Energy Solar',
-    headline: '5 deals in first week',
-    message: "5 deals closed in our first week with SolaFlow. The pre-qualification is doing half the selling for us.",
-    stat: '5 deals/week',
-  },
-]
-
-
-// ============================================
 // GOOGLE REVIEWS
 // ============================================
 

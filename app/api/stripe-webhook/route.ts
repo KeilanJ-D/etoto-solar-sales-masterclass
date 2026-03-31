@@ -82,7 +82,6 @@ export async function POST(request: NextRequest) {
         .get()
 
       if (!existingQuery.empty) {
-        console.log('Code already exists for session:', session.id)
         return NextResponse.json({ received: true, code: existingQuery.docs[0].data().code })
       }
 
@@ -98,8 +97,6 @@ export async function POST(request: NextRequest) {
         isBundle,
         bundleProducts: isBundle ? BUNDLE_PRODUCTS : [],
       })
-
-      console.log('Created purchase code:', code, 'for product:', productId, 'session:', session.id)
 
       return NextResponse.json({ received: true, code })
     } catch (err) {
