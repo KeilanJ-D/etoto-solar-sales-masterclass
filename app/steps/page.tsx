@@ -9,10 +9,8 @@ import Step7Objections from '@/components/funnel/Step7Objections'
 import Step8Close from '@/components/funnel/Step8Close'
 import Step9FollowUp from '@/components/funnel/Step9FollowUp'
 import Footer from '@/components/funnel/Footer'
-import JumpToCalcButton from '@/components/funnel/JumpToCalcButton'
 import { TestimonialRow } from '@/components/shared/TestimonialRow'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
-import { StepProgress } from '@/components/shared/StepProgress'
 import { SalesScriptCTA, FormulaCheatSheetCTA } from '@/components/shared/ResourceCTA'
 import { InlineProof } from '@/components/shared/InlineProof'
 import { NextStepCTA } from '@/components/shared/NextStepCTA'
@@ -34,8 +32,6 @@ export default function StepsPage() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
-      <JumpToCalcButton />
-      <StepProgress />
       
       {/* Header */}
       <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
@@ -58,11 +54,11 @@ export default function StepsPage() {
       <Step2Discovery />
       <Step3EnergyAudit />
       
-      {/* YEERS Proof - After Step 3 */}
+      {/* Solar Solutions Oxford Proof - After Step 3 */}
       <section className="py-6 px-4 sm:px-6 bg-white border-t border-slate-100">
         <div className="max-w-2xl mx-auto">
           <InlineProof
-            quote="A YEERS customer completed their SolaFlow estimate at 6:17 PM. By 6:22 PM, a rep was on the phone. The maths were already done."
+            quote="A Solar Solutions Oxford customer completed their SolaFlow estimate at 6:17 PM. By 6:22 PM, a rep was on the phone. The maths were already done."
             context="In the real world — the energy audit step can be automated by SolaFlow"
             icon="timeline"
             variant="highlight"
@@ -83,12 +79,12 @@ export default function StepsPage() {
       <Step6Financials />
       <Step7Objections />
       
-      {/* YEERS Proof - After Step 7 (Objections) */}
+      {/* Crafted Electrics Proof - After Step 7 (Objections) */}
       <section className="py-6 px-4 sm:px-6 bg-white border-t border-slate-100">
         <div className="max-w-2xl mx-auto">
           <InlineProof
             quote="I've had another quote cheaper, but using Fox equipment and I've looked online and seen that the Sigenergy stuff is loads better like you said."
-            context="Real objection from a YEERS customer — they overcame it themselves because SolaFlow pre-educated them on product quality"
+            context="Real objection from a Crafted Electrics customer — they overcame it themselves because SolaFlow pre-educated them on product quality"
             icon="quote"
             variant="highlight"
           />
@@ -115,12 +111,12 @@ export default function StepsPage() {
       {/* Steps 8-9 */}
       <Step8Close />
       
-      {/* YEERS Proof - After Step 8 (Close) */}
+      {/* UPS Solar Proof - After Step 8 (Close) */}
       <section className="py-6 px-4 sm:px-6 bg-white border-t border-slate-100">
         <div className="max-w-2xl mx-auto">
           <InlineProof
             quote="Cheers! Deposit paid."
-            context="Deposit paid same day as proposal. Total time from ad to deposit: 3 days. System value: £13,100. — YEERS customer"
+            context="Deposit paid same day as proposal. Total time from ad to deposit: 3 days. System value: £13,100. — UPS Solar customer"
             icon="stat"
             variant="highlight"
           />

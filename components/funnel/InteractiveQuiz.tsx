@@ -141,7 +141,7 @@ const questions: Question[] = [
 export default function InteractiveQuiz() {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
-  const [quizStarted, setQuizStarted] = useState(false)
+  const [quizStarted, setQuizStarted] = useState(true) // Auto-start quiz immediately
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | string[] | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -341,45 +341,7 @@ export default function InteractiveQuiz() {
 
         {/* Quiz Content */}
         <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          {/* Pre-Quiz Screen */}
-          {!quizStarted ? (
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-white/10 text-center max-w-lg mx-auto">
-              <div className="w-20 h-20 rounded-full bg-[#E8192C]/20 mx-auto mb-6 flex items-center justify-center">
-                <Target className="w-10 h-10 text-[#E8192C]" />
-              </div>
-              
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Test Yourself?</h3>
-              
-              <div className="flex items-center justify-center gap-6 mb-6 text-slate-400">
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-white">18</p>
-                  <p className="text-sm">Questions</p>
-                </div>
-                <div className="w-px h-10 bg-white/20" />
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-white">5 min</p>
-                  <p className="text-sm">Average</p>
-                </div>
-                <div className="w-px h-10 bg-white/20" />
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-[#E8192C]">80%</p>
-                  <p className="text-sm">To Pass</p>
-                </div>
-              </div>
-              
-              <p className="text-slate-400 mb-8">
-                How well do you know the 9-step formula? Every solar rep and appointment setter should be able to pass this.
-              </p>
-              
-              <button
-                onClick={() => setQuizStarted(true)}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl transition-all hover:scale-105 active:scale-95 min-h-[56px] touch-action-manipulation text-lg shadow-lg shadow-[#E8192C]/25"
-              >
-                Start Quiz
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          ) : !quizComplete ? (
+          {!quizComplete ? (
             <div className="bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/10">
               {/* Sticky Progress bar on mobile */}
               <div className="sticky top-0 z-10 -mx-4 sm:mx-0 -mt-4 sm:mt-0 px-4 sm:px-0 pt-4 sm:pt-0 pb-4 bg-slate-900/95 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none">

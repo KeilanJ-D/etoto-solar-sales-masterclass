@@ -11,9 +11,9 @@
 // ============================================
 
 export const stats = [
-  { value: "£175M+", label: "Sales for Clients" },
-  { value: "£5M/m", label: "Average Client Sales" },
-  { value: "£12,500", label: "Average Client AOV" },
+  { value: "£200M+", label: "Sales for Clients" },
+  { value: "£5M/m", label: "Avg Client Sales/Month" },
+  { value: "£12,500+", label: "Average Client AOV" },
   { value: "<£500", label: "Average Client CPA" },
 ]
 
@@ -177,27 +177,37 @@ export function getVideoTestimonialById(id: string) {
 
 
 // ============================================
-// WHATSAPP SCREENSHOT PROOF (ScreenshotProof component)
+// CLIENT RESULTS (ScreenshotProof component - conversation UI)
 // ============================================
 
 export const screenshotProof = [
   {
     id: 'south-coast-solar',
-    image: '/proof/scs-60k-week.png',
-    headline: '£60K in new business in one week',
-    caption: 'On track for their first ever £100K week',
-    source: 'WhatsApp group screenshot',
-    logoUrl: null,
     company: 'South Coast Solar',
+    headline: '£60K in new business in one week',
+    message: "Just hit £60K this week. On track for our first ever £100K week. The leads from ETOTO are converting like crazy.",
+    stat: '£60K/week',
   },
   {
     id: 'ups-solar',
-    image: '/proof/ups-solar-450-cpa.png',
-    headline: '£450 CPA (down from £1,200)',
-    caption: '40 installs at £450 per acquisition',
-    source: 'WhatsApp screenshot',
-    logoUrl: null,
     company: 'UPS Solar',
+    headline: '£450 CPA (down from £1,200)',
+    message: "40 installs this month at £450 per acquisition. We were paying £1,200 before ETOTO. The quality of leads makes all the difference.",
+    stat: '£450 CPA',
+  },
+  {
+    id: 'crafted-electrics',
+    company: 'Crafted Electrics',
+    headline: 'First £100K month',
+    message: "Just closed our first £100K month using the 9-step formula. Never thought we'd hit this number so fast.",
+    stat: '£100K month',
+  },
+  {
+    id: 'green-energy-solar',
+    company: 'Green Energy Solar',
+    headline: '5 deals in first week',
+    message: "5 deals closed in our first week with SolaFlow. The pre-qualification is doing half the selling for us.",
+    stat: '5 deals/week',
   },
 ]
 

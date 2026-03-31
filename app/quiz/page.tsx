@@ -28,27 +28,11 @@ export const metadata = {
 
 export default function QuizPage() {
   return (
-    <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
+    <main className="bg-slate-900 min-h-screen overflow-x-hidden">
       <MasterclassNav />
 
-      {/* Slim header bar */}
-      <div className="bg-slate-900 border-b border-white/10 px-4 py-4">
-        <div className="max-w-2xl mx-auto flex items-center justify-between gap-4 flex-wrap">
-          <div>
-            <h1 className="text-white font-bold text-lg leading-tight">Solar Sales Quiz</h1>
-            <p className="text-slate-400 text-sm">18 questions &middot; 80% to pass</p>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="px-3 py-1 bg-white/10 text-slate-300 rounded-full">5 min avg</span>
-            <span className="px-3 py-1 bg-[#E8192C]/20 text-[#E8192C] font-semibold rounded-full">80% to pass</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Quiz — immediately visible */}
-      <div className="py-8 px-4 md:px-6">
-        <InteractiveQuiz />
-      </div>
+      {/* Full page quiz experience */}
+      <InteractiveQuiz />
 
       {/* Next Step in funnel */}
       <section className="py-8 px-4 sm:px-6 bg-white">

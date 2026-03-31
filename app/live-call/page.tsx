@@ -3,7 +3,7 @@ import LiveCallRecording from '@/components/funnel/LiveCallRecording'
 import SolaFlowDemo from '@/components/funnel/SolaFlowDemo'
 import Footer from '@/components/funnel/Footer'
 import { VideoTestimonial } from '@/components/shared/VideoTestimonial'
-import { SalesScriptCTA, QuizCTA } from '@/components/shared/ResourceCTA'
+
 import { InlineProof } from '@/components/shared/InlineProof'
 import { NextStepCTA } from '@/components/shared/NextStepCTA'
 import { getVideoTestimonialById } from '@/lib/social-proof-data'
@@ -24,52 +24,29 @@ export default function LiveCallPage() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
       
-      {/* Header */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/10 text-white/90 text-sm font-medium rounded-full mb-6">
-            Live Demonstration
-          </span>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
-            Watch a Real Sales Call
-          </h1>
-          <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-            See every step of the formula applied in a real conversation. 
-            This is what it looks like when everything clicks.
-          </p>
-          
-          {/* Pre-roll context */}
-          <div className="bg-white/5 border border-white/10 rounded-xl p-6 max-w-2xl mx-auto text-left">
-            <h3 className="text-[#E8192C] font-bold text-sm uppercase tracking-wide mb-3">The Setup</h3>
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Keilan is calling a homeowner who enquired through a Facebook ad 2 hours ago. 
-              They&apos;ve had two other quotes. They haven&apos;t committed to anyone yet. 
-              Watch how the 9-step formula turns this into a closed deal.
-            </p>
-          </div>
-        </div>
-      </section>
-      
       <LiveCallRecording />
       
-      {/* Key Moments - consolidated timestamp section */}
+      {/* Key Moments - 1x1 cards */}
       <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
-          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6 text-center">
             Key Moments
           </h3>
-          <div className="grid gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
-              { time: '5:12', insight: 'The customer says "so basically it pays for itself?" — that\'s self-selling. The maths did the work.' },
-              { time: '8:30', insight: 'Battery value explained with peak shaving. Instant, tangible savings the customer can visualise.' },
-              { time: '14:00', insight: 'The objection is handled without arguing. No pushback, just data and reassurance.' },
-              { time: '18:30', insight: 'The proposal is sent DURING the call, not after. That\'s the key to maintaining momentum.' },
+              { time: '5:12', title: 'Self-Selling', insight: 'Customer says "so basically it pays for itself?" The maths did the work.' },
+              { time: '8:30', title: 'Battery Value', insight: 'Peak shaving explained. Instant, tangible savings they can visualise.' },
+              { time: '14:00', title: 'Objection Handled', insight: 'No pushback, just data and reassurance. No arguing.' },
+              { time: '18:30', title: 'Proposal Sent Live', insight: 'Sent DURING the call, not after. Maintains momentum.' },
             ].map((item, i) => (
-              <div key={i} className="flex flex-col sm:flex-row gap-2 sm:gap-4 p-4 sm:p-5 bg-white rounded-xl border border-slate-200">
-                <span className="flex-shrink-0 px-4 py-2 bg-[#E8192C] text-white text-sm sm:text-base font-bold rounded-lg w-fit min-h-[40px] flex items-center font-mono">
-                  {item.time}
-                </span>
-                <p className="text-slate-700 text-sm sm:text-base leading-relaxed">{item.insight}</p>
+              <div key={i} className="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="px-3 py-1 bg-[#E8192C] text-white text-sm font-bold rounded-lg font-mono">
+                    {item.time}
+                  </span>
+                  <h4 className="font-bold text-slate-900">{item.title}</h4>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed">{item.insight}</p>
               </div>
             ))}
           </div>
@@ -124,19 +101,11 @@ export default function LiveCallPage() {
           </div>
 
           <InlineProof
-            quote="The process in the recording is the same process YEERS used through SolaFlow. Ad → Estimate → Call → Survey → Close. £24,400 in the first 2 weeks."
+            quote="The process in the recording is the same process Green Energy Solar used through SolaFlow. Ad → Estimate → Call → Survey → Close. £24,400 in the first 2 weeks."
             context="The method is the same. SolaFlow just automates steps 1-3."
             icon="timeline"
             variant="highlight"
           />
-        </div>
-      </section>
-      
-      {/* Cross-links */}
-      <section className="py-8 px-4 sm:px-6 bg-slate-50">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <SalesScriptCTA />
-          <QuizCTA />
         </div>
       </section>
       
