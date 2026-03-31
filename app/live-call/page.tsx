@@ -24,15 +24,9 @@ export default function LiveCallPage() {
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
       
-      {/* Cinematic Header */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">
-        {/* Noise texture */}
-        <div className="absolute inset-0 noise-texture" />
-        
-        {/* Cinematic glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#E8192C]/10 rounded-full blur-3xl" />
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
+      {/* Header */}
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white">
+        <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 bg-white/10 border border-white/10 text-white/90 text-sm font-medium rounded-full mb-6">
             Live Demonstration
           </span>
