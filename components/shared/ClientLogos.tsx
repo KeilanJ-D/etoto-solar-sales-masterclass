@@ -27,11 +27,12 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               className="opacity-60 hover:opacity-100 transition-all duration-300"
             >
               {logo.logoUrl ? (
-                <div className="h-10 w-auto relative" style={{ width: 'auto', height: '40px' }}>
+                <div className="h-10 w-auto relative" style={{ width: '120px', height: '40px' }}>
                   <Image
                     src={logo.logoUrl}
                     alt={logo.name}
                     fill
+                    sizes="120px"
                     className="object-contain"
                   />
                 </div>
@@ -49,11 +50,12 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               className="flex-shrink-0 scroll-snap-start opacity-60"
             >
               {logo.logoUrl ? (
-                <div className="h-6 w-auto relative" style={{ width: 'auto', height: '24px' }}>
+                <div className="h-6 w-auto relative" style={{ width: '80px', height: '24px' }}>
                   <Image
                     src={logo.logoUrl}
                     alt={logo.name}
                     fill
+                    sizes="80px"
                     className="object-contain"
                   />
                 </div>
