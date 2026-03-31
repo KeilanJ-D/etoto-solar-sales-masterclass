@@ -9,7 +9,7 @@ interface ScreenshotProofItem {
   headline: string
   caption: string
   source: string
-  logoUrl?: string
+  logoUrl?: string | null
   company?: string
 }
 

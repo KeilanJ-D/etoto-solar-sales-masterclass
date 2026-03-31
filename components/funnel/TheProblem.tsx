@@ -55,6 +55,8 @@ export default function TheProblem() {
     return () => observer.disconnect()
   }, [mounted])
 
+  if (!mounted) return null
+
   return (
     <section id="problem" ref={sectionRef} className="py-16 md:py-32 px-4 md:px-6 bg-white relative overflow-hidden">
       {/* Background decoration */}
