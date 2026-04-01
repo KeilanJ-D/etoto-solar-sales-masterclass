@@ -183,7 +183,7 @@ export default function SalesFrameworkPage() {
       <ProductHero
         title="The 9-Step Skeleton. Flexible. Adaptable. Yours."
         subtitle="Not everyone wants word-for-word. Some reps want the structure without the script — the framework they can adapt to their own voice. Interactive cards, printable summaries, and the calculator built in."
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
         stats={[
           { value: '9', label: 'Steps' },
@@ -218,7 +218,7 @@ export default function SalesFrameworkPage() {
       <PasswordGate
         productId="sales-framework"
         productName="Sales Framework"
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
@@ -239,12 +239,14 @@ export default function SalesFrameworkPage() {
                 <div className="blur-sm select-none pointer-events-none">
                   <FrameworkCard {...FRAMEWORK_STEPS[3]} showAdaptIt={false} />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
-                    <p className="font-bold text-slate-900 mb-2">Steps 4-9 are locked</p>
-                    <p className="text-sm text-slate-600">Unlock the full framework + Adapt It suggestions for £3.99</p>
+                {!isInternal && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
+                      <p className="font-bold text-slate-900 mb-2">Steps 4-9 are locked</p>
+                      <p className="text-sm text-slate-600">Unlock the full framework + Adapt It suggestions for £3.99</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </section>

@@ -29,7 +29,7 @@ export default function FormulaCheatSheetPage() {
       <ProductHero
         title="Every Formula. Every Tool. Always in Your Pocket."
         subtitle="The four formulas that close solar deals — live, interactive, with a working calculator you can use on every call. Pin the visual summary to your desk. Use the calculator on your phone mid-pitch."
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         stats={[
           { value: '4', label: 'Core Formulas' },
@@ -74,7 +74,7 @@ export default function FormulaCheatSheetPage() {
       <PasswordGate
         productId="formula-cheat-sheet"
         productName="Formula Cheat Sheet"
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">

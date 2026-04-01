@@ -88,10 +88,8 @@ export default function ResourcesPage() {
           <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
             {isInternalSite 
               ? 'Scripts, templates, cheat sheets — all designed to help you close more deals.'
-              : "Everything you've learned in the masterclass, packaged into tools you can use every day. Scripts, templates, cheat sheets — all designed to help you close more deals."
-            }
+              : "Everything you've learned in the masterclass, packaged into tools you can use every day. Scripts, templates, cheat sheets — all designed to help you close more deals."}
           </p>
-          
           {/* Value props */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
             <span className="px-4 py-2 bg-white/10 rounded-full text-slate-300">Instant download</span>
