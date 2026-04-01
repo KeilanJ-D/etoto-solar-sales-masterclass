@@ -24,14 +24,16 @@ const AUDIO_CLIPS = {
 }
 
 export default function SalesScriptPage() {
-  const [isUnlocked, setIsUnlocked] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
+  const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  const [isUnlocked, setIsUnlocked] = useState(isInternal)
 
   useEffect(() => {
+    if (isInternal) return // Skip token check on internal site
     const storedToken = localStorage.getItem('access_sales-script')
     if (storedToken) {
       setIsUnlocked(true)
     }
-  }, [])
+  }, [isInternal])
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">

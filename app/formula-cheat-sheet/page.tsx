@@ -11,15 +11,17 @@ import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
 
 export default function FormulaCheatSheetPage() {
-  const [isUnlocked, setIsUnlocked] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
+  const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  const [isUnlocked, setIsUnlocked] = useState(isInternal)
 
   // Check localStorage on mount
   useEffect(() => {
+    if (isInternal) return // Skip token check on internal site
     const storedToken = localStorage.getItem('access_formula-cheat-sheet')
     if (storedToken) {
       setIsUnlocked(true)
     }
-  }, [])
+  }, [isInternal])
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
@@ -43,7 +45,7 @@ export default function FormulaCheatSheetPage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">What&apos;s Inside</h2>
-            <p className="text-slate-600">The formulas are free. The tools are £3.99.</p>
+            {!isInternal && <p className="text-slate-600">The formulas are free. The tools are £3.99.</p>}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

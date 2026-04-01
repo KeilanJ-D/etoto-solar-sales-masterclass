@@ -5,13 +5,15 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import { Home, ListOrdered, Video, Phone, HelpCircle, Package, Zap } from 'lucide-react'
 
+const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+
 const navItems = [
   { href: '/', label: 'Home', shortLabel: 'Home', icon: Home },
   { href: '/steps', label: 'The 9 Steps', shortLabel: 'Steps', icon: ListOrdered },
   { href: '/live-call', label: 'Live Call', shortLabel: 'Call', icon: Video },
   { href: '/appointment-setting', label: 'Appointment Setting', shortLabel: 'Appts', icon: Phone },
   { href: '/quiz', label: 'Quiz', shortLabel: 'Quiz', icon: HelpCircle },
-  { href: '/resources', label: 'Resources', shortLabel: 'Docs', icon: Package },
+  { href: '/resources', label: isInternalSite ? 'Tools' : 'Resources', shortLabel: isInternalSite ? 'Tools' : 'Docs', icon: Package },
   { href: '/solaflow', label: 'SolaFlow', shortLabel: 'Flow', icon: Zap },
 ]
 

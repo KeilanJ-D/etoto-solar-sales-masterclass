@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { ArrowRight, type LucideIcon } from 'lucide-react'
 
+const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+
 interface ResourceCTAProps {
   icon: LucideIcon
   title: string
@@ -25,7 +27,7 @@ export function ResourceCTA({ icon: Icon, title, description, href, ctaText, pri
             className="w-full sm:w-auto flex items-center justify-center sm:inline-flex gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-medium text-sm py-3 px-4 rounded-lg transition-colors min-h-[48px] touch-action-manipulation"
           >
             {ctaText}
-            {price && <span className="opacity-80">— {price}</span>}
+            {!isInternalSite && price && <span className="opacity-80">— {price}</span>}
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -39,11 +41,11 @@ export function SalesScriptCTA() {
   return (
     <ResourceCTA
       icon={require('lucide-react').FileText}
-      title="Want the exact script from this call?"
+      title={isInternalSite ? "The full sales script" : "Want the exact script from this call?"}
       description="Get the word-for-word sales script used in every ETOTO-trained installer."
       href="/sales-script"
-      ctaText="Buy the Sales Script"
-      price="£3.99"
+      ctaText={isInternalSite ? "View the Script" : "Buy the Sales Script"}
+      price={isInternalSite ? undefined : "£3.99"}
     />
   )
 }
@@ -73,6 +75,9 @@ export function QuizCTA() {
 }
 
 export function CompleteToolkitCTA() {
+  // Hide on internal site since all tools are already unlocked
+  if (isInternalSite) return null
+  
   return (
     <ResourceCTA
       icon={require('lucide-react').Package}
@@ -102,11 +107,11 @@ export function AppointmentQuizCTA() {
   return (
     <ResourceCTA
       icon={require('lucide-react').ClipboardList}
-      title="Train your setters"
+      title={isInternalSite ? "Test your knowledge" : "Train your setters"}
       description="The Appointment Setting Quiz tests your team's lead qualification skills."
       href="/appointment-quiz"
-      ctaText="Get the Quiz"
-      price="£3.99"
+      ctaText={isInternalSite ? "Take the Quiz" : "Get the Quiz"}
+      price={isInternalSite ? undefined : "£3.99"}
     />
   )
 }
@@ -115,11 +120,11 @@ export function FormulaCheatSheetCTA() {
   return (
     <ResourceCTA
       icon={require('lucide-react').Calculator}
-      title="Try the calculator on your phone"
+      title={isInternalSite ? "The formula cheat sheet" : "Try the calculator on your phone"}
       description="The Formula Cheat Sheet gives you the maths to show customers during calls."
       href="/formula-cheat-sheet"
-      ctaText="Get the Cheat Sheet"
-      price="£3.99"
+      ctaText={isInternalSite ? "View the Cheat Sheet" : "Get the Cheat Sheet"}
+      price={isInternalSite ? undefined : "£3.99"}
     />
   )
 }

@@ -35,14 +35,16 @@ export default function ProductHero({
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
-        {/* Back link */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
-        >
-          <ArrowRight className="w-4 h-4 rotate-180" />
-          <span>Back to Masterclass</span>
-        </Link>
+        {/* Back link - hidden on internal site */}
+        {!isInternalSite && (
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
+          >
+            <ArrowRight className="w-4 h-4 rotate-180" />
+            <span>Back to Masterclass</span>
+          </Link>
+        )}
 
         {/* Eyebrow */}
         <p className="text-sm font-medium text-[#E8192C] tracking-wide uppercase mb-4">

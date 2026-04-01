@@ -126,7 +126,8 @@ export default function CompleteToolkitPage() {
           </div>
           
           <h1 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
-            The Complete Solar<br />Sales Toolkit
+            {isInternalSite ? 'Solar Sales Tools' : 'The Complete Solar'}<br />
+            {!isInternalSite && 'Sales Toolkit'}
           </h1>
           
           <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
@@ -175,8 +176,8 @@ export default function CompleteToolkitPage() {
       {/* Stats Banner */}
       <StatsBanner stats={stats} />
 
-      {/* Enter Access Code Section - Only show if not already unlocked */}
-      {!hasAccess && !isChecking && (
+      {/* Enter Access Code Section - Only show if not already unlocked and not internal site */}
+      {!isInternalSite && !hasAccess && !isChecking && (
         <section className="py-12 px-4 bg-white border-b border-slate-200">
           <div className="max-w-md mx-auto">
             <div className="text-center mb-6">
@@ -321,36 +322,38 @@ export default function CompleteToolkitPage() {
         </section>
       )}
       
-      {/* FAQ */}
-      <section className="py-16 md:py-24 px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">How do I access the products?</h3>
-              <p className="text-slate-600">After purchase, you&apos;ll receive an access code via email. Enter it on any product page to unlock all content permanently on your device.</p>
-            </div>
+      {/* FAQ - hidden on internal site */}
+      {!isInternalSite && (
+        <section className="py-16 md:py-24 px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-12">
+              Frequently Asked Questions
+            </h2>
             
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Can I share my access code?</h3>
-              <p className="text-slate-600">Each code is for individual use. For team access, contact us about our installer package with volume pricing.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Is there a refund policy?</h3>
-              <p className="text-slate-600">Yes, we offer a 14-day money-back guarantee if you&apos;re not satisfied with the content.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Will there be updates?</h3>
-              <p className="text-slate-600">Yes, we regularly update the content based on market changes and feedback. All updates are included free.</p>
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">How do I access the products?</h3>
+                <p className="text-slate-600">After purchase, you&apos;ll receive an access code via email. Enter it on any product page to unlock all content permanently on your device.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Can I share my access code?</h3>
+                <p className="text-slate-600">Each code is for individual use. For team access, contact us about our installer package with volume pricing.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Is there a refund policy?</h3>
+                <p className="text-slate-600">Yes, we offer a 14-day money-back guarantee if you&apos;re not satisfied with the content.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Will there be updates?</h3>
+                <p className="text-slate-600">Yes, we regularly update the content based on market changes and feedback. All updates are included free.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       
       {/* Testimonials */}
       <TestimonialRow 
