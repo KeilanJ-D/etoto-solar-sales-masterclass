@@ -38,6 +38,11 @@ const services = [
 ]
 
 export default function ETOTOServices() {
+  // Hide services section on internal/client deployments
+  if (process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true') {
+    return null
+  }
+
   return (
     <section className="py-16 md:py-24 px-4 md:px-6 bg-slate-50">
       <div className="max-w-6xl mx-auto">

@@ -1,3 +1,5 @@
+'use client'
+
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
 import Link from 'next/link'
@@ -5,20 +7,13 @@ import { ArrowRight, Package, FileText, LayoutGrid, CheckSquare, Calculator, Boo
 import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
 import { googleReviewsUrl } from '@/lib/social-proof-data'
 
-export const metadata = {
-  title: 'Solar Sales Resources & Toolkit — ETOTO Media',
-  description: 'Scripts, frameworks, calculators, and the complete sales toolkit. Everything you need to sell solar.',
-  openGraph: {
-    title: 'Solar Sales Resources & Toolkit — ETOTO Media',
-    description: 'Scripts, frameworks, calculators, and the complete sales toolkit. Everything you need to sell solar.',
-  },
-}
+const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
 
 const products = [
   {
     title: 'Solar Sales Script',
     description: 'Word-for-word script for all 9 steps',
-    price: '£3.99',
+    price: isInternalSite ? null : '£3.99',
     href: '/sales-script',
     icon: FileText,
     color: '#E8192C',
@@ -28,7 +23,7 @@ const products = [
   {
     title: 'Sales Framework',
     description: 'Visual skeleton of the formula',
-    price: '£3.99',
+    price: isInternalSite ? null : '£3.99',
     href: '/sales-framework',
     icon: LayoutGrid,
     color: '#3B82F6',
@@ -38,7 +33,7 @@ const products = [
   {
     title: 'Setter Quiz',
     description: '18 scenario-based questions',
-    price: '£3.99',
+    price: isInternalSite ? null : '£3.99',
     href: '/appointment-quiz',
     icon: CheckSquare,
     color: '#8B5CF6',
@@ -48,7 +43,7 @@ const products = [
   {
     title: 'Formula Cheat Sheet',
     description: 'Calculator reference for calls',
-    price: '£3.99',
+    price: isInternalSite ? null : '£3.99',
     href: '/formula-cheat-sheet',
     icon: Calculator,
     color: '#10B981',
@@ -82,19 +77,21 @@ export default function ResourcesPage() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen overflow-x-hidden">
       <MasterclassNav />
-      
+
       {/* Hero Header */}
       <section className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 bg-[#E8192C] text-white text-sm font-bold rounded-full mb-6 uppercase tracking-wide">
-            The Shop
+            {isInternalSite ? 'Tools' : 'The Shop'}
           </span>
           <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight">
             Your Solar Sales Toolkit
           </h1>
           <p className="text-slate-300 max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-            Everything you&apos;ve learned in the masterclass, packaged into tools you can use every day. 
-            Scripts, templates, cheat sheets — all designed to help you close more deals.
+            {isInternalSite 
+              ? 'Scripts, templates, cheat sheets — all designed to help you close more deals.'
+              : "Everything you've learned in the masterclass, packaged into tools you can use every day. Scripts, templates, cheat sheets — all designed to help you close more deals."
+            }
           </p>
           
           {/* Value props */}
@@ -141,45 +138,52 @@ export default function ResourcesPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
-              Get Everything You Need
+              {isInternalSite ? 'Your Tools' : 'Get Everything You Need'}
             </h2>
             <p className="text-slate-600">
-              Every tool maps to a stage of the formula. Buy what you need, or get everything.
+              {isInternalSite 
+                ? 'Every tool maps to a stage of the formula. Click to open.'
+                : 'Every tool maps to a stage of the formula. Buy what you need, or get everything.'
+              }
             </p>
           </div>
 
-          {/* Bundle Card - Featured */}
-          <Link
-            href="/complete-toolkit"
-            className="block bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 text-white hover:shadow-2xl transition-all hover:scale-[1.01] mb-10"
-          >
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#E8192C] flex items-center justify-center flex-shrink-0">
-                <Package className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
-              </div>
-              <div className="flex-1 text-center sm:text-left">
-                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                  <h3 className="text-xl md:text-2xl font-bold">The Complete Toolkit</h3>
-                  <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-xs font-bold rounded-full uppercase">
-                    Best Value
-                  </span>
+          {/* Bundle Card - Featured (hidden on internal site) */}
+          {!isInternalSite && (
+            <Link
+              href="/complete-toolkit"
+              className="block bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 md:p-8 text-white hover:shadow-2xl transition-all hover:scale-[1.01] mb-10"
+            >
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#E8192C] flex items-center justify-center flex-shrink-0">
+                  <Package className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 </div>
-                <p className="text-slate-400 text-sm">
-                  All 4 tools. Save £5.97 vs buying individually.
-                </p>
-              </div>
-              <div className="text-center sm:text-right flex items-center gap-4">
-                <div>
-                  <p className="text-3xl md:text-4xl font-black">£9.99</p>
-                  <p className="text-sm text-slate-500 line-through">£15.96</p>
+                <div className="flex-1 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold">The Complete Toolkit</h3>
+                    <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-xs font-bold rounded-full uppercase">
+                      Best Value
+                    </span>
+                  </div>
+                  <p className="text-slate-400 text-sm">
+                    All 4 tools. Save £5.97 vs buying individually.
+                  </p>
                 </div>
-                <ArrowRight className="w-6 h-6 text-slate-400" />
+                <div className="text-center sm:text-right flex items-center gap-4">
+                  <div>
+                    <p className="text-3xl md:text-4xl font-black">£9.99</p>
+                    <p className="text-sm text-slate-500 line-through">£15.96</p>
+                  </div>
+                  <ArrowRight className="w-6 h-6 text-slate-400" />
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          )}
 
           {/* Or Pick What You Need */}
-          <p className="text-center text-slate-500 text-sm mb-6">Or pick what you need:</p>
+          {!isInternalSite && (
+            <p className="text-center text-slate-500 text-sm mb-6">Or pick what you need:</p>
+          )}
 
           {/* Products Grid - 2x2 compact cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -206,9 +210,16 @@ export default function ResourcesPage() {
                         <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded-full">{product.useOn}</span>
                       </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-lg font-bold text-slate-900">{product.price}</p>
-                    </div>
+                    {product.price && (
+                      <div className="text-right flex-shrink-0">
+                        <p className="text-lg font-bold text-slate-900">{product.price}</p>
+                      </div>
+                    )}
+                    {isInternalSite && (
+                      <div className="flex-shrink-0">
+                        <ArrowRight className="w-5 h-5 text-slate-400" />
+                      </div>
+                    )}
                   </div>
                 </Link>
               )
