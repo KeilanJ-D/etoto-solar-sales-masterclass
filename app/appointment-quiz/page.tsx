@@ -9,6 +9,7 @@ import SolaFlowUpsell from '@/components/products/SolaFlowUpsell'
 import ETOTOServices from '@/components/products/ETOTOServices'
 import ProductFooter from '@/components/products/ProductFooter'
 import Link from 'next/link'
+import MasterclassNav from '@/components/funnel/MasterclassNav'
 
 // Full quiz data with explanations
 const QUIZ_QUESTIONS = [
@@ -173,6 +174,7 @@ export default function AppointmentQuizPage() {
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
+      <MasterclassNav />
       {/* Hero */}
       <ProductHero
         title="Are Your Setters Ready for the Phones?"

@@ -9,6 +9,7 @@ import SolaFlowUpsell from '@/components/products/SolaFlowUpsell'
 import ETOTOServices from '@/components/products/ETOTOServices'
 import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
+import MasterclassNav from '@/components/funnel/MasterclassNav'
 
 // Audio clip timestamps from the real call
 const AUDIO_CLIPS = {
@@ -37,6 +38,7 @@ export default function SalesScriptPage() {
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
+      <MasterclassNav />
       {/* Hero */}
       <ProductHero
         title="The Word-for-Word Script That Closes Solar Deals."

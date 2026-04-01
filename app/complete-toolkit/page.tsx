@@ -9,6 +9,7 @@ import { TestimonialRow } from '@/components/shared/TestimonialRow'
 import { GoogleReviewsBadge } from '@/components/shared/GoogleReviewsBadge'
 import { googleReviewsUrl } from '@/lib/social-proof-data'
 import { stats, getTestimonialsByIds } from '@/lib/social-proof-data'
+import MasterclassNav from '@/components/funnel/MasterclassNav'
 
 const products = [
   {
@@ -117,6 +118,7 @@ export default function CompleteToolkitPage() {
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
+      <MasterclassNav />
       {/* Hero */}
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-16 md:py-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
