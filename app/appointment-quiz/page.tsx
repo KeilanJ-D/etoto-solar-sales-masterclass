@@ -160,14 +160,16 @@ const QUIZ_QUESTIONS = [
 ]
 
 export default function AppointmentQuizPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  const [isUnlocked, setIsUnlocked] = useState(isInternal)
 
   useEffect(() => {
+    if (isInternal) return // Skip token check on internal site
     const storedToken = localStorage.getItem('access_appointment-quiz')
     if (storedToken) {
       setIsUnlocked(true)
     }
-  }, [])
+  }, [isInternal])
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
@@ -175,7 +177,7 @@ export default function AppointmentQuizPage() {
       <ProductHero
         title="Are Your Setters Ready for the Phones?"
         subtitle="18 interactive questions. Solar basics, qualification, objection handling, appointment positioning. 80% pass mark. Track scores, retry wrong answers, drill the gaps."
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
         stats={[
           { value: '18', label: 'Questions' },
@@ -190,7 +192,7 @@ export default function AppointmentQuizPage() {
       <PasswordGate
         productId="appointment-quiz"
         productName="Appointment Setter Quiz"
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
@@ -340,11 +342,13 @@ function PreviewQuiz() {
         <p className="text-slate-600 mb-6">
           You scored {score} out of 5 on the preview. 13 more questions to go.
         </p>
-        <div className="bg-slate-900 text-white rounded-xl p-6">
-          <p className="text-lg font-semibold mb-2">Unlock the Full Quiz</p>
-          <p className="text-slate-400 text-sm mb-4">Get detailed explanations, retry wrong answers, and track your best score.</p>
-          <p className="text-2xl font-black text-[#E8192C]">£3.99</p>
-        </div>
+        {process.env.NEXT_PUBLIC_UNLOCK_ALL !== 'true' && (
+          <div className="bg-slate-900 text-white rounded-xl p-6">
+            <p className="text-lg font-semibold mb-2">Unlock the Full Quiz</p>
+            <p className="text-slate-400 text-sm mb-4">Get detailed explanations, retry wrong answers, and track your best score.</p>
+            <p className="text-2xl font-black text-[#E8192C]">£3.99</p>
+          </div>
+        )}
       </div>
     )
   }

@@ -4,6 +4,11 @@ import { Calculator, ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
 export default function SolaFlowUpsell() {
+  // Hide upsell on internal/client deployments
+  if (process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true') {
+    return null
+  }
+
   return (
     <section className="py-12 md:py-16 px-4 md:px-6 bg-gradient-to-br from-slate-900 to-slate-800">
       <div className="max-w-4xl mx-auto">

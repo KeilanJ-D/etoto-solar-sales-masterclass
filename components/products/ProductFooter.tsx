@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
 export default function ProductFooter() {
+  const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+
   return (
     <footer className="py-10 px-4 md:px-6 bg-slate-900 text-white">
       <div className="max-w-5xl mx-auto">
@@ -21,11 +23,13 @@ export default function ProductFooter() {
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
             <Link href="/" className="text-slate-400 hover:text-white transition-colors">
-              Back to Masterclass
+              {isInternalSite ? 'Home' : 'Back to Masterclass'}
             </Link>
-            <Link href="/complete-toolkit" className="text-slate-400 hover:text-white transition-colors">
-              Complete Toolkit
-            </Link>
+            {!isInternalSite && (
+              <Link href="/complete-toolkit" className="text-slate-400 hover:text-white transition-colors">
+                Complete Toolkit
+              </Link>
+            )}
             <Link href="/solaflow" className="text-slate-400 hover:text-white transition-colors">
               SolaFlow
             </Link>

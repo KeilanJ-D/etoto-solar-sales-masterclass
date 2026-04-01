@@ -24,14 +24,16 @@ const AUDIO_CLIPS = {
 }
 
 export default function SalesScriptPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  const [isUnlocked, setIsUnlocked] = useState(isInternal)
 
   useEffect(() => {
+    if (isInternal) return // Skip token check on internal site
     const storedToken = localStorage.getItem('access_sales-script')
     if (storedToken) {
       setIsUnlocked(true)
     }
-  }, [])
+  }, [isInternal])
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
@@ -39,7 +41,7 @@ export default function SalesScriptPage() {
       <ProductHero
         title="The Word-for-Word Script That Closes Solar Deals."
         subtitle="Every sentence. Every pause. Every question. The exact script used across 200+ UK solar installers — from 'Hi, how are you doing?' to '25% deposit by credit card.' Interactive, with copy buttons and audio from a real sales call."
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
         stats={[
           { value: '9', label: 'Steps' },
@@ -84,7 +86,7 @@ export default function SalesScriptPage() {
       <PasswordGate
         productId="sales-script"
         productName="Sales Script"
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
@@ -146,13 +148,15 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
                     audioClip={AUDIO_CLIPS.step3}
                   />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
-                    <AlertTriangle className="w-8 h-8 text-[#E8192C] mx-auto mb-3" />
-                    <p className="font-bold text-slate-900 mb-2">Steps 3-9 are locked</p>
-                    <p className="text-sm text-slate-600">Unlock the full script for £3.99</p>
+                {!isInternal && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
+                      <AlertTriangle className="w-8 h-8 text-[#E8192C] mx-auto mb-3" />
+                      <p className="font-bold text-slate-900 mb-2">Steps 3-9 are locked</p>
+                      <p className="text-sm text-slate-600">Unlock the full script for £3.99</p>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </section>

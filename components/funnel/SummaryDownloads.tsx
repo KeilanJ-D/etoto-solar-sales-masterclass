@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Download, FileText, ArrowRight, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
+const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+
 const steps = [
   'Rapport',
   'Discovery',
@@ -52,10 +54,10 @@ const formulas = [
 ]
 
 const products = [
-  { name: 'Full Sales Script', description: 'Word-for-word, with audio clips', href: '/sales-script', price: '£3.99' },
-  { name: 'Sales Framework', description: 'Flexible 9-step skeleton', href: '/sales-framework', price: '£3.99' },
-  { name: 'Appointment Setter Quiz', description: '18 questions, scoring, retry mode', href: '/appointment-quiz', price: '£3.99' },
-  { name: 'Formula Cheat Sheet', description: 'Calculator with saved configs', href: '/formula-cheat-sheet', price: '£3.99' },
+  { name: 'Full Sales Script', description: 'Word-for-word, with audio clips', href: '/sales-script', price: isInternalSite ? null : '£3.99' },
+  { name: 'Sales Framework', description: 'Flexible 9-step skeleton', href: '/sales-framework', price: isInternalSite ? null : '£3.99' },
+  { name: 'Appointment Setter Quiz', description: '18 questions, scoring, retry mode', href: '/appointment-quiz', price: isInternalSite ? null : '£3.99' },
+  { name: 'Formula Cheat Sheet', description: 'Calculator with saved configs', href: '/formula-cheat-sheet', price: isInternalSite ? null : '£3.99' },
 ]
 
 export default function SummaryDownloads() {
@@ -128,8 +130,8 @@ export default function SummaryDownloads() {
 
         {/* Product Microsites */}
         <div className={`mb-12 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h3 className="text-lg font-bold text-slate-900 mb-2 text-center">Go Deeper — The Full Toolkit</h3>
-          <p className="text-slate-500 text-center mb-6 text-sm">Interactive microsites with scripts, audio, calculators, and quizzes.</p>
+          <h3 className="text-lg font-bold text-slate-900 mb-2 text-center">{isInternalSite ? 'Your Tools' : 'Go Deeper — The Full Toolkit'}</h3>
+          <p className="text-slate-500 text-center mb-6 text-sm">{isInternalSite ? 'Scripts, audio, calculators, and quizzes.' : 'Interactive microsites with scripts, audio, calculators, and quizzes.'}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {products.map((item, index) => (
               <Link
@@ -144,20 +146,23 @@ export default function SummaryDownloads() {
                   <p className="font-bold text-slate-900">{item.name}</p>
                   <p className="text-sm text-slate-500 truncate">{item.description}</p>
                 </div>
-                <span className="text-sm font-bold text-[#E8192C] flex-shrink-0">{item.price}</span>
+                {item.price && <span className="text-sm font-bold text-[#E8192C] flex-shrink-0">{item.price}</span>}
+                {!item.price && <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0" />}
               </Link>
             ))}
           </div>
-          <div className="mt-6 text-center">
-            <Link 
-              href="/complete-toolkit"
-              className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
-            >
-              <span>Get All 4 for £9.99</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <p className="text-sm text-slate-500 mt-2">Save £5.97 with the Complete Toolkit</p>
-          </div>
+          {!isInternalSite && (
+            <div className="mt-6 text-center">
+              <Link 
+                href="/complete-toolkit"
+                className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
+              >
+                <span>Get All 4 for £9.99</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <p className="text-sm text-slate-500 mt-2">Save £5.97 with the Complete Toolkit</p>
+            </div>
+          )}
         </div>
 
         {/* Closing Line */}

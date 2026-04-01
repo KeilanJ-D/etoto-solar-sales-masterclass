@@ -19,6 +19,11 @@ export default function BuySection({
   bundleLink,
   features = [],
 }: BuySectionProps) {
+  // Hide buy section on internal/client deployments
+  if (process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true') {
+    return null
+  }
+
   const defaultFeatures = [
     'Instant access after purchase',
     'Lifetime access — no subscription',

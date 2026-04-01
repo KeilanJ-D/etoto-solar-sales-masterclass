@@ -11,15 +11,17 @@ import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
 
 export default function FormulaCheatSheetPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  const [isUnlocked, setIsUnlocked] = useState(isInternal)
 
   // Check localStorage on mount
   useEffect(() => {
+    if (isInternal) return // Skip token check on internal site
     const storedToken = localStorage.getItem('access_formula-cheat-sheet')
     if (storedToken) {
       setIsUnlocked(true)
     }
-  }, [])
+  }, [isInternal])
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
@@ -27,7 +29,7 @@ export default function FormulaCheatSheetPage() {
       <ProductHero
         title="Every Formula. Every Tool. Always in Your Pocket."
         subtitle="The four formulas that close solar deals — live, interactive, with a working calculator you can use on every call. Pin the visual summary to your desk. Use the calculator on your phone mid-pitch."
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         stats={[
           { value: '4', label: 'Core Formulas' },
@@ -43,7 +45,7 @@ export default function FormulaCheatSheetPage() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">What&apos;s Inside</h2>
-            <p className="text-slate-600">The formulas are free. The tools are £3.99.</p>
+            {!isInternal && <p className="text-slate-600">The formulas are free. The tools are £3.99.</p>}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -72,7 +74,7 @@ export default function FormulaCheatSheetPage() {
       <PasswordGate
         productId="formula-cheat-sheet"
         productName="Formula Cheat Sheet"
-        price="£3.99"
+        price={isInternal ? '' : '£3.99'}
         buyLink="https://buy.stripe.com/00w5kF9no8MB3r4dGGfEk05"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">

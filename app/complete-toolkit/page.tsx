@@ -45,8 +45,10 @@ export default function CompleteToolkitPage() {
   // YEERS (sales training), Alltech (appointment), Halo (overall)
   const bundleTestimonials = getTestimonialsByIds(['yeers', 'alltech', 'halo'])
   
-  const [hasAccess, setHasAccess] = useState(false)
-  const [isChecking, setIsChecking] = useState(true)
+  const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  
+  const [hasAccess, setHasAccess] = useState(isInternalSite)
+  const [isChecking, setIsChecking] = useState(!isInternalSite)
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -54,6 +56,9 @@ export default function CompleteToolkitPage() {
   const productId = 'complete-toolkit'
   
   useEffect(() => {
+    // Skip check on internal site
+    if (isInternalSite) return
+    
     // Check if user has bundle access via stored token
     const storedToken = localStorage.getItem(`access_${productId}`)
     if (storedToken) {
@@ -61,7 +66,7 @@ export default function CompleteToolkitPage() {
     } else {
       setIsChecking(false)
     }
-  }, [])
+  }, [isInternalSite])
 
   const verifyStoredToken = async (token: string) => {
     try {
@@ -121,42 +126,49 @@ export default function CompleteToolkitPage() {
           </div>
           
           <h1 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
-            The Complete Solar<br />Sales Toolkit
+            {isInternalSite ? 'Solar Sales Tools' : 'The Complete Solar'}<br />
+            {!isInternalSite && 'Sales Toolkit'}
           </h1>
           
           <p className="text-lg md:text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Everything you need to close more solar deals. All 4 products in one package, 
-            saving you £5.97 compared to buying individually.
+            {isInternalSite 
+              ? 'Everything you need to close more solar deals. All 4 tools in one place.'
+              : 'Everything you need to close more solar deals. All 4 products in one package, saving you £5.97 compared to buying individually.'
+            }
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <div className="text-center">
-              <p className="text-slate-400 line-through text-lg">£15.96</p>
-              <p className="text-4xl md:text-5xl font-black text-white">£9.99</p>
-              <p className="text-emerald-400 font-medium">Save 37%</p>
-            </div>
-          </div>
-          
-          {isChecking ? (
-            <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto" />
-          ) : hasAccess ? (
-            <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-6 py-3 rounded-full font-medium">
-              <Check className="w-5 h-5" />
-              <span>You have full access — scroll down to view your products</span>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <a
-                href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
-              >
-                <span>Get Complete Toolkit</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
-              <p className="text-slate-400 text-sm">Already purchased? Enter your code below</p>
-            </div>
+          {!isInternalSite && (
+            <>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+                <div className="text-center">
+                  <p className="text-slate-400 line-through text-lg">£15.96</p>
+                  <p className="text-4xl md:text-5xl font-black text-white">£9.99</p>
+                  <p className="text-emerald-400 font-medium">Save 37%</p>
+                </div>
+              </div>
+              
+              {isChecking ? (
+                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto" />
+              ) : hasAccess ? (
+                <div className="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-6 py-3 rounded-full font-medium">
+                  <Check className="w-5 h-5" />
+                  <span>You have full access — scroll down to view your products</span>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <a
+                    href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px]"
+                  >
+                    <span>Get Complete Toolkit</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </a>
+                  <p className="text-slate-400 text-sm">Already purchased? Enter your code below</p>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
@@ -164,8 +176,8 @@ export default function CompleteToolkitPage() {
       {/* Stats Banner */}
       <StatsBanner stats={stats} />
 
-      {/* Enter Access Code Section - Only show if not already unlocked */}
-      {!hasAccess && !isChecking && (
+      {/* Enter Access Code Section - Only show if not already unlocked and not internal site */}
+      {!isInternalSite && !hasAccess && !isChecking && (
         <section className="py-12 px-4 bg-white border-b border-slate-200">
           <div className="max-w-md mx-auto">
             <div className="text-center mb-6">
@@ -250,12 +262,12 @@ export default function CompleteToolkitPage() {
                   ))}
                 </ul>
                 
-                {hasAccess ? (
+                {(hasAccess || isInternalSite) ? (
                   <Link
                     href={product.href}
                     className="flex items-center justify-center gap-2 w-full bg-slate-100 hover:bg-slate-200 text-slate-900 font-medium py-3 px-4 rounded-xl transition-all"
                   >
-                    <span>Open</span>
+                    <span>Go to {product.name.split(' ')[0].toLowerCase()}</span>
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 ) : (
@@ -270,74 +282,78 @@ export default function CompleteToolkitPage() {
         </div>
       </section>
       
-      {/* Value Breakdown */}
-      <section className="bg-slate-900 text-white py-16 md:py-24 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">The Value Breakdown</h2>
-          
-          <div className="space-y-4 mb-8">
-            {products.map((product) => (
-              <div key={product.name} className="flex items-center justify-between bg-white/5 rounded-xl p-4">
-                <span className="text-slate-300">{product.name}</span>
-                <span className="font-bold">£3.99</span>
-              </div>
-            ))}
-            <div className="border-t border-white/20 pt-4">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-400">Individual total</span>
-                <span className="text-slate-400 line-through">£15.96</span>
-              </div>
-              <div className="flex items-center justify-between mt-2">
-                <span className="font-bold text-lg">Bundle price</span>
-                <span className="font-black text-2xl text-[#E8192C]">£9.99</span>
+      {/* Value Breakdown - hidden on internal site */}
+      {!isInternalSite && (
+        <section className="bg-slate-900 text-white py-16 md:py-24 px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8">The Value Breakdown</h2>
+            
+            <div className="space-y-4 mb-8">
+              {products.map((product) => (
+                <div key={product.name} className="flex items-center justify-between bg-white/5 rounded-xl p-4">
+                  <span className="text-slate-300">{product.name}</span>
+                  <span className="font-bold">£3.99</span>
+                </div>
+              ))}
+              <div className="border-t border-white/20 pt-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-400">Individual total</span>
+                  <span className="text-slate-400 line-through">£15.96</span>
+                </div>
+                <div className="flex items-center justify-between mt-2">
+                  <span className="font-bold text-lg">Bundle price</span>
+                  <span className="font-black text-2xl text-[#E8192C]">£9.99</span>
+                </div>
               </div>
             </div>
+            
+            {!hasAccess && (
+              <a
+                href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all"
+              >
+                <span>Get Complete Toolkit for £9.99</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            )}
           </div>
-          
-          {!hasAccess && (
-            <a
-              href="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all"
-            >
-              <span>Get Complete Toolkit for £9.99</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
-          )}
-        </div>
-      </section>
+        </section>
+      )}
       
-      {/* FAQ */}
-      <section className="py-16 md:py-24 px-4">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-12">
-            Frequently Asked Questions
-          </h2>
-          
-          <div className="space-y-6">
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">How do I access the products?</h3>
-              <p className="text-slate-600">After purchase, you&apos;ll receive an access code via email. Enter it on any product page to unlock all content permanently on your device.</p>
-            </div>
+      {/* FAQ - hidden on internal site */}
+      {!isInternalSite && (
+        <section className="py-16 md:py-24 px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-12">
+              Frequently Asked Questions
+            </h2>
             
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Can I share my access code?</h3>
-              <p className="text-slate-600">Each code is for individual use. For team access, contact us about our installer package with volume pricing.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Is there a refund policy?</h3>
-              <p className="text-slate-600">Yes, we offer a 14-day money-back guarantee if you&apos;re not satisfied with the content.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
-              <h3 className="font-bold text-slate-900 mb-2">Will there be updates?</h3>
-              <p className="text-slate-600">Yes, we regularly update the content based on market changes and feedback. All updates are included free.</p>
+            <div className="space-y-6">
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">How do I access the products?</h3>
+                <p className="text-slate-600">After purchase, you&apos;ll receive an access code via email. Enter it on any product page to unlock all content permanently on your device.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Can I share my access code?</h3>
+                <p className="text-slate-600">Each code is for individual use. For team access, contact us about our installer package with volume pricing.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Is there a refund policy?</h3>
+                <p className="text-slate-600">Yes, we offer a 14-day money-back guarantee if you&apos;re not satisfied with the content.</p>
+              </div>
+              
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="font-bold text-slate-900 mb-2">Will there be updates?</h3>
+                <p className="text-slate-600">Yes, we regularly update the content based on market changes and feedback. All updates are included free.</p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
       
       {/* Testimonials */}
       <TestimonialRow 

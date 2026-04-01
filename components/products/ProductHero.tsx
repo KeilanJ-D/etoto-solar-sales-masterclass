@@ -24,6 +24,8 @@ export default function ProductHero({
   stats = [],
   isUnlocked = false,
 }: ProductHeroProps) {
+  const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
+  
   return (
     <section className="relative py-16 md:py-24 px-4 md:px-6 bg-gradient-to-br from-white via-slate-50/50 to-red-50/30 overflow-hidden">
       {/* Background decoration */}
@@ -33,14 +35,16 @@ export default function ProductHero({
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
-        {/* Back link */}
-        <Link 
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
-        >
-          <ArrowRight className="w-4 h-4 rotate-180" />
-          <span>Back to Masterclass</span>
-        </Link>
+        {/* Back link - hidden on internal site */}
+        {!isInternalSite && (
+          <Link 
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-700 mb-6 transition-colors"
+          >
+            <ArrowRight className="w-4 h-4 rotate-180" />
+            <span>Back to Masterclass</span>
+          </Link>
+        )}
 
         {/* Eyebrow */}
         <p className="text-sm font-medium text-[#E8192C] tracking-wide uppercase mb-4">
@@ -57,35 +61,37 @@ export default function ProductHero({
           {subtitle}
         </p>
 
-        {/* Price / Unlocked badge */}
-        {isUnlocked ? (
-          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 font-semibold px-6 py-3 rounded-full mb-8">
-            <Check className="w-5 h-5" />
-            <span>Full Access Unlocked</span>
-          </div>
-        ) : (
-          <div className="space-y-4 mb-8">
-            <div className="flex items-center justify-center gap-4">
-              <span className="text-4xl md:text-5xl font-black text-slate-900">{price}</span>
-              <span className="text-slate-500">one-time</span>
+        {/* Price / Unlocked badge - hidden on internal site */}
+        {!isInternalSite && (
+          isUnlocked ? (
+            <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 font-semibold px-6 py-3 rounded-full mb-8">
+              <Check className="w-5 h-5" />
+              <span>Full Access Unlocked</span>
             </div>
-            <a
-              href={buyLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-semibold py-4 px-8 rounded-xl sm:rounded-full transition-all shadow-lg hover:shadow-xl min-h-[56px] touch-action-manipulation"
-            >
-              <span>Buy Access — Unlock Instantly</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
-            {bundleNudge && (
-              <p className="text-sm text-slate-500">
-                <Link href="/complete-toolkit" className="text-[#E8192C] hover:underline">
-                  {bundleNudge} →
-                </Link>
-              </p>
-            )}
-          </div>
+          ) : (
+            <div className="space-y-4 mb-8">
+              <div className="flex items-center justify-center gap-4">
+                <span className="text-4xl md:text-5xl font-black text-slate-900">{price}</span>
+                <span className="text-slate-500">one-time</span>
+              </div>
+              <a
+                href={buyLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-semibold py-4 px-8 rounded-xl sm:rounded-full transition-all shadow-lg hover:shadow-xl min-h-[56px] touch-action-manipulation"
+              >
+                <span>Buy Access — Unlock Instantly</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              {bundleNudge && (
+                <p className="text-sm text-slate-500">
+                  <Link href="/complete-toolkit" className="text-[#E8192C] hover:underline">
+                    {bundleNudge} →
+                  </Link>
+                </p>
+              )}
+            </div>
+          )
         )}
 
         {/* Stats */}
