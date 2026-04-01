@@ -24,7 +24,7 @@ const AUDIO_CLIPS = {
 }
 
 export default function SalesScriptPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
 
   useEffect(() => {
     const storedToken = localStorage.getItem('access_sales-script')

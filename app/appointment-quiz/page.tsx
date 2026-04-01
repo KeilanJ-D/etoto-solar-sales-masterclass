@@ -160,7 +160,7 @@ const QUIZ_QUESTIONS = [
 ]
 
 export default function AppointmentQuizPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
 
   useEffect(() => {
     const storedToken = localStorage.getItem('access_appointment-quiz')

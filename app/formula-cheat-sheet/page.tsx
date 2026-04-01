@@ -11,7 +11,7 @@ import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
 
 export default function FormulaCheatSheetPage() {
-  const [isUnlocked, setIsUnlocked] = useState(false)
+  const [isUnlocked, setIsUnlocked] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
 
   // Check localStorage on mount
   useEffect(() => {

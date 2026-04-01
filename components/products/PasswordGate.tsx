@@ -23,6 +23,11 @@ export default function PasswordGate({
   children,
   previewContent
 }: PasswordGateProps) {
+  // Bypass gate for internal/client deployments
+  if (process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true') {
+    return <>{children}</>
+  }
+
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')

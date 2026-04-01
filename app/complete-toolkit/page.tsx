@@ -45,8 +45,8 @@ export default function CompleteToolkitPage() {
   // YEERS (sales training), Alltech (appointment), Halo (overall)
   const bundleTestimonials = getTestimonialsByIds(['yeers', 'alltech', 'halo'])
   
-  const [hasAccess, setHasAccess] = useState(false)
-  const [isChecking, setIsChecking] = useState(true)
+  const [hasAccess, setHasAccess] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true')
+  const [isChecking, setIsChecking] = useState(process.env.NEXT_PUBLIC_UNLOCK_ALL !== 'true')
   const [inputValue, setInputValue] = useState('')
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
