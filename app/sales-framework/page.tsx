@@ -10,6 +10,7 @@ import ETOTOServices from '@/components/products/ETOTOServices'
 import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
 import Link from 'next/link'
+import MasterclassNav from '@/components/funnel/MasterclassNav'
 
 // Framework data with Adapt It suggestions
 const FRAMEWORK_STEPS = [
@@ -179,6 +180,7 @@ export default function SalesFrameworkPage() {
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
+      <MasterclassNav />
       {/* Hero */}
       <ProductHero
         title="The 9-Step Skeleton. Flexible. Adaptable. Yours."

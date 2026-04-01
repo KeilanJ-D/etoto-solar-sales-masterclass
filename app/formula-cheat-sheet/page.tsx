@@ -9,6 +9,7 @@ import SolaFlowUpsell from '@/components/products/SolaFlowUpsell'
 import ETOTOServices from '@/components/products/ETOTOServices'
 import ProductFooter from '@/components/products/ProductFooter'
 import FormulaCalculator from '@/components/funnel/FormulaCalculator'
+import MasterclassNav from '@/components/funnel/MasterclassNav'
 
 export default function FormulaCheatSheetPage() {
   const isInternal = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
@@ -25,6 +26,7 @@ export default function FormulaCheatSheetPage() {
 
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
+      <MasterclassNav />
       {/* Hero */}
       <ProductHero
         title="Every Formula. Every Tool. Always in Your Pocket."
