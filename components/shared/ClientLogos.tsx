@@ -27,14 +27,15 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               className="opacity-60 hover:opacity-100 transition-all duration-300"
             >
               {logo.logoUrl ? (
-                <Image
-                  src={logo.logoUrl}
-                  alt={logo.name}
-                  width={100}
-                  height={40}
-                  className="object-contain"
-                  style={{ width: 'auto', height: 'auto', maxHeight: '40px', maxWidth: '100%' }}
-                />
+                <div className="h-10 w-auto relative" style={{ width: '120px', height: '40px' }}>
+                  <Image
+                    src={logo.logoUrl}
+                    alt={logo.name}
+                    fill
+                    sizes="120px"
+                    className="object-contain"
+                  />
+                </div>
               ) : (
                 <span className="text-sm font-semibold text-slate-300 whitespace-nowrap">{logo.name}</span>
               )}
@@ -49,14 +50,15 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
               className="flex-shrink-0 scroll-snap-start opacity-60"
             >
               {logo.logoUrl ? (
-                <Image
-                  src={logo.logoUrl}
-                  alt={logo.name}
-                  width={80}
-                  height={32}
-                  className="object-contain"
-                  style={{ width: 'auto', height: 'auto', maxHeight: '24px', maxWidth: '100%' }}
-                />
+                <div className="h-6 w-auto relative" style={{ width: '80px', height: '24px' }}>
+                  <Image
+                    src={logo.logoUrl}
+                    alt={logo.name}
+                    fill
+                    sizes="80px"
+                    className="object-contain"
+                  />
+                </div>
               ) : (
                 <span className="text-xs font-semibold text-slate-300 whitespace-nowrap">{logo.name}</span>
               )}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Package, Calculator, Sun, Tag, Clock, Users } from 'lucide-react'
+import { Package, Calculator, Clock } from 'lucide-react'
 
 const problemCards = [
   { 
@@ -15,33 +15,25 @@ const problemCards = [
     detail: 'They send a quote in a PDF and hope for the best. The customer has no idea what the numbers mean because nobody walked them through it live.',
   },
   { 
-    icon: Sun, 
-    title: 'They Start With Solar',
-    detail: 'Solar generation depends on sunshine, roof angles, and seasons. Battery savings are instant, tangible, and guaranteed. Lead with the certainty, not the variable.',
-  },
-  { 
-    icon: Tag, 
-    title: 'They Compete on Price',
-    detail: 'When you can\'t sell on value, you sell on price. And there\'s always someone cheaper. The formula breaks this cycle by making the ROI so clear that price becomes secondary.',
-  },
-  { 
     icon: Clock, 
     title: 'They Close After the Call',
     detail: 'The proposal arrives 24 hours later when the customer has cooled off, talked to their partner, and Googled three more competitors. Close on the call, not after it.',
-  },
-  { 
-    icon: Users, 
-    title: 'They Don\'t Train Their Team',
-    detail: 'The founder can sell because they know the product inside out. Their reps can\'t because nobody gave them a system. This masterclass IS that system.',
   },
 ]
 
 export default function TheProblem() {
   const [visibleCards, setVisibleCards] = useState<number[]>([])
   const [sectionVisible, setSectionVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,7 +53,9 @@ export default function TheProblem() {
 
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
+  }, [mounted])
+
+  if (!mounted) return null
 
   return (
     <section id="problem" ref={sectionRef} className="py-16 md:py-32 px-4 md:px-6 bg-white relative overflow-hidden">
@@ -82,7 +76,7 @@ export default function TheProblem() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {problemCards.map((card, index) => {
             const Icon = card.icon
             const isVisible = visibleCards.includes(index)

@@ -11,9 +11,9 @@
 // ============================================
 
 export const stats = [
-  { value: "£175M+", label: "Sales for Clients" },
-  { value: "£5M/m", label: "Average Client Sales" },
-  { value: "£12,500", label: "Average Client AOV" },
+  { value: "£200M+", label: "Sales for Clients" },
+  { value: "£5M/m", label: "Avg Client Sales/Month" },
+  { value: "£12,500+", label: "Average Client AOV" },
   { value: "<£500", label: "Average Client CPA" },
 ]
 
@@ -174,32 +174,6 @@ export function getTestimonialsByIds(ids: string[]) {
 export function getVideoTestimonialById(id: string) {
   return videoTestimonials.find(v => v.id === id)
 }
-
-
-// ============================================
-// WHATSAPP SCREENSHOT PROOF (ScreenshotProof component)
-// ============================================
-
-export const screenshotProof = [
-  {
-    id: 'south-coast-solar',
-    image: '/proof/scs-60k-week.png',
-    headline: '£60K in new business in one week',
-    caption: 'On track for their first ever £100K week',
-    source: 'WhatsApp group screenshot',
-    logoUrl: null,
-    company: 'South Coast Solar',
-  },
-  {
-    id: 'ups-solar',
-    image: '/proof/ups-solar-450-cpa.png',
-    headline: '£450 CPA (down from £1,200)',
-    caption: '40 installs at £450 per acquisition',
-    source: 'WhatsApp screenshot',
-    logoUrl: null,
-    company: 'UPS Solar',
-  },
-]
 
 
 // ============================================

@@ -1,8 +1,12 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Smartphone, User, TrendingUp, ArrowRight } from 'lucide-react'
+import { Smartphone, User, TrendingUp, ArrowRight, Zap } from 'lucide-react'
 import Link from 'next/link'
+
+interface SolaFlowDemoProps {
+  variant?: 'full' | 'teaser'
+}
 
 const useCases = [
   {
@@ -22,7 +26,7 @@ const useCases = [
   },
 ]
 
-export default function SolaFlowDemo() {
+export default function SolaFlowDemo({ variant = 'full' }: SolaFlowDemoProps) {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -34,6 +38,34 @@ export default function SolaFlowDemo() {
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
   }, [])
+
+  // Teaser variant: compact single-line CTA
+  if (variant === 'teaser') {
+    return (
+      <section ref={sectionRef} className="py-10 sm:py-12 px-4 sm:px-6 bg-slate-900 text-white">
+        <div className="max-w-3xl mx-auto">
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div className="flex items-center gap-4 text-center sm:text-left">
+              <Zap className="w-6 h-6 text-[#E8192C] hidden sm:block" />
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold text-white">
+                  SolaFlow: <span className="text-[#E8192C]">£24.4K closed in 2 weeks</span>
+                </h3>
+                <p className="text-sm text-slate-400">Instant quotes before you arrive</p>
+              </div>
+            </div>
+            <Link
+              href="/solaflow"
+              className="flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold py-2.5 px-5 rounded-lg transition-all whitespace-nowrap text-sm"
+            >
+              Learn More
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section ref={sectionRef} className="py-20 md:py-32 px-4 md:px-6 bg-slate-900 text-white relative overflow-hidden">

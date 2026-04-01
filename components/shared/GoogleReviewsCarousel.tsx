@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import { Star, ExternalLink } from 'lucide-react'
+import { useState } from 'react'
+import { Star, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react'
 import { googleReviews, googleReviewsUrl } from '@/lib/social-proof-data'
 
 interface GoogleReview {
@@ -11,9 +11,9 @@ interface GoogleReview {
   timeAgo: string
 }
 
-function ReviewCard({ review }: { review: GoogleReview }) {
+function ReviewCard({ review, featured = false }: { review: GoogleReview; featured?: boolean }) {
   return (
-    <div className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px] bg-white rounded-xl p-5 shadow-sm border border-slate-100">
+    <div className={`bg-white rounded-xl p-5 sm:p-6 border ${featured ? 'border-yellow-200 shadow-lg' : 'border-slate-100 shadow-sm'}`}>
       {/* Stars */}
       <div className="flex gap-0.5 mb-3">
         {Array.from({ length: review.rating }).map((_, i) => (
@@ -22,17 +22,17 @@ function ReviewCard({ review }: { review: GoogleReview }) {
       </div>
       
       {/* Quote */}
-      <p className="text-slate-700 text-sm leading-relaxed mb-4 line-clamp-4">
+      <p className={`text-slate-700 leading-relaxed mb-4 ${featured ? 'text-base' : 'text-sm'}`}>
         &ldquo;{review.text}&rdquo;
       </p>
       
       {/* Author */}
-      <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 text-xs font-bold">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center text-white text-sm font-bold">
           {review.name.charAt(0)}
         </div>
         <div>
-          <p className="text-sm font-medium text-slate-900">{review.name}</p>
+          <p className="font-semibold text-slate-900">{review.name}</p>
           <p className="text-xs text-slate-500">{review.timeAgo}</p>
         </div>
       </div>
@@ -41,41 +41,25 @@ function ReviewCard({ review }: { review: GoogleReview }) {
 }
 
 export function GoogleReviewsCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [isPaused, setIsPaused] = useState(false)
+  const [currentPage, setCurrentPage] = useState(0)
   
-  // Duplicate reviews for infinite scroll effect
-  const duplicatedReviews = [...googleReviews, ...googleReviews]
+  // Show 3 reviews per page on desktop, 1 on mobile
+  const reviewsPerPage = 3
+  const totalPages = Math.ceil(googleReviews.length / reviewsPerPage)
   
-  useEffect(() => {
-    const scrollContainer = scrollRef.current
-    if (!scrollContainer) return
-    
-    let animationId: number
-    let scrollSpeed = 0.5 // pixels per frame (~30px/second at 60fps)
-    
-    const scroll = () => {
-      if (!isPaused && scrollContainer) {
-        scrollContainer.scrollLeft += scrollSpeed
-        
-        // Reset scroll position when we've scrolled through the first set
-        const halfWidth = scrollContainer.scrollWidth / 2
-        if (scrollContainer.scrollLeft >= halfWidth) {
-          scrollContainer.scrollLeft = 0
-        }
-      }
-      animationId = requestAnimationFrame(scroll)
-    }
-    
-    animationId = requestAnimationFrame(scroll)
-    
-    return () => cancelAnimationFrame(animationId)
-  }, [isPaused])
+  const currentReviews = googleReviews.slice(
+    currentPage * reviewsPerPage,
+    (currentPage + 1) * reviewsPerPage
+  )
+  
+  const nextPage = () => setCurrentPage((p) => (p + 1) % totalPages)
+  const prevPage = () => setCurrentPage((p) => (p - 1 + totalPages) % totalPages)
   
   return (
-    <section className="py-12 sm:py-16 bg-slate-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <section className="py-12 sm:py-16 px-4 sm:px-6 bg-slate-50">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <div className="flex gap-0.5">
@@ -101,25 +85,54 @@ export function GoogleReviewsCarousel() {
             <ExternalLink className="w-4 h-4" />
           </a>
         </div>
-      </div>
-      
-      {/* Scrolling carousel */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 overflow-x-hidden px-4 sm:px-6"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-      >
-        {duplicatedReviews.map((review, index) => (
-          <ReviewCard key={`${review.name}-${index}`} review={review} />
-        ))}
-      </div>
-      
-      {/* Leave a review CTA */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="text-center">
+        
+        {/* Reviews Grid - Mobile: 1 col stacked, Desktop: 3 cols */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          {currentReviews.map((review, index) => (
+            <ReviewCard 
+              key={`${review.name}-${currentPage}-${index}`} 
+              review={review}
+              featured={index === 0 && currentPage === 0}
+            />
+          ))}
+        </div>
+        
+        {/* Pagination */}
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={prevPage}
+            className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+            aria-label="Previous reviews"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          
+          <div className="flex gap-2">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i)}
+                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  i === currentPage 
+                    ? 'bg-[#E8192C] w-6' 
+                    : 'bg-slate-300 hover:bg-slate-400'
+                }`}
+                aria-label={`Go to page ${i + 1}`}
+              />
+            ))}
+          </div>
+          
+          <button
+            onClick={nextPage}
+            className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+            aria-label="Next reviews"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+        
+        {/* Leave a review CTA */}
+        <div className="text-center mt-8 pt-6 border-t border-slate-200">
           <p className="text-slate-500 text-sm mb-2">Found this tool valuable?</p>
           <a
             href={googleReviewsUrl}
@@ -132,7 +145,7 @@ export function GoogleReviewsCarousel() {
                 <Star key={i} className="w-4 h-4 fill-current" />
               ))}
             </div>
-            Leave us a 5-star review on Google
+            Leave us a 5-star review
             <ExternalLink className="w-4 h-4" />
           </a>
         </div>
