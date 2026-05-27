@@ -105,15 +105,15 @@ export default function FormulaCheatSheetPage() {
                   number={3}
                   title="Solar Income"
                   formula="kWp × peak sun hours × export rate × 365"
-                  example="6.58 × 4.5 × £0.15 × 365"
-                  result="= £1,621/year income"
+                  example="6.58 × 3.5 × £0.12 × 365"
+                  result="= £1,008/year income"
                 />
                 <FormulaCard
                   number={4}
                   title="Payback Period"
                   formula="Total system cost ÷ Annual benefit"
-                  example="£12,500 ÷ £2,971"
-                  result="= 4.2 years payback"
+                  example="£12,500 ÷ £2,358"
+                  result="= 5.3 years payback"
                 />
               </div>
               <p className="text-center text-sm text-slate-500 italic">
@@ -232,8 +232,8 @@ Saved: ${new Date().toLocaleDateString()}`
               number={4}
               title="Payback Period"
               formula="Total system cost ÷ Annual benefit"
-              example="£12,500 ÷ £2,971"
-              result="= 4.2 years payback"
+              example="£12,500 ÷ £2,358"
+              result="= 5.3 years payback"
             />
           </div>
 

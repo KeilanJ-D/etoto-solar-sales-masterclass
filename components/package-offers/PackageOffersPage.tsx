@@ -200,19 +200,23 @@ function PackageCard({ pkg }: { pkg: PackageOffer }) {
               The formula on this system
             </p>
             <dl className="space-y-1.5 text-xs sm:text-sm">
-              <FormulaRow
-                label="System size"
-                value={`${breakdown.systemKwp.toFixed(2)} kWp`}
-              />
-              <FormulaRow
-                label="Daily generation"
-                value={`${breakdown.dailyGenerationKwh.toFixed(1)} kWh/day`}
-              />
-              <FormulaRow
-                label="Annual generation"
-                value={`${breakdown.annualGenerationKwh.toLocaleString(undefined, { maximumFractionDigits: 0 })} kWh/yr`}
-              />
-              <div className="border-t border-white/10 mt-2 pt-2 space-y-1.5">
+              {breakdown.systemKwp > 0 && (
+                <>
+                  <FormulaRow
+                    label="System size"
+                    value={`${breakdown.systemKwp.toFixed(2)} kWp`}
+                  />
+                  <FormulaRow
+                    label="Daily generation"
+                    value={`${breakdown.dailyGenerationKwh.toFixed(1)} kWh/day`}
+                  />
+                  <FormulaRow
+                    label="Annual generation"
+                    value={`${breakdown.annualGenerationKwh.toLocaleString(undefined, { maximumFractionDigits: 0 })} kWh/yr`}
+                  />
+                </>
+              )}
+              <div className={`${breakdown.systemKwp > 0 ? 'border-t border-white/10 mt-2 pt-2' : ''} space-y-1.5`}>
                 {breakdown.annualBatterySaving > 0 && (
                   <FormulaRow
                     label={`Battery savings (${PEAK_P}p − ${OFFPEAK_P}p × 365)`}

@@ -133,7 +133,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
 
 [Wait for response]
 
-"Brilliant. Well, let me tell you a bit about what we do...""`}
+"Brilliant. Well, let me tell you a bit about what we do..."`}
                 keyLine="Position yourself as a consultant, not a salesman."
                 whyItWorks="Opening with 'how are you doing?' creates conversational rapport. Mentioning the Facebook ad reminds them they initiated contact. Asking 'is that something you were looking into?' gets them to verbally commit interest."
                 audioClip={AUDIO_CLIPS.step1}
@@ -154,7 +154,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
 
 "Do you happen to know your unit rate? It should be on your bill — around 24-28p at the moment for most people."
 
-"And are you the homeowner? Just checking because obviously we'd need to install on the property.""`}
+"And are you the homeowner? Just checking because obviously we'd need to install on the property."`}
                 keyLine="'What made you start looking into solar?' — let them tell you their motivation."
                 whyItWorks="Discovery questions serve two purposes: qualifying the lead and gathering the numbers for your calculations. The order matters — ask about motivation first (emotional), then bills (practical), then ownership (qualifying)."
                 audioClip={AUDIO_CLIPS.step2}
@@ -167,7 +167,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
                     step={3}
                     title="Energy Audit"
                     goal="Calculate their current usage. Establish the 'daily cost to run the house.'"
-                    script="So if you're spending £1,200 a year on electricity, at 21p per unit, that means you're using about 5,714 kilowatt hours per year..."
+                    script="So if you're spending £1,200 a year on electricity, at 28p per unit (the current Ofgem cap), that's about 4,285 kilowatt hours per year..."
                     keyLine="Your home costs £X.XX a day to run."
                     whyItWorks="This is the anchor for everything that follows."
                     audioClip={AUDIO_CLIPS.step3}
@@ -373,7 +373,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
 
 [Wait for response]
 
-"Brilliant. Well, let me tell you a bit about what we do...""`}
+"Brilliant. Well, let me tell you a bit about what we do..."`}
             keyLine="Position yourself as a consultant, not a salesman."
             whyItWorks="Opening with 'how are you doing?' creates conversational rapport. Mentioning the Facebook ad reminds them they initiated contact."
             audioClip={AUDIO_CLIPS.step1}
@@ -394,7 +394,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
 
 "Do you happen to know your unit rate? It should be on your bill — around 24-28p at the moment for most people."
 
-"And are you the homeowner? Just checking because obviously we'd need to install on the property.""`}
+"And are you the homeowner? Just checking because obviously we'd need to install on the property."`}
             keyLine="'What made you start looking into solar?' — let them tell you their motivation."
             whyItWorks="Discovery questions serve two purposes: qualifying the lead and gathering the numbers for your calculations."
             audioClip={AUDIO_CLIPS.step2}
@@ -405,13 +405,13 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
             step={3}
             title="Energy Audit"
             goal="Calculate their current usage. Establish the 'daily cost to run the house.'"
-            script={`"So if you're spending £1,200 a year on electricity, at 21p per unit, that means you're using about 5,714 kilowatt hours per year.
+            script={`"So if you're spending £1,200 a year on electricity, at 28p per unit (the current Ofgem cap), that's about 4,285 kilowatt hours per year.
 
-Divide that by 365 and that's about 15.65 kilowatt hours per day.
+Divide that by 365 and that's about 11.74 kilowatt hours per day.
 
-Times that by your unit rate of 21p... that means your house is costing you about £3.28 a day to run.
+Times that by your unit rate of 28p... your house is costing you about £3.29 a day to run.
 
-So your house costs £3.28 a day to run. Let's see what we can do about that."`}
+So your house costs £3.29 a day to run. Let's see what we can do about that."`}
             keyLine="'Your house costs £X.XX a day to run' — this is your anchor statement."
             whyItWorks="Translating annual spend into a daily cost makes it tangible. People understand daily costs better than annual figures."
             audioClip={AUDIO_CLIPS.step3}
@@ -428,20 +428,16 @@ So your house costs £3.28 a day to run. Let's see what we can do about that."`}
             step={4}
             title="Battery Value"
             goal="Introduce the battery first. Explain how off-peak charging saves money."
-            script={`"What I would do here is install 15 kilowatt hours of battery storage.
+            script={`"What I'd do here is install 12 kilowatt hours of battery storage — sized to cover your daily 11.74 kWh usage with a bit of headroom.
 
-The way it works is: you go onto a tariff like Octopus Intelligent Go, where you can buy electricity overnight at 7p instead of 28p.
+The way it works: you move onto a tariff like Octopus Cosy or Intelligent Go where you buy electricity overnight at 7p instead of the daytime 28p.
 
-You charge the battery at 7p overnight, then use that cheap electricity during the day instead of buying at 28p.
+You charge the battery at 7p, then use that cheap electricity during the day instead of buying at 28p.
 
-At your usage of 15.65 kWh per day, that's a saving of 21p per kilowatt hour. Times 365 days... that's £1,197 per year you're not spending on electricity.
+At your 11.74 kWh per day, the gap between 28p and 7p is 21p per kilowatt hour. Times 365 days... that's £900 a year you're not paying.
 
-But wait — we're charging the battery at 7p. So we need to subtract that cost. 15.65 kWh times 7p times 365 is £400.
-
-So your net battery saving is £1,197 minus £400 = £797 per year.
-
-Your daily cost goes from £3.28 to about £1.10."`}
-            keyLine="'Your daily cost goes from £3.28 to £1.10' — the before/after transformation."
+Your daily electricity cost drops from £3.29 to about £0.82."`}
+            keyLine="'Your daily cost goes from £3.29 to £0.82' — the before/after transformation."
             whyItWorks="Battery-first because it doesn't depend on sunshine. The off-peak arbitrage works every single day, rain or shine."
             audioClip={AUDIO_CLIPS.step4}
           />
@@ -451,15 +447,15 @@ Your daily cost goes from £3.28 to about £1.10."`}
             step={5}
             title="Solar Value"
             goal="Now add solar. Explain how export income stacks on top of battery savings."
-            script={`"On top of the battery, we'd fit 14 AIKO 470 watt panels. That's a 6.58 kilowatt peak system.
+            script={`"On top of the battery, we'd fit 14 AIKO 470 watt panels. That's a 6.58 kilowatt peak system on your roof.
 
-In the UK we average about 4.5 peak sun hours per day. So that system generates about 29.61 kWh per day.
+In the UK we use 3.5 peak sun hours per day as our conservative average — even with our weather, that's what your panels deliver across the year. So that system generates about 23 kWh per day.
 
-Now, some of that you'll use yourself — but let's assume you export 80% because you've already got the battery handling your daily usage.
+Your battery is already covering daytime usage, so all of that solar gets exported to the grid at the Smart Export Guarantee rate. We use 12p as a UK average.
 
-So you're exporting about 23.7 kWh per day. At 16p per kilowatt hour on the Smart Export Guarantee, that's £3.79 per day, or £1,384 per year in solar income.
+23 kWh × 12p × 365 = £1,008 per year in solar income.
 
-Add that to your battery saving of £797... you're now £2,181 better off per year. And your daily electricity cost is basically zero."`}
+Add that to your battery saving of £900... you're now £1,908 better off per year. And your daily electricity cost is basically zero."`}
             keyLine="'Your battery saving plus your solar income = total annual benefit.'"
             whyItWorks="Solar income feels like free money because it's money coming IN, not just money saved."
             audioClip={AUDIO_CLIPS.step5}

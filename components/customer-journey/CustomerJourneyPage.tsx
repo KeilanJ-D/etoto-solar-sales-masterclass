@@ -216,7 +216,7 @@ export default function CustomerJourneyPage() {
               icon={Phone}
               color="bg-emerald-100 text-emerald-700"
               title="Your call window opens"
-              body="Lead lands in GoHighLevel CRM with all 6 questions populated + the SolaFlow estimate (if completed). Your job: call within 5 minutes while they're still warm."
+              body="Lead lands in GoHighLevel CRM with all 8 funnel answers populated + the SolaFlow estimate (if completed). Your job: call within 5 minutes while they're still warm."
             />
             <PipelineEvent
               when="If no answer"
@@ -439,7 +439,7 @@ function GHLContactCardMockup() {
         <div className="mt-5 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs text-slate-500">
           <Check className="w-3.5 h-3.5 text-emerald-500" />
           <span>
-            All 6 funnel answers + SolaFlow output are available <strong className="text-slate-700">before you dial</strong>.
+            All 8 funnel answers + SolaFlow output are available <strong className="text-slate-700">before you dial</strong>.
             Your call window opens now.
           </span>
         </div>
