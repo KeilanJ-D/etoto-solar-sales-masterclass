@@ -22,7 +22,7 @@ const BATTERY_PRODUCTS = [
     ipRating: 'IP66',
     warranty: '10 years',
     defaultPrice: 2500,
-    image: '/products/sigenergy-10.jpg',
+    image: '/products/batteries/SIG.png',
   },
   {
     id: 'ecoflow',
@@ -37,7 +37,7 @@ const BATTERY_PRODUCTS = [
     ipRating: 'IP65',
     warranty: '15 years',
     defaultPrice: 1200,
-    image: '/products/ecoflow-powerocean.jpg',
+    image: '/products/batteries/POWEROCEAN.png',
   },
 ]
 

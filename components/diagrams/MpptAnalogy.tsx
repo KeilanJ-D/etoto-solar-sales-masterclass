@@ -47,34 +47,46 @@ export default function MpptAnalogy() {
             Cruise control in your car
           </text>
 
-          {/* Road profile */}
+          {/* Road profile + filled ground */}
+          <path
+            d="M 0 200 L 80 200 L 140 160 L 220 160 L 280 220 L 360 220 L 400 200 L 400 270 L 0 270 Z"
+            fill="#cbd5e1"
+            opacity="0.4"
+          />
           <path
             d="M 0 200 L 80 200 L 140 160 L 220 160 L 280 220 L 360 220 L 400 200"
             fill="none"
             stroke={SLATE}
             strokeWidth="3"
           />
-          <path
-            d="M 0 200 L 80 200 L 140 160 L 220 160 L 280 220 L 360 220 L 400 200 L 400 270 L 0 270 Z"
-            fill="#cbd5e1"
-            opacity="0.4"
-          />
-          <text x="100" y="195" fontSize="9" fill="#64748b">flat</text>
-          <text x="180" y="155" fontSize="9" fill="#64748b">uphill</text>
-          <text x="320" y="215" fontSize="9" fill="#64748b">downhill</text>
+          {/* Terrain labels — placed BELOW the road inside the ground fill
+              so the car has clean sky to drive through */}
+          <text x="40" y="250" fontSize="9" fill="#64748b" fontWeight="600">flat</text>
+          <text x="170" y="250" fontSize="9" fill="#64748b" fontWeight="600">uphill</text>
+          <text x="305" y="250" fontSize="9" fill="#64748b" fontWeight="600">downhill</text>
 
-          {/* Car (animated) */}
+          {/* Car — uses SVG offset-path so it physically follows the road
+              profile, not a flat horizontal line. Path is the road top
+              minus 21 (wheel bottom offset) so wheels sit on the road. */}
           <motion.g
-            initial={{ x: 0 }}
-            animate={{ x: [0, 380, 0] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+            initial={false}
+            animate={{ offsetDistance: ['0%', '100%', '0%'] }}
+            transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              offsetPath:
+                'path("M 0 179 L 80 179 L 140 139 L 220 139 L 280 199 L 360 199 L 400 179")',
+              offsetRotate: '0deg',
+            }}
           >
-            <g transform="translate(0 178)">
-              <rect x="0" y="-4" width="40" height="18" rx="4" fill={RED} />
-              <rect x="6" y="-12" width="22" height="10" rx="2" fill="#0f172a" />
-              <circle cx="9" cy="16" r="5" fill="#1e293b" />
-              <circle cx="31" cy="16" r="5" fill="#1e293b" />
-            </g>
+            {/* Car centred on (0,0) so the offset-path anchor lands on the
+                car centre. Wheels at cy=16 with r=5 → bottom at y=21
+                touches the road surface. */}
+            <rect x="-20" y="-4" width="40" height="18" rx="4" fill={RED} />
+            <rect x="-14" y="-12" width="22" height="10" rx="2" fill="#0f172a" />
+            <circle cx="-11" cy="16" r="5" fill="#1e293b" />
+            <circle cx="11" cy="16" r="5" fill="#1e293b" />
+            {/* Subtle headlight dot — adds direction */}
+            <circle cx="18" cy="4" r="1.5" fill="#fef3c7" />
           </motion.g>
 
           {/* Speedometer dial (left) */}

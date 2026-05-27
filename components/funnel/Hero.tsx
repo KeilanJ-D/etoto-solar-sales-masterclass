@@ -14,8 +14,11 @@ export default function Hero() {
 
   useEffect(() => {
     setIsVisible(true)
-    const timer = setTimeout(() => setShowStats(true), 800)
-    return () => clearTimeout(timer)
+    // Trigger count-up immediately on mount — the previous 800ms delay
+    // meant first paint showed "0 Steps · £0+ · <0 mins" before the
+    // animation kicked in. Now stats animate from 0 → target right away
+    // and the visible 0-state only flashes for a single frame at most.
+    setShowStats(true)
   }, [])
 
   const stats = [
