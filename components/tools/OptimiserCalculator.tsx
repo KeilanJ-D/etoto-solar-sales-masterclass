@@ -2,7 +2,10 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { CheckCircle2, Grid3x3, Lightbulb, RotateCw, Sun, TrendingUp } from 'lucide-react'
+import {
+  AlertCircle, Calculator, CheckCircle2, Grid3x3, GraduationCap,
+  Lightbulb, RotateCw, Sun, TrendingUp,
+} from 'lucide-react'
 import { SOLAFLOW_CONSTANTS, panels } from '@/lib/solaflow-products'
 
 type PanelState = 'clean' | 'shaded'
@@ -252,11 +255,13 @@ export default function OptimiserCalculator() {
           )}
         </div>
 
-        {/* Roof grid */}
+        {/* Roof grid — styled like a real PV array on a roof.
+            No cards around each panel. Tiles touch with a thin dark line
+            between them (the "panel junction"). Tap any tile to toggle shade. */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <p className="text-sm font-semibold text-slate-900">
-              Click any panel to toggle shade
+              👆 Tap any panel to mark it as shaded
             </p>
             <button
               onClick={clearShade}
@@ -266,10 +271,15 @@ export default function OptimiserCalculator() {
               Reset
             </button>
           </div>
-          <div className="bg-slate-100 rounded-xl p-4 sm:p-6">
+
+          {/* The "roof" — neutral surround that lets the panels read as the array */}
+          <div className="mx-auto" style={{ maxWidth: `${Math.min(cols * 90, 560)}px` }}>
             <div
-              className="grid gap-2 mx-auto max-w-xl"
-              style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+              className="grid bg-slate-900 p-px rounded-md shadow-xl ring-1 ring-slate-300"
+              style={{
+                gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                gap: '1px',
+              }}
             >
               {Array.from({ length: rows * cols }).map((_, idx) => {
                 const state = panelGrid[idx] || 'clean'
@@ -278,10 +288,10 @@ export default function OptimiserCalculator() {
                   <button
                     key={idx}
                     onClick={() => togglePanel(idx)}
-                    className={`relative aspect-[3/4] rounded-md border-2 transition-all flex items-center justify-center overflow-hidden bg-white ${
+                    className={`relative aspect-[2/3] overflow-hidden transition-all bg-white ${
                       isShaded
-                        ? 'border-slate-900'
-                        : 'border-blue-700 hover:scale-105'
+                        ? 'cursor-pointer'
+                        : 'cursor-pointer hover:brightness-110 active:brightness-95'
                     }`}
                     aria-label={`Panel ${idx + 1}: ${state}`}
                   >
@@ -289,13 +299,13 @@ export default function OptimiserCalculator() {
                       src={selectedPanel.imagePath}
                       alt=""
                       fill
-                      sizes="80px"
-                      className={`object-contain p-0.5 transition-all ${
-                        isShaded ? 'opacity-30 grayscale' : 'opacity-100'
+                      sizes="90px"
+                      className={`object-cover transition-all ${
+                        isShaded ? 'opacity-25 grayscale-[80%]' : 'opacity-100'
                       }`}
                     />
                     {isShaded && (
-                      <span className="absolute inset-0 flex items-center justify-center bg-slate-900/40 text-slate-100 text-base">
+                      <span className="absolute inset-0 flex items-center justify-center bg-slate-900/55 text-slate-100 text-base font-bold">
                         ☁
                       </span>
                     )}
@@ -303,20 +313,9 @@ export default function OptimiserCalculator() {
                 )
               })}
             </div>
-            <div className="flex items-center justify-center gap-5 mt-4 text-xs">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded border border-blue-700 bg-white" />
-                <span className="text-slate-600">Clean</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-slate-900/40 border border-slate-900" />
-                <span className="text-slate-600">Shaded</span>
-              </div>
-              <span className="text-slate-400">·</span>
-              <span className="text-slate-500 italic">
-                Each tile shows the real {selectedPanel.brand} panel image
-              </span>
-            </div>
+            <p className="text-center text-[11px] text-slate-500 italic mt-2">
+              Each tile is a real {selectedPanel.brand} {selectedPanel.name} ({selectedPanel.wattage}W) — shaded panels are dimmed and marked with ☁
+            </p>
           </div>
         </div>
 
@@ -351,25 +350,87 @@ export default function OptimiserCalculator() {
           </div>
         </div>
 
-        {/* Cost of doing nothing */}
+        {/* Cost of doing nothing — with TRANSPARENT math breakdown.
+            The customer sees exactly where the £/year number came from. */}
         {result.shadedPanels > 0 && (
           <div className="bg-red-50 border-2 border-red-200 rounded-xl p-5">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 mb-4">
               <TrendingUp className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-              <div>
+              <div className="flex-1">
                 <p className="text-xs font-semibold uppercase text-red-700 tracking-wide mb-1">
                   Cost of doing nothing
                 </p>
-                <p className="text-2xl sm:text-3xl font-black text-red-700 mb-1">
+                <p className="text-3xl sm:text-4xl font-black text-red-700 mb-1 leading-none">
                   £{result.annualLossDoNothingGBP.toFixed(0)}/year
                 </p>
                 <p className="text-sm text-red-900">
-                  {result.annualLossDoNothingKwh.toFixed(0)} kWh lost annually = £
+                  {result.annualLossDoNothingKwh.toFixed(0)} kWh lost annually · £
                   {(result.annualLossDoNothingGBP * 25).toFixed(0)} over the system&apos;s 25-year life
                 </p>
               </div>
             </div>
+
+            {/* Always-visible step-by-step calculation — teach the formula,
+                don't hide it behind a "show maths" toggle */}
+            <div className="bg-white rounded-lg border border-red-200 p-3 sm:p-4 text-xs sm:text-sm">
+              <div className="flex items-center gap-1.5 text-red-700 font-bold mb-2">
+                <Calculator className="w-3.5 h-3.5" />
+                <span>Where £{result.annualLossDoNothingGBP.toFixed(0)} comes from</span>
+              </div>
+              <ol className="space-y-1.5 font-mono text-[11px] sm:text-xs text-slate-700">
+                <li>
+                  <span className="text-slate-400">①</span>{' '}
+                  {result.totalPanels} panels × {panelWattage}W = <strong className="text-slate-900">{(result.totalPanels * panelWattage).toLocaleString()} W</strong> full string output
+                </li>
+                <li>
+                  <span className="text-slate-400">②</span>{' '}
+                  Shaded panel drops whole string to 35% → lose <strong className="text-slate-900">{Math.round(result.totalPanels * panelWattage * (1 - SHADE_DERATE_NO_FIX)).toLocaleString()} W</strong> during shade
+                </li>
+                <li>
+                  <span className="text-slate-400">③</span>{' '}
+                  × {SHADE_HOURS_PER_DAY} hrs/day shade × {SHADE_DAYS_PER_YEAR} days/yr ÷ 1,000 = <strong className="text-slate-900">{result.annualLossDoNothingKwh.toFixed(0)} kWh/yr lost</strong>
+                </li>
+                <li>
+                  <span className="text-slate-400">④</span>{' '}
+                  × {(UNIT_RATE_GBP * 100).toFixed(0)}p unit rate = <strong className="text-red-700">£{result.annualLossDoNothingGBP.toFixed(0)} / year</strong>
+                </li>
+              </ol>
+
+              <details className="mt-3 pt-3 border-t border-red-100">
+                <summary className="text-[11px] sm:text-xs font-semibold text-red-700 cursor-pointer hover:underline list-none flex items-center gap-1">
+                  <span className="inline-block transition-transform">▶</span> Why these assumptions?
+                </summary>
+                <ul className="mt-2 space-y-1.5 text-[11px] sm:text-xs text-slate-600 leading-relaxed pl-3">
+                  <li>
+                    <strong className="text-slate-900">{SHADE_HOURS_PER_DAY} hrs/day:</strong> Typical UK chimney, tree or neighbour-roof shade lands on the array for about 3 hours per day during the months when the sun is low enough to cast it.
+                  </li>
+                  <li>
+                    <strong className="text-slate-900">{SHADE_DAYS_PER_YEAR} days/yr:</strong> Roughly 6 months — autumn through early spring. In high summer the sun clears most obstructions.
+                  </li>
+                  <li>
+                    <strong className="text-slate-900">35% derate:</strong> A traditional string inverter can only operate at the lowest panel&apos;s voltage. One shaded panel = the whole string limps along at that reduced voltage. The 35% figure is the conservative industry rule of thumb for partial shade on one panel in a string.
+                  </li>
+                  <li>
+                    <strong className="text-slate-900">28p unit rate:</strong> Ofgem cap baseline. The lost kWh is electricity the customer has to BUY at this rate to make up for it.
+                  </li>
+                </ul>
+              </details>
+            </div>
           </div>
+        )}
+
+        {/* COACHING CARD — reactive to current configuration.
+            Tells the rep WHICH option to recommend (and why) based on
+            shaded count, total panels, and whether Aiko is selected. */}
+        {result.shadedPanels > 0 && (
+          <CoachingCard
+            shadedPanels={result.shadedPanels}
+            totalPanels={result.totalPanels}
+            isAikoSelected={isAikoSelected}
+            panelBrand={selectedPanel.brand}
+            optimiserCost={result.optimiserCost}
+            aikoCost={result.aikoCost}
+          />
         )}
 
         {/* Three options compared */}
@@ -498,6 +559,176 @@ export default function OptimiserCalculator() {
             </p>
           </div>
         )}
+      </div>
+    </div>
+  )
+}
+
+// ============================================
+// COACHING CARD
+// Reactive advice based on shaded count, total, and panel choice.
+// Teaches the rep WHICH option to pitch + the principle behind it.
+// ============================================
+
+interface CoachingCardProps {
+  shadedPanels: number
+  totalPanels: number
+  isAikoSelected: boolean
+  panelBrand: string
+  optimiserCost: number
+  aikoCost: number
+}
+
+type CoachTone = 'aiko-already' | 'mppt-free' | 'optimisers' | 'aiko-swap' | 'aiko-heavy'
+
+function deriveCoach(props: CoachingCardProps): {
+  tone: CoachTone
+  headline: string
+  why: string
+  action: string
+  principle: string
+} {
+  const { shadedPanels, totalPanels, isAikoSelected, optimiserCost, aikoCost } = props
+  const ratio = shadedPanels / totalPanels
+
+  // Aiko + heavy shade — optimisers still help at this scale even with cell bypass
+  if (isAikoSelected && shadedPanels >= 6) {
+    return {
+      tone: 'aiko-heavy',
+      headline: `${shadedPanels} shaded panels is heavy — even Aiko benefits from optimisers here`,
+      why: `Aiko's cell-level bypass handles partial shade on individual panels brilliantly. But with ${shadedPanels} panels in shade across the string, the inverter is still tracking a compromised voltage profile. Adding optimisers on the shaded panels makes them voltage-independent — each one outputs its own optimised power.`,
+      action: `Quote ${shadedPanels} × £45 in optimisers (£${optimiserCost}). Customer keeps the Aiko aesthetic + warranty AND gets surgical shade recovery.`,
+      principle:
+        'Aiko bypass = the panel handles its own shade. Optimisers = the panel handles its own VOLTAGE. Together: best-in-class shade recovery.',
+    }
+  }
+
+  // Aiko + low/moderate shade — already on the right panel
+  if (isAikoSelected) {
+    return {
+      tone: 'aiko-already',
+      headline: `You're already on Aiko — ${shadedPanels === 0 ? 'no fix needed' : 'most of the work is done'}`,
+      why: `Aiko's split-cell architecture has cell-level bypass diodes built in. When ${shadedPanels === 1 ? 'that panel' : 'those panels'} hit shade, the affected cells route around themselves — the panel keeps producing from its unshaded cells, and the string is never bottlenecked. You bought ~80% of the optimiser benefit when you picked the panel.`,
+      action: `No optimisers needed at this scale. Mention to the customer: "we put cell-level shade tolerance on every panel — that's why we chose Aiko for your roof."`,
+      principle:
+        'Aiko = shade tolerance is baked into every panel by design. The optimiser conversation only re-opens if shade is extreme (6+ panels) or scattered across orientations.',
+    }
+  }
+
+  // Non-Aiko + minimal shade + big enough array — free MPPT split wins
+  if (shadedPanels <= 2 && totalPanels >= 8) {
+    return {
+      tone: 'mppt-free',
+      headline: `Only ${shadedPanels} panel${shadedPanels > 1 ? 's' : ''} in shade — free MPPT split is the answer`,
+      why: `Modern hybrid inverters have 2–4 MPPT inputs (independent maximum power point trackers). When you wire the shaded ${shadedPanels === 1 ? 'panel' : 'panels'} onto their own MPPT, the inverter tracks them independently from the clean string. The unshaded panels produce at 100%; the shaded ${shadedPanels === 1 ? 'one operates' : 'ones operate'} at whatever they can do without dragging anyone else down.`,
+      action: `Spec it at install — no optimisers, no panel upgrade. Tell the customer: "we designed your system so the shaded panels can't drag the rest down." Sells the spec on top of the saving.`,
+      principle:
+        'MPPT split = electrical isolation at the inverter input. Free if you have a spare MPPT. Always your first move when shaded panels cluster on one part of the roof.',
+    }
+  }
+
+  // Non-Aiko + lots of shade — Aiko swap becomes cost-competitive
+  if (ratio >= 0.5 || shadedPanels >= 6) {
+    return {
+      tone: 'aiko-swap',
+      headline: `Heavy shading (${shadedPanels} of ${totalPanels}) — Aiko swap is the cheapest long-term fix`,
+      why: `At this much shade, optimisers on every shaded panel get expensive fast — and they're still hardware that can fail. Aiko Neostar 2P has cell-level bypass built into every panel. The cost premium (£15/panel) is less than optimisers at this scale, AND every panel gets shade tolerance, not just the shaded ones today. If shade patterns change (tree grows, new build next door), you're already covered.`,
+      action: `Quote the Aiko swap: £15 × ${totalPanels} panels = £${aikoCost}. Compare against ${shadedPanels} × £45 optimisers = £${optimiserCost}. Aiko usually wins here on TCO + future-proofing.`,
+      principle:
+        'Lots of shade? Cell-level bypass beats per-panel optimisers on price AND resilience. Optimisers fix today\'s shade. Aiko fixes today\'s + tomorrow\'s.',
+    }
+  }
+
+  // Default: 3-5 shaded panels — optimisers sweet spot
+  return {
+    tone: 'optimisers',
+    headline: `${shadedPanels} shaded panels — optimisers are the surgical fix`,
+    why: `Too many shaded panels to MPPT-split cleanly, not enough to justify swapping every panel on the roof. Optimisers (Tigo, SolarEdge, Huawei) are DC-DC converters that mount under the shaded panels at install. Each optimiser makes its panel voltage-independent — the panel outputs whatever it can produce, totally decoupled from the string.`,
+    action: `Quote ${shadedPanels} × £45 = £${optimiserCost} in optimisers. Payback under 2 years, then it's pure saving for the system's life. Compare to the £${aikoCost} Aiko swap — usually optimisers win at this scale.`,
+    principle:
+      'Optimisers = "act like you\'re on your own array" hardware. Surgical: only the panels that need them get them. Sweet spot is 3–6 shaded panels on a 10–16 panel array.',
+  }
+}
+
+const TONE_STYLES: Record<
+  CoachTone,
+  { bg: string; border: string; eyebrow: string; icon: typeof Lightbulb; iconColor: string; actionBg: string }
+> = {
+  'aiko-already': {
+    bg: 'bg-emerald-50',
+    border: 'border-emerald-300',
+    eyebrow: 'text-emerald-700',
+    icon: CheckCircle2,
+    iconColor: 'text-emerald-600',
+    actionBg: 'bg-emerald-100/60 border-emerald-300',
+  },
+  'mppt-free': {
+    bg: 'bg-blue-50',
+    border: 'border-blue-300',
+    eyebrow: 'text-blue-700',
+    icon: Lightbulb,
+    iconColor: 'text-blue-600',
+    actionBg: 'bg-blue-100/60 border-blue-300',
+  },
+  optimisers: {
+    bg: 'bg-amber-50',
+    border: 'border-amber-300',
+    eyebrow: 'text-amber-700',
+    icon: GraduationCap,
+    iconColor: 'text-amber-600',
+    actionBg: 'bg-amber-100/60 border-amber-300',
+  },
+  'aiko-swap': {
+    bg: 'bg-purple-50',
+    border: 'border-purple-300',
+    eyebrow: 'text-purple-700',
+    icon: AlertCircle,
+    iconColor: 'text-purple-600',
+    actionBg: 'bg-purple-100/60 border-purple-300',
+  },
+  'aiko-heavy': {
+    bg: 'bg-slate-100',
+    border: 'border-slate-300',
+    eyebrow: 'text-slate-700',
+    icon: Lightbulb,
+    iconColor: 'text-slate-700',
+    actionBg: 'bg-white border-slate-300',
+  },
+}
+
+function CoachingCard(props: CoachingCardProps) {
+  const coach = deriveCoach(props)
+  const style = TONE_STYLES[coach.tone]
+  const Icon = style.icon
+
+  return (
+    <div className={`${style.bg} ${style.border} border-2 rounded-xl p-5`}>
+      <div className="flex items-start gap-3 mb-3">
+        <Icon className={`w-5 h-5 ${style.iconColor} flex-shrink-0 mt-0.5`} />
+        <div className="flex-1 min-w-0">
+          <p className={`text-[10px] uppercase tracking-widest font-bold ${style.eyebrow} mb-1`}>
+            Coach&apos;s take · live for your config
+          </p>
+          <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+            {coach.headline}
+          </h3>
+        </div>
+      </div>
+
+      <p className="text-sm text-slate-700 leading-relaxed mb-4">{coach.why}</p>
+
+      <div className={`${style.actionBg} border rounded-lg p-3 mb-3`}>
+        <p className={`text-[10px] uppercase tracking-wider font-bold ${style.eyebrow} mb-1`}>
+          Action for this quote
+        </p>
+        <p className="text-sm text-slate-900 font-medium leading-snug">{coach.action}</p>
+      </div>
+
+      <div className="flex items-start gap-2 text-[11px] text-slate-600 italic">
+        <Sun className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" />
+        <span>
+          <strong className="not-italic text-slate-700">Principle:</strong> {coach.principle}
+        </span>
       </div>
     </div>
   )
