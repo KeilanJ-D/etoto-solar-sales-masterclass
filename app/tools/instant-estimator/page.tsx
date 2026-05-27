@@ -6,7 +6,7 @@ import InstantEstimatorWizard from '@/components/instant-estimator/InstantEstima
 export const metadata: Metadata = {
   title: 'Instant Estimator · ETOTO Solar Sales Masterclass',
   description:
-    'Practise the SolaFlow 4-stage flow: Energy audit → Battery → Panels → Payback. Indicative numbers for training — verify against your company SolaFlow pricing before quoting customers.',
+    'Practise the SolaFlow 4-stage flow — Energy audit, Battery, Panels, Payback. Indicative numbers for training; verify against your company SolaFlow pricing before quoting customers.',
 }
 
 export default function InstantEstimatorPage() {

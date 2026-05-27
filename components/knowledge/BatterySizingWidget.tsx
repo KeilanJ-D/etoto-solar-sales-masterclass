@@ -205,7 +205,7 @@ export default function BatterySizingWidget() {
               href="/tools/instant-estimator"
               className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-5 rounded-full transition-all text-sm"
             >
-              Configure full system in the Instant Estimator
+              Open the Instant Estimator
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

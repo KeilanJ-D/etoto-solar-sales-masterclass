@@ -70,7 +70,8 @@ export default function StagePanels({
         </h2>
         <p className="text-slate-600">
           Recommended: <strong className="text-slate-900">{panelRec.recommendedPanels} panels</strong>{' '}
-          ({panelRec.estimatedSystemKwp.toFixed(1)} kWp) to cover annual usage at 3.2 PSH × 0.78 PR.
+          ({panelRec.estimatedSystemKwp.toFixed(1)} kWp) to cover annual usage at 3.2 PSH (peak
+          sun hours) × 0.78 PR (performance ratio — losses from heat, wiring, soiling).
         </p>
       </div>
 
@@ -139,7 +140,7 @@ export default function StagePanels({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
           <label htmlFor="export-rate" className="text-sm font-semibold text-slate-700">
-            SEG export rate
+            SEG export rate (Smart Export Guarantee)
           </label>
           <div className="flex items-center gap-2">
             <input
@@ -168,7 +169,7 @@ export default function StagePanels({
             How does the system route solar?
           </p>
           <p className="text-xs text-slate-500 mb-4">
-            Battery-optimised is the default — squeezes every penny out of off-peak arbitrage AND
+            Battery-optimised is the default — squeezes every penny out of off-peak arbitrage and
             full export.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -183,7 +184,7 @@ export default function StagePanels({
             >
               <div className="flex items-center gap-2 mb-1">
                 <Sun className="w-4 h-4 text-amber-600" />
-                <p className="font-bold text-sm text-slate-900">Hybrid (70/30)</p>
+                <p className="font-bold text-sm text-slate-900">Self-consume first (70/30)</p>
               </div>
               <p className="text-xs text-slate-600">
                 70% solar self-consumed, 30% exported. Battery sits idle as backup.
@@ -211,35 +212,35 @@ export default function StagePanels({
       )}
 
       {/* Live solar snapshot */}
-      <div className="rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 p-6 text-white">
-        <p className="text-xs font-bold uppercase tracking-widest text-amber-100 mb-3">
+      <div className="rounded-2xl bg-slate-900 p-6 text-white">
+        <p className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-3">
           Solar economics
         </p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-100 mb-0.5">System size</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-0.5">System size</p>
             <p className="text-xl font-black">
-              {audit.systemKwp.toFixed(1)}<span className="text-sm font-normal text-amber-100"> kWp</span>
+              {audit.systemKwp.toFixed(1)}<span className="text-sm font-normal text-slate-400"> kWp</span>
             </p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-100 mb-0.5">Daily gen.</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-0.5">Daily gen.</p>
             <p className="text-xl font-black">
-              {audit.dailyGeneration.toFixed(1)}<span className="text-sm font-normal text-amber-100"> kWh</span>
+              {audit.dailyGeneration.toFixed(1)}<span className="text-sm font-normal text-slate-400"> kWh</span>
             </p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-100 mb-0.5">Self-consume</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-0.5">Self-consume</p>
             <p className="text-xl font-black">
               £{Math.round(audit.annualSelfConsumeSaving).toLocaleString()}
-              <span className="text-sm font-normal text-amber-100">/yr</span>
+              <span className="text-sm font-normal text-slate-400">/yr</span>
             </p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-amber-100 mb-0.5">Export income</p>
+            <p className="text-[10px] uppercase tracking-wider text-slate-400 mb-0.5">Export income</p>
             <p className="text-xl font-black">
               £{Math.round(audit.annualSolarExport).toLocaleString()}
-              <span className="text-sm font-normal text-amber-100">/yr</span>
+              <span className="text-sm font-normal text-slate-400">/yr</span>
             </p>
           </div>
         </div>

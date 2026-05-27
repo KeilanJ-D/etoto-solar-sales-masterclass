@@ -369,7 +369,7 @@ export default async function BrandPage({
                 href="/tools/instant-estimator"
                 className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3.5 px-7 rounded-full transition-all min-h-[52px]"
               >
-                Open the Estimator
+                Open the Instant Estimator
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link

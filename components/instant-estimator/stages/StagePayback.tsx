@@ -67,7 +67,7 @@ export default function StagePayback({
           Stage 4 of 4
         </div>
         <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
-          The numbers that close the deal
+          What&apos;s the payback story?
         </h2>
         <p className="text-slate-600">
           Total system cost, total annual benefit, payback period, and the 25-year projection at 7%
@@ -85,12 +85,12 @@ export default function StagePayback({
             {audit.paybackYears}<span className="text-2xl sm:text-3xl font-bold"> years</span>
           </p>
         ) : (
-          <p className="text-3xl sm:text-4xl font-black mb-2 opacity-80">No payback</p>
+          <p className="text-3xl sm:text-4xl font-black mb-2 opacity-80">Payback: not yet</p>
         )}
         <p className="text-sm sm:text-base text-white/80">
           {audit.paybackYears != null
             ? `After year ${audit.paybackYears}, every £${Math.round(audit.totalAnnualBenefit).toLocaleString()}/yr in savings is pure profit.`
-            : 'Annual benefit not yet positive — revisit Stage 2/3 settings.'}
+            : 'Annual benefit is zero or negative with these settings — go back to Stage 2 or 3 and add a battery or panels.'}
         </p>
       </div>
 
@@ -316,7 +316,7 @@ export default function StagePayback({
           className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 active:bg-slate-700 transition-all shadow-md min-h-[48px]"
         >
           <Printer className="w-4 h-4" />
-          Print / save summary
+          Print or save as PDF
         </button>
       </div>
     </div>

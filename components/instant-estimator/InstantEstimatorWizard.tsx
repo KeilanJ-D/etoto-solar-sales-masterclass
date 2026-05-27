@@ -189,7 +189,7 @@ export default function InstantEstimatorWizard() {
 
   return (
     <div className="bg-slate-50 min-h-screen pb-24">
-      {/* Practice mode banner */}
+      {/* Training mode banner */}
       <div className="bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 px-4 py-2.5 print:hidden">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-1.5 text-xs sm:text-sm">
           <div className="flex items-center gap-2">
@@ -208,13 +208,13 @@ export default function InstantEstimatorWizard() {
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-start justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-widest text-[#E8192C] font-bold mb-1">
-              ETOTO Masterclass · Tools
+              Training tool
             </p>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900">
               Instant Estimator
             </h1>
             <p className="text-sm text-slate-600 mt-0.5">
-              Practice the SolaFlow 4-stage flow — Audit, Battery, Panels, Payback.
+              Practise the SolaFlow 4-stage flow — Audit, Battery, Panels, Payback.
             </p>
           </div>
           <Link

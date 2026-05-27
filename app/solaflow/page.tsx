@@ -114,7 +114,7 @@ export default function SolaFlowPage() {
               href="/tools/instant-estimator"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl sm:rounded-full shadow-lg hover:shadow-xl transition-all min-h-[56px]"
             >
-              Try the Instant Estimator
+              Open the Instant Estimator
               <ArrowRight className="w-5 h-5" />
             </Link>
             <a
@@ -553,12 +553,12 @@ export default function SolaFlowPage() {
                 </p>
               </div>
               <h3 className="text-2xl font-black text-slate-900 mb-3">
-                Speak to your manager
+                Get yourself an account
               </h3>
               <p className="text-slate-600 mb-6 leading-relaxed">
-                If your company works with ETOTO, chances are SolaFlow is either already set up or
-                they&apos;ve been looking at it. Ask your manager or owner-operator about getting you
-                an account — branded with your company colours, your products, your pricing.
+                Speak to your manager or owner-operator. If your company works with ETOTO, chances
+                are SolaFlow is either already set up or they&apos;ve been looking at it. Ask about
+                getting you an account — branded with your company colours, your products, your pricing.
               </p>
               <div className="space-y-2 mb-6">
                 {[

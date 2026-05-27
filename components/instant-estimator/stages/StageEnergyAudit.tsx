@@ -57,7 +57,7 @@ export default function StageEnergyAudit({
           What does the home currently cost to run?
         </h2>
         <p className="text-slate-600">
-          Bill plus property + roof tells us system size, panel count and labour cost in one go.
+          Bill, property and roof together tell us system size, panel count and labour cost.
           This is the foundation — get this stage right and every downstream number is real.
         </p>
       </div>
@@ -108,7 +108,7 @@ export default function StageEnergyAudit({
             <span className="text-slate-500 text-sm whitespace-nowrap">p / kWh</span>
           </div>
           <p className="text-xs text-slate-500">
-            Ofgem cap is 28p (Apr 2026). Check their actual rate on a recent bill.
+            Ofgem cap is around 27p (Apr–Jun 2026). Always check the customer&apos;s latest bill.
           </p>
         </div>
 
