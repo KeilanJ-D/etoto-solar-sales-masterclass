@@ -9,8 +9,12 @@ export interface PaybackStageProps {
   customSystemCost: number | null
   audit: AuditCalcOutputs
   batteryCost: number
+  /** Optional breakdown string e.g. "1× Tesla PW3 + 2× Expansion Pack" */
+  batteryDescription?: string
   solarCost: number
   inverterCost: number
+  /** Number of inverter units in the spec (1 by default, more for per-stack setups) */
+  inverterQuantity: number
   onChange: (patch: {
     extrasCost?: number
     customSystemCost?: number | null
@@ -24,8 +28,10 @@ export default function StagePayback({
   customSystemCost,
   audit,
   batteryCost,
+  batteryDescription,
   solarCost,
   inverterCost,
+  inverterQuantity,
   onChange,
   onBack,
   onPrint,
@@ -108,14 +114,23 @@ export default function StagePayback({
             </div>
             {inverterCost > 0 && (
               <div className="flex justify-between">
-                <dt className="text-slate-600">Inverter</dt>
+                <dt className="text-slate-600">
+                  Inverter{inverterQuantity > 1 ? ` (× ${inverterQuantity})` : ''}
+                </dt>
                 <dd className="text-slate-900 font-semibold">£{inverterCost.toLocaleString()}</dd>
               </div>
             )}
-            <div className="flex justify-between">
-              <dt className="text-slate-600">Battery</dt>
-              <dd className="text-slate-900 font-semibold">£{batteryCost.toLocaleString()}</dd>
-            </div>
+            {batteryCost > 0 && (
+              <div className="flex flex-col">
+                <div className="flex justify-between">
+                  <dt className="text-slate-600">Battery</dt>
+                  <dd className="text-slate-900 font-semibold">£{batteryCost.toLocaleString()}</dd>
+                </div>
+                {batteryDescription && (
+                  <p className="text-[11px] text-slate-500 italic mt-0.5">{batteryDescription}</p>
+                )}
+              </div>
+            )}
             {extrasCost > 0 && (
               <div className="flex justify-between">
                 <dt className="text-slate-600">Extras</dt>

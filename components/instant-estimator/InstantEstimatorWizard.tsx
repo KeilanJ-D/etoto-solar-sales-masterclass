@@ -22,6 +22,10 @@ import {
   getBatteryPrice,
   getInverterPrice,
 } from '@/lib/instant-estimator/pricing'
+import {
+  computeBatteryCost,
+  computeInverterQuantity,
+} from '@/lib/instant-estimator/battery-cost'
 import StageEnergyAudit from './stages/StageEnergyAudit'
 import StageBattery from './stages/StageBattery'
 import StagePanels from './stages/StagePanels'
@@ -91,11 +95,25 @@ export default function InstantEstimatorWizard() {
     [state.selectedBatterySku],
   )
 
-  // Pricing
+  // Pricing — uses helpers that mirror real SolaFlow productCalc.ts:
+  // - computeBatteryCost handles Tesla PW3 expansion-pack pricing
+  // - computeInverterQuantity handles requiresInverterPerStack (EcoFlow,
+  //   Powervault, Sigenergy) so cost reflects the right number of inverters
   const batteryPriceUnit = getBatteryPrice(state.selectedBatterySku)
-  const inverterPriceUnit = selectedBattery?.hybrid ? 0 : getInverterPrice(state.selectedInverterSku)
-  const inverterCost = selectedBattery?.hybrid ? 0 : inverterPriceUnit
-  const batteryCost = batteryPriceUnit * state.batteryQuantity
+  const batteryDetail = computeBatteryCost(selectedBattery, state.batteryQuantity)
+  const batteryCost = batteryDetail.total
+
+  const hasPanels =
+    (selectedPanel?.wattage ?? 0) > 0 && state.panelCount > 0
+  const inverterQuantity = computeInverterQuantity(
+    selectedBattery,
+    state.batteryQuantity,
+    hasPanels,
+  )
+  const inverterPriceUnit =
+    inverterQuantity > 0 ? getInverterPrice(state.selectedInverterSku) : 0
+  const inverterCost = inverterQuantity * inverterPriceUnit
+
   const solarBreakdown = computeSolarCost({
     panelCount: state.panelCount,
     panelWattage: selectedPanel?.wattage ?? 0,
@@ -115,6 +133,9 @@ export default function InstantEstimatorWizard() {
         batteryUsableKwh: selectedBattery?.capacityKwh ?? 0,
         batteryQuantity: state.batteryQuantity,
         batteryPricePerUnit: batteryPriceUnit,
+        // Pass the expansion-pack-aware total as an override so the audit
+        // doesn't silently multiply unit × qty and discard the saving.
+        batteryCostOverride: batteryCost,
         batteryOptimised: state.batteryOptimised,
         solarCost: solarBreakdown.total + inverterCost,
         customSystemCost: state.customSystemCost,
@@ -130,6 +151,7 @@ export default function InstantEstimatorWizard() {
       selectedBattery?.capacityKwh,
       state.batteryQuantity,
       batteryPriceUnit,
+      batteryCost,
       state.batteryOptimised,
       solarBreakdown.total,
       inverterCost,
@@ -316,8 +338,10 @@ export default function InstantEstimatorWizard() {
             customSystemCost={state.customSystemCost}
             audit={audit}
             batteryCost={batteryCost}
+            batteryDescription={batteryDetail.description}
             solarCost={solarBreakdown.total}
             inverterCost={inverterCost}
+            inverterQuantity={inverterQuantity}
             onChange={patch}
             onBack={() => goto(2)}
             onPrint={() => {
