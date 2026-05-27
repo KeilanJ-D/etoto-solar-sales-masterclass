@@ -169,18 +169,18 @@ export default function ProductsShowcasePage() {
         <div className="max-w-3xl mx-auto text-center">
           <Sparkles className="w-12 h-12 text-[#E8192C] mx-auto mb-4" />
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-4 text-balance">
-            See these products live in SolaFlow.
+            Practise speccing systems with these products.
           </h2>
           <p className="text-slate-300 mb-7 max-w-xl mx-auto text-sm sm:text-base">
-            Every brand on this page is in the SolaFlow product database. Open the demo
-            dashboard to spec a real system using these brands — energy audit, product
-            selector, quote preview.
+            Every brand on this page is in the SolaFlow product database. Open the Instant
+            Estimator to spec a real system end-to-end — energy audit, battery selection,
+            panels, payback.
           </p>
           <Link
-            href="/demo-dashboard"
+            href="/tools/instant-estimator"
             className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3.5 px-7 rounded-full transition-all min-h-[52px]"
           >
-            Open the SolaFlow Demo
+            Open the Instant Estimator
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

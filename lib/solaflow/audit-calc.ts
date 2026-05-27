@@ -6,8 +6,8 @@
  * (SaaS-Dashboard-Pro 3/client/src/lib/audit-calc.ts).
  *
  * Pure functions, zero dependencies — safe to use anywhere.
- * Used in the masterclass demo dashboard so masterclass numbers
- * match SolaFlow numbers exactly.
+ * Used in the masterclass Instant Estimator and inline widgets so
+ * masterclass numbers match SolaFlow numbers exactly.
  * ============================================
  */
 

@@ -6,7 +6,7 @@
  * (SaaS-Dashboard-Pro 3/client/src/lib/recommendationEngine.ts).
  *
  * Pure functions, zero dependencies — safe to use anywhere.
- * Used in the masterclass demo dashboard for realistic sizing
+ * Used in the masterclass Instant Estimator for realistic sizing
  * recommendations that match what SolaFlow actually suggests.
  * ============================================
  */

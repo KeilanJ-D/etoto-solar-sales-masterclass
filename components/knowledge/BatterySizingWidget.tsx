@@ -202,10 +202,10 @@ export default function BatterySizingWidget() {
 
           <div className="mt-4 text-center">
             <Link
-              href="/demo-dashboard"
+              href="/tools/instant-estimator"
               className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-5 rounded-full transition-all text-sm"
             >
-              Configure full system in SolaFlow demo
+              Configure full system in the Instant Estimator
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

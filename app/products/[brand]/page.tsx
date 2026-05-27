@@ -361,15 +361,15 @@ export default async function BrandPage({
               Spec a {b.exactName} system live.
             </h2>
             <p className="text-slate-300 mb-7 max-w-xl mx-auto text-sm sm:text-base">
-              Open the SolaFlow demo dashboard and configure a {b.exactName} system end-to-end —
-              energy audit, product selection, quote preview.
+              Open the Instant Estimator and configure a {b.exactName} system end-to-end —
+              energy audit, battery, panels, payback.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
-                href="/demo-dashboard"
+                href="/tools/instant-estimator"
                 className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3.5 px-7 rounded-full transition-all min-h-[52px]"
               >
-                Open the demo
+                Open the Estimator
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
