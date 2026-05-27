@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import { AlertTriangle, Battery, CheckCircle2, Clock, Info, Sparkles, Sun, Zap } from 'lucide-react'
 import { inverterDatabase, type InverterSpec } from '@/lib/knowledge/inverter-database'
+import { getInverterRecommendation } from '@/lib/solaflow/recommendation-engine'
 
 type Phase = 'single' | 'three'
 type Tariff = 'go' | 'cosy' | 'flat'
@@ -313,6 +314,28 @@ export default function InverterSizingTool() {
             <p className="text-sm text-slate-600">
               Driven by: <span className="font-semibold">{recommendation.bindingFactor}</span>
             </p>
+            {/* SolaFlow cross-check */}
+            {(() => {
+              const sfRec = getInverterRecommendation(
+                pvKwp,
+                batteryKwh * (batteryDoD / 100),
+                batteryKwh > 0 ? 1 : 0,
+              )
+              if (sfRec.recommendedPowerKw <= 0) return null
+              return (
+                <div className="mt-3 pt-3 border-t border-slate-100 flex items-center gap-2 text-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500 flex-shrink-0" />
+                  <span className="text-slate-600">
+                    <span className="font-semibold text-slate-900">SolaFlow recommends:</span>{' '}
+                    {sfRec.recommendedPowerKw} kW
+                    <span className="text-slate-500">
+                      {' '}
+                      (range {sfRec.minAcceptablePowerKw} – {sfRec.maxAcceptablePowerKw} kW)
+                    </span>
+                  </span>
+                </div>
+              )
+            })()}
           </div>
 
           {/* Primary spec */}

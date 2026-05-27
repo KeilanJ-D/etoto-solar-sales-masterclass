@@ -13,10 +13,13 @@ import StringDesign from '@/components/diagrams/StringDesign'
 import MpptAnalogy from '@/components/diagrams/MpptAnalogy'
 import DnoFlowchart from '@/components/diagrams/DnoFlowchart'
 import BillBeforeAfter from '@/components/diagrams/BillBeforeAfter'
+import EnergyAuditWidget from './EnergyAuditWidget'
+import BatterySizingWidget from './BatterySizingWidget'
 
 /**
- * Diagrams rendered after "longRule" on specific knowledge pages.
- * Hand-picked per topic so the visual lands where it teaches most.
+ * Diagrams + inline calculator widgets rendered after "longRule" on
+ * specific knowledge pages. Hand-picked per topic so each visual /
+ * interactive lands where it teaches most.
  */
 function TopicDiagrams({ slug }: { slug: string }) {
   switch (slug) {
@@ -24,6 +27,7 @@ function TopicDiagrams({ slug }: { slug: string }) {
       return (
         <>
           <SystemTopology />
+          <EnergyAuditWidget />
           <AnimatedModeSwitch initialMode="hybrid" />
         </>
       )
@@ -40,6 +44,7 @@ function TopicDiagrams({ slug }: { slug: string }) {
       return (
         <>
           <EnergyFlowTimeline />
+          <BatterySizingWidget />
           <BillBeforeAfter />
         </>
       )
