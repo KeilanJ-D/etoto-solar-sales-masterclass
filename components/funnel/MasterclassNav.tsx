@@ -3,12 +3,13 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-import { Award, BookOpen, Briefcase, Calculator, Home, Layers, ListOrdered, Settings, Sigma } from 'lucide-react'
+import { Award, BookOpen, Briefcase, Calculator, Home, Layers, ListOrdered, Settings, Sigma, Users } from 'lucide-react'
 
 const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
 
 const navItems = [
   { href: '/', label: 'Home', shortLabel: 'Home', icon: Home },
+  { href: '/customer-journey', label: 'Journey', shortLabel: 'Journey', icon: Users },
   { href: '/formula-cheat-sheet', label: 'The Formula', shortLabel: 'Formula', icon: Sigma },
   { href: '/steps', label: 'The 9 Steps', shortLabel: 'Steps', icon: ListOrdered },
   { href: '/knowledge', label: 'Knowledge', shortLabel: 'Know', icon: BookOpen },

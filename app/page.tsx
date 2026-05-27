@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Headphones, ListOrdered, Settings, Sigma, Sparkles, Wrench } from 'lucide-react'
+import { ArrowRight, BookOpen, Headphones, ListOrdered, Settings, Sigma, Sparkles, Users, Wrench } from 'lucide-react'
 import Hero from '@/components/funnel/Hero'
 import TheProblem from '@/components/funnel/TheProblem'
 import TheMethod from '@/components/funnel/TheMethod'
@@ -45,16 +45,37 @@ export default function SalesMasterclass() {
               </h2>
             </div>
             <p className="text-xs text-slate-400 italic">
-              ~63 min total · Or jump straight to your role below
+              ~68 min total · Or jump straight to your role below
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <Link
+              href="/customer-journey"
+              className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
+                1
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <Users className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold">5 min</p>
+                </div>
+                <p className="font-bold text-sm mb-0.5 group-hover:text-[#E8192C] transition-colors">
+                  Customer Journey
+                </p>
+                <p className="text-xs text-slate-400 leading-snug">
+                  The 8 questions before they call.
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
+            </Link>
             <Link
               href="/formula-cheat-sheet"
               className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
             >
               <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
-                1
+                2
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-0.5">
@@ -65,7 +86,7 @@ export default function SalesMasterclass() {
                   The Formula
                 </p>
                 <p className="text-xs text-slate-400 leading-snug">
-                  The 4 sums that close every solar deal.
+                  The 4 sums that close every deal.
                 </p>
               </div>
               <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
@@ -75,7 +96,7 @@ export default function SalesMasterclass() {
               className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
             >
               <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
-                2
+                3
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-0.5">
@@ -96,7 +117,7 @@ export default function SalesMasterclass() {
               className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
             >
               <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
-                3
+                4
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-0.5">
@@ -107,7 +128,7 @@ export default function SalesMasterclass() {
                   The Real Call
                 </p>
                 <p className="text-xs text-slate-400 leading-snug">
-                  Hear all 9 steps in one recorded close.
+                  Hear all 9 steps in one close.
                 </p>
               </div>
               <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
