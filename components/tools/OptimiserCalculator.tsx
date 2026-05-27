@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { CheckCircle2, Grid3x3, Lightbulb, RotateCw, Sun, TrendingUp } from 'lucide-react'
-import { SOLAFLOW_CONSTANTS } from '@/lib/solaflow-products'
+import { SOLAFLOW_CONSTANTS, panels } from '@/lib/solaflow-products'
 
 type PanelState = 'clean' | 'shaded'
 
@@ -20,16 +21,41 @@ const SHADE_DAYS_PER_YEAR = 220 // when sun is at angle to cast shade
 const OPTIMISER_PRICE_PER_PANEL = 45 // Tigo trade
 const AIKO_PREMIUM_PER_PANEL = 15
 
+// Real SolaFlow catalogue picker — Aiko first since it's the cell-level
+// shade-tolerant pick we recommend in option C.
+const PANEL_PICKER_SKUS = [
+  'aiko-470w',
+  'aiko-475w',
+  'aiko-480w',
+  'aiko-510w',
+  'jinko-460w',
+  'dmegc-450w',
+  'dmegc-455w',
+  'eurener-500w',
+  'exiom-510w',
+  'bexie-520w',
+] as const
+
 export default function OptimiserCalculator() {
   const [rows, setRows] = useState(3)
   const [cols, setCols] = useState(5)
-  const [panelWattage, setPanelWattage] = useState(415)
-  const [panels, setPanels] = useState<PanelState[]>(() =>
+  const [selectedPanelSku, setSelectedPanelSku] = useState<string>('aiko-470w')
+  const [panelStates, setPanelStates] = useState<PanelState[]>(() =>
     Array(15).fill('clean' as PanelState)
   )
 
+  const selectedPanel = useMemo(
+    () => panels.find((p) => p.sku === selectedPanelSku) ?? panels[0],
+    [selectedPanelSku],
+  )
+  const panelWattage = selectedPanel.wattage
+  const isAikoSelected = selectedPanel.brand === 'Aiko'
+
+  // Aliased to keep downstream variable name `panels` intact for the calc
+  const panelGrid = panelStates
+
   const togglePanel = (idx: number) => {
-    setPanels((prev) => {
+    setPanelStates((prev) => {
       const next = [...prev]
       next[idx] = next[idx] === 'clean' ? 'shaded' : 'clean'
       return next
@@ -39,16 +65,16 @@ export default function OptimiserCalculator() {
   const resetGrid = (newRows: number, newCols: number) => {
     setRows(newRows)
     setCols(newCols)
-    setPanels(Array(newRows * newCols).fill('clean' as PanelState))
+    setPanelStates(Array(newRows * newCols).fill('clean' as PanelState))
   }
 
   const clearShade = () => {
-    setPanels(panels.map(() => 'clean' as PanelState))
+    setPanelStates(panelStates.map(() => 'clean' as PanelState))
   }
 
   const result = useMemo(() => {
-    const totalPanels = panels.length
-    const shadedPanels = panels.filter((p) => p === 'shaded').length
+    const totalPanels = panelGrid.length
+    const shadedPanels = panelGrid.filter((p) => p === 'shaded').length
     const systemKwp = (totalPanels * panelWattage) / 1000
 
     // Annual loss if we do nothing
@@ -124,7 +150,7 @@ export default function OptimiserCalculator() {
       aikoPaybackYears,
       recommendation,
     }
-  }, [panels, panelWattage])
+  }, [panelGrid, panelWattage])
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
@@ -180,19 +206,50 @@ export default function OptimiserCalculator() {
           </div>
           <div>
             <label className="text-xs font-semibold uppercase text-slate-500 mb-2 block">
-              Panel watts
+              Panel (SolaFlow catalogue)
             </label>
             <select
-              value={panelWattage}
-              onChange={(e) => setPanelWattage(Number(e.target.value))}
+              value={selectedPanelSku}
+              onChange={(e) => setSelectedPanelSku(e.target.value)}
               className="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm bg-white"
             >
-              <option value={400}>400W</option>
-              <option value={415}>415W (Longi)</option>
-              <option value={440}>440W (Aiko)</option>
-              <option value={450}>450W</option>
+              {PANEL_PICKER_SKUS.map((sku) => {
+                const p = panels.find((pp) => pp.sku === sku)
+                if (!p) return null
+                return (
+                  <option key={sku} value={sku}>
+                    {p.brand} {p.name} — {p.wattage}W
+                  </option>
+                )
+              })}
             </select>
           </div>
+        </div>
+
+        {/* Selected panel chip — confirms which product is on the roof */}
+        <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl p-3">
+          <div className="w-14 h-14 bg-white rounded-lg border border-slate-200 flex items-center justify-center flex-shrink-0 overflow-hidden">
+            <Image
+              src={selectedPanel.imagePath}
+              alt={`${selectedPanel.brand} ${selectedPanel.name}`}
+              width={48}
+              height={48}
+              className="object-contain max-h-full max-w-full"
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-xs uppercase tracking-wider font-bold text-slate-500">
+              On the roof
+            </p>
+            <p className="text-sm font-bold text-slate-900 truncate">
+              {selectedPanel.brand} {selectedPanel.name} · {selectedPanel.wattage}W · {selectedPanel.efficiency}
+            </p>
+          </div>
+          {isAikoSelected && (
+            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full flex-shrink-0">
+              Cell-level shade tolerance
+            </span>
+          )}
         </div>
 
         {/* Roof grid */}
@@ -215,32 +272,50 @@ export default function OptimiserCalculator() {
               style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
             >
               {Array.from({ length: rows * cols }).map((_, idx) => {
-                const state = panels[idx] || 'clean'
+                const state = panelGrid[idx] || 'clean'
+                const isShaded = state === 'shaded'
                 return (
                   <button
                     key={idx}
                     onClick={() => togglePanel(idx)}
-                    className={`aspect-[3/4] rounded-md border-2 transition-all flex items-center justify-center text-xs font-bold ${
-                      state === 'shaded'
-                        ? 'bg-slate-700 border-slate-900 text-slate-200'
-                        : 'bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 border-blue-700 text-white hover:scale-105'
+                    className={`relative aspect-[3/4] rounded-md border-2 transition-all flex items-center justify-center overflow-hidden bg-white ${
+                      isShaded
+                        ? 'border-slate-900'
+                        : 'border-blue-700 hover:scale-105'
                     }`}
                     aria-label={`Panel ${idx + 1}: ${state}`}
                   >
-                    {state === 'shaded' ? '☁' : <Sun className="w-3 h-3 opacity-80" />}
+                    <Image
+                      src={selectedPanel.imagePath}
+                      alt=""
+                      fill
+                      sizes="80px"
+                      className={`object-contain p-0.5 transition-all ${
+                        isShaded ? 'opacity-30 grayscale' : 'opacity-100'
+                      }`}
+                    />
+                    {isShaded && (
+                      <span className="absolute inset-0 flex items-center justify-center bg-slate-900/40 text-slate-100 text-base">
+                        ☁
+                      </span>
+                    )}
                   </button>
                 )
               })}
             </div>
             <div className="flex items-center justify-center gap-5 mt-4 text-xs">
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-gradient-to-br from-blue-400 to-blue-600 border border-blue-700" />
+                <div className="w-3 h-3 rounded border border-blue-700 bg-white" />
                 <span className="text-slate-600">Clean</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded bg-slate-700 border border-slate-900" />
+                <div className="w-3 h-3 rounded bg-slate-900/40 border border-slate-900" />
                 <span className="text-slate-600">Shaded</span>
               </div>
+              <span className="text-slate-400">·</span>
+              <span className="text-slate-500 italic">
+                Each tile shows the real {selectedPanel.brand} panel image
+              </span>
             </div>
           </div>
         </div>
@@ -342,27 +417,42 @@ export default function OptimiserCalculator() {
                 rationale="Surgical fix — only shaded panels affected. Works with any inverter."
                 isRecommended={result.recommendation === 'optimisers'}
               />
-              {/* Option C — Aiko */}
-              <OptionCard
-                title="Swap to Aiko Neostar 2P (all panels)"
-                subtitle={`£15 premium × ${result.totalPanels} = £${result.aikoCost}`}
-                cost={`£${result.aikoCost}`}
-                annualSaving={result.aikoNetAnnualSaving}
-                payback={
-                  isFinite(result.aikoPaybackYears)
-                    ? `${result.aikoPaybackYears.toFixed(1)} yrs`
-                    : '∞'
-                }
-                viability={
-                  result.shadedPanels > 6 ? 'best-paid' : 'viable'
-                }
-                rationale={
-                  result.shadedPanels > 6
-                    ? 'Cell-level shade tolerance — cleanest spec, longest warranty.'
-                    : 'Overkill for this much shade — optimisers cheaper.'
-                }
-                isRecommended={result.recommendation === 'aiko'}
-              />
+              {/* Option C — Aiko swap (only if not already on Aiko) */}
+              {!isAikoSelected ? (
+                <OptionCard
+                  title="Swap to Aiko (cell-level shade tolerance)"
+                  subtitle={`£15 premium × ${result.totalPanels} = £${result.aikoCost}`}
+                  cost={`£${result.aikoCost}`}
+                  annualSaving={result.aikoNetAnnualSaving}
+                  payback={
+                    isFinite(result.aikoPaybackYears)
+                      ? `${result.aikoPaybackYears.toFixed(1)} yrs`
+                      : '∞'
+                  }
+                  viability={result.shadedPanels > 6 ? 'best-paid' : 'viable'}
+                  rationale={
+                    result.shadedPanels > 6
+                      ? 'Cell-level shade tolerance — cleanest spec, longest warranty.'
+                      : 'Overkill for this much shade — optimisers cheaper.'
+                  }
+                  isRecommended={result.recommendation === 'aiko'}
+                />
+              ) : (
+                <div className="rounded-xl border-2 border-emerald-200 bg-emerald-50/40 p-4 sm:p-5">
+                  <div className="flex items-center gap-2 mb-1">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <h4 className="font-bold text-emerald-900 text-sm sm:text-base">
+                      You&apos;re already on Aiko — option C is built in
+                    </h4>
+                  </div>
+                  <p className="text-xs text-emerald-800 leading-relaxed">
+                    Aiko panels have cell-level bypass, so each panel handles partial shade
+                    on its own. You still get gains from smart stringing or optimisers on
+                    heavily-shaded panels, but the cell architecture buys you ~15-20% of the
+                    benefit for free.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         )}
