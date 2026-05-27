@@ -3,18 +3,19 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-import { Home, ListOrdered, Video, Phone, HelpCircle, Package, Zap } from 'lucide-react'
+import { Award, BookOpen, Briefcase, Home, ListOrdered, Settings, Sparkles, Users, Wrench } from 'lucide-react'
 
 const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
 
 const navItems = [
   { href: '/', label: 'Home', shortLabel: 'Home', icon: Home },
   { href: '/steps', label: 'The 9 Steps', shortLabel: 'Steps', icon: ListOrdered },
-  { href: '/live-call', label: 'Live Call', shortLabel: 'Call', icon: Video },
-  { href: '/appointment-setting', label: 'Appointment Setting', shortLabel: 'Appts', icon: Phone },
-  { href: '/quiz', label: 'Quiz', shortLabel: 'Quiz', icon: HelpCircle },
-  { href: '/resources', label: isInternalSite ? 'Tools' : 'Resources', shortLabel: isInternalSite ? 'Tools' : 'Docs', icon: Package },
-  { href: '/solaflow', label: 'SolaFlow', shortLabel: 'Flow', icon: Zap },
+  { href: '/knowledge', label: 'Knowledge', shortLabel: 'Know', icon: BookOpen },
+  { href: '/systems', label: 'Systems', shortLabel: 'Sys', icon: Settings },
+  { href: '/tools/inverter-sizing', label: 'Tools', shortLabel: 'Tools', icon: Wrench },
+  { href: '/case-studies', label: 'Case Studies', shortLabel: 'Cases', icon: Award },
+  { href: '/for', label: 'For Your Role', shortLabel: 'Roles', icon: Users },
+  { href: '/agency', label: 'Work with Us', shortLabel: 'Agency', icon: Briefcase },
 ]
 
 export default function MasterclassNav() {

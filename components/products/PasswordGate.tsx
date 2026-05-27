@@ -2,12 +2,13 @@
 
 import { useState, useEffect, ReactNode } from 'react'
 import { Lock, Unlock, AlertCircle, ArrowRight } from 'lucide-react'
+import { COMPLETE_MASTERCLASS } from '@/lib/pricing'
 
 interface PasswordGateProps {
   productId: string
   productName: string
-  price: string
-  buyLink: string
+  price?: string
+  buyLink?: string
   children: ReactNode
   previewContent?: ReactNode
 }
@@ -15,11 +16,11 @@ interface PasswordGateProps {
 // Passwords will be validated server-side via API route
 // This component handles the client-side UX
 
-export default function PasswordGate({ 
-  productId, 
-  productName, 
-  price,
-  buyLink,
+export default function PasswordGate({
+  productId,
+  productName,
+  price = `${COMPLETE_MASTERCLASS.priceHeadline} ${COMPLETE_MASTERCLASS.priceVatNote}`,
+  buyLink = COMPLETE_MASTERCLASS.stripeLink,
   children,
   previewContent
 }: PasswordGateProps) {
@@ -127,10 +128,10 @@ export default function PasswordGate({
               <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-[#E8192C]" />
             </div>
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-balance">
-              Unlock the Full {productName}
+              Unlock the Complete Masterclass
             </h3>
             <p className="text-slate-400 text-xs sm:text-sm">
-              Enter your access code to unlock all content
+              Includes {productName} and everything else — framework, knowledge library, systems playbooks, sizing tools.
             </p>
           </div>
 
@@ -189,13 +190,13 @@ export default function PasswordGate({
               href={buyLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 w-full bg-slate-900 hover:bg-slate-800 active:bg-slate-700 text-white font-semibold py-3.5 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all min-h-[52px] sm:min-h-[56px] touch-action-manipulation"
+              className="flex items-center justify-center gap-2 w-full bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-semibold py-3.5 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all min-h-[52px] sm:min-h-[56px] touch-action-manipulation"
             >
-              <span>Buy Access for {price}</span>
+              <span>Buy the Complete Masterclass — {price}</span>
               <ArrowRight className="w-5 h-5" />
             </a>
             <p className="text-center text-slate-500 text-xs mt-3">
-              Bought the Complete Toolkit? Your code works here too.
+              {COMPLETE_MASTERCLASS.priceMonthly} also available · Lifetime access
             </p>
           </div>
         </div>

@@ -185,8 +185,8 @@ export default function SalesFrameworkPage() {
       <ProductHero
         title="The 9-Step Skeleton. Flexible. Adaptable. Yours."
         subtitle="Not everyone wants word-for-word. Some reps want the structure without the script — the framework they can adapt to their own voice. Interactive cards, printable summaries, and the calculator built in."
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
+        price=""
+        buyLink="/complete-toolkit"
         stats={[
           { value: '9', label: 'Steps' },
           { value: 'Flexible', label: 'Structure' },
@@ -220,8 +220,6 @@ export default function SalesFrameworkPage() {
       <PasswordGate
         productId="sales-framework"
         productName="Sales Framework"
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-4xl mx-auto">
@@ -245,7 +243,7 @@ export default function SalesFrameworkPage() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
                       <p className="font-bold text-slate-900 mb-2">Steps 4-9 are locked</p>
-                      <p className="text-sm text-slate-600">Unlock the full framework + Adapt It suggestions for £3.99</p>
+                      <p className="text-sm text-slate-600">Part of the Complete Masterclass — see below to unlock.</p>
                     </div>
                   </div>
                 )}
@@ -330,23 +328,7 @@ export default function SalesFrameworkPage() {
       </section>
 
       {/* Buy Section */}
-      {!isUnlocked && (
-        <BuySection
-          productName="Sales Framework"
-          price="£3.99"
-          bundlePrice="£9.99"
-          buyLink="https://buy.stripe.com/bJecN76bc0g54v8fOOfEk03"
-          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
-          features={[
-            'All 9 framework cards',
-            'Bullet-point checklists per step',
-            '"Adapt It" suggestions for each step',
-            'Key principles highlighted',
-            'Printable 1-page summary',
-            'Links to full script for each step',
-          ]}
-        />
-      )}
+      {!isUnlocked && <BuySection />}
 
       {/* SolaFlow Upsell */}
       <SolaFlowUpsell />

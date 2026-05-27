@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import SalesStep, { ScriptBox, WhyCard, KeyLine, FormulaBlock, ExampleBlock } from './SalesStep'
-import { Battery, TrendingDown, Zap } from 'lucide-react'
+import { ArrowRight, Battery, TrendingDown, Zap } from 'lucide-react'
 
 export default function Step4BatteryValue() {
   return (
@@ -97,6 +98,25 @@ And that is literally just through battery storage. We haven't even talked about
         <p className="text-sm md:text-base font-medium leading-relaxed text-center">
           &ldquo;That is LITERALLY just through battery storage.&rdquo; — Mark heard this and was already hooked. Solar hadn&apos;t been mentioned once.
         </p>
+      </div>
+
+      {/* Technical deep-link */}
+      <div className="mt-6 bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5">
+        <p className="text-xs font-semibold uppercase text-amber-400 tracking-wide mb-2">
+          Behind the pitch: sizing the battery + inverter
+        </p>
+        <p className="text-sm text-slate-300 mb-3 leading-relaxed">
+          Promising a 4-hour off-peak charge cycle requires an inverter that can actually
+          move that much energy into the battery. Reps who size this wrong oversell battery
+          performance and end up with customer complaints.
+        </p>
+        <Link
+          href="/knowledge/battery-and-inverter"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E8192C] hover:underline"
+        >
+          Battery + Inverter Pairing rules
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </SalesStep>
   )

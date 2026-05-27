@@ -43,9 +43,8 @@ export function SalesScriptCTA() {
       icon={require('lucide-react').FileText}
       title={isInternalSite ? "The full sales script" : "Want the exact script from this call?"}
       description="Get the word-for-word sales script used in every ETOTO-trained installer."
-      href="/sales-script"
-      ctaText={isInternalSite ? "View the Script" : "Buy the Sales Script"}
-      price={isInternalSite ? undefined : "£3.99"}
+      href={isInternalSite ? "/sales-script" : "/complete-toolkit"}
+      ctaText={isInternalSite ? "View the Script" : "View the Masterclass"}
     />
   )
 }
@@ -75,17 +74,16 @@ export function QuizCTA() {
 }
 
 export function CompleteToolkitCTA() {
-  // Hide on internal site since all tools are already unlocked
   if (isInternalSite) return null
-  
+
   return (
     <ResourceCTA
       icon={require('lucide-react').Package}
-      title="Get all 4 resources"
-      description="The Complete Solar Toolkit includes the script, framework, quiz, and cheat sheet."
+      title="The Complete Masterclass"
+      description="The full operating system — framework, knowledge, sizing tools, systems playbooks. Lifetime access."
       href="/complete-toolkit"
-      ctaText="Get the Complete Toolkit"
-      price="£9.99"
+      ctaText="View the Masterclass"
+      price="£1,000 + VAT"
     />
   )
 }
@@ -109,9 +107,8 @@ export function AppointmentQuizCTA() {
       icon={require('lucide-react').ClipboardList}
       title={isInternalSite ? "Test your knowledge" : "Train your setters"}
       description="The Appointment Setting Quiz tests your team's lead qualification skills."
-      href="/appointment-quiz"
-      ctaText={isInternalSite ? "Take the Quiz" : "Get the Quiz"}
-      price={isInternalSite ? undefined : "£3.99"}
+      href={isInternalSite ? "/appointment-quiz" : "/complete-toolkit"}
+      ctaText={isInternalSite ? "Take the Quiz" : "View the Masterclass"}
     />
   )
 }
@@ -122,9 +119,8 @@ export function FormulaCheatSheetCTA() {
       icon={require('lucide-react').Calculator}
       title={isInternalSite ? "The formula cheat sheet" : "Try the calculator on your phone"}
       description="The Formula Cheat Sheet gives you the maths to show customers during calls."
-      href="/formula-cheat-sheet"
-      ctaText={isInternalSite ? "View the Cheat Sheet" : "Get the Cheat Sheet"}
-      price={isInternalSite ? undefined : "£3.99"}
+      href={isInternalSite ? "/formula-cheat-sheet" : "/complete-toolkit"}
+      ctaText={isInternalSite ? "View the Cheat Sheet" : "View the Masterclass"}
     />
   )
 }

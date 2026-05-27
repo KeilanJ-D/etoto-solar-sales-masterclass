@@ -37,20 +37,22 @@ export default function Footer() {
         {/* Main grid - single column on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-12 pb-12 border-b border-white/10">
           <div>
-            <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">Quick Links</h4>
+            <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">Masterclass</h4>
             <ul className="space-y-1">
-              <li><Link href="/#the-problem" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">The Problem</Link></li>
-              <li><Link href="/#the-method" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">The Method</Link></li>
               <li><Link href="/steps" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">The 9 Steps</Link></li>
-              <li><Link href="/live-call" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Live Call</Link></li>
+              <li><Link href="/knowledge" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Knowledge Library</Link></li>
+              <li><Link href="/systems" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Systems Playbooks</Link></li>
+              <li><Link href="/tools/inverter-sizing" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Sizing Tools</Link></li>
+              <li><Link href="/live-call" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Live Call Recording</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">Tools</h4>
+            <h4 className="text-white font-bold text-sm mb-4 uppercase tracking-wide">Work with ETOTO</h4>
             <ul className="space-y-1">
-              <li><Link href="/steps#formula-calculator" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Calculator</Link></li>
-              <li><Link href="/quiz" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Quiz</Link></li>
-              <li><Link href="/resources" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Resources</Link></li>
+              <li><Link href="/agency" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">The Agency</Link></li>
+              <li><Link href="/agency#scaler" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">90-Day Scaler · £3k/m</Link></li>
+              <li><Link href="/agency#core" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">6-Month Programme · £6k/m</Link></li>
+              <li><Link href="/case-studies" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">Case Studies</Link></li>
               <li><Link href="/solaflow" className="block py-2 text-white/50 hover:text-[#E8192C] text-sm transition-colors min-h-[44px] flex items-center">SolaFlow</Link></li>
             </ul>
           </div>

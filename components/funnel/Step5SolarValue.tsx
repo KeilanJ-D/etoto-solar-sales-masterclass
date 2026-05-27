@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import SalesStep, { ScriptBox, WhyCard, KeyLine, FromTheCall } from './SalesStep'
-import { Sun, TrendingUp, PlusCircle } from 'lucide-react'
+import { ArrowRight, Sun, TrendingUp, PlusCircle } from 'lucide-react'
 
 export default function Step5SolarValue() {
   return (
@@ -92,6 +93,34 @@ That's not savings. That's revenue. Money coming INTO your account."`}
       <FromTheCall>
         Mark&apos;s response: &ldquo;Exactly. And this is pure pure revenue.&rdquo; He said it himself. Keilan didn&apos;t have to convince him.
       </FromTheCall>
+
+      {/* Technical deep-links */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <Link
+          href="/knowledge/inverter-sizing"
+          className="group bg-white border border-slate-200 hover:border-[#E8192C]/40 rounded-xl p-4 transition-all"
+        >
+          <p className="text-xs font-semibold uppercase text-slate-500 mb-1">
+            Behind the pitch
+          </p>
+          <p className="font-bold text-slate-900 group-hover:text-[#E8192C] transition-colors flex items-center gap-2 text-sm">
+            How to size the inverter that delivers this generation
+            <ArrowRight className="w-4 h-4" />
+          </p>
+        </Link>
+        <Link
+          href="/knowledge/panel-selection"
+          className="group bg-white border border-slate-200 hover:border-[#E8192C]/40 rounded-xl p-4 transition-all"
+        >
+          <p className="text-xs font-semibold uppercase text-slate-500 mb-1">
+            Choosing the panels
+          </p>
+          <p className="font-bold text-slate-900 group-hover:text-[#E8192C] transition-colors flex items-center gap-2 text-sm">
+            Aiko vs Longi vs JA Solar — when to use which
+            <ArrowRight className="w-4 h-4" />
+          </p>
+        </Link>
+      </div>
     </SalesStep>
   )
 }

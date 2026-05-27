@@ -54,10 +54,12 @@ const formulas = [
 ]
 
 const products = [
-  { name: 'Full Sales Script', description: 'Word-for-word, with audio clips', href: '/sales-script', price: isInternalSite ? null : '£3.99' },
-  { name: 'Sales Framework', description: 'Flexible 9-step skeleton', href: '/sales-framework', price: isInternalSite ? null : '£3.99' },
-  { name: 'Appointment Setter Quiz', description: '18 questions, scoring, retry mode', href: '/appointment-quiz', price: isInternalSite ? null : '£3.99' },
-  { name: 'Formula Cheat Sheet', description: 'Calculator with saved configs', href: '/formula-cheat-sheet', price: isInternalSite ? null : '£3.99' },
+  { name: 'Full Sales Script', description: 'Word-for-word, with audio clips', href: '/sales-script' },
+  { name: 'Sales Framework', description: 'Flexible 9-step skeleton', href: '/sales-framework' },
+  { name: 'Appointment Setter Quiz', description: '18 questions, scoring, retry mode', href: '/appointment-quiz' },
+  { name: 'Formula Cheat Sheet', description: 'Calculator with saved configs', href: '/formula-cheat-sheet' },
+  { name: 'Knowledge Library', description: '7 deep technical topics + glossary', href: '/knowledge' },
+  { name: 'Systems Playbooks', description: 'SolaFlow · HighLevel · OpenSolar · Discovery', href: '/systems' },
 ]
 
 export default function SummaryDownloads() {
@@ -87,8 +89,8 @@ export default function SummaryDownloads() {
               Everything You Need
             </span>
           </div>
-          <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">The Complete Toolkit</h2>
-          <p className="text-slate-500">Download the scripts. Memorise the formula. Close deals.</p>
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">The Complete Masterclass</h2>
+          <p className="text-slate-500">Framework, knowledge, tools, systems. Everything in one place.</p>
         </div>
 
         {/* 9-Step Recap */}
@@ -146,21 +148,22 @@ export default function SummaryDownloads() {
                   <p className="font-bold text-slate-900">{item.name}</p>
                   <p className="text-sm text-slate-500 truncate">{item.description}</p>
                 </div>
-                {item.price && <span className="text-sm font-bold text-[#E8192C] flex-shrink-0">{item.price}</span>}
-                {!item.price && <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0" />}
+                <ArrowRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
               </Link>
             ))}
           </div>
           {!isInternalSite && (
             <div className="mt-6 text-center">
-              <Link 
+              <Link
                 href="/complete-toolkit"
                 className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-6 rounded-full transition-all"
               >
-                <span>Get All 4 for £9.99</span>
+                <span>Unlock everything — Complete Masterclass £1,000 + VAT</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <p className="text-sm text-slate-500 mt-2">Save £5.97 with the Complete Toolkit</p>
+              <p className="text-sm text-slate-500 mt-2">
+                One purchase. Lifetime access. Free updates forever.
+              </p>
             </div>
           )}
         </div>

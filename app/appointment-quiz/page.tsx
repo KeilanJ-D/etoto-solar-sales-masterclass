@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Check, X, RotateCcw, Award, ChevronRight, BookOpen, Users, Target, Briefcase } from 'lucide-react'
+import { ArrowRight, Check, X, RotateCcw, Award, ChevronRight, BookOpen, Users, Target, Briefcase } from 'lucide-react'
 import ProductHero from '@/components/products/ProductHero'
 import PasswordGate from '@/components/products/PasswordGate'
 import BuySection from '@/components/products/BuySection'
@@ -179,8 +179,8 @@ export default function AppointmentQuizPage() {
       <ProductHero
         title="Are Your Setters Ready for the Phones?"
         subtitle="18 interactive questions. Solar basics, qualification, objection handling, appointment positioning. 80% pass mark. Track scores, retry wrong answers, drill the gaps."
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
+        price=""
+        buyLink="/complete-toolkit"
         stats={[
           { value: '18', label: 'Questions' },
           { value: '80%', label: 'Pass Mark' },
@@ -194,8 +194,6 @@ export default function AppointmentQuizPage() {
       <PasswordGate
         productId="appointment-quiz"
         productName="Appointment Setter Quiz"
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-3xl mx-auto">
@@ -243,23 +241,7 @@ export default function AppointmentQuizPage() {
       </section>
 
       {/* Buy Section */}
-      {!isUnlocked && (
-        <BuySection
-          productName="Appointment Setter Quiz"
-          price="£3.99"
-          bundlePrice="£9.99"
-          buyLink="https://buy.stripe.com/5kQ9AV0QS7Ix0eScCCfEk04"
-          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
-          features={[
-            'Full 18-question interactive quiz',
-            'Detailed explanations for every answer',
-            'Retry wrong answers mode',
-            'Score history tracking',
-            'Links to relevant masterclass sections',
-            'Printable certificate for 80%+ scores',
-          ]}
-        />
-      )}
+      {!isUnlocked && <BuySection />}
 
       {/* SolaFlow Upsell */}
       <SolaFlowUpsell />
@@ -347,8 +329,10 @@ function PreviewQuiz() {
         {process.env.NEXT_PUBLIC_UNLOCK_ALL !== 'true' && (
           <div className="bg-slate-900 text-white rounded-xl p-6">
             <p className="text-lg font-semibold mb-2">Unlock the Full Quiz</p>
-            <p className="text-slate-400 text-sm mb-4">Get detailed explanations, retry wrong answers, and track your best score.</p>
-            <p className="text-2xl font-black text-[#E8192C]">£3.99</p>
+            <p className="text-slate-400 text-sm mb-4">Plus the full Complete Masterclass — framework, knowledge library, sizing tools, systems playbooks.</p>
+            <a href="/complete-toolkit" className="inline-flex items-center gap-2 text-[#E8192C] font-bold hover:underline">
+              See the Complete Masterclass <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         )}
       </div>

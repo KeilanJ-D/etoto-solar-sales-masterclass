@@ -76,12 +76,19 @@ export default function Hero() {
         />
       </div>
 
-      {/* Badge */}
-      <div className={`mb-6 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
+      {/* Badge — credibility pill */}
+      <div className={`mb-6 flex flex-wrap items-center justify-center gap-2 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
         <span className="inline-flex items-center gap-2 bg-white border border-slate-200 text-slate-600 text-xs md:text-sm font-medium px-4 py-2 rounded-full shadow-sm">
           <span className="w-2 h-2 bg-[#E8192C] rounded-full animate-pulse" />
           ETOTO Media — Solar Sales Masterclass
         </span>
+        <a
+          href="/agency"
+          className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-xs md:text-sm font-semibold px-3 py-2 rounded-full hover:bg-amber-100 transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6L12 2z"/></svg>
+          Award-winning agency
+        </a>
       </div>
 
       {/* Main headline */}

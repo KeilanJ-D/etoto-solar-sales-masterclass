@@ -22,6 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://masterclass.etoto.media'),
   title: 'ETOTO Media — Solar Sales Masterclass',
   description: 'The 9-step formula that closes solar deals. Scripts, live maths, real call recordings. Free training for UK solar installers.',
   generator: 'v0.app',

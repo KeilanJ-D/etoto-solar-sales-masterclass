@@ -287,15 +287,15 @@ function SuccessPageContent() {
             {productKey !== 'toolkit' && (
               <div className="bg-slate-900 rounded-2xl p-6 mb-6 text-white">
                 <p className="text-slate-400 text-sm mb-2">Get more value</p>
-                <h3 className="font-bold text-lg mb-2">Upgrade to the Complete Toolkit</h3>
+                <h3 className="font-bold text-lg mb-2">Upgrade to the Complete Masterclass</h3>
                 <p className="text-slate-300 text-sm mb-4">
-                  Get all 4 premium resources and save £5.97 compared to buying individually.
+                  Unlock everything — framework, knowledge library, interactive sizing tools, and four systems playbooks. Lifetime access.
                 </p>
                 <Link
                   href="/complete-toolkit"
                   className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
                 >
-                  View Complete Toolkit
+                  View the Masterclass
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

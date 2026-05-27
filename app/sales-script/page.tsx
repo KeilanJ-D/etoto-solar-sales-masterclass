@@ -43,8 +43,8 @@ export default function SalesScriptPage() {
       <ProductHero
         title="The Word-for-Word Script That Closes Solar Deals."
         subtitle="Every sentence. Every pause. Every question. The exact script used across 200+ UK solar installers — from 'Hi, how are you doing?' to '25% deposit by credit card.' Interactive, with copy buttons and audio from a real sales call."
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
+        price=""
+        buyLink="/complete-toolkit"
         stats={[
           { value: '9', label: 'Steps' },
           { value: '45min', label: 'Audio' },
@@ -88,8 +88,6 @@ export default function SalesScriptPage() {
       <PasswordGate
         productId="sales-script"
         productName="Sales Script"
-        price={isInternal ? '' : '£3.99'}
-        buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
         previewContent={
           <section className="py-12 md:py-16 px-4 md:px-6 bg-slate-50">
             <div className="max-w-4xl mx-auto">
@@ -155,7 +153,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
                     <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-xl text-center">
                       <AlertTriangle className="w-8 h-8 text-[#E8192C] mx-auto mb-3" />
                       <p className="font-bold text-slate-900 mb-2">Steps 3-9 are locked</p>
-                      <p className="text-sm text-slate-600">Unlock the full script for £3.99</p>
+                      <p className="text-sm text-slate-600">Part of the Complete Masterclass — see below to unlock.</p>
                     </div>
                   </div>
                 )}
@@ -197,23 +195,7 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
       </section>
 
       {/* Buy Section */}
-      {!isUnlocked && (
-        <BuySection
-          productName="Sales Script"
-          price="£3.99"
-          bundlePrice="£9.99"
-          buyLink="https://buy.stripe.com/eVqbJ3gPQ6Ete5IbyyfEk02"
-          bundleLink="https://buy.stripe.com/5kQaEZ7fg5Ap8Lo466fEk06"
-          features={[
-            '9 complete step scripts',
-            'Copy-to-clipboard on every line',
-            'Audio clips from a real closing call',
-            '5 full objection response scripts',
-            'WhatsApp follow-up templates',
-            'Live calculator embedded',
-          ]}
-        />
-      )}
+      {!isUnlocked && <BuySection />}
 
       {/* SolaFlow Upsell */}
       <SolaFlowUpsell />

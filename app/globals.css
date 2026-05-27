@@ -508,3 +508,35 @@ html {
 .animate-fall {
   animation: fall linear forwards;
 }
+
+/* ================================================
+   PRINT STYLES (for knowledge/systems pages on doorstep)
+   ================================================ */
+@media print {
+  nav, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 11pt;
+  }
+  main {
+    animation: none !important;
+  }
+  section {
+    page-break-inside: avoid;
+    padding: 0.5rem !important;
+  }
+  h1 { font-size: 18pt; }
+  h2 { font-size: 14pt; page-break-after: avoid; }
+  h3 { font-size: 12pt; page-break-after: avoid; }
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+  /* Hide gated section overlays in print so unlocked content prints clean */
+  .print-show {
+    display: block !important;
+  }
+}
