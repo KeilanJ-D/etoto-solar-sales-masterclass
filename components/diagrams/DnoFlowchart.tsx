@@ -73,7 +73,7 @@ export default function DnoFlowchart() {
       {/* DESKTOP: horizontal SVG flowchart */}
       <div className="hidden lg:block">
         <svg
-          viewBox="0 0 900 460"
+          viewBox="0 0 900 470"
           className="w-full h-auto"
           role="img"
           aria-label="DNO G98 vs G99 decision flowchart"
@@ -134,16 +134,17 @@ export default function DnoFlowchart() {
             question="Total inverter ≤ 11.04 kW?"
           />
 
-          <text x="150" y="345" textAnchor="middle" fontSize="11" fill={GREEN} fontWeight="700">
+          {/* Yes/No labels — moved up to y=330 so they sit closer to the Q2 boxes they answer */}
+          <text x="150" y="335" textAnchor="middle" fontSize="11" fill={GREEN} fontWeight="700">
             Yes
           </text>
-          <text x="320" y="345" textAnchor="middle" fontSize="11" fill={AMBER} fontWeight="700">
+          <text x="320" y="335" textAnchor="middle" fontSize="11" fill={AMBER} fontWeight="700">
             No
           </text>
-          <text x="570" y="345" textAnchor="middle" fontSize="11" fill={GREEN} fontWeight="700">
+          <text x="570" y="335" textAnchor="middle" fontSize="11" fill={GREEN} fontWeight="700">
             Yes
           </text>
-          <text x="740" y="345" textAnchor="middle" fontSize="11" fill={AMBER} fontWeight="700">
+          <text x="740" y="335" textAnchor="middle" fontSize="11" fill={AMBER} fontWeight="700">
             No
           </text>
 
@@ -152,37 +153,38 @@ export default function DnoFlowchart() {
           <Arrow path="M 600 320 L 550 370" />
           <Arrow path="M 720 320 L 770 370" />
 
+          {/* Outcome boxes — heights bumped to 90 so foreignObject body text breathes */}
           <OutcomeBoxSvg
             x={30}
             y={370}
-            width={210}
+            width={205}
             color="green"
             tag="G98"
             title="Notify only"
             body="Submit DNO form within 28 days of commissioning. No pre-approval. Install proceeds normally."
           />
           <OutcomeBoxSvg
-            x={250}
+            x={245}
             y={370}
-            width={210}
+            width={205}
             color="amber"
             tag="G99"
             title="Apply BEFORE install"
             body="4 – 6 week lead time. Most DNOs approve 5 – 11 kW single-phase but some throttle. Submit day of deposit."
           />
           <OutcomeBoxSvg
-            x={470}
+            x={460}
             y={370}
-            width={210}
+            width={205}
             color="green"
             tag="G98"
             title="Notify only"
             body="3-phase has way more headroom. Most domestic 3-phase installs fall under G98 (≤ 3.68 kW per phase)."
           />
           <OutcomeBoxSvg
-            x={690}
+            x={675}
             y={370}
-            width={180}
+            width={205}
             color="amber"
             tag="G99"
             title="Apply BEFORE install"
@@ -358,7 +360,7 @@ function OutcomeBoxSvg({
   }[color]
   return (
     <g transform={`translate(${x} ${y})`}>
-      <rect width={width} height="80" rx="6" fill={colors.bg} stroke={colors.border} strokeWidth="2" />
+      <rect width={width} height="90" rx="6" fill={colors.bg} stroke={colors.border} strokeWidth="2" />
       <rect x="0" y="0" width="50" height="20" rx="6" fill={colors.tagBg} />
       <text x="25" y="14" textAnchor="middle" fontSize="11" fill="white" fontWeight="900">
         {tag}
@@ -366,7 +368,7 @@ function OutcomeBoxSvg({
       <text x="12" y="40" fontSize="12" fontWeight="800" fill={colors.text}>
         {title}
       </text>
-      <foreignObject x="12" y="44" width={width - 24} height="36">
+      <foreignObject x="12" y="46" width={width - 24} height="44">
         <p
           style={{
             fontSize: '10px',

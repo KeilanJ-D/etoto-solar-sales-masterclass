@@ -201,39 +201,17 @@ export default function EnergyFlowTimeline() {
           ↑ Evening discharge
         </text>
 
-        {/* Annotations — money zones */}
+        {/* Annotations — money zones (moved BELOW the curves to stop occluding them) */}
         <g>
-          {/* Money zone 1: morning peak */}
-          <rect
-            x="280"
-            y="60"
-            width="120"
-            height="60"
-            fill={RED}
-            opacity="0.06"
-            rx="4"
-          />
-          <text x="340" y="80" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
-            ⚡ Battery covers
+          {/* Money zone 1: morning peak — pill at bottom of chart */}
+          <rect x="270" y="262" width="140" height="22" rx="11" fill="white" stroke={RED} strokeWidth="1" opacity="0.95" />
+          <text x="340" y="277" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
+            ⚡ Battery covers morning peak
           </text>
-          <text x="340" y="95" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
-            morning peak
-          </text>
-          {/* Money zone 2: evening peak */}
-          <rect
-            x="700"
-            y="60"
-            width="120"
-            height="60"
-            fill={RED}
-            opacity="0.06"
-            rx="4"
-          />
-          <text x="760" y="80" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
-            ⚡ Battery covers
-          </text>
-          <text x="760" y="95" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
-            evening peak
+          {/* Money zone 2: evening peak — pill at bottom of chart */}
+          <rect x="690" y="262" width="140" height="22" rx="11" fill="white" stroke={RED} strokeWidth="1" opacity="0.95" />
+          <text x="760" y="277" textAnchor="middle" fontSize="10" fill={RED} fontWeight="700">
+            ⚡ Battery covers evening peak
           </text>
         </g>
 

@@ -85,7 +85,7 @@ export default function StringDesign() {
         {/* Bottom annotation */}
         <text
           x="450"
-          y="360"
+          y="350"
           textAnchor="middle"
           fontSize="12"
           fill="#64748b"
@@ -122,7 +122,7 @@ function Scenario({
   return (
     <g transform={`translate(${x} 30)`}>
       {/* Title */}
-      <text x="140" y="14" textAnchor="middle" fontSize="12" fill="#0f172a" fontWeight="700">
+      <text x="140" y="6" textAnchor="middle" fontSize="12" fill="#0f172a" fontWeight="700">
         {title}
       </text>
 

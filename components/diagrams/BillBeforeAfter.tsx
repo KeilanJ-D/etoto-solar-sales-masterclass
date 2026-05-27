@@ -169,7 +169,8 @@ export default function BillBeforeAfter() {
               strokeWidth="1.5"
               strokeDasharray="4 4"
             />
-            <text x="410" y="28" textAnchor="middle" fontSize="10" fill="#64748b" fontStyle="italic">
+            {/* Label positioned ABOVE the ghost so the animated bars don't cover it */}
+            <text x="410" y="-6" textAnchor="middle" fontSize="10" fill="#64748b" fontStyle="italic">
               ↑ what you used to pay
             </text>
           </g>
@@ -225,7 +226,7 @@ export default function BillBeforeAfter() {
         </g>
 
         {/* Bottom takeaway */}
-        <g transform="translate(40 350)">
+        <g transform="translate(40 335)">
           <text fontSize="12" fill="#0f172a" fontWeight="700">
             From £1,800/yr expense to a £1,800/yr benefit. Same house, same usage, different system.
           </text>

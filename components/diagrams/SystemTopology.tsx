@@ -121,7 +121,7 @@ export default function SystemTopology() {
           stroke={RED}
           strokeWidth="3"
         />
-        <text x="350" y="245" fontSize="11" fill={RED} fontWeight="700">
+        <text x="360" y="225" fontSize="11" fill={RED} fontWeight="700">
           DC
         </text>
         {/* Animated current dots on DC */}
@@ -304,6 +304,8 @@ export default function SystemTopology() {
           markerEnd="url(#arrowBlue)"
           markerStart="url(#arrowBlueStart)"
         />
+        {/* White pill behind text so it doesn't compete with the wire */}
+        <rect x="528" y="360" width="144" height="14" rx="7" fill="white" stroke="#e2e8f0" strokeWidth="0.5" />
         <text x="600" y="370" textAnchor="middle" fontSize="10" fill="#64748b" fontStyle="italic">
           Imports + Exports (SEG)
         </text>
