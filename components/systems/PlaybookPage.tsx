@@ -6,6 +6,7 @@ import type { SystemsPlaybook } from '@/lib/systems/types'
 import { playbookBySlug } from '@/lib/systems/registry'
 import GatedSection from '@/components/knowledge/GatedSection'
 import DoneForYouCard from '@/components/shared/DoneForYouCard'
+import DiscoveryQuestionBank from '@/components/discovery/DiscoveryQuestionBank'
 
 const DONE_FOR_YOU_BY_PLAYBOOK: Record<
   string,
@@ -89,6 +90,16 @@ export default function PlaybookPage({ playbook }: { playbook: SystemsPlaybook }
           </p>
         </div>
       </section>
+
+      {/* Interactive question bank — Customer Discovery only.
+          Free + ungated because the library IS the value here. */}
+      {playbook.slug === 'customer-discovery-mastery' && (
+        <section className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8 bg-white">
+          <div className="max-w-5xl mx-auto">
+            <DiscoveryQuestionBank />
+          </div>
+        </section>
+      )}
 
       <section className="px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="max-w-4xl mx-auto">
