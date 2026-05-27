@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
-import { Award, BookOpen, Briefcase, Home, Layers, ListOrdered, Settings, Sparkles, Users, Wrench } from 'lucide-react'
+import { Award, BookOpen, Briefcase, Home, Layers, ListOrdered, Settings, Sparkles, Users, Wrench, Zap } from 'lucide-react'
 
 const isInternalSite = process.env.NEXT_PUBLIC_UNLOCK_ALL === 'true'
 
@@ -12,8 +12,8 @@ const navItems = [
   { href: '/steps', label: 'The 9 Steps', shortLabel: 'Steps', icon: ListOrdered },
   { href: '/knowledge', label: 'Knowledge', shortLabel: 'Know', icon: BookOpen },
   { href: '/products', label: 'Products', shortLabel: 'Brands', icon: Layers },
+  { href: '/demo-dashboard', label: 'SolaFlow Demo', shortLabel: 'Demo', icon: Zap },
   { href: '/systems', label: 'Systems', shortLabel: 'Sys', icon: Settings },
-  { href: '/tools/inverter-sizing', label: 'Tools', shortLabel: 'Tools', icon: Wrench },
   { href: '/case-studies', label: 'Cases', shortLabel: 'Cases', icon: Award },
   { href: '/agency', label: 'Work with Us', shortLabel: 'Agency', icon: Briefcase },
 ]
