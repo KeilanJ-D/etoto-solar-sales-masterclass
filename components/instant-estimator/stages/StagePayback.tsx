@@ -319,6 +319,30 @@ export default function StagePayback({
             £{Math.round(projectionPoints[projectionPoints.length - 1].cumulative / 1000)}k
           </text>
         </svg>
+
+        {/* Screen-reader-only data table — gives non-visual users access to
+            the projection numbers the SVG visualises. */}
+        <table className="sr-only">
+          <caption>25-year cumulative savings projection at 7% energy inflation</caption>
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Cumulative savings</th>
+              <th scope="col">Net position vs system cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            {projectionPoints.map((p) => (
+              <tr key={p.year}>
+                <td>Year {p.year}</td>
+                <td>£{Math.round(p.cumulative).toLocaleString()}</td>
+                <td>
+                  £{Math.round(p.cumulative - audit.effectiveSystemCost).toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {/* Nav */}

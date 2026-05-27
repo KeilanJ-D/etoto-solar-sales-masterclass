@@ -114,7 +114,7 @@ export default function StageBattery({
           Stage 2 of 4
         </div>
         <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
-          Battery sizing & selection
+          How big a battery do they need?
         </h2>
         <p className="text-slate-600">
           Recommended around{' '}

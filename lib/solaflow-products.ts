@@ -6,45 +6,42 @@
 // guarantees masterclass content stays in lock-step with what
 // SolaFlow can actually quote.
 //
+// Types live in ./solaflow/types.ts. Re-exported here for backward
+// compatibility — every existing `import { Battery } from
+// '@/lib/solaflow-products'` continues to work. New code should prefer
+// `import type { Battery } from '@/lib/solaflow/types'` so it doesn't
+// pull the catalogue data into its IDE indexing graph.
+//
 // To update: re-sync from /Users/keilanjames-devereux/Vercel-Estimator 2/d-products/
 // ============================================
 
-export type ProductTier = 'budget' | 'value' | 'premium' | 'specialty'
-export type PriceBand = 'low' | 'mid' | 'high' | 'flagship'
-export type IdealUseCase =
-  | 'modular-stackable'
-  | 'ev-ready'
-  | 'heat-pump-household'
-  | 'budget-conscious'
-  | 'premium-aesthetic'
-  | 'small-home'
-  | 'large-home'
-  | 'shaded-roof'
-  | 'all-black-look'
-  | 'european-made'
-  | 'all-in-one'
-  | 'three-phase'
+import type {
+  Battery,
+  Brand,
+  BrandSlug,
+  Extra,
+  IdealUseCase,
+  Inverter,
+  Panel,
+  PriceBand,
+  ProductTier,
+} from './solaflow/types'
+
+export type {
+  Battery,
+  Brand,
+  BrandSlug,
+  Extra,
+  IdealUseCase,
+  Inverter,
+  Panel,
+  PriceBand,
+  ProductTier,
+}
 
 // ============================================
 // PANELS (11 SKUs across 6 brands)
 // ============================================
-
-export interface Panel {
-  sku: string
-  brand: string
-  name: string
-  wattage: number
-  efficiency: string
-  warranty: string
-  weightKg: number
-  dimensionsMm: string
-  badge?: string
-  tier: ProductTier
-  priceBand: PriceBand
-  description: string[]
-  imagePath: string
-  datasheetPath: string
-}
 
 export const panels: Panel[] = [
   {
@@ -279,27 +276,6 @@ export const panels: Panel[] = [
 // BATTERIES (9 SKUs across 7 brands)
 // ============================================
 
-export interface Battery {
-  sku: string
-  brand: string
-  name: string
-  capacityKwh: number
-  warranty: string
-  cycles: string
-  hybrid: boolean
-  maxPerStack?: number
-  maxStacks?: number
-  requiresInverterPerStack?: boolean
-  expansionPack?: { maxQty: number; label: string }
-  badge?: string
-  tier: ProductTier
-  priceBand: PriceBand
-  description: string[]
-  imagePath: string
-  datasheetPath: string
-  idealFor: IdealUseCase[]
-}
-
 export const batteries: Battery[] = [
   {
     sku: 'anker-solix-x1-5kwh',
@@ -526,26 +502,6 @@ export const batteries: Battery[] = [
 // ============================================
 // INVERTERS (20+ SKUs across 7 brands)
 // ============================================
-
-export interface Inverter {
-  sku: string
-  brand: string
-  name: string
-  ratingKw: number
-  efficiency: string
-  warranty: string
-  phaseType: 'Single Phase' | 'Three Phase' | 'N/A'
-  batteryCompatible: boolean
-  solarOnlyCompatible?: boolean
-  isGateway?: boolean
-  badge?: string
-  tier: ProductTier
-  priceBand: PriceBand
-  description: string[]
-  imagePath: string
-  datasheetPath?: string
-  compatibleBrands: string[]
-}
 
 export const inverters: Inverter[] = [
   // ANKER
@@ -1087,14 +1043,6 @@ export const inverters: Inverter[] = [
 // EXTRAS
 // ============================================
 
-export interface Extra {
-  sku: string
-  name: string
-  description: string
-  type: 'toggle' | 'quantity'
-  maxQty: number
-}
-
 export const extras: Extra[] = [
   {
     sku: 'optimisers',
@@ -1144,38 +1092,6 @@ export const extras: Extra[] = [
 // ============================================
 // BRAND METADATA (editorial — used by /products showcase)
 // ============================================
-
-export type BrandSlug =
-  | 'aiko'
-  | 'bexie'
-  | 'dmegc'
-  | 'eurener'
-  | 'exiom'
-  | 'jinko'
-  | 'tesla'
-  | 'sigenergy'
-  | 'fox-ess'
-  | 'anker'
-  | 'ecoflow'
-  | 'powervault'
-
-export interface Brand {
-  slug: BrandSlug
-  displayName: string
-  exactName: string // Use this exact casing everywhere in copy
-  tier: ProductTier
-  priceBand: PriceBand
-  oneLineHook: string
-  longDescription: string
-  origin: string
-  yearsInUk: string
-  productCategories: Array<'panels' | 'batteries' | 'inverters'>
-  usps: string[]
-  useThisWhen: string[]
-  dontUseThisWhen: string[]
-  idealFor: IdealUseCase[]
-  logoPath?: string
-}
 
 export const brands: Brand[] = [
   {

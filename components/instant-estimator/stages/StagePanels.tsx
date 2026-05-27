@@ -66,7 +66,7 @@ export default function StagePanels({
           Stage 3 of 4
         </div>
         <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-2">
-          Solar generation
+          How many panels will fit the brief?
         </h2>
         <p className="text-slate-600">
           Recommended: <strong className="text-slate-900">{panelRec.recommendedPanels} panels</strong>{' '}

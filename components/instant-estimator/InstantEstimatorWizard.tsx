@@ -88,6 +88,24 @@ export default function InstantEstimatorWizard() {
   const [state, setState] = useState<EstimatorState>(INITIAL_STATE)
   const [activeStage, setActiveStage] = useState<StageIndex>(0)
 
+  // Persist active stage across refresh so a rep mid-walkthrough doesn't
+  // lose their place. SSR-safe: only touches localStorage on the client.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const stored = window.localStorage.getItem('etoto-estimator-stage')
+    if (stored !== null) {
+      const n = Number(stored)
+      if (n === 0 || n === 1 || n === 2 || n === 3) {
+        setActiveStage(n as StageIndex)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    window.localStorage.setItem('etoto-estimator-stage', String(activeStage))
+  }, [activeStage])
+
   /**
    * Patch with two automatic flags:
    * - Any patch touching `panelCount` sets `panelCountUserSet=true` so
