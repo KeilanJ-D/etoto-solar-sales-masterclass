@@ -6,6 +6,49 @@ import type { KnowledgeTopic } from '@/lib/knowledge/types'
 import { knowledgeBySlug, knowledgeCategoryLabels } from '@/lib/knowledge/registry'
 import GatedSection from './GatedSection'
 import DoneForYouCard from '@/components/shared/DoneForYouCard'
+import AnimatedModeSwitch from '@/components/shared/AnimatedModeSwitch'
+import SystemTopology from '@/components/diagrams/SystemTopology'
+import EnergyFlowTimeline from '@/components/diagrams/EnergyFlowTimeline'
+import StringDesign from '@/components/diagrams/StringDesign'
+import MpptAnalogy from '@/components/diagrams/MpptAnalogy'
+import DnoFlowchart from '@/components/diagrams/DnoFlowchart'
+import BillBeforeAfter from '@/components/diagrams/BillBeforeAfter'
+
+/**
+ * Diagrams rendered after "longRule" on specific knowledge pages.
+ * Hand-picked per topic so the visual lands where it teaches most.
+ */
+function TopicDiagrams({ slug }: { slug: string }) {
+  switch (slug) {
+    case 'system-design-walkthrough':
+      return (
+        <>
+          <SystemTopology />
+          <AnimatedModeSwitch initialMode="hybrid" />
+        </>
+      )
+    case 'strings-and-mppt':
+      return (
+        <>
+          <StringDesign />
+          <MpptAnalogy />
+        </>
+      )
+    case 'single-vs-three-phase':
+      return <DnoFlowchart />
+    case 'battery-and-inverter':
+      return (
+        <>
+          <EnergyFlowTimeline />
+          <BillBeforeAfter />
+        </>
+      )
+    case 'inverter-sizing':
+      return <SystemTopology />
+    default:
+      return null
+  }
+}
 
 const DONE_FOR_YOU_BY_TOPIC: Record<
   string,
@@ -113,6 +156,13 @@ export default function KnowledgePage({ topic }: { topic: KnowledgeTopic }) {
           <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
             {topic.longRule}
           </p>
+        </div>
+      </section>
+
+      {/* DIAGRAMS (free) — visual explainer between rule and decision flow */}
+      <section className="px-4 sm:px-6 lg:px-8 py-2 sm:py-4">
+        <div className="max-w-5xl mx-auto">
+          <TopicDiagrams slug={topic.slug} />
         </div>
       </section>
 
