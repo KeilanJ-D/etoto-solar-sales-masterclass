@@ -230,7 +230,7 @@ export default function AgencyPage() {
                 className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-3.5 px-7 rounded-full transition-all min-h-[52px]"
               >
                 <CalendarCheck className="w-5 h-5" />
-                Book intro call
+                Book a 20-minute intro call
               </Link>
             </div>
           </AnimateOnScroll>
@@ -352,7 +352,7 @@ export default function AgencyPage() {
                   href="#intro-call"
                   className="mt-auto flex items-center justify-center gap-2 w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-xl transition-all min-h-[52px] shadow-lg shadow-amber-500/25"
                 >
-                  Book a 90-Day Scaler intro
+                  Book a 20-minute intro call
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -441,7 +441,7 @@ export default function AgencyPage() {
                   href="#intro-call"
                   className="mt-auto flex items-center justify-center gap-2 w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all min-h-[52px] shadow-lg shadow-emerald-500/25"
                 >
-                  Book a 6-Month Programme intro
+                  Book a 20-minute intro call
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -637,7 +637,7 @@ export default function AgencyPage() {
               className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-5 px-10 rounded-full transition-all min-h-[64px] text-base sm:text-lg shadow-xl shadow-[#E8192C]/30"
             >
               <Mail className="w-5 h-5" />
-              Book your 20-minute call
+              Book a 20-minute intro call
               <ArrowRight className="w-5 h-5" />
             </a>
             <p className="text-xs text-slate-500 mt-4">

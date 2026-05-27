@@ -19,7 +19,7 @@ export default function CustomerJourneyPage() {
         <div className="max-w-5xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#E8192C]/20 text-[#E8192C] rounded-full text-xs sm:text-sm font-semibold mb-5 border border-[#E8192C]/30">
             <Users className="w-3.5 h-3.5" />
-            The 8-step customer funnel
+            The 8-question customer funnel
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-5 leading-tight text-balance">
             Before they ever speak to you.
@@ -142,18 +142,29 @@ export default function CustomerJourneyPage() {
                     </div>
                   )}
 
-                  {/* Why we ask this — rep-only insight */}
-                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[10px] uppercase tracking-wider font-bold text-amber-800 mb-0.5">
-                        Why we ask (rep insight)
-                      </p>
-                      <p className="text-xs text-amber-900 leading-relaxed">
-                        {step.whyAsked}
-                      </p>
+                  {/* Why we ask — full amber callout for steps 1 & 2 to
+                      anchor the educational pattern, then condensed to a
+                      thin italic line for steps 3-8 so the eye actually
+                      moves down the funnel instead of fatiguing on amber. */}
+                  {step.id <= 2 ? (
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 flex items-start gap-2">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-600 flex-shrink-0 mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-amber-800 mb-0.5">
+                          Why we ask (rep insight)
+                        </p>
+                        <p className="text-xs text-amber-900 leading-relaxed">
+                          {step.whyAsked}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <p className="text-xs text-slate-500 italic leading-relaxed pl-2 border-l-2 border-amber-300">
+                      <Sparkles className="inline w-3 h-3 text-amber-500 mr-1 -mt-0.5" />
+                      <span className="text-amber-700 font-semibold not-italic">Rep insight: </span>
+                      {step.whyAsked}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}

@@ -191,33 +191,10 @@ My name's [your name], I'm calling from [company]. You clicked on one of our ads
         <FullScriptContent />
       </PasswordGate>
 
-      {/* Who This Is For */}
-      <section className="py-16 md:py-20 px-4 md:px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Who This Is For</h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: Users, title: 'New Sales Reps', desc: 'Just starting in solar sales? This script gives you the exact words to use from day one. No guessing, no improvising.' },
-              { icon: Target, title: 'Experienced Reps', desc: 'Already closing deals? Compare your approach to a proven script. Pick up new phrases and techniques to refine your pitch.' },
-              { icon: Briefcase, title: 'Business Owners', desc: 'Training a team? This script becomes your training manual. Everyone sells the same way, using the same proven formula.' },
-            ].map((item, index) => {
-              const Icon = item.icon
-              return (
-                <div key={index} className="bg-slate-50 rounded-xl p-6 border border-slate-200">
-                  <div className="w-12 h-12 rounded-lg bg-[#E8192C]/10 flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-[#E8192C]" />
-                  </div>
-                  <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-slate-600">{item.desc}</p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
+      {/* "Who This Is For" trio removed — same pattern appears on
+          /formula-cheat-sheet + /complete-toolkit. By the time a visitor
+          is on the sales script page they've self-selected; the trio was
+          padding, not signal. */}
 
       {/* Buy Section */}
       {!isUnlocked && <BuySection />}

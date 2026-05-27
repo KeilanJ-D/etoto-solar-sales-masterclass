@@ -36,11 +36,15 @@ export default function OptimiserCalculatorPage() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black mb-4 text-balance leading-tight">
             Optimiser ROI Calculator
           </h1>
-          <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
-            Mock up the roof. Mark which panels see shade. The calculator runs the
-            annual-loss maths and shows three options: smart stringing (free), Tigo
-            optimisers (£45/panel), or swap to Aiko (£15 premium/panel).
+          <p className="text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed mb-4">
+            Mock up the roof. Click any panel to mark it as shaded. The calculator
+            runs the annual generation-loss maths and ranks your three fixes:
           </p>
+          <ul className="text-sm sm:text-base text-slate-300 space-y-1.5 max-w-3xl">
+            <li><strong className="text-white">Smart stringing</strong> — £0, uses a spare MPPT</li>
+            <li><strong className="text-white">Tigo optimisers</strong> — £45 per shaded panel</li>
+            <li><strong className="text-white">Swap to Aiko</strong> — £15 premium per panel, cell-level bypass on every panel</li>
+          </ul>
         </div>
       </section>
 

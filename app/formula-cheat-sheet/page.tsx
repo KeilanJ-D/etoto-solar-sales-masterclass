@@ -29,8 +29,8 @@ export default function FormulaCheatSheetPage() {
       <MasterclassNav />
       {/* Hero */}
       <ProductHero
-        title="Every Formula. Every Tool. Always in Your Pocket."
-        subtitle="The four formulas that close solar deals — live, interactive, with a working calculator you can use on every call. Pin the visual summary to your desk. Use the calculator on your phone mid-pitch."
+        title="Four formulas. One calculator. Always in your pocket."
+        subtitle="The four sums that close every solar deal, plus a live 4-tab calculator you can use on the phone mid-pitch. Pin the visual to your desk."
         price=""
         buyLink="/complete-toolkit"
         stats={[
