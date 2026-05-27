@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Copy, Check, Play, ChevronDown, ChevronUp, MessageSquare, Target, Users, Briefcase, AlertTriangle } from 'lucide-react'
+import Link from 'next/link'
+import { ArrowRight, Copy, Check, Play, ChevronDown, ChevronUp, MessageSquare, Target, Users, Briefcase, AlertTriangle } from 'lucide-react'
 import ProductHero from '@/components/products/ProductHero'
 import PasswordGate from '@/components/products/PasswordGate'
 import BuySection from '@/components/products/BuySection'
@@ -39,6 +40,30 @@ export default function SalesScriptPage() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
       <MasterclassNav />
+
+      {/* Live-call CTA banner — surfaces the 45-min recorded close so reps
+          know there's audio of the whole script before they scroll. Also
+          links to the live package offers reps reference on calls. */}
+      <div className="bg-slate-900 text-white px-4 py-3 border-b border-slate-800">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-xs sm:text-sm">
+          <Link
+            href="/live-call"
+            className="inline-flex items-center gap-2 font-semibold hover:text-[#E8192C] transition-colors"
+          >
+            <span>🎧</span>
+            <span>Hear all 9 of these scripts in one 45-min recorded call</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link
+            href="/package-offers"
+            className="inline-flex items-center gap-2 font-semibold text-slate-300 hover:text-[#E8192C] transition-colors"
+          >
+            <span>📦</span>
+            <span>Package offers on the market</span>
+          </Link>
+        </div>
+      </div>
+
       {/* Hero */}
       <ProductHero
         title="The Word-for-Word Script That Closes Solar Deals."

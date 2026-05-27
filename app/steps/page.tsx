@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import { Headphones } from 'lucide-react'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import StepsNav from '@/components/funnel/StepsNav'
 import Step1Rapport from '@/components/funnel/Step1Rapport'
@@ -44,10 +46,17 @@ export default function StepsPage() {
           <h1 className="text-3xl md:text-5xl font-bold mb-4">
             The 9-Step Solar Sales Formula
           </h1>
-          <p className="text-slate-300 max-w-2xl mx-auto">
-            From first contact to signed contract. Each step builds on the last. 
+          <p className="text-slate-300 max-w-2xl mx-auto mb-6">
+            From first contact to signed contract. Each step builds on the last.
             Master all nine and you&apos;ll close consistently.
           </p>
+          <Link
+            href="/live-call"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/15 backdrop-blur border border-white/20 rounded-full text-sm font-semibold text-white transition-all"
+          >
+            <Headphones className="w-4 h-4" />
+            Hear all 9 steps in one recorded close (45 min)
+          </Link>
         </div>
       </section>
       
