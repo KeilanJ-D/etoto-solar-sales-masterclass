@@ -2,11 +2,16 @@
 
 import { useState, useMemo } from 'react'
 import { CheckCircle2, Grid3x3, Lightbulb, RotateCw, Sun, TrendingUp } from 'lucide-react'
+import { SOLAFLOW_CONSTANTS } from '@/lib/solaflow-products'
 
 type PanelState = 'clean' | 'shaded'
 
-const ANNUAL_KWH_PER_KWP = 950 // UK average yield
-const UNIT_RATE_GBP = 0.27 // 2026 UK retail price
+// Aligned with SolaFlow: 3.5 PSH × 0.85 SLF × 365 = 1086 kWh/kWp/year
+const ANNUAL_KWH_PER_KWP =
+  SOLAFLOW_CONSTANTS.peakSunHours *
+  SOLAFLOW_CONSTANTS.systemLossFactor *
+  365
+const UNIT_RATE_GBP = SOLAFLOW_CONSTANTS.defaultPeakRatePence / 100
 const SHADE_DERATE_NO_FIX = 0.35 // shaded panel drags string to 35% during shade hours
 const SHADE_DERATE_OPTIMISED = 0.85 // optimised shaded panel only loses its own contribution
 const SHADE_HOURS_PER_DAY = 3 // typical UK chimney/tree shade duration

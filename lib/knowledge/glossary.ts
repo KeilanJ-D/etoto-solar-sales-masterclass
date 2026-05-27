@@ -45,7 +45,7 @@ export const glossary: GlossaryTerm[] = [
     oneLineDefinition:
       'A small device installed behind individual panels to break them out of the series string so each panel runs independently.',
     detail:
-      'Tigo TS4-A-O is the dominant inverter-agnostic optimiser (~£40 trade). SolarEdge locks you into their proprietary inverter (~£55 trade). Use surgically on problem panels; don\'t blanket every panel.',
+      'Available in SolaFlow as an Extra at ~£45 trade per panel. Inverter-agnostic — works with any system. Use surgically on problem panels; don\'t blanket every panel.',
     relatedTopics: ['optimisers'],
   },
   {
@@ -54,7 +54,7 @@ export const glossary: GlossaryTerm[] = [
     oneLineDefinition:
       'An inverter that handles both PV → AC conversion AND battery charge/discharge in one box.',
     detail:
-      'Hybrid inverters DC-couple the battery (95%+ efficiency) vs AC-coupled systems where battery sits behind its own inverter (84% efficiency). Hybrid = the modern default. Examples: GivEnergy Gen3, Solis S6, Sigenergy SigenStor, Fox H1.',
+      'Hybrid inverters DC-couple the battery (95%+ efficiency) vs AC-coupled systems where battery sits behind its own inverter (84% efficiency). Hybrid = the modern default. SolaFlow catalogue: FOX ESS H1, Sigenergy 3.6-12kW, Anker SOLIX X1, Bexie 1PH Hybrid, EcoFlow PowerOcean. Tesla Powerwall 3 is integrated (battery + inverter in one box).',
     relatedTopics: ['battery-and-inverter'],
   },
   {
@@ -73,7 +73,7 @@ export const glossary: GlossaryTerm[] = [
     oneLineDefinition:
       'How much of a battery\'s nominal capacity is usable, expressed as a percentage.',
     detail:
-      'A 10 kWh battery at 90% DoD has 9 kWh usable. The other 10% is reserved to protect cell life. Modern LFP batteries (Sigenergy, GivEnergy) typically allow 90 – 100% DoD; older NMC chemistries cap at 80%.',
+      'A 10 kWh battery at 90% DoD has 9 kWh usable. The other 10% is reserved to protect cell life. Modern LFP batteries (Sigenergy, FOX ESS, Anker, Bexie) typically allow 90 – 100% DoD; older NMC chemistries cap at 80%.',
   },
   {
     term: 'C-rate',
@@ -151,7 +151,7 @@ export const glossary: GlossaryTerm[] = [
     oneLineDefinition:
       'A panel manufacturer with strong financial credit rating and high production volume.',
     detail:
-      'Bloomberg NEF publishes the tier-1 list quarterly. Tier-1 = financially likely to still exist in 25 years to honour warranty. Includes Longi, JA Solar, Trina, Aiko, REC, Jinko. NOT a quality rating — just a credit rating.',
+      'Bloomberg NEF publishes the tier-1 list quarterly. Tier-1 = financially likely to still exist in 25 years to honour warranty. SolaFlow catalogue Tier-1 panels: Aiko, Bexie, DMEGC, Eurener, Exiom, Jinko. NOT a quality rating — just a credit rating.',
     relatedTopics: ['panel-selection'],
   },
   {

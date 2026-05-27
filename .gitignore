@@ -14,9 +14,3 @@ next.user-config.*
 node_modules
 .next/
 .DS_Store
-# Build artifacts
-tsconfig.tsbuildinfo
-
-# Lockfile preference (project uses npm/package-lock.json)
-pnpm-lock.yaml
-yarn.lock

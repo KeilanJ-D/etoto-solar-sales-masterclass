@@ -28,13 +28,13 @@ export const stringsAndMppt: KnowledgeTopic = {
           {
             label: '2 orientations (E/W split, or main roof + dormer)',
             outcome:
-              'Need at least 2 MPPTs. Most hybrid inverters have 2 (Solis S6, GivEnergy Gen3, Sigenergy SigenStor, Fox H1). Each face gets its own string at its own operating voltage.',
+              'Need at least 2 MPPTs. Most hybrid inverters have 2 (FOX ESS H1, Sigenergy 5-6kW, Anker SOLIX X1, Bexie 1PH Hybrid). Each face gets its own string at its own operating voltage.',
             accent: 'blue',
           },
           {
             label: '3+ orientations',
             outcome:
-              'Either a 3-MPPT inverter (Sungrow SH-RT range, Sigenergy 3-phase), OR a 2-MPPT inverter with optimisers on the third orientation\'s panels, OR a 2-MPPT inverter with Aiko panels on the awkward face.',
+              'Either a 3-MPPT inverter (Sigenergy 8-12kW, FOX ESS K-series 10kW three-phase), OR a 2-MPPT inverter with optimisers on the third orientation\'s panels, OR a 2-MPPT inverter with Aiko 510W All-Black panels on the awkward face.',
             accent: 'amber',
           },
         ],
@@ -51,13 +51,13 @@ export const stringsAndMppt: KnowledgeTopic = {
           {
             label: 'A few panels (1 – 3) shaded at certain hours',
             outcome:
-              'Optimisers on just those panels (Tigo TS4-A-O at ~£40 trade, or SolarEdge per-panel). Each shaded panel becomes independent so it doesn\'t drag the string.',
+              'Optimisers on just those panels (SolaFlow Extras, ~£45 trade each). Each shaded panel becomes independent so it doesn\'t drag the string.',
             accent: 'amber',
           },
           {
             label: 'Whole string sees rolling shade through the day',
             outcome:
-              'Spec Aiko Neostar 2P or Aiko Comet panels — they have cell-level bypass that handles partial shade without external optimisers. ~£15/panel premium vs Longi, but saves £30 – 50 per panel on optimisers AND gives better warranty.',
+              'Spec Aiko 510W All-Black panels — ABC cell-level bypass handles partial shade without external optimisers. ~£15/panel premium vs Aiko Neostar 470W, but saves £30 – 50 per panel on optimisers AND gives the all-black aesthetic.',
             accent: 'red',
           },
         ],
@@ -156,7 +156,7 @@ export const stringsAndMppt: KnowledgeTopic = {
         '14-panel single-orientation array with 2 panels shaded by neighbour\'s tree 14:00 – 17:00.',
       inputs: [
         { label: 'Panels', value: '14 × 415W = 5.81 kWp' },
-        { label: 'Inverter', value: 'GivEnergy 5kW Gen3, 2 MPPTs' },
+        { label: 'Inverter', value: 'FOX ESS H1 5kW, 2 MPPTs' },
         { label: 'Shading', value: '2 panels, 3h/day, summer' },
       ],
       steps: [

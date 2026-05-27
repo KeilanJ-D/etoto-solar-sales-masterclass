@@ -215,7 +215,7 @@ export const systemDesignWalkthrough: KnowledgeTopic = {
         {
           formula:
             'Stringing: 10 south on MPPT 1, 6 west on MPPT 2. Chimney shadow on 2 of the south panels.',
-          result: 'Add Tigo optimisers on the 2 shaded south panels (£80 trade)',
+          result: 'Add SolaFlow Extras optimisers on the 2 shaded south panels (£90 trade)',
         },
         {
           formula: 'DNO: 6 kW single-phase > 3.68 kW → G99',
@@ -223,7 +223,7 @@ export const systemDesignWalkthrough: KnowledgeTopic = {
         },
       ],
       outcome:
-        'Final spec: 6.64 kWp PV (16 × 415W Longi), 15 kWh battery (GivEnergy or equivalent), 6 kW hybrid inverter with 2 MPPTs, 2 Tigo optimisers on the chimney-shaded panels. G99 submitted day of deposit. Customer install timeline: 5 – 6 weeks from deposit. Estimated annual saving: £900 – £1,100.',
+        'Final spec: 6.58 kWp PV (14 × 470W Aiko Neostar), 15 kWh battery (3 × FOX ESS EP6 5.76kWh = 17.28 kWh), 6 kW hybrid inverter (FOX ESS H1 6kW, 2 MPPTs), 2 optimisers on the chimney-shaded panels. G99 submitted day of deposit. Customer install timeline: 5 – 6 weeks from deposit. Estimated annual saving: £900 – £1,100.',
     },
   ],
 

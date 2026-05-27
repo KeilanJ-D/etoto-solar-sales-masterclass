@@ -139,7 +139,7 @@ export const batteryAndInverter: KnowledgeTopic = {
 
   maths: [
     {
-      scenario: '12 kWh GivEnergy battery on Octopus Go (4h cheap window).',
+      scenario: '11.52 kWh FOX ESS EP12 battery on Octopus Go (4h cheap window).',
       inputs: [
         { label: 'Battery nominal', value: '12 kWh' },
         { label: 'Battery usable', value: '11.2 kWh (DoD 93%)' },
@@ -161,7 +161,7 @@ export const batteryAndInverter: KnowledgeTopic = {
         },
       ],
       outcome:
-        'Spec: GivEnergy Gen3 5kW hybrid. Charges 11.2 kWh in 2.5 hours from grid. PV harvest matched 1:1. Customer never sees a peak-rate charge cycle.',
+        'Spec: FOX ESS H1 5kW hybrid + 2 × FOX ESS EP6 (11.52 kWh). Charges 11.52 kWh in ~3 hours from grid. PV harvest matched 1:1. Customer never sees a peak-rate charge cycle. Alternative: Anker SOLIX X1 5kW + 2 × X1 5kWh battery.',
     },
     {
       scenario:

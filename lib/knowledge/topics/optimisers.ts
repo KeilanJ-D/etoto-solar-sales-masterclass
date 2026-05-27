@@ -11,7 +11,7 @@ export const optimisers: KnowledgeTopic = {
   estReadMinutes: 6,
   lastUpdated: '2026-05-27',
   longRule:
-    'Optimisers (Tigo TS4-A-O, SolarEdge, Huawei Smart Module Controllers) sit behind individual panels and break each panel out of the series string. Each panel runs at its own optimal voltage so shaded or mismatched panels don\'t drag the rest. They cost £40 – 60 per panel trade. Three competing solutions: (1) a bigger inverter with more MPPTs (lets you split panels into more strings), (2) Aiko Neostar 2P or Aiko Comet panels which have cell-level bypass built in (~£15 premium per panel vs Longi), or (3) clever stringing on a standard inverter to put problem panels on their own string. The right answer depends on how many panels have problems and how localised the shade is.',
+    'Optimisers sit behind individual panels and break each panel out of the series string. Each panel runs at its own optimal voltage so shaded or mismatched panels don\'t drag the rest. They cost £40 – 60 per panel trade. Three competing solutions: (1) a bigger inverter with more MPPTs (lets you split panels into more strings), (2) Aiko 510W All-Black panels which have ABC cell-level bypass built in (~£15 premium per panel vs DMEGC), or (3) clever stringing on a standard inverter to put problem panels on their own string. The right answer depends on how many panels have problems and how localised the shade is.',
 
   decisionFlow: {
     intro:
@@ -29,7 +29,7 @@ export const optimisers: KnowledgeTopic = {
           {
             label: '1 – 3 panels',
             outcome:
-              'Tigo TS4-A-O optimisers on JUST those panels (£40 trade each). Cheapest, most targeted fix.',
+              'Optimisers on JUST those panels (£45 trade each via SolaFlow Extras). Cheapest, most targeted fix.',
             accent: 'blue',
           },
           {
@@ -41,7 +41,7 @@ export const optimisers: KnowledgeTopic = {
           {
             label: '7+ panels OR rolling shade across the array',
             outcome:
-              'Spec Aiko Neostar 2P or Comet on the full array. Cell-level shade tolerance built in. ~£15 premium per panel × 14 panels = £210 — cheaper than optimising 7+ panels and gives you a longer warranty.',
+              'Spec Aiko Neostar 510W All-Black on the full array. ABC cell-level shade tolerance built in. ~£15 premium per panel × 14 panels = £210 — cheaper than optimising 7+ panels and gives you the all-black aesthetic.',
             accent: 'red',
           },
         ],
@@ -50,13 +50,13 @@ export const optimisers: KnowledgeTopic = {
         question: '2. Is the inverter you\'ve quoted 2-MPPT or 3-MPPT?',
         options: [
           {
-            label: '2-MPPT (e.g. GivEnergy Gen3, Solis S6)',
+            label: '2-MPPT (e.g. FOX ESS H1, Sigenergy 5-6kW, Anker SOLIX X1)',
             outcome:
               'You\'ve got 2 string circuits. If shade is localised to one face, dedicate one MPPT to the problem panels. Saves optimiser cost.',
             accent: 'emerald',
           },
           {
-            label: '3-MPPT (e.g. Sungrow SH-RT, Sigenergy 3-phase)',
+            label: '3-MPPT (e.g. Sigenergy 8-12kW, FOX ESS K-series 10kW three-phase)',
             outcome:
               'Maximum stringing flexibility. Usually avoids the need for optimisers entirely — even on complex roofs.',
             accent: 'emerald',
@@ -92,7 +92,7 @@ export const optimisers: KnowledgeTopic = {
       costOfMistake:
         '14 panels × £55 trade = £770 added to a job that didn\'t need it. Plus SolarEdge locks you into their proprietary inverter ecosystem, which adds £400 vs an open-system hybrid.',
       fix:
-        'Default to NO optimisers. Add them only on panels with documented shade. Use Tigo over SolarEdge — Tigo works with any inverter and costs less.',
+        'Default to NO optimisers. Add them only on panels with documented shade. Use inverter-agnostic optimisers — they work with any system and cost less than proprietary ones.',
     },
     {
       mistake:
@@ -100,9 +100,9 @@ export const optimisers: KnowledgeTopic = {
       whyItHappens:
         'Sales rep heard "best panels" and ran with it.',
       costOfMistake:
-        'Customer pays £15/panel premium for shade tolerance they don\'t need on a clean roof. Competitor with Longi at lower price wins.',
+        'Customer pays £15/panel premium for shade tolerance they don\'t need on a clean roof. Competitor with DMEGC or Jinko at lower price wins.',
       fix:
-        'Aiko is the right call when: (a) the roof has shade, (b) the customer is design-conscious (all-black look), or (c) you\'re bundling them to avoid optimiser cost on a complex roof. Otherwise Longi/JA Solar/Trina are equal-or-better £/W.',
+        'Aiko 510W All-Black is the right call when: (a) the roof has shade, (b) the customer is design-conscious (all-black look), or (c) you\'re bundling them to avoid optimiser cost on a complex roof. Otherwise DMEGC or Jinko are equal-or-better £/W for clean roofs.',
     },
     {
       mistake:
@@ -120,9 +120,9 @@ export const optimisers: KnowledgeTopic = {
     {
       scenario: '14-panel roof, 3 panels shaded by chimney 13:00 – 16:00.',
       inputs: [
-        { label: 'Panels', value: '14 × 415W = 5.81 kWp Longi Hi-MO 6' },
+        { label: 'Panels', value: '14 × 470W = 6.58 kWp Aiko Neostar' },
         { label: 'Shaded panels', value: '3 (chimney shadow)' },
-        { label: 'Inverter', value: 'GivEnergy 5kW Gen3, 2 MPPT' },
+        { label: 'Inverter', value: 'FOX ESS H1 5kW, 2 MPPT' },
       ],
       steps: [
         {
@@ -130,13 +130,13 @@ export const optimisers: KnowledgeTopic = {
           result: 'Annual yield loss from shading: ~700 kWh = £140/year = £3,500 over 25 years.',
         },
         {
-          formula: 'Option B: Tigo TS4-A-O on 3 shaded panels. £40 trade × 3 = £120 + 1h labour.',
+          formula: 'Option B: Optimisers on 3 shaded panels via SolaFlow Extras. £45 trade × 3 = £135 + 1h labour.',
           result:
             'Annual loss reduced to ~80 kWh = £16/year. Net saving: £124/year. Payback: <1 year.',
         },
         {
           formula:
-            'Option C: Swap 3 panels for Aiko Neostar 2P. £15 premium × 3 = £45.',
+            'Option C: Swap full array to Aiko 510W All-Black. £15 premium × 14 = £210.',
           result:
             'Annual loss reduced to ~100 kWh = £20/year. Net saving: £120/year. Payback: <6 months. BUT mixing panel brands voids most warranties — only viable on full-array swap.',
         },
@@ -177,7 +177,7 @@ export const optimisers: KnowledgeTopic = {
     },
     {
       context:
-        'Customer compares your quote (Longi + optimisers) to competitor (Aiko panels, no optimisers).',
+        'Customer compares your quote (DMEGC + optimisers) to competitor (Aiko 510W All-Black, no optimisers).',
       lines: [
         {
           speaker: 'you',
@@ -189,7 +189,7 @@ export const optimisers: KnowledgeTopic = {
         },
         {
           speaker: 'you',
-          text: 'I\'ve quoted Longi panels with three optimisers on the chimney-shaded panels. The other 11 are clean — they don\'t need any help. So you\'re paying £120 for optimisers instead of £210 in Aiko premium across 14 panels. £90 saved, same end result.',
+          text: 'I\'ve quoted DMEGC panels with three optimisers on the chimney-shaded panels. The other 11 are clean — they don\'t need any help. So you\'re paying £135 for optimisers instead of £210 in Aiko premium across 14 panels. £75 saved, same end result.',
         },
         {
           speaker: 'you',

@@ -3,15 +3,15 @@ import type { KnowledgeTopic } from '../types'
 export const panelSelection: KnowledgeTopic = {
   slug: 'panel-selection',
   category: 'product',
-  title: 'Panel Selection — Aiko vs Longi vs JA Solar vs Trina',
+  title: 'Panel Selection — The Six Brands in the SolaFlow Catalogue',
   oneLineRule:
-    'Pick the panel for the roof, not the brochure. For a clean south-facing roof, the cheapest tier-1 panel wins on £/kWh. For shaded or premium installs, Aiko\'s cell-level bypass earns its price premium.',
+    'Pick the panel for the roof, not the brochure. Clean south-facing roof → DMEGC or Jinko wins on £/kWh. Shade, premium aesthetic, or warranty-sensitive customer → Aiko or Bexie earn their premium.',
   intent:
-    'For reps spec\'ing panels live with customers and back-office ordering teams. Knowing which panel goes where saves real money and unlocks confident upselling.',
+    'For reps spec\'ing panels live with customers and back-office ordering teams. Knowing which panel goes where saves real money and unlocks confident upselling — all panels referenced here are in the SolaFlow catalogue and ready to quote.',
   estReadMinutes: 7,
   lastUpdated: '2026-05-27',
   longRule:
-    'All major tier-1 panels in 2026 are within 2 – 3% efficiency of each other (21 – 23%). The differences that actually matter are: (1) shade tolerance — Aiko has cell-level bypass built in; everyone else relies on the inverter or optimisers; (2) warranty — Aiko gives 15-year product / 30-year performance; most others give 12/25; (3) aesthetics — Aiko Neostar 2P is all-black, premium-look; (4) availability — JA Solar and Longi are the most reliably stocked in UK trade; (5) £/W — Trina and Longi are cheapest, Aiko is ~10 – 15% more.',
+    'All Tier-1 panels in the SolaFlow catalogue (Aiko, Bexie, DMEGC, Eurener, Exiom, Jinko) are within 2 – 3% efficiency of each other (19.9 – 23.3%). The differences that actually matter are: (1) **shade tolerance** — Aiko 510W All-Black has ABC cell-level bypass built in; everyone else relies on the inverter or optimisers; (2) **warranty** — Eurener leads with 30-year performance, Bexie with 25-year product / 30-year performance; (3) **aesthetics** — Aiko 510W is all-black; (4) **origin** — Bexie, Exiom, Eurener are European-made; (5) **£/W** — DMEGC is cheapest, Aiko mid, Bexie/Eurener premium.',
 
   decisionFlow: {
     intro: 'Three questions, then you have your panel.',
@@ -22,19 +22,19 @@ export const panelSelection: KnowledgeTopic = {
           {
             label: 'Clean roof, no shade, one orientation',
             outcome:
-              'Longi Hi-MO 6 or JA Solar Deep Blue. Best £/W, tier-1, easy install. ~£90 trade per 415W panel.',
+              'DMEGC 450W or Jinko 460W. Tier-1, 25 – 30-year warranty, lowest £/kWp. ~£90 trade per panel.',
             accent: 'emerald',
           },
           {
             label: 'Some shade or complex orientations',
             outcome:
-              'Aiko Neostar 2P. Cell-level shade tolerance avoids optimiser cost. ~£105 trade per 440W panel.',
+              'Aiko 510W All-Black. ABC cell-level shade tolerance handles partial shade without optimisers. ~£105 trade per panel.',
             accent: 'blue',
           },
           {
             label: 'Premium customer, design-led aesthetic priority',
             outcome:
-              'Aiko Comet (all-black, frameless look) or Solar Edge Sunpower-equivalent. Premium spec, premium price.',
+              'Bexie 520W or Aiko 510W All-Black. Premium spec, premium price, premium look. Bexie also brings European-made + 30-year performance.',
             accent: 'red',
           },
         ],
@@ -45,31 +45,31 @@ export const panelSelection: KnowledgeTopic = {
           {
             label: 'Standard (most customers)',
             outcome:
-              'Tier-1 standard panels offer 12-year product, 25-year performance warranty. Adequate.',
+              'Aiko, DMEGC, Jinko all offer 25-year performance warranty. Adequate for 95% of installs.',
             accent: 'emerald',
           },
           {
             label: 'High — customer asked about long-term warranty explicitly',
             outcome:
-              'Aiko: 15-year product, 30-year performance. Trina Vertex S+: 25-year product, 30-year performance. Both upsell into a "we backed it with the longest warranty in the industry" frame.',
+              'Eurener Nexa 500W: 30-year performance warranty (industry-leading). Bexie 520W: 25-year product + 30-year performance. Jinko 460W: 12-year product + 30-year performance. All three frame as "we backed it with the longest warranty in the industry".',
             accent: 'blue',
           },
         ],
       },
       {
-        question: '3. Margin/turnover priority for this install?',
+        question: '3. Does the customer prioritise European-made?',
         options: [
           {
-            label: 'Volume install, tight margin',
+            label: 'Not a priority',
             outcome:
-              'Longi or JA Solar. Available, predictable, reliable.',
+              'Aiko (China, ABC cells) is your default. Jinko or DMEGC for budget. Tesla\'s solar ecosystem if going premium.',
             accent: 'emerald',
           },
           {
-            label: 'Premium install, customer pays for quality',
+            label: 'Strong preference for European-made',
             outcome:
-              'Aiko + 3-phase inverter + Sigenergy battery. Highest-spec stack you can sell. Margin per panel is bigger AND customer feels they bought the best.',
-            accent: 'red',
+              'Bexie 520W (flagship), Exiom 510W (mid), or Eurener Nexa 500W (warranty-led). All three give you the European story without dropping below Tier-1 spec.',
+            accent: 'blue',
           },
         ],
       },
@@ -79,19 +79,19 @@ export const panelSelection: KnowledgeTopic = {
   mistakes: [
     {
       mistake:
-        'Quoting Aiko on every job because "they\'re the best".',
+        'Quoting Aiko 510W on every job because "they\'re the best".',
       whyItHappens:
-        'Rep got excited about Aiko at a CPD event. Or supplier pushed them.',
+        'Rep got excited about ABC cell tech at a CPD event. Or supplier pushed them.',
       costOfMistake:
-        '£15 – 20 per panel premium on installs that don\'t need shade tolerance. Loses competitive bids to Longi/JA Solar at lower price.',
+        '£15 – 20 per panel premium on installs that don\'t need shade tolerance. Loses competitive bids to DMEGC/Jinko at lower price.',
       fix:
-        'Default to Longi/JA Solar. Upgrade to Aiko when shade, design, or warranty drives the decision.',
+        'Default to DMEGC or Jinko for clean roofs. Upgrade to Aiko 510W when shade, design, or warranty drives the decision. Bexie or Eurener for European-made requests.',
     },
     {
       mistake:
         'Mixing panel brands or wattages across the same array.',
       whyItHappens:
-        'Stock ran out mid-job. Or installer thought "they\'re both 415W, same thing".',
+        'Stock ran out mid-job. Or installer thought "they\'re both 470W, same thing".',
       costOfMistake:
         'Voids most manufacturer warranties. Different wattage on same string = whole string throttled. Different brands = different electrical characteristics = MPPT confusion.',
       fix:
@@ -105,7 +105,7 @@ export const panelSelection: KnowledgeTopic = {
       costOfMistake:
         'Customer pays £200 more, doesn\'t see a benefit, leaves Trustpilot review saying "felt upsold".',
       fix:
-        'Always tie the upgrade to a specific reason: "Aiko for your shaded chimney face" or "Longi because your roof is clean and we\'re saving you £350 across 14 panels".',
+        'Always tie the upgrade to a specific reason: "Aiko 510W for your shaded chimney face" or "Jinko 460W because your roof is clean and we\'re saving you £350 across 14 panels".',
     },
   ],
 
@@ -114,21 +114,21 @@ export const panelSelection: KnowledgeTopic = {
       scenario:
         'Quote choice on a 6 kWp clean south-facing roof, no shade.',
       inputs: [
-        { label: 'Roof', value: 'Single orientation, no shade, 15 panels' },
+        { label: 'Roof', value: 'Single orientation, no shade, 14 panels' },
         { label: 'Customer', value: 'Cost-conscious, standard install' },
       ],
       steps: [
         {
-          formula: 'Longi Hi-MO 6 415W: £90 trade × 15 = £1,350 panels',
-          result: '6.225 kWp at £216/kWp panel cost',
+          formula: 'DMEGC 450W: £90 trade × 14 = £1,260 panels',
+          result: '6.3 kWp at £200/kWp panel cost',
         },
         {
-          formula: 'Aiko Neostar 2P 440W: £105 trade × 14 = £1,470 panels',
-          result: '6.16 kWp at £239/kWp panel cost',
+          formula: 'Aiko Neostar 470W: £105 trade × 14 = £1,470 panels',
+          result: '6.58 kWp at £223/kWp panel cost',
         },
         {
-          formula: 'Difference: £120 + 1 fewer panel install (£35 labour saved on Aiko)',
-          result: 'Net difference: £85 in favour of Aiko',
+          formula: 'Difference: £210 + slightly higher kWp on Aiko (better £/kWp)',
+          result: 'Net difference: £210 more for Aiko, 0.28 kWp extra',
         },
         {
           formula:
@@ -137,31 +137,31 @@ export const panelSelection: KnowledgeTopic = {
         },
       ],
       outcome:
-        'Both are valid. Longi wins on raw £. Aiko wins on aesthetic + warranty. For a cost-conscious customer on a clean roof, quote Longi and pocket the margin — or pass the saving on as a closing lever.',
+        'Both are valid. DMEGC wins on raw £. Aiko 470W wins on aesthetic + warranty + slightly higher output. For a cost-conscious customer on a clean roof, quote DMEGC and pocket the margin — or pass the saving on as a closing lever.',
     },
     {
       scenario:
         'Same 6 kWp roof, but 4 panels catch chimney shadow 13:00 – 16:00.',
       inputs: [
-        { label: 'Roof', value: '15 panels, 4 shaded' },
-        { label: 'Comparison', value: 'Longi + optimisers vs Aiko' },
+        { label: 'Roof', value: '14 panels, 4 shaded' },
+        { label: 'Comparison', value: 'DMEGC + optimisers vs Aiko 510W All-Black' },
       ],
       steps: [
         {
-          formula: 'Longi + 4 Tigo optimisers: £1,350 panels + £160 optimisers = £1,510',
+          formula: 'DMEGC + 4 optimisers (£45 each): £1,260 panels + £180 optimisers = £1,440',
           result: '~£20/year shade loss remaining',
         },
         {
-          formula: 'Aiko Neostar 2P all 14 panels: £1,470',
-          result: '~£25/year shade loss remaining (cell-level bypass is good but not optimiser-perfect)',
+          formula: 'Aiko 510W All-Black all 14 panels: £15 premium × 14 = £210 vs Aiko Neostar baseline',
+          result: '~£25/year shade loss remaining (ABC bypass is good but not optimiser-perfect)',
         },
         {
-          formula: 'Difference: £40 in favour of Aiko',
-          result: 'Aiko wins on cost AND simplicity',
+          formula: 'Aiko 510W total: £1,680 vs DMEGC+optimisers £1,440',
+          result: 'DMEGC+optimisers is £240 cheaper — but Aiko gives the all-black look + simpler install',
         },
       ],
       outcome:
-        'Aiko is the right call here. Cheaper than Longi+optimisers, simpler install, longer warranty. This is the textbook scenario where Aiko earns its premium.',
+        'Both work. DMEGC + optimisers wins on raw £. Aiko 510W wins when the customer cares about aesthetic or wants the simpler spec. This is the textbook case where the optimiser-vs-Aiko decision is a customer-preference call, not a technical one.',
     },
   ],
 
@@ -176,11 +176,11 @@ export const panelSelection: KnowledgeTopic = {
         },
         {
           speaker: 'you',
-          text: 'For your roof specifically, I\'m recommending [Longi Hi-MO 6 / Aiko Neostar / etc] because [reason tied to roof/shade/customer priority].',
+          text: 'For your roof specifically, I\'m recommending [DMEGC 450W for budget / Aiko Neostar 470W for the standard / Aiko 510W All-Black for aesthetic / Bexie 520W for European-made] because [reason tied to roof/shade/customer priority].',
         },
         {
           speaker: 'you',
-          text: 'All the panels I quote are tier-1, meaning the manufacturer has a financial credit rating that says they\'ll still be around in 25 years to honour the warranty. That part is non-negotiable. The brand within tier-1 is a fit-to-your-house decision.',
+          text: 'All the panels we install are Tier-1, meaning the manufacturer has a financial credit rating that says they\'ll still be around in 25 years to honour the warranty. That part is non-negotiable. The brand within Tier-1 is a fit-to-your-house decision.',
         },
       ],
       whyItWorks: [
@@ -194,15 +194,15 @@ export const panelSelection: KnowledgeTopic = {
       lines: [
         {
           speaker: 'you',
-          text: 'Aiko is a good panel. It\'s the only mainstream panel right now with cell-level shade tolerance built in — which means individual cells in shadow don\'t drag the whole panel down. That\'s genuinely clever.',
+          text: 'Aiko is a genuinely clever panel. The 510W All-Black uses ABC — All Back Contact — cell technology, which means individual cells in shadow don\'t drag the whole panel down like they would on a traditional panel. That\'s real innovation, not marketing.',
         },
         {
           speaker: 'you',
-          text: 'On your roof, is that worth the ~£15-per-panel premium? Let\'s look together. You\'ve got [X panels in shade / no shade]. If you\'ve got shade, Aiko earns its money — no question. If you don\'t, you\'re paying for tech you don\'t use, and Longi at the same efficiency saves you £200 across the array.',
+          text: 'On your roof, is that worth the ~£15-per-panel premium? Let\'s look together. You\'ve got [X panels in shade / no shade]. If you\'ve got shade, the 510W All-Black earns its money — no question. If you don\'t, you\'re paying for tech you don\'t use, and Aiko 470W or DMEGC at the same efficiency saves you £200 across the array.',
         },
         {
           speaker: 'you',
-          text: 'The other reason people pick Aiko is the look — all-black, sleek. If the aesthetic matters to you, that\'s a fair reason on its own.',
+          text: 'The other reason people pick the 510W is the look — all-black, sleek. If the aesthetic matters to you, that\'s a fair reason on its own.',
         },
       ],
       whyItWorks: [

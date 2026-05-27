@@ -148,7 +148,7 @@ export const inverterSizing: KnowledgeTopic = {
         },
       ],
       outcome:
-        'Spec: Solis S6-GR1P5K or Solax X1-Mini-G4 5kW. Both single-phase, single MPPT, ~£800 trade. G99 submitted day of deposit.',
+        'Spec: FOX ESS H1 5kW (£1,100 trade) or EcoFlow PowerOcean 5kW (£900 trade). Both single-phase hybrid, 2 MPPTs. G99 submitted day of deposit.',
     },
     {
       scenario:
@@ -206,7 +206,7 @@ export const inverterSizing: KnowledgeTopic = {
         },
       ],
       outcome:
-        'Spec: GivEnergy Gen3 6kW hybrid OR Solis S6-EH1P-6K. Battery fills overnight, EV pulls from battery in AM. PV adds 3,500 kWh/year on top.',
+        'Spec: FOX ESS H1 6kW hybrid OR Anker SOLIX X1 6kW. Battery fills overnight (2 × Anker SOLIX 5kWh = 10 kWh), EV pulls from battery in AM. PV adds 3,500 kWh/year on top.',
     },
   ],
 
