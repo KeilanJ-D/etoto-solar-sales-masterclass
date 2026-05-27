@@ -19,6 +19,9 @@ import AnimateOnScroll from '@/components/shared/AnimateOnScroll'
 import ParallaxBlobs from '@/components/shared/ParallaxBlobs'
 import {
   brands,
+  panels,
+  batteries,
+  inverters,
   type Brand,
   type IdealUseCase,
 } from '@/lib/solaflow-products'
@@ -226,60 +229,89 @@ function BrandGroup({
 
 function BrandCard({ brand }: { brand: Brand }) {
   const tierBadge = TIER_BADGES[brand.tier]
+
+  // Pull up to 3 representative product images for this brand (1 per category)
+  const sampleImages: { src: string; alt: string }[] = []
+  const firstPanel = panels.find((p) => p.brand === brand.exactName)
+  if (firstPanel) sampleImages.push({ src: firstPanel.imagePath, alt: `${brand.exactName} panel` })
+  const firstBattery = batteries.find((b) => b.brand === brand.exactName)
+  if (firstBattery) sampleImages.push({ src: firstBattery.imagePath, alt: `${brand.exactName} battery` })
+  const firstInverter = inverters.find((i) => i.brand === brand.exactName)
+  if (firstInverter) sampleImages.push({ src: firstInverter.imagePath, alt: `${brand.exactName} inverter` })
+
   return (
     <Link
       href={`/products/${brand.slug}`}
-      className="group flex flex-col h-full bg-white rounded-2xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 p-5 sm:p-6 transition-all hover:shadow-xl hover:-translate-y-0.5"
+      className="group flex flex-col h-full bg-white rounded-2xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 transition-all hover:shadow-xl hover:-translate-y-0.5 overflow-hidden"
     >
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-            {brand.origin.split('(')[0].trim()}
-          </p>
-          <h3 className="font-black text-xl sm:text-2xl text-slate-900 group-hover:text-[#E8192C] transition-colors">
-            {brand.exactName}
-          </h3>
+      {/* Product thumbnail strip */}
+      {sampleImages.length > 0 && (
+        <div className="bg-slate-50 border-b border-slate-100 px-4 py-5 flex items-center justify-center gap-3 min-h-[120px]">
+          {sampleImages.map((img, idx) => (
+            <div key={idx} className="h-20 w-20 flex items-center justify-center">
+              <Image
+                src={img.src}
+                alt={img.alt}
+                width={80}
+                height={80}
+                className="object-contain max-h-full max-w-full"
+              />
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col items-end gap-1.5">
-          <span
-            className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ring-1 ${tierBadge.classes}`}
-          >
-            {tierBadge.label}
-          </span>
-          <span className="text-xs font-bold text-slate-400">
-            {PRICE_BAND_LABELS[brand.priceBand]}
-          </span>
-        </div>
-      </div>
+      )}
 
-      <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed mb-4">
-        {brand.oneLineHook}
-      </p>
-
-      <div className="flex flex-wrap gap-1.5 mb-4">
-        {brand.productCategories.map((c) => {
-          const CIcon = CATEGORY_ICONS[c]
-          return (
+      <div className="p-5 sm:p-6 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+              {brand.origin.split('(')[0].trim()}
+            </p>
+            <h3 className="font-black text-xl sm:text-2xl text-slate-900 group-hover:text-[#E8192C] transition-colors">
+              {brand.exactName}
+            </h3>
+          </div>
+          <div className="flex flex-col items-end gap-1.5">
             <span
-              key={c}
-              className="inline-flex items-center gap-1 text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full capitalize"
+              className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ring-1 ${tierBadge.classes}`}
             >
-              <CIcon className="w-3 h-3" />
-              {c}
+              {tierBadge.label}
             </span>
-          )
-        })}
-      </div>
+            <span className="text-xs font-bold text-slate-400">
+              {PRICE_BAND_LABELS[brand.priceBand]}
+            </span>
+          </div>
+        </div>
 
-      <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-        <span className="text-xs text-slate-500">
-          <CheckCircle2 className="inline w-3 h-3 text-emerald-500 mr-1" />
-          {brand.usps.length} USPs · {brand.useThisWhen.length} use cases
-        </span>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#E8192C]">
-          View brand
-          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-        </span>
+        <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed mb-4">
+          {brand.oneLineHook}
+        </p>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {brand.productCategories.map((c) => {
+            const CIcon = CATEGORY_ICONS[c]
+            return (
+              <span
+                key={c}
+                className="inline-flex items-center gap-1 text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full capitalize"
+              >
+                <CIcon className="w-3 h-3" />
+                {c}
+              </span>
+            )
+          })}
+        </div>
+
+        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+          <span className="text-xs text-slate-500">
+            <CheckCircle2 className="inline w-3 h-3 text-emerald-500 mr-1" />
+            {brand.usps.length} USPs · {brand.useThisWhen.length} use cases
+          </span>
+          <span className="inline-flex items-center gap-1 text-sm font-semibold text-[#E8192C]">
+            View brand
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </span>
+        </div>
       </div>
     </Link>
   )

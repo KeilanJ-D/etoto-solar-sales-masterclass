@@ -7,6 +7,7 @@ import {
   ArrowRight,
   Battery,
   CheckCircle2,
+  FileText,
   MapPin,
   Sparkles,
   Sun,
@@ -207,38 +208,60 @@ export default async function BrandPage({
                     {panels.map((p) => (
                       <div
                         key={p.sku}
-                        className="bg-white rounded-xl ring-1 ring-slate-200 p-5 hover:ring-[#E8192C]/30 transition-all"
+                        className="bg-white rounded-xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 transition-all overflow-hidden flex flex-col"
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <p className="text-xs font-semibold uppercase text-slate-500">
-                              {p.brand}
-                            </p>
-                            <p className="font-bold text-slate-900 text-base">{p.name}</p>
+                        <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-4 border-b border-slate-100">
+                          <Image
+                            src={p.imagePath}
+                            alt={`${p.brand} ${p.name} solar panel`}
+                            width={220}
+                            height={165}
+                            className="object-contain max-h-full max-w-full"
+                          />
+                        </div>
+                        <div className="p-5 flex flex-col flex-1">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="text-xs font-semibold uppercase text-slate-500">
+                                {p.brand}
+                              </p>
+                              <p className="font-bold text-slate-900 text-base">{p.name}</p>
+                            </div>
+                            {p.badge && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
+                                {p.badge}
+                              </span>
+                            )}
                           </div>
-                          {p.badge && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
-                              {p.badge}
-                            </span>
+                          <div className="text-3xl font-black text-[#E8192C] mb-3">
+                            {p.wattage}W
+                          </div>
+                          <dl className="space-y-1 text-xs text-slate-600 mb-4">
+                            <div className="flex justify-between">
+                              <dt>Efficiency</dt>
+                              <dd className="font-semibold text-slate-900">{p.efficiency}</dd>
+                            </div>
+                            <div className="flex justify-between">
+                              <dt>Warranty</dt>
+                              <dd className="font-semibold text-slate-900">{p.warranty}</dd>
+                            </div>
+                            <div className="flex justify-between">
+                              <dt>Weight</dt>
+                              <dd className="font-semibold text-slate-900">{p.weightKg} kg</dd>
+                            </div>
+                          </dl>
+                          {p.datasheetPath && (
+                            <a
+                              href={p.datasheetPath}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#E8192C] hover:underline"
+                            >
+                              <FileText className="w-3.5 h-3.5" />
+                              View datasheet (PDF)
+                            </a>
                           )}
                         </div>
-                        <div className="text-3xl font-black text-[#E8192C] mb-3">
-                          {p.wattage}W
-                        </div>
-                        <dl className="space-y-1 text-xs text-slate-600">
-                          <div className="flex justify-between">
-                            <dt>Efficiency</dt>
-                            <dd className="font-semibold text-slate-900">{p.efficiency}</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt>Warranty</dt>
-                            <dd className="font-semibold text-slate-900">{p.warranty}</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt>Weight</dt>
-                            <dd className="font-semibold text-slate-900">{p.weightKg} kg</dd>
-                          </div>
-                        </dl>
                       </div>
                     ))}
                   </div>
@@ -255,48 +278,70 @@ export default async function BrandPage({
                     {batteries.map((bat) => (
                       <div
                         key={bat.sku}
-                        className="bg-white rounded-xl ring-1 ring-slate-200 p-5 hover:ring-[#E8192C]/30 transition-all"
+                        className="bg-white rounded-xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 transition-all overflow-hidden flex flex-col"
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <p className="text-xs font-semibold uppercase text-slate-500">
-                              {bat.brand}
-                            </p>
-                            <p className="font-bold text-slate-900 text-base">{bat.name}</p>
-                          </div>
-                          {bat.badge && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
-                              {bat.badge}
-                            </span>
-                          )}
+                        <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-4 border-b border-slate-100">
+                          <Image
+                            src={bat.imagePath}
+                            alt={`${bat.brand} ${bat.name} battery`}
+                            width={220}
+                            height={165}
+                            className="object-contain max-h-full max-w-full"
+                          />
                         </div>
-                        <div className="text-3xl font-black text-[#E8192C] mb-3">
-                          {bat.capacityKwh} <span className="text-base">kWh</span>
-                        </div>
-                        <dl className="space-y-1 text-xs text-slate-600">
-                          <div className="flex justify-between">
-                            <dt>Cycles</dt>
-                            <dd className="font-semibold text-slate-900">{bat.cycles}</dd>
+                        <div className="p-5 flex flex-col flex-1">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="text-xs font-semibold uppercase text-slate-500">
+                                {bat.brand}
+                              </p>
+                              <p className="font-bold text-slate-900 text-base">{bat.name}</p>
+                            </div>
+                            {bat.badge && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
+                                {bat.badge}
+                              </span>
+                            )}
                           </div>
-                          <div className="flex justify-between">
-                            <dt>Warranty</dt>
-                            <dd className="font-semibold text-slate-900">{bat.warranty}</dd>
+                          <div className="text-3xl font-black text-[#E8192C] mb-3">
+                            {bat.capacityKwh} <span className="text-base">kWh</span>
                           </div>
-                          {bat.maxPerStack && (
+                          <dl className="space-y-1 text-xs text-slate-600 mb-4">
                             <div className="flex justify-between">
-                              <dt>Max per stack</dt>
-                              <dd className="font-semibold text-slate-900">
-                                {bat.maxPerStack}{' '}
-                                {bat.maxStacks && `× ${bat.maxStacks} stacks`}
-                              </dd>
+                              <dt>Cycles</dt>
+                              <dd className="font-semibold text-slate-900">{bat.cycles}</dd>
                             </div>
-                          )}
-                          {bat.hybrid && (
-                            <div className="text-emerald-700 font-semibold mt-1">
-                              ✓ Integrated inverter (no separate hybrid needed)
+                            <div className="flex justify-between">
+                              <dt>Warranty</dt>
+                              <dd className="font-semibold text-slate-900">{bat.warranty}</dd>
                             </div>
+                            {bat.maxPerStack && (
+                              <div className="flex justify-between">
+                                <dt>Max per stack</dt>
+                                <dd className="font-semibold text-slate-900">
+                                  {bat.maxPerStack}{' '}
+                                  {bat.maxStacks && `× ${bat.maxStacks} stacks`}
+                                </dd>
+                              </div>
+                            )}
+                            {bat.hybrid && (
+                              <div className="text-emerald-700 font-semibold mt-1">
+                                ✓ Integrated inverter (no separate hybrid needed)
+                              </div>
+                            )}
+                          </dl>
+                          {bat.datasheetPath && (
+                            <a
+                              href={bat.datasheetPath}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#E8192C] hover:underline"
+                            >
+                              <FileText className="w-3.5 h-3.5" />
+                              View datasheet (PDF)
+                            </a>
                           )}
-                        </dl>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -313,38 +358,60 @@ export default async function BrandPage({
                     {inverters.map((inv) => (
                       <div
                         key={inv.sku}
-                        className="bg-white rounded-xl ring-1 ring-slate-200 p-5 hover:ring-[#E8192C]/30 transition-all"
+                        className="bg-white rounded-xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 transition-all overflow-hidden flex flex-col"
                       >
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <p className="text-xs font-semibold uppercase text-slate-500">
-                              {inv.brand}
-                            </p>
-                            <p className="font-bold text-slate-900 text-base">{inv.name}</p>
+                        <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-4 border-b border-slate-100">
+                          <Image
+                            src={inv.imagePath}
+                            alt={`${inv.brand} ${inv.name} inverter`}
+                            width={220}
+                            height={165}
+                            className="object-contain max-h-full max-w-full"
+                          />
+                        </div>
+                        <div className="p-5 flex flex-col flex-1">
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="text-xs font-semibold uppercase text-slate-500">
+                                {inv.brand}
+                              </p>
+                              <p className="font-bold text-slate-900 text-base">{inv.name}</p>
+                            </div>
+                            {inv.badge && (
+                              <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E8192C]/10 text-[#E8192C] px-2 py-0.5 rounded-full">
+                                {inv.badge}
+                              </span>
+                            )}
                           </div>
-                          {inv.badge && (
-                            <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E8192C]/10 text-[#E8192C] px-2 py-0.5 rounded-full">
-                              {inv.badge}
-                            </span>
+                          <div className="text-3xl font-black text-[#E8192C] mb-3">
+                            {inv.ratingKw} <span className="text-base">kW</span>
+                          </div>
+                          <dl className="space-y-1 text-xs text-slate-600 mb-4">
+                            <div className="flex justify-between">
+                              <dt>Efficiency</dt>
+                              <dd className="font-semibold text-slate-900">{inv.efficiency}</dd>
+                            </div>
+                            <div className="flex justify-between">
+                              <dt>Phase</dt>
+                              <dd className="font-semibold text-slate-900">{inv.phaseType}</dd>
+                            </div>
+                            <div className="flex justify-between">
+                              <dt>Warranty</dt>
+                              <dd className="font-semibold text-slate-900">{inv.warranty}</dd>
+                            </div>
+                          </dl>
+                          {inv.datasheetPath && (
+                            <a
+                              href={inv.datasheetPath}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="mt-auto inline-flex items-center gap-1.5 text-xs font-semibold text-[#E8192C] hover:underline"
+                            >
+                              <FileText className="w-3.5 h-3.5" />
+                              View datasheet (PDF)
+                            </a>
                           )}
                         </div>
-                        <div className="text-3xl font-black text-[#E8192C] mb-3">
-                          {inv.ratingKw} <span className="text-base">kW</span>
-                        </div>
-                        <dl className="space-y-1 text-xs text-slate-600">
-                          <div className="flex justify-between">
-                            <dt>Efficiency</dt>
-                            <dd className="font-semibold text-slate-900">{inv.efficiency}</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt>Phase</dt>
-                            <dd className="font-semibold text-slate-900">{inv.phaseType}</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt>Warranty</dt>
-                            <dd className="font-semibold text-slate-900">{inv.warranty}</dd>
-                          </div>
-                        </dl>
                       </div>
                     ))}
                   </div>
