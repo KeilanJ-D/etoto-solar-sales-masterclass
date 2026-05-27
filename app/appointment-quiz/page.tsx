@@ -50,7 +50,7 @@ const QUIZ_QUESTIONS = [
     question: "Does solar still work on cloudy days in the UK?",
     options: ["Yes", "No"],
     correct: 0,
-    explanation: "Panels generate from daylight, not direct sunshine. A cloudy day in the UK still produces 10-25% of peak output. Over a full year, the UK averages 4.5 peak sun hours per day — that's the figure we use in ROI calculations. If a customer asks this, never dismiss it. Acknowledge it and explain the annual average.",
+    explanation: "Panels generate from daylight, not direct sunshine. A cloudy day in the UK still produces 10-25% of peak output. The SolaFlow funnel uses 3.5 peak sun hours per day as a conservative UK annual average — that's the figure we use in ROI calculations so we never over-promise. If a customer asks about cloudy days, never dismiss it. Acknowledge it and explain the annual average.",
     studyStep: 5
   },
   {
@@ -131,7 +131,7 @@ const QUIZ_QUESTIONS = [
     question: "Customer says 'I've heard solar doesn't work when it's cloudy.'",
     options: ["Agree and move on", "Panels generate from daylight, not just direct sunshine", "Offer a discount to compensate", "Say it's a common myth without explaining"],
     correct: 1,
-    explanation: "This is the most common misconception. Panels generate from photons in daylight, not heat or direct sun. Germany has worse weather than the UK and is one of the world's largest solar markets. The key stat: UK averages 4.5 peak sun hours per day across the year, including cloudy days.",
+    explanation: "This is the most common misconception. Panels generate from photons in daylight, not heat or direct sun. Germany has worse weather than the UK and is one of the world's largest solar markets. The key stat: SolaFlow uses 3.5 peak sun hours per day across the year (deliberately conservative — UK averages slightly higher) so estimates always under-promise.",
     studyStep: 5
   },
   {

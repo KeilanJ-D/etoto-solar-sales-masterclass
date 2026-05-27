@@ -39,7 +39,7 @@ const formulas = [
     title: 'Solar Income',
     lines: [
       'Panel W × Count = System kWp',
-      'kWp × 4.5 peak hours = Daily generation',
+      'kWp × 3.5 peak hours = Daily generation',
       'Daily gen × Export rate = Daily income',
       'Daily income × 365 = Annual income',
     ],

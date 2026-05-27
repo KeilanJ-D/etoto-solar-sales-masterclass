@@ -31,8 +31,8 @@ const LABOUR_PER_KWP = 700
 /**
  * Inline Energy Audit widget. Uses SolaFlow's actual computeAudit + the
  * recommendation engine, so numbers match the SolaFlow dashboard and
- * funnel exactly. Lightweight version of the full /tools/instant-estimator
- * Energy Audit stage — designed to live INSIDE a knowledge page.
+ * funnel exactly. Lightweight version of the full Formula Calculator on
+ * /formula-cheat-sheet — designed to live INSIDE a knowledge page.
  */
 export default function EnergyAuditWidget() {
   const [monthlyBill, setMonthlyBill] = useState(180)
@@ -246,10 +246,10 @@ export default function EnergyAuditWidget() {
               </p>
             </div>
             <Link
-              href="/tools/instant-estimator"
+              href="/formula-cheat-sheet"
               className="inline-flex items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-3 px-5 rounded-xl transition-all shadow-md whitespace-nowrap"
             >
-              Open the Instant Estimator
+              Open the Formula Calculator
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

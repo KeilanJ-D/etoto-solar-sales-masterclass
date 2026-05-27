@@ -181,7 +181,7 @@ Unit Rate: 28p/kWh
 Off-peak Rate: 7p/kWh
 Export Rate: 15p/kWh
 Price per kWp: £1,000
-Peak Sun Hours: 4.5 (UK average)
+Peak Sun Hours: 3.5 (SolaFlow conservative UK average)
 ---
 Saved: ${new Date().toLocaleDateString()}`
     navigator.clipboard.writeText(config)
@@ -331,7 +331,7 @@ Saved: ${new Date().toLocaleDateString()}`
               { label: 'Off-Peak', value: '7p', note: 'Octopus Go' },
               { label: 'Best SEG', value: '16p', note: 'Ecotricity' },
               { label: 'Peak Export', value: '32p', note: 'Flux peak' },
-              { label: 'Sun Hours', value: '4.5', note: 'UK average' },
+              { label: 'Sun Hours', value: '3.5', note: 'SolaFlow funnel' },
               { label: 'VAT', value: '0%', note: 'Until Mar 2027' },
             ].map((item, index) => (
               <div key={index} className="bg-slate-50 rounded-xl p-4 text-center border border-slate-200">

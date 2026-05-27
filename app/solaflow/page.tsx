@@ -111,10 +111,10 @@ export default function SolaFlowPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 w-full max-w-md sm:max-w-none mx-auto">
             <Link
-              href="/tools/instant-estimator"
+              href="/formula-cheat-sheet"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] active:bg-[#B01220] text-white font-bold rounded-xl sm:rounded-full shadow-lg hover:shadow-xl transition-all min-h-[56px]"
             >
-              Open the Instant Estimator
+              Open the Formula Calculator
               <ArrowRight className="w-5 h-5" />
             </Link>
             <a
@@ -448,14 +448,14 @@ export default function SolaFlowPage() {
               Want to practise the 4-stage flow?
             </h3>
             <p className="text-slate-600 mb-6 max-w-xl mx-auto">
-              We&apos;ve built a training version of the estimator inside the Masterclass — same flow,
-              same maths, same product database. Run through it as many times as you need to get fluent.
+              Want to run the maths yourself? The Formula Cheat Sheet has the live 4-tab
+              calculator with all the SolaFlow-aligned constants — same numbers, same flow.
             </p>
             <Link
-              href="/tools/instant-estimator"
+              href="/formula-cheat-sheet"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all min-h-[52px]"
             >
-              Open the Instant Estimator
+              Open the Formula Calculator
               <ArrowRight className="w-5 h-5" />
             </Link>
             <p className="text-xs text-slate-500 mt-4">
@@ -574,10 +574,10 @@ export default function SolaFlowPage() {
                 ))}
               </div>
               <Link
-                href="/tools/instant-estimator"
+                href="/customer-journey"
                 className="block w-full text-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all min-h-[48px]"
               >
-                In the meantime, practise on the Estimator →
+                In the meantime, walk the customer journey →
               </Link>
             </div>
 

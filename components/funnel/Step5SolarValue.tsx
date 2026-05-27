@@ -16,7 +16,7 @@ export default function Step5SolarValue() {
       <div className="bg-slate-100 rounded-xl p-6 font-mono text-sm md:text-base text-slate-800 mb-6">
         <div className="space-y-2">
           <p>Panel W × Number of panels = <span className="text-[#E8192C] font-bold">System kWp</span></p>
-          <p>System kWp × 4.5 peak hours = <span className="text-[#E8192C] font-bold">Daily kWh generated</span></p>
+          <p>System kWp × 3.5 peak hours = <span className="text-[#E8192C] font-bold">Daily kWh generated</span></p>
           <p>Daily kWh × Export rate = <span className="text-[#E8192C] font-bold">Daily income</span></p>
           <p>Daily income × 365 = <span className="text-[#E8192C] font-bold">Annual export income</span></p>
         </div>

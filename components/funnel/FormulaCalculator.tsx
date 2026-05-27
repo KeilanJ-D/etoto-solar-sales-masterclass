@@ -564,8 +564,9 @@ function SolarIncomeTab({
   const systemKwp = (panelsNum * wattageNum) / 1000
   const solarCost = systemKwp * pricePerKwpNum
   
-  // Solar generation (UK average ~4.5 peak sun hours)
-  const dailyGeneration = systemKwp * 4.5
+  // Solar generation — SolaFlow funnel uses 3.5 peak sun hours (UK conservative average,
+  // matches lib/solaflow/audit-calc.ts so masterclass numbers align with the live tool)
+  const dailyGeneration = systemKwp * 3.5
   const dailySolarExport = dailyGeneration * (exportRateNum / 100)
   const annualSolarExport = dailySolarExport * 365
   

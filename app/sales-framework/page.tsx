@@ -92,7 +92,7 @@ const FRAMEWORK_STEPS = [
     ],
     keyPrinciple: 'Solar income feels like free money because it\'s money coming IN, not just saved.',
     adaptIt: [
-      'If the customer has a south-facing roof, bump the peak sun hours from 4.5 to 5. East-west, use 3.8-4.0. This shows you\'re designing for THEIR home, not reading a generic number.',
+      'SolaFlow uses 3.5 PSH as a deliberately conservative UK average so funnel estimates never over-promise. South-facing roof? You can defend 4.0 in the OpenSolar design. East-west? Drop to 3.0. The funnel under-promises; the survey delivers.',
       'Some customers don\'t want to export — they want self-sufficiency. For these buyers, flip the pitch: "With solar + battery, you\'ll use 80% of your own energy instead of 30%." Different angle, same products.',
     ],
   },
