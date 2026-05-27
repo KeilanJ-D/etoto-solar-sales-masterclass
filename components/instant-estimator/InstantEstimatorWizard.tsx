@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Battery, Sun, TrendingUp, Zap, Sparkles, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import {
@@ -16,7 +16,8 @@ import {
   PROPERTY_PANEL_DEFAULTS,
   type PropertyType,
 } from '@/lib/solaflow/recommendation-engine'
-import { batteries, panels } from '@/lib/solaflow-products'
+import { batteries, inverters, panels } from '@/lib/solaflow-products'
+import { isInverterBatteryCompatible } from '@/lib/solaflow/product-compatibility'
 import {
   computeSolarCost,
   getBatteryPrice,
@@ -48,6 +49,9 @@ interface EstimatorState {
   // Stage 3
   selectedPanelSku: string
   panelCount: number
+  /** True once the user has manually touched panelCount. Prevents
+   * handlePropertyChange from silently overwriting their edit. */
+  panelCountUserSet: boolean
   exportRatePence: number
   batteryOptimised: boolean
   // Stage 4
@@ -66,6 +70,7 @@ const INITIAL_STATE: EstimatorState = {
   selectedInverterSku: 'foxess-h1-5kw',
   selectedPanelSku: 'aiko-470w',
   panelCount: 13,
+  panelCountUserSet: false,
   exportRatePence: DEFAULT_EXPORT_RATE_PENCE,
   batteryOptimised: true,
   extrasCost: 0,
@@ -83,7 +88,21 @@ export default function InstantEstimatorWizard() {
   const [state, setState] = useState<EstimatorState>(INITIAL_STATE)
   const [activeStage, setActiveStage] = useState<StageIndex>(0)
 
-  const patch = (p: Partial<EstimatorState>) => setState((s) => ({ ...s, ...p }))
+  /**
+   * Patch with two automatic flags:
+   * - Any patch touching `panelCount` sets `panelCountUserSet=true` so
+   *   subsequent property-type changes don't silently overwrite it.
+   * - Doesn't fire on the auto-seed path (which uses raw setState in
+   *   handlePropertyChange below).
+   */
+  const patch = (p: Partial<EstimatorState>) =>
+    setState((s) => {
+      const next: EstimatorState = { ...s, ...p }
+      if ('panelCount' in p && p.panelCount !== s.panelCount) {
+        next.panelCountUserSet = true
+      }
+      return next
+    })
 
   // Resolve selected products
   const selectedPanel = useMemo(
@@ -175,19 +194,50 @@ export default function InstantEstimatorWizard() {
     [audit.systemKwp, audit.totalCapacity, state.batteryQuantity],
   )
 
-  // Auto-seed panel count when property type changes (only if user hasn't manually overridden)
+  /**
+   * Auto-seed panel count when property type changes — but only if the
+   * user hasn't already manually set the count. Uses raw setState so the
+   * auto-seed doesn't trigger the patch's "user-set" flag.
+   */
   const handlePropertyChange = (next: EstimatorState['propertyType']) => {
-    if (!next) {
-      patch({ propertyType: next })
+    setState((s) => {
+      if (!next) return { ...s, propertyType: next }
+      const def = PROPERTY_PANEL_DEFAULTS[next as PropertyType]
+      if (def?.recommended != null && !s.panelCountUserSet) {
+        // Auto-seed; deliberately does NOT mark panelCountUserSet=true
+        return { ...s, propertyType: next, panelCount: def.recommended }
+      }
+      return { ...s, propertyType: next }
+    })
+  }
+
+  /**
+   * Auto-clear `selectedInverterSku` when the chosen inverter is no longer
+   * compatible with the chosen battery — covers the case where a rep picks
+   * FoxESS H1, then swaps to a Tesla PW3 (hybrid → no inverter needed) or
+   * to an EcoFlow battery (different brand). Mirrors the source's effect
+   * + toast pattern; we drop the toast for simplicity.
+   */
+  useEffect(() => {
+    if (!state.selectedInverterSku) return
+    // Hybrid battery or no battery? Inverter is unused — clear it
+    if (selectedBattery?.hybrid || !selectedBattery) {
+      setState((s) =>
+        s.selectedInverterSku ? { ...s, selectedInverterSku: null } : s,
+      )
       return
     }
-    const def = PROPERTY_PANEL_DEFAULTS[next as PropertyType]
-    if (def?.recommended != null) {
-      patch({ propertyType: next, panelCount: def.recommended })
-    } else {
-      patch({ propertyType: next })
+    // Non-hybrid battery: check current inverter is still brand-compatible
+    const currentInverter = inverters.find(
+      (i) => i.sku === state.selectedInverterSku,
+    )
+    if (
+      currentInverter &&
+      !isInverterBatteryCompatible(currentInverter, selectedBattery)
+    ) {
+      setState((s) => ({ ...s, selectedInverterSku: null }))
     }
-  }
+  }, [selectedBattery, state.selectedInverterSku])
 
   const reset = () => {
     setState(INITIAL_STATE)

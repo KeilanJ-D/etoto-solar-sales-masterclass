@@ -175,12 +175,18 @@ export default function StagePayback({
                   inputMode="numeric"
                   min={0}
                   value={customSystemCost ?? ''}
-                  onChange={(e) =>
-                    onChange({
-                      customSystemCost:
-                        e.target.value === '' ? null : Number(e.target.value) || null,
-                    })
-                  }
+                  onChange={(e) => {
+                    const raw = e.target.value
+                    if (raw === '') {
+                      onChange({ customSystemCost: null })
+                      return
+                    }
+                    const parsed = Number(raw)
+                    if (Number.isNaN(parsed)) return
+                    // Allow £0 (e.g. free demo install) — was previously
+                    // coerced back to null via `|| null` which is falsy for 0.
+                    onChange({ customSystemCost: Math.max(0, parsed) })
+                  }}
                   className="w-full px-3 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-[#E8192C]/30 focus:border-[#E8192C] focus:outline-none"
                   placeholder="leave blank to use calculated"
                 />

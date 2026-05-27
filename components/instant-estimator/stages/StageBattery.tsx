@@ -6,6 +6,7 @@ import ProductPicker, { type ProductPickerItem } from '../ProductPicker'
 import { batteries, inverters, type Battery, type Inverter } from '@/lib/solaflow-products'
 import type { AuditCalcOutputs } from '@/lib/solaflow/audit-calc'
 import type { BatteryRecommendation, InverterRecommendation } from '@/lib/solaflow/recommendation-engine'
+import { getCompatibleInverters } from '@/lib/solaflow/product-compatibility'
 import { getBatteryPrice, getInverterPrice } from '@/lib/instant-estimator/pricing'
 
 export interface BatteryStageProps {
@@ -70,16 +71,11 @@ export default function StageBattery({
     [batteryRec.minUsableCapacityKwh, batteryRec.maxUsableCapacityKwh],
   )
 
-  // Compatible inverters (brand-locked, battery-compatible, not gateways)
+  // Compatible inverters — uses shared lib so masterclass + real SolaFlow
+  // never drift on which inverters appear in the picker.
   const compatibleInverters: Inverter[] = useMemo(() => {
     if (!selectedBattery || !needsSeparateInverter) return []
-    return inverters.filter(
-      (inv) =>
-        inv.batteryCompatible &&
-        !inv.isGateway &&
-        (inv.compatibleBrands.includes(selectedBattery.brand) ||
-          inv.compatibleBrands.includes('Universal')),
-    )
+    return getCompatibleInverters(inverters, selectedBattery)
   }, [selectedBattery, needsSeparateInverter])
 
   const inverterItems: ProductPickerItem[] = useMemo(
