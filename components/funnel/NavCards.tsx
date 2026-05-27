@@ -1,15 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { Award, Briefcase, ListOrdered, Video, BookOpen, Settings, Calculator, Users, ArrowRight, Wrench } from 'lucide-react'
+import { Award, ListOrdered, Video, BookOpen, Settings, Users, ArrowRight, Wrench } from 'lucide-react'
 
+// 6 cards — standardised verbs: Open / Try / Watch / Read / Pick
 const ctaCards = [
   {
     icon: ListOrdered,
     title: 'The 9 Steps',
-    description: 'The complete sales formula',
+    description: 'The complete sales formula, scripts, real call audio',
     href: '/steps',
-    cta: 'Start Learning',
+    cta: 'Open the framework',
     accent: '#E8192C',
     featured: false,
   },
@@ -18,7 +19,7 @@ const ctaCards = [
     title: 'Knowledge Library',
     description: 'Inverter sizing, MPPT, optimisers, phase logic',
     href: '/knowledge',
-    cta: 'Browse Library',
+    cta: 'Open the library',
     accent: '#8B5CF6',
     featured: true,
   },
@@ -27,44 +28,17 @@ const ctaCards = [
     title: 'Systems Playbooks',
     description: 'SolaFlow · HighLevel · OpenSolar · Discovery',
     href: '/systems',
-    cta: 'Open Playbooks',
+    cta: 'Open the playbooks',
     accent: '#10B981',
     featured: false,
   },
   {
     icon: Wrench,
     title: 'Interactive Tools',
-    description: 'Inverter sizing tool + optimiser ROI calculator',
+    description: 'Inverter Sizing Tool + Optimiser ROI Calculator',
     href: '/tools/inverter-sizing',
-    cta: 'Try the Tools',
+    cta: 'Try the tools',
     accent: '#F59E0B',
-    featured: false,
-  },
-  {
-    icon: Video,
-    title: 'Live Sales Call',
-    description: 'Real 45-min call recording',
-    href: '/live-call',
-    cta: 'Watch Now',
-    accent: '#3B82F6',
-    featured: false,
-  },
-  {
-    icon: Users,
-    title: 'For Your Role',
-    description: 'Setters · Reps · Partner agencies',
-    href: '/for',
-    cta: 'Pick Your Role',
-    accent: '#6366F1',
-    featured: false,
-  },
-  {
-    icon: Calculator,
-    title: 'Formula Calculator',
-    description: 'Build a system live with full maths',
-    href: '/steps#formula-calculator',
-    cta: 'Try It',
-    accent: '#EC4899',
     featured: false,
   },
   {
@@ -72,17 +46,17 @@ const ctaCards = [
     title: 'Case Studies',
     description: '£1.1M pipeline in 7 weeks · 67 sales/month · 9 real client stories',
     href: '/case-studies',
-    cta: 'Read the Stories',
+    cta: 'Read the stories',
     accent: '#0EA5E9',
     featured: false,
   },
   {
-    icon: Briefcase,
-    title: 'Work with ETOTO',
-    description: 'The agency behind the masterclass · 90-Day & 6-Month programmes',
-    href: '/agency',
-    cta: 'Explore the Agency',
-    accent: '#14B8A6',
+    icon: Video,
+    title: 'Live Sales Call',
+    description: 'Real 45-minute closing call recording',
+    href: '/live-call',
+    cta: 'Watch the call',
+    accent: '#3B82F6',
     featured: false,
   },
 ]

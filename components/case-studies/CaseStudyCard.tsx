@@ -29,9 +29,9 @@ export default function CaseStudyCard({
   return (
     <Link
       href={`/case-studies/${study.slug}`}
-      className="group block bg-white rounded-2xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all"
+      className="group flex flex-col h-full bg-white rounded-2xl ring-1 ring-slate-200 hover:ring-[#E8192C]/30 overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all"
     >
-      <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-900 via-slate-800 to-[#E8192C]/30 overflow-hidden">
+      <div className="relative aspect-[16/10] bg-gradient-to-br from-slate-900 via-slate-800 to-[#E8192C]/30 overflow-hidden flex-shrink-0">
         {study.thumbnail ? (
           <Image
             src={study.thumbnail}
@@ -64,7 +64,7 @@ export default function CaseStudyCard({
         )}
       </div>
 
-      <div className="p-5 sm:p-6">
+      <div className="p-5 sm:p-6 flex-1 flex flex-col">
         <div className="flex items-center gap-2 flex-wrap mb-3 text-xs">
           <span
             className={`inline-flex items-center px-2 py-0.5 rounded-full font-semibold ${programmeMeta.color}`}
@@ -112,7 +112,7 @@ export default function CaseStudyCard({
           </div>
         )}
 
-        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E8192C]">
+        <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-[#E8192C]">
           Read the full story
           <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
         </span>

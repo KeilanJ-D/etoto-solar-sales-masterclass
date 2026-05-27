@@ -28,7 +28,6 @@ import {
 } from 'lucide-react'
 import MasterclassNav from '@/components/funnel/MasterclassNav'
 import Footer from '@/components/funnel/Footer'
-import AcademyLadder from '@/components/shared/AcademyLadder'
 import RecognitionSection from '@/components/shared/RecognitionSection'
 import AnimateOnScroll from '@/components/shared/AnimateOnScroll'
 import AnimatedCounter from '@/components/shared/AnimatedCounter'
@@ -259,24 +258,22 @@ export default function AgencyPage() {
         </div>
       </section>
 
-      {/* THE LADDER */}
-      <AcademyLadder />
-
-      {/* PROGRAMMES — detailed */}
+      {/* PROGRAMMES — detailed (replaces Academy Ladder; the Ladder lives on /
+      and /complete-toolkit instead — keeping /agency tight) */}
       <section id="programmes" className="px-4 sm:px-6 lg:px-8 py-14 sm:py-20 bg-white scroll-mt-24">
         <div className="max-w-6xl mx-auto">
           <AnimateOnScroll variant="fade-up">
-            <div className="text-center mb-12">
+            <div className="text-center mb-4">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#E8192C] mb-3">
-                The programmes
+                Two ways to work with us
               </p>
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 mb-3 text-balance">
-                Two ways to work with us.
+                Read it · Done with you · Done for you.
               </h2>
-              <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
-                Same lead engine. Different commitment, different unlocks. Most clients
-                start with the 90-Day Scaler to prove the model, then graduate to the
-                6-Month Programme.
+              <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base mb-8">
+                You&apos;ve already read the Masterclass — the methodology. Below are
+                the two ways to have our team run that methodology in your business.
+                Same lead engine, different commitment, different unlocks.
               </p>
             </div>
           </AnimateOnScroll>
@@ -469,7 +466,7 @@ export default function AgencyPage() {
           <AnimateOnScroll variant="fade-up">
             <div className="text-center mb-10">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#E8192C] mb-3">
-                Capabilities
+                What&apos;s actually under the hood
               </p>
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 mb-3 text-balance">
                 Not just an ad agency. A full-stack growth partner.
@@ -502,7 +499,7 @@ export default function AgencyPage() {
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-10">
               <div>
                 <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#E8192C] mb-3">
-                  Client stories
+                  What this looks like in practice
                 </p>
                 <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 text-balance">
                   Same playbook. Different outcomes.
@@ -536,7 +533,7 @@ export default function AgencyPage() {
           <AnimateOnScroll variant="fade-up">
             <div className="text-center mb-12">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#E8192C] mb-3">
-                The process
+                What happens after you say yes
               </p>
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-slate-900 mb-3 text-balance">
                 Intro call to ads live in 7-10 days.
@@ -585,11 +582,14 @@ export default function AgencyPage() {
       <section className="px-4 sm:px-6 lg:px-8 py-14 sm:py-20 bg-slate-50">
         <div className="max-w-3xl mx-auto">
           <AnimateOnScroll variant="fade-up">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#E8192C] mb-3 text-center">
+              Common questions, honest answers
+            </p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 mb-2 text-center text-balance">
-              Frequently asked questions
+              The things people ask before booking.
             </h2>
             <p className="text-slate-600 text-center mb-10 text-sm sm:text-base">
-              Or just ask us on the intro call.
+              Or just ask us live on the intro call.
             </p>
           </AnimateOnScroll>
           <div className="space-y-3">
@@ -632,25 +632,25 @@ export default function AgencyPage() {
               No pitch. We learn your business, your install capacity, your pipeline.
               You decide if either programme is the right fit.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="mailto:keilan.jd@etotomedia.com?subject=Solar%20Sales%20Masterclass%20%E2%80%94%20Agency%20Intro%20Call&body=Hi%20Keilan%2C%0A%0AI%27d%20like%20to%20book%20a%2020-minute%20intro%20call%20to%20learn%20about%20the%2090-Day%20Scaler%20%2F%206-Month%20Programme.%0A%0AA%20few%20things%20about%20us%3A%0A-%20%5BCompany%20name%5D%0A-%20%5BTechnologies%20we%20install%5D%0A-%20%5BJobs%20per%20month%20currently%5D%0A-%20%5BBest%20time%20to%20call%5D"
-                className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px] text-base shadow-xl shadow-[#E8192C]/30"
-              >
-                <Mail className="w-5 h-5" />
-                Email Keilan
-                <ArrowRight className="w-5 h-5" />
-              </a>
+            <a
+              href="mailto:keilan.jd@etotomedia.com?subject=Solar%20Sales%20Masterclass%20%E2%80%94%20Agency%20Intro%20Call&body=Hi%20Keilan%2C%0A%0AI%27d%20like%20to%20book%20a%2020-minute%20intro%20call%20to%20learn%20about%20the%2090-Day%20Scaler%20%2F%206-Month%20Programme.%0A%0AA%20few%20things%20about%20us%3A%0A-%20%5BCompany%20name%5D%0A-%20%5BTechnologies%20we%20install%5D%0A-%20%5BJobs%20per%20month%20currently%5D%0A-%20%5BBest%20time%20to%20call%5D"
+              className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-5 px-10 rounded-full transition-all min-h-[64px] text-base sm:text-lg shadow-xl shadow-[#E8192C]/30"
+            >
+              <Mail className="w-5 h-5" />
+              Book your 20-minute call
+              <ArrowRight className="w-5 h-5" />
+            </a>
+            <p className="text-xs text-slate-500 mt-4">
+              Goes straight to Keilan · response within one working day
+            </p>
+            <p className="text-sm text-slate-400 mt-6">
+              Not ready yet?{' '}
               <Link
                 href="/complete-toolkit"
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-full transition-all min-h-[56px]"
+                className="text-white hover:text-[#E8192C] transition-colors underline underline-offset-4"
               >
-                <BookOpen className="w-5 h-5" />
-                Or read the Masterclass first
+                Read the £1,000 Masterclass first →
               </Link>
-            </div>
-            <p className="text-xs text-slate-500 mt-6">
-              keilan.jd@etotomedia.com · response within one working day
             </p>
           </AnimateOnScroll>
         </div>

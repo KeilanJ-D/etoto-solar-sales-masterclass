@@ -234,42 +234,65 @@ export default function CompleteMasterclassPage() {
                 </div>
               ) : (
                 <div className="space-y-4 max-w-xl mx-auto">
-                  <button
-                    onClick={handleBuy}
-                    className="inline-flex w-full items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px] text-base sm:text-lg shadow-lg shadow-[#E8192C]/30"
-                  >
-                    <span>
-                      Pay in full — {COMPLETE_MASTERCLASS.priceHeadline}{' '}
-                      {COMPLETE_MASTERCLASS.priceVatNote}
-                    </span>
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
+                  {COMPLETE_MASTERCLASS.stripeLink.includes('REPLACE_WITH') ? (
+                    <>
+                      <button
+                        onClick={handleBuy}
+                        className="inline-flex w-full items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px] text-base sm:text-lg shadow-lg shadow-[#E8192C]/30"
+                      >
+                        <span>
+                          Reserve your spot — {COMPLETE_MASTERCLASS.priceHeadline}{' '}
+                          {COMPLETE_MASTERCLASS.priceVatNote}
+                        </span>
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                      <p className="text-slate-400 text-xs">
+                        Stripe checkout goes live this week. Email reaches Keilan
+                        directly — we&apos;ll send the payment link within one working day.
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <a
+                        href={COMPLETE_MASTERCLASS.stripeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all min-h-[56px] text-base sm:text-lg shadow-lg shadow-[#E8192C]/30"
+                      >
+                        <span>
+                          Pay in full — {COMPLETE_MASTERCLASS.priceHeadline}{' '}
+                          {COMPLETE_MASTERCLASS.priceVatNote}
+                        </span>
+                        <ArrowRight className="w-5 h-5" />
+                      </a>
 
-                  <div className="flex items-center gap-3">
-                    <div className="flex-1 h-px bg-white/15" />
-                    <span className="text-xs text-slate-400 uppercase tracking-wider">
-                      or
-                    </span>
-                    <div className="flex-1 h-px bg-white/15" />
-                  </div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex-1 h-px bg-white/15" />
+                        <span className="text-xs text-slate-400 uppercase tracking-wider">
+                          or
+                        </span>
+                        <div className="flex-1 h-px bg-white/15" />
+                      </div>
 
-                  <a
-                    href={COMPLETE_MASTERCLASS.iwocaPayLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold py-3.5 px-6 rounded-full transition-all min-h-[52px] text-sm sm:text-base"
-                  >
-                    <Banknote className="w-5 h-5 text-emerald-400" />
-                    <span>
-                      Apply for iwocaPay finance — {COMPLETE_MASTERCLASS.iwocaPayDeposit},
-                      then {COMPLETE_MASTERCLASS.iwocaPayMonthly}
-                    </span>
-                  </a>
+                      <a
+                        href={COMPLETE_MASTERCLASS.iwocaPayLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-bold py-3.5 px-6 rounded-full transition-all min-h-[52px] text-sm sm:text-base"
+                      >
+                        <Banknote className="w-5 h-5 text-emerald-400" />
+                        <span>
+                          Apply for iwocaPay finance — {COMPLETE_MASTERCLASS.iwocaPayDeposit},
+                          then {COMPLETE_MASTERCLASS.iwocaPayMonthly}
+                        </span>
+                      </a>
 
-                  <p className="text-slate-400 text-xs">
-                    {COMPLETE_MASTERCLASS.iwocaPaySubtext} ·{' '}
-                    {COMPLETE_MASTERCLASS.accessNote}
-                  </p>
+                      <p className="text-slate-400 text-xs">
+                        {COMPLETE_MASTERCLASS.iwocaPaySubtext} ·{' '}
+                        {COMPLETE_MASTERCLASS.accessNote}
+                      </p>
+                    </>
+                  )}
 
                   <button
                     onClick={() => setShowCodeForm(!showCodeForm)}
@@ -618,8 +641,9 @@ export default function CompleteMasterclassPage() {
               className="inline-flex items-center gap-2 bg-[#E8192C] hover:bg-[#D01622] text-white font-bold py-4 px-8 rounded-full transition-all text-base sm:text-lg"
             >
               <span>
-                Buy the Masterclass — {COMPLETE_MASTERCLASS.priceHeadline}{' '}
-                {COMPLETE_MASTERCLASS.priceVatNote}
+                {COMPLETE_MASTERCLASS.stripeLink.includes('REPLACE_WITH')
+                  ? `Reserve your spot — ${COMPLETE_MASTERCLASS.priceHeadline} ${COMPLETE_MASTERCLASS.priceVatNote}`
+                  : `Buy the Masterclass — ${COMPLETE_MASTERCLASS.priceHeadline} ${COMPLETE_MASTERCLASS.priceVatNote}`}
               </span>
               <ArrowRight className="w-5 h-5" />
             </button>

@@ -276,14 +276,14 @@ export default function KnowledgePage({ topic }: { topic: KnowledgeTopic }) {
                         key={idx}
                         className="border-l-2 border-[#E8192C] pl-4 py-1"
                       >
-                        <code className="block text-sm font-mono text-slate-800 bg-slate-50 px-3 py-2 rounded">
+                        <code className="block text-sm sm:text-base font-mono text-slate-800 bg-slate-50 px-3 py-2 rounded">
                           {s.formula}
                         </code>
-                        <p className="text-slate-700 font-semibold text-sm mt-2">
+                        <p className="text-slate-700 font-semibold text-sm sm:text-base mt-2">
                           → {s.result}
                         </p>
                         {s.explanation && (
-                          <p className="text-slate-500 text-xs mt-1">{s.explanation}</p>
+                          <p className="text-slate-500 text-xs sm:text-sm mt-1">{s.explanation}</p>
                         )}
                       </div>
                     ))}
@@ -426,15 +426,15 @@ export default function KnowledgePage({ topic }: { topic: KnowledgeTopic }) {
         </section>
       )}
 
-      {/* FOOTER STAMP */}
-      <section className="px-4 sm:px-6 lg:px-8 py-8 text-center">
+      {/* FOOTER STAMP — visually separated from DoneForYouCard above */}
+      <section className="px-4 sm:px-6 lg:px-8 py-10 sm:py-12 text-center border-t border-slate-100 mt-6">
         <p className="text-xs text-slate-400">
           Last reviewed: {formatDate(topic.lastUpdated)} · Maintained by the ETOTO solar
           team
         </p>
         <Link
           href="/knowledge"
-          className="inline-flex items-center gap-2 mt-3 text-sm text-[#E8192C] hover:underline font-medium"
+          className="inline-flex items-center gap-2 mt-3 text-sm text-slate-600 hover:text-[#E8192C] transition-colors font-medium"
         >
           <BookOpen className="w-4 h-4" />
           Back to Knowledge Library

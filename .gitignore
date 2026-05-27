@@ -13,4 +13,10 @@ next.user-config.*
 # Common ignores
 node_modules
 .next/
-.DS_Storetsconfig.tsbuildinfo
+.DS_Store
+# Build artifacts
+tsconfig.tsbuildinfo
+
+# Lockfile preference (project uses npm/package-lock.json)
+pnpm-lock.yaml
+yarn.lock
