@@ -84,8 +84,9 @@ export default function FormulaCheatSheetPage() {
                 <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">The 4 Formulas</h2>
               </div>
 
-              {/* Formula Cards Preview */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              {/* All 4 Formula Cards — ungated. The spine is free; only the
+                  calculator + tariff tables sit behind the paywall. */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <FormulaCard
                   number={1}
                   title="Energy Audit"
@@ -100,10 +101,6 @@ export default function FormulaCheatSheetPage() {
                   example="17.61 × (£0.28 - £0.07) × 365"
                   result="= £1,350/year saved"
                 />
-              </div>
-
-              {/* Blurred cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 blur-sm select-none pointer-events-none">
                 <FormulaCard
                   number={3}
                   title="Solar Income"
@@ -119,6 +116,10 @@ export default function FormulaCheatSheetPage() {
                   result="= 4.2 years payback"
                 />
               </div>
+              <p className="text-center text-sm text-slate-500 italic">
+                The 4 formulas are the spine — free for everyone. The interactive calculator,
+                live tariff comparison and printable cheat sheet are part of the Complete Masterclass.
+              </p>
             </div>
           </section>
         }

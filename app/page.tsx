@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, BookOpen, Settings, Sparkles, Wrench } from 'lucide-react'
+import { ArrowRight, BookOpen, Headphones, ListOrdered, Settings, Sigma, Sparkles, Wrench } from 'lucide-react'
 import Hero from '@/components/funnel/Hero'
 import TheProblem from '@/components/funnel/TheProblem'
 import TheMethod from '@/components/funnel/TheMethod'
@@ -29,7 +29,93 @@ export default function SalesMasterclass() {
       
       {/* PART 1: THE HOOK */}
       <Hero />
-      
+
+      {/* START HERE — orientation path for Day-1 reps. Tells Bob the
+          recommended reading order so the deck doesn't feel like 9 doors
+          at once. Updated when Phase B ships the Customer Journey page. */}
+      <section className="bg-slate-900 text-white px-4 sm:px-6 py-8 sm:py-10">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-[#E8192C] mb-1">
+                New to selling solar?
+              </p>
+              <h2 className="text-xl sm:text-2xl font-black">
+                Read in this order — week 1 of your training
+              </h2>
+            </div>
+            <p className="text-xs text-slate-400 italic">
+              ~63 min total · Or jump straight to your role below
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Link
+              href="/formula-cheat-sheet"
+              className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
+                1
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <Sigma className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold">3 min</p>
+                </div>
+                <p className="font-bold text-sm mb-0.5 group-hover:text-[#E8192C] transition-colors">
+                  The Formula
+                </p>
+                <p className="text-xs text-slate-400 leading-snug">
+                  The 4 sums that close every solar deal.
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/steps"
+              className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
+                2
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <ListOrdered className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold">15 min</p>
+                </div>
+                <p className="font-bold text-sm mb-0.5 group-hover:text-[#E8192C] transition-colors">
+                  The 9 Steps
+                </p>
+                <p className="text-xs text-slate-400 leading-snug">
+                  How to run the call, step by step.
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/live-call"
+              className="group flex items-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl p-4 transition-all"
+            >
+              <div className="w-10 h-10 rounded-lg bg-[#E8192C] flex items-center justify-center flex-shrink-0 font-black text-white text-sm">
+                3
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <Headphones className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs uppercase tracking-wider text-slate-400 font-semibold">45 min</p>
+                </div>
+                <p className="font-bold text-sm mb-0.5 group-hover:text-[#E8192C] transition-colors">
+                  The Real Call
+                </p>
+                <p className="text-xs text-slate-400 leading-snug">
+                  Hear all 9 steps in one recorded close.
+                </p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-slate-500 flex-shrink-0 mt-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* PART 2: NAVIGATION CARDS - Moved up for immediate engagement */}
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-5xl mx-auto">

@@ -175,6 +175,22 @@ export default function AppointmentQuizPage() {
   return (
     <main className="bg-[#FAFBFC] min-h-screen">
       <MasterclassNav />
+
+      {/* Clarifying banner — this is the SETTER quiz, not the customer
+          quiz. Bob arrives expecting the lead-form and this disambiguates
+          it in one line before he reads the hero. */}
+      <div className="bg-amber-50 border-b border-amber-200 px-4 py-2.5">
+        <div className="max-w-5xl mx-auto flex items-center justify-center gap-2 text-xs sm:text-sm text-amber-900 text-center">
+          <span className="font-bold">⚠️ This tests your setters.</span>
+          <span className="hidden sm:inline">For the customer-facing quiz your prospects fill in, see</span>
+          <span className="sm:hidden">For the customer quiz, see</span>
+          <Link href="/solaflow" className="font-bold underline hover:no-underline">
+            SolaFlow
+          </Link>
+          .
+        </div>
+      </div>
+
       {/* Hero */}
       <ProductHero
         title="Are Your Setters Ready for the Phones?"
