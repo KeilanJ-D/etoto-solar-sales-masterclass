@@ -19,6 +19,8 @@ export default function StringDesign() {
       title="One MPPT, one string, one operating voltage — why it matters"
       caption="Three roofs, three different stringing decisions. The cost of getting this wrong is 8 – 25% of annual yield, every year, forever."
       fullWidth
+      scrollOnMobile
+      mobileMinWidth={900}
       legend={
         <>
           <LegendItem color={SUN} label="Panel in full sun" />

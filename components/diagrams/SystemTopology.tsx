@@ -22,6 +22,8 @@ export default function SystemTopology() {
       title="What a residential solar + battery install actually looks like"
       caption="Sun → panels → inverter → battery / consumer unit → house load → grid. Animated dots show DC (red) and AC (blue) current flow."
       fullWidth
+      scrollOnMobile
+      mobileMinWidth={900}
       legend={
         <>
           <LegendItem color={RED} label="DC current (panels → inverter)" />

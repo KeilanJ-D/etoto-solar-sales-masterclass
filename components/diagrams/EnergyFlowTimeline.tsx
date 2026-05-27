@@ -22,6 +22,8 @@ export default function EnergyFlowTimeline() {
       title="How solar + battery + grid interact across 24 hours"
       caption="The sun arc, household load, and battery state-of-charge all overlap in time. Where they don't align is where the battery + grid earn their money."
       fullWidth
+      scrollOnMobile
+      mobileMinWidth={900}
       legend={
         <>
           <LegendItem color={AMBER} label="Solar generation (sun arc)" />

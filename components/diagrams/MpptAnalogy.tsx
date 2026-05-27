@@ -25,6 +25,8 @@ export default function MpptAnalogy() {
       title="What an MPPT actually does — the cruise control analogy"
       caption="Cruise control adjusts the throttle to hold a target speed across changing road conditions. An MPPT adjusts the voltage to extract maximum power across changing sun conditions. Same idea, different lever."
       fullWidth
+      scrollOnMobile
+      mobileMinWidth={900}
       legend={
         <>
           <LegendItem color={SLATE} label="Driver / sun input" />

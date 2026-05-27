@@ -46,6 +46,8 @@ export default function BillBeforeAfter() {
       title="What a typical UK home's electricity bill looks like before + after solar + battery"
       caption="Same usage, same standing charge, completely different colour mix. The peak-rate red bar collapses; off-peak charging takes most of the load; SEG export creates a new green income bar that didn't exist before."
       fullWidth
+      scrollOnMobile
+      mobileMinWidth={900}
       legend={
         <>
           <LegendItem color={RED} label="Peak rate (~28p/kWh)" />

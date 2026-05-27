@@ -15,6 +15,8 @@ import DnoFlowchart from '@/components/diagrams/DnoFlowchart'
 import BillBeforeAfter from '@/components/diagrams/BillBeforeAfter'
 import EnergyAuditWidget from './EnergyAuditWidget'
 import BatterySizingWidget from './BatterySizingWidget'
+import InverterSizingWidget from './InverterSizingWidget'
+import OptimiserWidget from './OptimiserWidget'
 
 /**
  * Diagrams + inline calculator widgets rendered after "longRule" on
@@ -49,7 +51,14 @@ function TopicDiagrams({ slug }: { slug: string }) {
         </>
       )
     case 'inverter-sizing':
-      return <SystemTopology />
+      return (
+        <>
+          <SystemTopology />
+          <InverterSizingWidget />
+        </>
+      )
+    case 'optimisers':
+      return <OptimiserWidget />
     default:
       return null
   }
