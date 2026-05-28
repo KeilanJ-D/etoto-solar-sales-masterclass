@@ -28,10 +28,23 @@ export function useAnimateOnScroll(threshold = 0.1) {
 }
 
 export function useCountUp(end: number, duration: number = 2000, shouldStart: boolean = false): number {
-  const [count, setCount] = useState(0)
+  // If shouldStart is true on first render (i.e. above-the-fold stats like
+  // the homepage Hero), initialise at the END value so SSR + first paint
+  // both show the final number — no "0 Steps · £0+ · <0 mins" flash.
+  // For below-the-fold use, shouldStart starts false → count starts at 0 →
+  // animation runs when triggered.
+  const [count, setCount] = useState(shouldStart ? end : 0)
+  const hasAnimated = useRef(shouldStart)
 
   useEffect(() => {
     if (!shouldStart) return
+    if (hasAnimated.current) {
+      // Already showing the end value from initial state — skip animation
+      // (the value is correct, no need to back up to 0 and re-count).
+      setCount(end)
+      return
+    }
+    hasAnimated.current = true
 
     let startTime: number
     let animationFrame: number
