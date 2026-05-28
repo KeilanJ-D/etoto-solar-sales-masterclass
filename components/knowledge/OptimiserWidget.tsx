@@ -169,8 +169,8 @@ export default function OptimiserWidget() {
                     £{result.annualLossDoNothingGBP}/yr lost
                   </p>
                   <p className="text-xs text-red-900">
-                    £{result.annualLossDoNothingGBP * 25} over the system&apos;s 25-year
-                    life
+                    £{result.annualLossDoNothingGBP * 25}
+                    {' '}over the system&apos;s 25-year life
                   </p>
                 </>
               ) : (

@@ -28,12 +28,17 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
             >
               {logo.logoUrl ? (
                 <div className="h-10 w-auto relative" style={{ width: '120px', height: '40px' }}>
+                  {/* brightness(0) invert(1): client logo PNGs are mixed
+                      colour/greyscale designed for light backgrounds. On dark
+                      navy most disappear. Force a uniform white so every logo
+                      contrasts equally, then dim with opacity for a tasteful
+                      "trusted by" wall (full colour returns on hover). */}
                   <Image
                     src={logo.logoUrl}
                     alt={logo.name}
                     fill
                     sizes="120px"
-                    className="object-contain"
+                    className="object-contain [filter:brightness(0)_invert(1)] hover:[filter:none] transition-[filter] duration-300"
                   />
                 </div>
               ) : (
@@ -56,7 +61,7 @@ export function ClientLogos({ logos, title = 'Trusted by 200+ UK solar installer
                     alt={logo.name}
                     fill
                     sizes="80px"
-                    className="object-contain"
+                    className="object-contain [filter:brightness(0)_invert(1)]"
                   />
                 </div>
               ) : (

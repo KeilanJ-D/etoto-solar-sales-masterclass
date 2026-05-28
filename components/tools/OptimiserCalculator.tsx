@@ -368,8 +368,9 @@ export default function OptimiserCalculator() {
                   £{result.annualLossDoNothingGBP.toFixed(0)}/year
                 </p>
                 <p className="text-sm text-red-900">
-                  {result.annualLossDoNothingKwh.toFixed(0)} kWh lost annually · £
-                  {(result.annualLossDoNothingGBP * 25).toFixed(0)} over the system&apos;s 25-year life
+                  {result.annualLossDoNothingKwh.toFixed(0)} kWh lost annually
+                  {' '}· £{(result.annualLossDoNothingGBP * 25).toFixed(0)}
+                  {' '}over the system&apos;s 25-year life
                 </p>
               </div>
             </div>

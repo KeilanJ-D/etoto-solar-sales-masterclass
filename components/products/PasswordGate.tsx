@@ -110,17 +110,20 @@ export default function PasswordGate({
 
   return (
     <div className="relative">
-      {/* Preview content with blur overlay */}
+      {/* Preview content */}
       {previewContent && (
         <div className="relative">
           {previewContent}
-          {/* Gradient fade to white */}
-          <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-white via-white/95 to-transparent pointer-events-none" />
+          {/* Subtle fade — just softens the bottom edge so the unlock card
+              feels connected to the preview. The preview content itself is
+              FREE (the 4 formula cards); the old 256px fade made cards 3 & 4
+              look gated when they weren't. Reduced to 80px and lighter. */}
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent pointer-events-none" />
         </div>
       )}
 
       {/* Password gate card */}
-      <div className="relative z-10 -mt-32 mx-3 sm:mx-4 md:mx-auto max-w-xl">
+      <div className="relative z-10 mt-6 mx-3 sm:mx-4 md:mx-auto max-w-xl">
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
           {/* Header */}
           <div className="bg-slate-900 text-white p-4 sm:p-6 text-center">

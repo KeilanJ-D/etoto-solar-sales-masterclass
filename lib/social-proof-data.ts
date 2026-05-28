@@ -14,7 +14,9 @@ export const stats = [
   { value: "£200M+", label: "Sales for Clients" },
   { value: "£5M/m", label: "Avg Client Sales/Month" },
   { value: "£12,500+", label: "Average Client AOV" },
-  { value: "<£500", label: "Average Client CPA" },
+  // "Under £500" reads cleanly; "<£500" at hero font sizes can look like a
+  // tag or be misread on quick scan. The label already says "Average".
+  { value: "Under £500", label: "Average Client CPA" },
 ]
 
 

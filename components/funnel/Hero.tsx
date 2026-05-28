@@ -72,16 +72,25 @@ export default function Hero() {
         />
       ))}
 
-      {/* Logo - ETOTO wordmark, confident and large */}
-      <div className={`mb-8 md:mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-        <img 
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETOTO_Joel-Sp4sI6W29ziGLLM0CGKbh7tBi3HDbM.png" 
-          alt="ETOTO Media" 
-          width={200}
-          height={56}
-          style={{ width: 'auto', height: 'auto', maxHeight: '56px', maxWidth: '100%' }}
-          className="object-contain"
-        />
+      {/* Logo lockup — red icon mark + dark wordmark. The previous blob-storage
+          PNG had a WHITE wordmark designed for dark backgrounds, which made it
+          nearly invisible on this light hero. Rebuilt inline so each element
+          renders with proper contrast against either light or dark surfaces. */}
+      <div className={`mb-8 md:mb-12 flex items-center justify-center gap-3 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
+        <span
+          aria-label="ETOTO Media"
+          className="inline-flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#E8192C] shadow-lg shadow-[#E8192C]/20"
+        >
+          <svg width="36" height="36" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g style={{ transform: 'scale(0.95)', transformOrigin: 'center' }}>
+              <path fill="#fff" d="M101.141 53H136.632C151.023 53 162.689 64.6662 162.689 79.0573V112.904H148.112V79.0573C148.112 78.7105 148.098 78.3662 148.072 78.0251L112.581 112.898C112.701 112.902 112.821 112.904 112.941 112.904H148.112V126.672H112.941C98.5504 126.672 86.5638 114.891 86.5638 100.5V66.7434H101.141V100.5C101.141 101.15 101.191 101.792 101.289 102.422L137.56 66.7816C137.255 66.7563 136.945 66.7434 136.632 66.7434H101.141V53Z" />
+              <path fill="#fff" d="M65.2926 124.136L14 66.7372H34.6355L64.7495 100.436V66.7372H80.1365V118.47C80.1365 126.278 70.4953 129.958 65.2926 124.136Z" />
+            </g>
+          </svg>
+        </span>
+        <span className="font-heading text-2xl md:text-3xl font-black tracking-tight text-slate-900 leading-none">
+          ETOTO <span className="text-slate-500 font-bold">Media</span>
+        </span>
       </div>
 
       {/* Badge — single merged credibility pill */}
@@ -126,7 +135,9 @@ export default function Hero() {
             <div 
               className="px-2 sm:px-4 md:px-6 py-3 sm:py-4 md:py-6 bg-white/90 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500 md:hover:-translate-y-2 group h-full"
             >
-              <p className="text-lg sm:text-2xl md:text-5xl font-black transition-transform group-hover:scale-110" style={{ color: stat.color }}>
+              {/* whitespace-nowrap: prevents "<25 mins" from wrapping to two
+                  lines and looking unbalanced next to its 1-line siblings. */}
+              <p className="text-lg sm:text-2xl md:text-5xl font-black whitespace-nowrap transition-transform group-hover:scale-110" style={{ color: stat.color }}>
                 {stat.prefix}{stat.value.toLocaleString()}{stat.suffix}
               </p>
               <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 font-medium mt-1 md:mt-2 leading-tight">{stat.label}</p>

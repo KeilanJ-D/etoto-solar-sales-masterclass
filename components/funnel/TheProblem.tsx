@@ -83,7 +83,10 @@ export default function TheProblem() {
         <div className={`mt-10 md:mt-14 text-center transition-all duration-700 delay-700 ${sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex flex-col items-center gap-3 bg-[#E8192C] text-white rounded-2xl px-6 md:px-8 py-5 md:py-6 shadow-xl">
             <p className="text-sm md:text-lg font-medium max-w-2xl leading-relaxed">
-              &ldquo;You&apos;re not selling solar panels. You&apos;re selling <span className="font-bold">£2,500/year</span> in savings and income. If the customer can see that number, the price of the system becomes irrelevant.&rdquo;
+              &ldquo;You&apos;re not selling solar panels. You&apos;re selling{' '}
+              <span className="font-bold">£2,500/year</span>{' '}in savings and
+              income. If the customer can see that number, the price of the
+              system becomes irrelevant.&rdquo;
             </p>
           </div>
         </div>
