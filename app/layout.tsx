@@ -63,8 +63,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth">
-      <body className="font-sans antialiased bg-white overflow-x-hidden">
+    <html lang="en" className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+      {/* suppressHydrationWarning on <body>: browser extensions (ColorZilla,
+          Grammarly, password managers, etc.) inject attributes like
+          cz-shortcut-listen, data-gr-c-s-check-loaded onto <body> before
+          React hydrates. Without this, the mismatch bails hydration and
+          users see only the loading spinner forever. */}
+      <body className="font-sans antialiased bg-white overflow-x-hidden" suppressHydrationWarning>
         {children}
         <Analytics />
       </body>
