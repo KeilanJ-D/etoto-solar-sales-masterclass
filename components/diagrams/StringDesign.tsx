@@ -30,8 +30,13 @@ export default function StringDesign() {
         </>
       }
     >
+      {/* viewBox height bumped from 380 → 420 to give the bottom annotation
+          room below the inverter labels. Previously the "Fix C with..."
+          caption sat at y=350 — the same row as the inverter rectangles
+          (which end at y=353) and the labels below them (y=365), causing
+          a visible overlap on desktop renders. */}
       <svg
-        viewBox="0 0 900 380"
+        viewBox="0 0 900 420"
         className="w-full h-auto"
         role="img"
         aria-label="Three string design scenarios"
@@ -82,10 +87,11 @@ export default function StringDesign() {
           inverterLabel="1 MPPT · 1 string · ⚠ bottleneck"
         />
 
-        {/* Bottom annotation */}
+        {/* Bottom annotation — sits below the inverter labels (which end
+            around y=370). */}
         <text
           x="450"
-          y="350"
+          y="400"
           textAnchor="middle"
           fontSize="12"
           fill="#64748b"

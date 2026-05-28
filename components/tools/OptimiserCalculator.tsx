@@ -365,11 +365,11 @@ export default function OptimiserCalculator() {
                   Cost of doing nothing
                 </p>
                 <p className="text-3xl sm:text-4xl font-black text-red-700 mb-1 leading-none">
-                  £{result.annualLossDoNothingGBP.toFixed(0)}/year
+                  £{Math.round(result.annualLossDoNothingGBP).toLocaleString('en-GB')}/year
                 </p>
                 <p className="text-sm text-red-900">
-                  {result.annualLossDoNothingKwh.toFixed(0)} kWh lost annually
-                  {' '}· £{(result.annualLossDoNothingGBP * 25).toFixed(0)}
+                  {Math.round(result.annualLossDoNothingKwh).toLocaleString('en-GB')} kWh lost annually
+                  {' '}· £{Math.round(result.annualLossDoNothingGBP * 25).toLocaleString('en-GB')}
                   {' '}over the system&apos;s 25-year life
                 </p>
               </div>
@@ -380,7 +380,7 @@ export default function OptimiserCalculator() {
             <div className="bg-white rounded-lg border border-red-200 p-3 sm:p-4 text-xs sm:text-sm">
               <div className="flex items-center gap-1.5 text-red-700 font-bold mb-2">
                 <Calculator className="w-3.5 h-3.5" />
-                <span>Where £{result.annualLossDoNothingGBP.toFixed(0)} comes from</span>
+                <span>Where £{Math.round(result.annualLossDoNothingGBP).toLocaleString('en-GB')} comes from</span>
               </div>
               <ol className="space-y-1.5 font-mono text-[11px] sm:text-xs text-slate-700">
                 <li>
@@ -397,7 +397,7 @@ export default function OptimiserCalculator() {
                 </li>
                 <li>
                   <span className="text-slate-400">④</span>{' '}
-                  × {(UNIT_RATE_GBP * 100).toFixed(0)}p unit rate = <strong className="text-red-700">£{result.annualLossDoNothingGBP.toFixed(0)} / year</strong>
+                  × {(UNIT_RATE_GBP * 100).toFixed(0)}p unit rate = <strong className="text-red-700">£{Math.round(result.annualLossDoNothingGBP).toLocaleString('en-GB')} / year</strong>
                 </li>
               </ol>
 
@@ -549,8 +549,8 @@ export default function OptimiserCalculator() {
               &ldquo;You have {result.shadedPanels}{' '}
               {result.shadedPanels === 1 ? 'panel' : 'panels'} in shade for part of the day.
               Without addressing it, that costs you about £
-              {result.annualLossDoNothingGBP.toFixed(0)} a year — £
-              {(result.annualLossDoNothingGBP * 25).toFixed(0)} over the system&apos;s
+              {Math.round(result.annualLossDoNothingGBP).toLocaleString('en-GB')} a year — £
+              {Math.round(result.annualLossDoNothingGBP * 25).toLocaleString('en-GB')} over the system&apos;s
               lifetime. The fix is{' '}
               {result.recommendation === 'optimisers'
                 ? `£${result.optimiserCost} in optimisers — small devices behind the shaded ${result.shadedPanels === 1 ? 'panel' : 'panels'} that make ${result.shadedPanels === 1 ? 'it' : 'them'} voltage-independent. The rest of the system never knows ${result.shadedPanels === 1 ? "it's there" : "they're there"}. Pays back inside a year.`

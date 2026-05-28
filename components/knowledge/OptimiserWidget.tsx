@@ -166,10 +166,10 @@ export default function OptimiserWidget() {
               {result.safeShaded > 0 ? (
                 <>
                   <p className="text-3xl font-black text-red-700 mb-1">
-                    £{result.annualLossDoNothingGBP}/yr lost
+                    £{result.annualLossDoNothingGBP.toLocaleString('en-GB')}/yr lost
                   </p>
                   <p className="text-xs text-red-900">
-                    £{result.annualLossDoNothingGBP * 25}
+                    £{(result.annualLossDoNothingGBP * 25).toLocaleString('en-GB')}
                     {' '}over the system&apos;s 25-year life
                   </p>
                 </>
