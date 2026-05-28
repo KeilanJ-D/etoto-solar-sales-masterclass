@@ -123,7 +123,12 @@ export default function OptimiserCalculator() {
     const aikoPaybackYears =
       aikoNetAnnualSaving > 0 ? aikoCost / aikoNetAnnualSaving : Infinity
 
-    // Best option pick
+    // Best option pick.
+    // KEY PHYSICS: you can't put 1-3 panels on their own string. Modern
+    // hybrid inverters need ~4+ panels per input to reach the ~90V MPPT
+    // start-up voltage. So "smart stringing" is NOT a fix for low shaded
+    // counts — it's an orientation tool that needs 4+ contiguous panels.
+    // Default for any shading: optimisers (works for any count).
     let recommendation:
       | 'none'
       | 'stringing'
@@ -131,10 +136,9 @@ export default function OptimiserCalculator() {
       | 'aiko' = 'none'
 
     if (shadedPanels === 0) recommendation = 'none'
-    else if (shadedPanels <= 3 && totalPanels >= 8)
-      recommendation = 'stringing' // smart stringing is free
-    else if (shadedPanels <= 6) recommendation = 'optimisers'
-    else recommendation = 'aiko'
+    else if (shadedPanels >= 6 && totalPanels >= 10)
+      recommendation = 'aiko' // Aiko swap competitive at heavy-shade scale
+    else recommendation = 'optimisers' // default for any shading scenario
 
     return {
       totalPanels,
@@ -440,33 +444,10 @@ export default function OptimiserCalculator() {
               Your three options
             </h3>
             <div className="space-y-3">
-              {/* Option A — smart stringing */}
-              <OptionCard
-                title="Smart stringing"
-                subtitle="Put shaded panels on their own MPPT"
-                cost="£0"
-                annualSaving={result.stringingSavingGBP}
-                payback="Instant"
-                viability={
-                  result.shadedPanels <= 6 && result.totalPanels >= 8
-                    ? 'best-free'
-                    : result.shadedPanels > 6
-                      ? 'not-recommended'
-                      : 'viable'
-                }
-                rationale={
-                  result.shadedPanels <= 6 && result.totalPanels >= 8
-                    ? 'Free fix — uses the inverter\'s 2nd MPPT.'
-                    : result.totalPanels < 8
-                      ? 'Array too small — not enough panels to make a clean string split.'
-                      : 'Too many shaded panels for stringing alone.'
-                }
-                isRecommended={result.recommendation === 'stringing'}
-              />
-              {/* Option B — optimisers */}
+              {/* Option 1 — Optimisers (DEFAULT recommendation for any shading) */}
               <OptionCard
                 title={`Tigo optimisers on ${result.shadedPanels} panel${result.shadedPanels === 1 ? '' : 's'}`}
-                subtitle="£45 trade per panel"
+                subtitle="£45 trade per panel — the surgical fix"
                 cost={`£${result.optimiserCost}`}
                 annualSaving={result.optimiserNetAnnualSaving}
                 payback={
@@ -474,11 +455,11 @@ export default function OptimiserCalculator() {
                     ? `${result.optimiserPaybackYears.toFixed(1)} yrs`
                     : '∞'
                 }
-                viability="viable"
-                rationale="Surgical fix — only shaded panels affected. Works with any inverter."
+                viability="best-free"
+                rationale="Works for any shade pattern — clustered or scattered, 1 panel or many. Each shaded panel becomes voltage-independent so the rest of the string keeps producing."
                 isRecommended={result.recommendation === 'optimisers'}
               />
-              {/* Option C — Aiko swap (only if not already on Aiko) */}
+              {/* Option 2 — Aiko swap (or built-in callout if already Aiko) */}
               {!isAikoSelected ? (
                 <OptionCard
                   title="Swap to Aiko (cell-level shade tolerance)"
@@ -493,8 +474,8 @@ export default function OptimiserCalculator() {
                   viability={result.shadedPanels > 6 ? 'best-paid' : 'viable'}
                   rationale={
                     result.shadedPanels > 6
-                      ? 'Cell-level shade tolerance — cleanest spec, longest warranty.'
-                      : 'Overkill for this much shade — optimisers cheaper.'
+                      ? 'Cell-level shade tolerance on EVERY panel. Cleanest spec, future-proofed against new shading. At this scale of shade, cheaper than optimisers per-panel.'
+                      : 'Overkill for this much shade today — but future-proofs the whole array. Worth comparing £ vs optimisers if customer plans to stay 10+ years.'
                   }
                   isRecommended={result.recommendation === 'aiko'}
                 />
@@ -503,17 +484,37 @@ export default function OptimiserCalculator() {
                   <div className="flex items-center gap-2 mb-1">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     <h4 className="font-bold text-emerald-900 text-sm sm:text-base">
-                      You&apos;re already on Aiko — option C is built in
+                      You&apos;re already on Aiko — cell-level bypass is built into every panel
                     </h4>
                   </div>
                   <p className="text-xs text-emerald-800 leading-relaxed">
-                    Aiko panels have cell-level bypass, so each panel handles partial shade
-                    on its own. You still get gains from smart stringing or optimisers on
-                    heavily-shaded panels, but the cell architecture buys you ~15-20% of the
-                    benefit for free.
+                    Aiko ABC panels handle partial shade on their own. Add optimisers on top
+                    ONLY if shade is heavy (6+ panels) — the two technologies stack at scale.
                   </p>
                 </div>
               )}
+              {/* Option 3 — MPPT split / string separation
+                  CONDITIONAL: only shown as viable for ≥4 shaded panels.
+                  This is really an ORIENTATION tool, not a shading tool —
+                  flagged honestly in the rationale. */}
+              <OptionCard
+                title="MPPT split / string separation"
+                subtitle="£0 if your inverter has a spare MPPT input"
+                cost="£0"
+                annualSaving={result.stringingSavingGBP}
+                payback="Instant"
+                viability={
+                  result.shadedPanels >= 4
+                    ? 'viable'
+                    : 'not-recommended'
+                }
+                rationale={
+                  result.shadedPanels < 4
+                    ? `Not viable with ${result.shadedPanels} shaded panel${result.shadedPanels === 1 ? '' : 's'}. Inverters need ≥4 panels per string to reach MPPT start-up voltage (~90V). This option is really for splitting roof orientations (east + west on two MPPTs), not for shading a small number of panels.`
+                    : `Viable IF your ${result.shadedPanels} shaded panels are a contiguous block on a separate roof face. If they're scattered across the same face, stick with optimisers. If they're on a different orientation entirely, this is your free fix.`
+                }
+                isRecommended={false}
+              />
             </div>
           </div>
         )}
@@ -550,11 +551,9 @@ export default function OptimiserCalculator() {
               {result.annualLossDoNothingGBP.toFixed(0)} a year — £
               {(result.annualLossDoNothingGBP * 25).toFixed(0)} over the system&apos;s
               lifetime. The fix is{' '}
-              {result.recommendation === 'stringing'
-                ? 'free — we just wire the shaded panels to their own circuit on the inverter.'
-                : result.recommendation === 'optimisers'
-                  ? `£${result.optimiserCost} in optimisers — they make each shaded panel independent so the rest of the system is not dragged down.`
-                  : `swapping to Aiko panels — they handle partial shade at the cell level. The premium pays back in ${result.aikoPaybackYears.toFixed(1)} years.`}
+              {result.recommendation === 'optimisers'
+                ? `£${result.optimiserCost} in optimisers — small devices behind the shaded ${result.shadedPanels === 1 ? 'panel' : 'panels'} that make ${result.shadedPanels === 1 ? 'it' : 'them'} voltage-independent. The rest of the system never knows ${result.shadedPanels === 1 ? "it's there" : "they're there"}. Pays back inside a year.`
+                : `swapping to Aiko panels — they handle partial shade at the cell level, no external hardware. The £${result.aikoCost} premium across all ${result.totalPanels} panels works out cheaper than ${result.shadedPanels} optimisers AND future-proofs the whole array.`}
               &rdquo;
             </p>
           </div>
@@ -579,7 +578,7 @@ interface CoachingCardProps {
   aikoCost: number
 }
 
-type CoachTone = 'aiko-already' | 'mppt-free' | 'optimisers' | 'aiko-swap' | 'aiko-heavy'
+type CoachTone = 'aiko-already' | 'optimisers-1-2' | 'optimisers' | 'aiko-swap' | 'aiko-heavy'
 
 function deriveCoach(props: CoachingCardProps): {
   tone: CoachTone
@@ -599,54 +598,57 @@ function deriveCoach(props: CoachingCardProps): {
       why: `Aiko's cell-level bypass handles partial shade on individual panels brilliantly. But with ${shadedPanels} panels in shade across the string, the inverter is still tracking a compromised voltage profile. Adding optimisers on the shaded panels makes them voltage-independent — each one outputs its own optimised power.`,
       action: `Quote ${shadedPanels} × £45 in optimisers (£${optimiserCost}). Customer keeps the Aiko aesthetic + warranty AND gets surgical shade recovery.`,
       principle:
-        'Aiko bypass = the panel handles its own shade. Optimisers = the panel handles its own VOLTAGE. Together: best-in-class shade recovery.',
+        'Aiko bypass = the panel handles its own shade (cell-level). Optimisers = the panel handles its own VOLTAGE (string-level). Together: best-in-class shade recovery.',
     }
   }
 
-  // Aiko + low/moderate shade — already on the right panel
+  // Aiko + low/moderate shade — cell bypass already handles it
   if (isAikoSelected) {
     return {
       tone: 'aiko-already',
-      headline: `You're already on Aiko — ${shadedPanels === 0 ? 'no fix needed' : 'most of the work is done'}`,
-      why: `Aiko's split-cell architecture has cell-level bypass diodes built in. When ${shadedPanels === 1 ? 'that panel' : 'those panels'} hit shade, the affected cells route around themselves — the panel keeps producing from its unshaded cells, and the string is never bottlenecked. You bought ~80% of the optimiser benefit when you picked the panel.`,
-      action: `No optimisers needed at this scale. Mention to the customer: "we put cell-level shade tolerance on every panel — that's why we chose Aiko for your roof."`,
+      headline: `You're already on Aiko — ${shadedPanels === 0 ? 'no fix needed' : 'cell-level bypass handles this'}`,
+      why: `Aiko's split-cell ABC architecture has bypass diodes at every cell. When ${shadedPanels === 1 ? 'that panel' : 'those panels'} hit shade, the affected cells route around themselves — the panel keeps producing from its unshaded cells, and the string is rarely bottlenecked at this scale.`,
+      action: `No optimisers needed. Tell the customer: "we put cell-level shade tolerance on every panel — that's why we chose Aiko for your roof." Sells the spec.`,
       principle:
-        'Aiko = shade tolerance is baked into every panel by design. The optimiser conversation only re-opens if shade is extreme (6+ panels) or scattered across orientations.',
+        'Aiko ABC = shade tolerance baked into every panel by design. The optimiser conversation only re-opens if shade gets extreme (6+ panels).',
     }
   }
 
-  // Non-Aiko + minimal shade + big enough array — free MPPT split wins
-  if (shadedPanels <= 2 && totalPanels >= 8) {
+  // 1–2 shaded panels (non-Aiko) — OPTIMISERS only.
+  // You can't make a viable string from 1-2 panels — they don't produce
+  // enough voltage to start a modern MPPT (~90V minimum, ~4 panels in
+  // series). Treating MPPT split as a "free fix" here is physically wrong.
+  if (shadedPanels >= 1 && shadedPanels <= 2) {
     return {
-      tone: 'mppt-free',
-      headline: `Only ${shadedPanels} panel${shadedPanels > 1 ? 's' : ''} in shade — free MPPT split is the answer`,
-      why: `Modern hybrid inverters have 2–4 MPPT inputs (independent maximum power point trackers). When you wire the shaded ${shadedPanels === 1 ? 'panel' : 'panels'} onto their own MPPT, the inverter tracks them independently from the clean string. The unshaded panels produce at 100%; the shaded ${shadedPanels === 1 ? 'one operates' : 'ones operate'} at whatever they can do without dragging anyone else down.`,
-      action: `Spec it at install — no optimisers, no panel upgrade. Tell the customer: "we designed your system so the shaded panels can't drag the rest down." Sells the spec on top of the saving.`,
+      tone: 'optimisers-1-2',
+      headline: `${shadedPanels === 1 ? 'One shaded panel' : 'Two shaded panels'} — optimisers, full stop`,
+      why: `You can't put 1 or 2 panels on their own string. Modern hybrid inverters need at least 4 panels in series to reach the ~90V MPPT start-up voltage — anything less and the string never wakes up. Optimisers solve it differently: a small DC-DC converter mounts behind each shaded panel and makes it voltage-independent, so the rest of the string runs at full power and never sees the shade.`,
+      action: `Quote ${shadedPanels} × £45 = £${optimiserCost} in Tigo optimisers. With 3 hrs/day of shade on ${shadedPanels === 1 ? 'one panel' : 'two panels'}, this pays back inside a year.`,
       principle:
-        'MPPT split = electrical isolation at the inverter input. Free if you have a spare MPPT. Always your first move when shaded panels cluster on one part of the roof.',
+        'Optimisers = the surgical fix. "Smart stringing" needs ≥4 contiguous panels — physics, not preference. MPPT split is really an orientation tool, not a shading tool.',
     }
   }
 
-  // Non-Aiko + lots of shade — Aiko swap becomes cost-competitive
+  // Non-Aiko + heavy shade — Aiko swap becomes cost-competitive
   if (ratio >= 0.5 || shadedPanels >= 6) {
     return {
       tone: 'aiko-swap',
       headline: `Heavy shading (${shadedPanels} of ${totalPanels}) — Aiko swap is the cheapest long-term fix`,
-      why: `At this much shade, optimisers on every shaded panel get expensive fast — and they're still hardware that can fail. Aiko Neostar 2P has cell-level bypass built into every panel. The cost premium (£15/panel) is less than optimisers at this scale, AND every panel gets shade tolerance, not just the shaded ones today. If shade patterns change (tree grows, new build next door), you're already covered.`,
-      action: `Quote the Aiko swap: £15 × ${totalPanels} panels = £${aikoCost}. Compare against ${shadedPanels} × £45 optimisers = £${optimiserCost}. Aiko usually wins here on TCO + future-proofing.`,
+      why: `At this much shade, optimisers on every shaded panel get expensive fast — and they're still hardware that can fail. Aiko Neostar 2P has cell-level bypass built into every panel. The cost premium (£15/panel) is less than optimisers at this scale, AND every panel gets shade tolerance — not just the shaded ones today. If shade patterns change (tree grows, new build next door), you're already covered.`,
+      action: `Aiko swap: £15 × ${totalPanels} panels = £${aikoCost}. Optimisers: ${shadedPanels} × £45 = £${optimiserCost}. ${aikoCost < optimiserCost ? 'Aiko wins on £ today AND future-proofs.' : 'Optimisers cheaper today, Aiko wins on resilience — compare with the customer.'}`,
       principle:
-        'Lots of shade? Cell-level bypass beats per-panel optimisers on price AND resilience. Optimisers fix today\'s shade. Aiko fixes today\'s + tomorrow\'s.',
+        'Lots of shade = cell-level bypass beats per-panel optimisers on price AND resilience. Optimisers fix today\'s shade; Aiko fixes today\'s and tomorrow\'s.',
     }
   }
 
-  // Default: 3-5 shaded panels — optimisers sweet spot
+  // Default: 3–5 shaded panels — optimisers stay the safest call
   return {
     tone: 'optimisers',
-    headline: `${shadedPanels} shaded panels — optimisers are the surgical fix`,
-    why: `Too many shaded panels to MPPT-split cleanly, not enough to justify swapping every panel on the roof. Optimisers (Tigo, SolarEdge, Huawei) are DC-DC converters that mount under the shaded panels at install. Each optimiser makes its panel voltage-independent — the panel outputs whatever it can produce, totally decoupled from the string.`,
-    action: `Quote ${shadedPanels} × £45 = £${optimiserCost} in optimisers. Payback under 2 years, then it's pure saving for the system's life. Compare to the £${aikoCost} Aiko swap — usually optimisers win at this scale.`,
+    headline: `${shadedPanels} shaded panels — optimisers stay the safest call`,
+    why: `Optimisers work for any shade pattern — clustered or scattered. MPPT split is only cheaper if your shaded panels happen to be a contiguous block of 4+ on a separate roof face (different orientation) AND you have a spare MPPT input. Without those specifics, optimisers win.`,
+    action: `Quote ${shadedPanels} × £45 = £${optimiserCost}. If you can confirm the shaded panels are on a separate roof face, the MPPT-split option (£0) becomes viable — see Option 3 below.`,
     principle:
-      'Optimisers = "act like you\'re on your own array" hardware. Surgical: only the panels that need them get them. Sweet spot is 3–6 shaded panels on a 10–16 panel array.',
+      'Optimisers = surgical, work for any shade pattern. MPPT split needs ≥4 contiguous panels on a separate face. Different problems, different tools.',
   }
 }
 
@@ -662,11 +664,11 @@ const TONE_STYLES: Record<
     iconColor: 'text-emerald-600',
     actionBg: 'bg-emerald-100/60 border-emerald-300',
   },
-  'mppt-free': {
+  'optimisers-1-2': {
     bg: 'bg-blue-50',
     border: 'border-blue-300',
     eyebrow: 'text-blue-700',
-    icon: Lightbulb,
+    icon: GraduationCap,
     iconColor: 'text-blue-600',
     actionBg: 'bg-blue-100/60 border-blue-300',
   },

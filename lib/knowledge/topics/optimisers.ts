@@ -11,7 +11,7 @@ export const optimisers: KnowledgeTopic = {
   estReadMinutes: 6,
   lastUpdated: '2026-05-27',
   longRule:
-    'Optimisers sit behind individual panels and break each panel out of the series string. Each panel runs at its own optimal voltage so shaded or mismatched panels don\'t drag the rest. They cost £40 – 60 per panel trade. Three competing solutions: (1) a bigger inverter with more MPPTs (lets you split panels into more strings), (2) Aiko 510W All-Black panels which have ABC cell-level bypass built in (~£15 premium per panel vs DMEGC), or (3) clever stringing on a standard inverter to put problem panels on their own string. The right answer depends on how many panels have problems and how localised the shade is.',
+    'Optimisers sit behind individual panels and break each panel out of the series string. Each panel runs at its own optimal voltage so shaded or mismatched panels don\'t drag the rest. They cost £40 – 60 per panel trade. Optimisers are the surgical fix for any shading scenario — 1 panel, 5 panels, scattered or clustered. The two competing solutions: (a) Aiko 510W All-Black panels which have ABC cell-level bypass built in (~£15 premium per panel vs DMEGC) — best when shading is widespread or you want future-proofing across the array, or (b) MPPT split / string separation if your shaded panels happen to be a contiguous block of 4+ on a separate roof face. IMPORTANT physics: you can\'t put 1-3 panels on their own string — modern hybrid inverters need ≥4 panels in series to reach the ~90V MPPT start-up voltage. "Smart stringing" is really an orientation tool (east + west on two MPPTs), not a shading fix for a few panels.',
 
   decisionFlow: {
     intro:
@@ -29,13 +29,13 @@ export const optimisers: KnowledgeTopic = {
           {
             label: '1 – 3 panels',
             outcome:
-              'Optimisers on JUST those panels (£45 trade each via SolaFlow Extras). Cheapest, most targeted fix.',
+              'Optimisers on JUST those panels (£45 trade each via SolaFlow Extras). Only sensible fix — you can\'t string this few panels alone (inverter needs ≥4 panels per MPPT to start up). MPPT split is NOT an option here, physics not preference.',
             accent: 'blue',
           },
           {
             label: '4 – 6 panels (one shaded face)',
             outcome:
-              'Either: (a) optimisers on each (£200 – 280), OR (b) put them on their own MPPT/string if the inverter allows, OR (c) swap to Aiko on just that face. Run the £ for each.',
+              'Now you have options: (a) optimisers on each (£200 – 280) — works regardless of layout, OR (b) if those 4-6 panels are a contiguous block on a separate roof face, put them on their own MPPT — £0 fix. Scattered shade still means optimisers. OR (c) swap the whole face to Aiko if planning premium spec.',
             accent: 'amber',
           },
           {
@@ -69,7 +69,7 @@ export const optimisers: KnowledgeTopic = {
           {
             label: 'Upfront cost (entry installs)',
             outcome:
-              'Smart stringing first, optimisers on problem panels only. Don\'t upsell Aiko unless shade is widespread.',
+              'Optimisers on the shaded panels only — don\'t upsell what isn\'t needed. MPPT split is free ONLY if the shaded zone is 4+ contiguous panels on a separate face. Don\'t pitch Aiko unless shade is widespread (6+ panels).',
             accent: 'blue',
           },
           {
@@ -120,7 +120,7 @@ export const optimisers: KnowledgeTopic = {
     {
       scenario: '14-panel roof, 3 panels shaded by chimney 13:00 – 16:00.',
       inputs: [
-        { label: 'Panels', value: '14 × 470W = 6.58 kWp Aiko Neostar' },
+        { label: 'Panels', value: '14 × 470W = 6.58 kWp DMEGC' },
         { label: 'Shaded panels', value: '3 (chimney shadow)' },
         { label: 'Inverter', value: 'FOX ESS H1 5kW, 2 MPPT' },
       ],
@@ -138,16 +138,16 @@ export const optimisers: KnowledgeTopic = {
           formula:
             'Option C: Swap full array to Aiko 510W All-Black. £15 premium × 14 = £210.',
           result:
-            'Annual loss reduced to ~100 kWh = £20/year. Net saving: £120/year. Payback: <6 months. BUT mixing panel brands voids most warranties — only viable on full-array swap.',
+            'Annual loss reduced to ~100 kWh = £20/year. Net saving: £120/year. Payback: <2 years. Also future-proofs against new shading (trees growing, new builds).',
         },
         {
-          formula: 'Option D: Put 3 shaded panels on String 2 (MPPT 2). £0 cost.',
+          formula: 'Option D: Put 3 shaded panels on String 2 (MPPT 2). £0 cost?',
           result:
-            'String 1 (11 panels) untouched. String 2 (3 panels) runs at reduced output during shade only. Annual loss: ~150 kWh = £30/year. Net saving: £110/year forever, at zero cost.',
+            'NOT VIABLE. Inverter needs ≥4 panels per MPPT to reach 90V start-up voltage. 3 panels × ~38V = 114V — borderline at best, with zero thermal headroom (voltage drops in summer heat). Most install standards require 4-panel minimum per string. Don\'t pitch this option to the customer if they only have 3 shaded panels.',
         },
       ],
       outcome:
-        'Best answer: Option D (smart stringing). £0 spent, £110/year saved. If you can\'t string this way for some reason, Option B (£120 optimisers) is your fallback.',
+        'Best answer: Option B (optimisers, £135). £124/year saved, pays back inside a year, no string-design compromises. Option D is a tempting "free" answer but the physics don\'t support 3 panels in series on a modern hybrid inverter — push back if a competitor quotes it. If shade ever spreads to 6+ panels, revisit with the Aiko swap (Option C).',
     },
   ],
 

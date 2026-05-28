@@ -65,12 +65,15 @@ export default function OptimiserWidget() {
     const aikoSavingGBP = annualLossDoNothingGBP - aikoLossGBP
     const aikoPaybackYrs = aikoSavingGBP > 0 ? aikoCost / aikoSavingGBP : Infinity
 
-    // Pick the recommended option
+    // Pick the recommended option.
+    // KEY PHYSICS: inverters need ≥4 panels per string to start (~90V MPPT
+    // minimum). So 1-3 shaded panels can't go "on their own string" — the
+    // string wouldn't wake up. Optimisers are the default for any shading;
+    // Aiko swap competes at heavy-shade scale.
     let recommendation: 'none' | 'stringing' | 'optimisers' | 'aiko' = 'none'
     if (safeShaded === 0) recommendation = 'none'
-    else if (safeShaded <= 3 && totalPanels >= 8) recommendation = 'stringing'
-    else if (safeShaded <= 6) recommendation = 'optimisers'
-    else recommendation = 'aiko'
+    else if (safeShaded >= 6 && totalPanels >= 10) recommendation = 'aiko'
+    else recommendation = 'optimisers'
 
     return {
       safeShaded,
@@ -197,24 +200,10 @@ export default function OptimiserWidget() {
           </div>
 
           <div className="space-y-3">
-            <OptionCard
-              title="Smart stringing"
-              subtitle="Put shaded panels on their own MPPT"
-              cost="£0"
-              annualSaving={result.stringingSavingGBP}
-              payback="Instant"
-              rationale={
-                result.safeShaded <= 6 && totalPanels >= 8
-                  ? 'Free fix — uses the inverter\'s 2nd MPPT input.'
-                  : result.safeShaded > 6
-                    ? 'Too many shaded panels for stringing alone — consider option B or C.'
-                    : 'Array too small for clean string split.'
-              }
-              recommended={result.recommendation === 'stringing'}
-            />
+            {/* Option 1 — Optimisers (default for any shading) */}
             <OptionCard
               title={`Optimisers on ${result.safeShaded} panel${result.safeShaded === 1 ? '' : 's'}`}
-              subtitle="£45 trade each via SolaFlow Extras"
+              subtitle="£45 trade each — the surgical fix"
               cost={`£${result.optimiserCost}`}
               annualSaving={result.optimiserSavingGBP}
               payback={
@@ -222,9 +211,10 @@ export default function OptimiserWidget() {
                   ? `${result.optimiserPaybackYrs.toFixed(1)} yrs`
                   : '∞'
               }
-              rationale="Surgical fix — only the shaded panels become independent. Works with any inverter."
+              rationale="Works for any shade pattern — clustered or scattered, 1 panel or many. Each shaded panel becomes voltage-independent so the rest of the string keeps producing."
               recommended={result.recommendation === 'optimisers'}
             />
+            {/* Option 2 — Aiko swap */}
             <OptionCard
               title="Aiko 510W All-Black across the array"
               subtitle={`£15 premium × ${totalPanels} = £${result.aikoCost}`}
@@ -237,10 +227,24 @@ export default function OptimiserWidget() {
               }
               rationale={
                 result.safeShaded > 6
-                  ? 'ABC cell-level bypass — cleanest spec, longest warranty, all-black aesthetic.'
-                  : 'Overkill for this much shade — optimisers cheaper.'
+                  ? 'ABC cell-level bypass on every panel. Cheaper than optimisers at this scale AND future-proofs against new shading.'
+                  : 'Future-proofs the whole array against shading changes. Compare £ vs optimisers if customer plans to stay 10+ years.'
               }
               recommended={result.recommendation === 'aiko'}
+            />
+            {/* Option 3 — MPPT split (conditional, honest about its limits) */}
+            <OptionCard
+              title="MPPT split / string separation"
+              subtitle="£0 if a spare MPPT is available"
+              cost="£0"
+              annualSaving={result.stringingSavingGBP}
+              payback="Instant"
+              rationale={
+                result.safeShaded < 4
+                  ? `Not viable — inverters need ≥4 panels per string (~90V MPPT minimum). With ${result.safeShaded} shaded, you can't form a separate string. This option is for splitting roof orientations, not for shading a few panels.`
+                  : `Viable IF your ${result.safeShaded} shaded panels are a contiguous block on a separate roof face. Otherwise stick with optimisers.`
+              }
+              recommended={false}
             />
           </div>
 

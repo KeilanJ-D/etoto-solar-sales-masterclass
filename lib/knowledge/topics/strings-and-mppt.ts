@@ -219,13 +219,14 @@ export const stringsAndMppt: KnowledgeTopic = {
         },
         {
           speaker: 'you',
-          text: 'We fix it one of two ways. Option one — and this costs nothing — we put those two panels on their own string. The other ten stay full power. Option two — we put a small device called an optimiser behind each shaded panel. £40 each. They become independent and the rest of the system never knows they\'re shaded. I\'d recommend option one because it\'s free, and we can spec the inverter to support it.',
+          text: 'The fix is small devices called optimisers — one behind each of those two shaded panels. About £40 each. They make the panel independent of the rest of the string, so the other ten never know it\'s shaded. People sometimes ask "can\'t we just put the shaded panels on their own string for free?" — honest answer is no. Modern inverters need at least four panels per input to wake up, so two panels can\'t be separated. Optimisers are the surgical fix at this scale. Eighty quid one-time, saves you about two hundred a year. Pays back in less than five months.',
         },
       ],
       whyItWorks: [
         'Quantifies the cost of the problem AND the fix.',
-        'Offers a free solution first — builds trust.',
+        'Pre-empts the "can\'t we just split the string for free" objection by explaining the voltage physics in one sentence — anchors you as the rep who actually understands the design.',
         'Names the technical mechanism (Christmas lights series) so they understand.',
+        'Five-month payback is a memorable number — easy yes.',
       ],
     },
   ],

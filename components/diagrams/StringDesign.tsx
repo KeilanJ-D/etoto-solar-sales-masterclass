@@ -91,7 +91,7 @@ export default function StringDesign() {
           fill="#64748b"
           fontStyle="italic"
         >
-          Fix C with: smart stringing (free) · or optimisers on the shaded panel (£45 trade) · or Aiko 510W All-Black (built-in cell bypass).
+          Fix C with: optimisers on the shaded panel (£45 trade) · or Aiko All-Black (built-in cell bypass) · MPPT split only works for 4+ contiguous shaded panels.
         </text>
       </svg>
     </DiagramShell>
