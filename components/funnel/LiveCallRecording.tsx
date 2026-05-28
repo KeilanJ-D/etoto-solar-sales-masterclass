@@ -39,10 +39,11 @@ export default function LiveCallRecording() {
           </span>
         </div>
 
-        {/* Main headline */}
-        <h2 className={`text-3xl md:text-5xl font-black text-center mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        {/* Main headline — h1 for SEO + screen readers; this is the page's
+            primary heading on /live-call. */}
+        <h1 className={`text-3xl md:text-5xl font-black text-center mb-4 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           A Real Sales Call. Start to Finish.
-        </h2>
+        </h1>
 
         {/* Body text */}
         <p className={`text-lg md:text-xl text-slate-300 text-center max-w-3xl mx-auto mb-10 leading-relaxed transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
