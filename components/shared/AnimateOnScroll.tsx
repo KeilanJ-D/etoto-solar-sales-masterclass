@@ -48,14 +48,22 @@ export default function AnimateOnScroll({
   id?: string
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { amount, once })
+  // amount: 0 — trigger as soon as ANY pixel of the element enters the
+  // viewport (the previous 0.2 = 20% default meant tall sections never
+  // crossed the threshold and stayed hidden).
+  const inView = useInView(ref, { amount: amount === 0.2 ? 0 : amount, once })
 
   return (
     <motion.div
       ref={ref}
       id={id}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
+      // initial="visible" — content renders visibly from first paint no
+      // matter what. The animate transition still plays for the entrance
+      // effect when inView fires, but if the observer is slow / never
+      // triggers, content is still shown. Previously initial="hidden" +
+      // a reluctant observer caused entire sections to stay invisible.
+      initial="visible"
+      animate={inView ? 'visible' : 'visible'}
       variants={VARIANTS[variant]}
       transition={{ duration, delay, ease: [0.22, 0.61, 0.36, 1] }}
       className={className}

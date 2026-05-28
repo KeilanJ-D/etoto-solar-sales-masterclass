@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Package, Calculator, Clock } from 'lucide-react'
 
 const problemCards = [
@@ -22,40 +22,15 @@ const problemCards = [
 ]
 
 export default function TheProblem() {
-  const [visibleCards, setVisibleCards] = useState<number[]>([])
-  const [sectionVisible, setSectionVisible] = useState(false)
-  const [mounted, setMounted] = useState(false)
+  // Content renders visibly from first paint. The staggered card reveal +
+  // section fade-in are additive polish, not visibility gates. Previously
+  // these started empty/false which caused the entire section to render
+  // blank until the IntersectionObserver fired (which was unreliable on
+  // tall pages or fast scrolls). Also removed the !mounted return null
+  // pattern that caused an SSR/hydration flash of empty space.
+  const [visibleCards] = useState<number[]>([0, 1, 2])
+  const [sectionVisible] = useState(true)
   const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!mounted) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setSectionVisible(true)
-            problemCards.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleCards(prev => [...prev, index])
-              }, index * 120)
-            })
-            observer.disconnect()
-          }
-        })
-      },
-      { threshold: 0.15 }
-    )
-
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [mounted])
-
-  if (!mounted) return null
 
   return (
     <section id="problem" ref={sectionRef} className="py-16 md:py-32 px-4 md:px-6 bg-white relative overflow-hidden">

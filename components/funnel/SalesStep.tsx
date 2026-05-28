@@ -14,16 +14,10 @@ interface SalesStepProps {
 
 export default function SalesStep({ id, stepNumber, title, goal, children, dark = false }: SalesStepProps) {
   const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  // Render visibly from first paint. Observer-gated visibility was hiding
+  // entire step sections when the IntersectionObserver didn't fire — every
+  // step on /steps would render blank until the user scrolled it into view.
+  const [isVisible] = useState(true)
 
   // Alternate background colors: odd steps = white, even steps = slate-50
   // Step 3 (calculator) gets special treatment = slate-900

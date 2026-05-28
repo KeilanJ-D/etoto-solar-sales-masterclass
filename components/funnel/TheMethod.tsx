@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { ChevronDown, Battery, Sun, Calculator } from 'lucide-react'
 
 const steps = [
@@ -32,16 +32,11 @@ const principles = [
 
 export default function TheMethod() {
   const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  // Render visibly from first paint. Observer-gated visibility was causing
+  // the entire section (the 9-step grid + 3 principle cards) to stay
+  // invisible when the observer didn't fire reliably — confirmed via
+  // Chrome QA showing 2 viewport-heights of blank slate on /.
+  const [isVisible] = useState(true)
 
   return (
     <section ref={sectionRef} className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-slate-900 to-slate-800 text-white relative overflow-hidden">

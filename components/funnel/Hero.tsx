@@ -5,8 +5,13 @@ import { ChevronDown } from 'lucide-react'
 import { useCountUp } from '@/hooks/use-animate-on-scroll'
 
 export default function Hero() {
-  const [isVisible, setIsVisible] = useState(false)
-  const [showStats, setShowStats] = useState(false)
+  // Content renders visibly from first paint. The fade-in transitions still
+  // run (state-driven classNames are kept) but they're additive polish, not
+  // a gate on visibility. Previously these started false → opacity-0 →
+  // content was completely invisible until useEffect fired post-hydration,
+  // which caused multiple seconds of blank screen on slower devices.
+  const [isVisible, setIsVisible] = useState(true)
+  const [showStats, setShowStats] = useState(true)
   
   const steps = useCountUp(9, 1500, showStats)
   const avgGP = useCountUp(2500, 1800, showStats)

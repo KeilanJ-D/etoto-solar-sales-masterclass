@@ -64,16 +64,9 @@ const products = [
 
 export default function SummaryDownloads() {
   const sectionRef = useRef<HTMLElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true) },
-      { threshold: 0.1 }
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
-  }, [])
+  // Render visibly from first paint — observer-gated visibility hid the
+  // summary downloads section.
+  const [isVisible] = useState(true)
 
   return (
     <section ref={sectionRef} className="py-16 md:py-24 px-4 md:px-6 bg-white relative overflow-hidden">
